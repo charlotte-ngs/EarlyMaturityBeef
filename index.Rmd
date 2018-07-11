@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Welcome
@@ -21,13 +21,10 @@ During the whole project, documentation, literature articles, software programs 
 * Large data sets will be stored on our cloud server (1-htz) at Hetzner. On this server all data analyses will be run.
 
 
-## Project Plan
-So far, we have a rough skeleton of a project plan. The first steps of this plan contain the following items
+## Project Material
+* [How to contribute to this repository](how_to_contribute/how_to_contribute.html)
+* [Project Plan](project_plan/project_plan.html)
 
-* Work out a detailed project plan
-* Collect the relevant literature on the topic of this project
-* Put together a literature review
-* Describe the situation as it is both on a national and an interantional level.
 
 
 

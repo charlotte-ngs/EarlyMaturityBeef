@@ -1,0 +1,50 @@
+---
+title: "How to contribute"
+author: "Sophie Kunz and Peter von Rohr"
+date: "7/11/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Description of Steps
+This document describes the steps that it takes to make contributions to this project repository. This website works with `Github Pages` which runs on `github`. A short introduction on how to get started with Github Pages is available at https://pages.github.com/. 
+
+When working with Github Pages it is important to remember that all material that is supposed to appear as a webpage needs to be located in the `gh-pages` branch of the repository. We propose to create new material in the master branch and to deploy the material that appears on the website to the gh-pages branch located in a different directory on the local machine.
+
+The initial steps for our project repository are already done. All you need to do is to work through the following steps. 
+
+* __Step 1__: Create the parent directory that holds the branch-specific subdirectories
+
+```
+PARENTDIR=EarlyMaturityBeef
+MASTER=master
+GHPAGES=gh-pages
+mkdir -p $PARENTDIR/$MASTER $PARENTDIR/$GHPAGES
+```
+
+* __Step 2__: Clone the two branches into their specific directories
+
+```
+cd $PARENTDIR/$MASTER;git clone https://github.com/charlotte-ngs/EarlyMaturityBeef.git;cd ../..
+cd $PARENTDIR/$GHPAGES;git clone https://github.com/charlotte-ngs/EarlyMaturityBeef.git -b $GHPAGES;cd ../..
+```
+
+* __Step 3__: Develop new material in the master branch. Deploy the HTML-files and other output to the gh-pages branch
+
+* __Step 4__: Commit and push the two branches
+
+```
+cd $PARENTDIR/$MASTER;git add .;git commit -m"Comment";git push origin $MASTER;cd ../..
+cd $PARENTDIR/$GHPAGES;git add .;git commit -m"Comment";git push origin $GHPAGES;cd ../..
+```
+
+* __Step 5__: Check whether new material appeared.
+
+
+```{r, results='asis'}
+cat(rmddochelper::get_latest_change(), "\n")
+```
+
