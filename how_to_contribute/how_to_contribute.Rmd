@@ -47,4 +47,3 @@ cd $PARENTDIR/$GHPAGES;git add .;git commit -m"Comment";git push origin $GHPAGES
 ```{r, results='asis'}
 cat(rmddochelper::get_latest_change(), "\n")
 ```
-
