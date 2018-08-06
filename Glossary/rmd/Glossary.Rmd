@@ -3,6 +3,7 @@ title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
 output: html_document
+bibliography: ["Erikson2003.bib", "Williams2017.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -48,3 +49,22 @@ Unnumbered lists start with a star.
 Bold face with two __underscores__ or **two stars**.
 
 Italics with one _underscore_ or one *star*.
+
+
+## Citations
+This section explains how we do literature citations together with Mendeley. 
+
+1. First we have to export the *.bib-file for our papers by either
+    * setting up automatic *.bib-generation in Mendeley-Desktop via the menu `Mendeley Desktop` > `Preferences` or by
+    * explicitly exporting the *.bib file from one paper by right click on the record and hit `Export`
+2. As the next step, we copy the *.bib file into the rmd-directory. 
+3. The paper can then be cited using the key of the bib-record from the *.bib-file.
+
+For more details see https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html
+
+The following text is now citing our paper [@Eriksson2003b]. 
+
+The next paper that we are citing is [@Williams2010a]
+
+# References
+
