@@ -3,7 +3,7 @@ title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
 output: html_document
-bibliography: ["Erikson2003.bib", "Williams2017.bib"]
+bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -65,6 +65,53 @@ For more details see https://rmarkdown.rstudio.com/authoring_bibliographies_and_
 The following text is now citing our paper [@Eriksson2003b]. 
 
 The next paper that we are citing is [@Williams2010a]
+
+# Glossary
+* __Net growth__ Mean gain in weight in kg per d. (slaughter weight - 0.5 * birth weight) * 1000 / slaughter age [@KunzSophie2018].
+
+* __Early maturity__ Either property of carcass fat coverage (optimum is class 3). Or property, how early an animal can be slaughtered. Should not be mixed up with sexual maturity. However corresponding to Andreas Landolt it may be linked to each other [@KunzSophie2018].
+
+* __Conformation__ Conformation is determined by the method CH-TAX. It tells you about the proportion of meat compared to fat [@KunzSophie2018]. 
+
+* __Weaning date__ Date when the calf does not get any milk from its mother anymore.
+
+* __TVD__ Tierverkehrsdatenbank? What information can you find there?
+
+* __Slaughter category__ Category of the CH-TAX?
+
+* __CH-TAX__ Tool to categorize carcasses in different categories. The price of the carcass depends on the category and the slaughter weight.
+
+* __KV__ ?
+
+* __Genetic correlation__ How much are different traits genetically linked to each other?
+
+* __Fat class__ There are 5 classes of fat: 1 = non-covered, 2 = partially covered, 3 = evenly covered, 4 = strongly covered, 5 = overfatty.
+
+* __Estimation of variance components__ ?
+
+* __Qualität-DB__ ?
+
+* __Pedigree__ Pedigree of the animal. How much data? How far back?
+
+* __Mixed linear model__ Trying to remove effects of the environment on the model by calculating it into the model. Farm is random effekt because there is not enough data to calculate its effect reliably.
+
+* __Additive genetic effect__ Has been part of the lecture.
+
+* __Animal model__ Has been part of the lecture.
+
+* __Genetic group__ ?
+
+* __Phantom parents__ ?
+
+* __Basis animal__ Animals in the pedigree that do not have parents according to the model.
+
+* __Bankkalb__ ?
+* __Banktier__ ?
+* __Selection path__ ?
+* __Variance components__ ?
+* __Software VCE__ ?
+* __Software Mix99__ ?
+
 
 # References
 
