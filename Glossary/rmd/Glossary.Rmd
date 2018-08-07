@@ -50,6 +50,11 @@ Bold face with two __underscores__ or **two stars**.
 
 Italics with one _underscore_ or one *star*.
 
+Formulas and special characters in text with $\sigma^2$ 
+
+Formulas and special characters in boxes with $$\sigma^2$$
+
+
 
 ## Citations
 This section explains how we do literature citations together with Mendeley. 
