@@ -3,7 +3,7 @@ title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
 output: html_document
-bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib"]
+bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib", "vonRohr2017.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -72,7 +72,7 @@ The following text is now citing our paper [@Eriksson2003b].
 The next paper that we are citing is [@Williams2010a]
 
 # Glossary
-* __Net growth__ Mean gain in weight in kg per d. (carcass weight - 0.5 * birth weight) * 1000 / age [@Kunz2018].
+* __Net growth__ Mean gain in weight in kg per d. ( $carcass weight - 0.5 * birth weight) * 1000 / age$ [@Kunz2018].
 
 * __Carcass weight__ (SG) Phenotypic carcass weight to produce a breeding value carcass weight. The weight data are collected in meat factories by a balance. I contains information about the enviromental and the genetic effects. Heritability of 0.22 for KV and 0.3 for MT show that breeding for carcass weight is possible. Breeding for a specific carcass weight is impossible [@KunzS.2018]. Why? 
 
@@ -84,7 +84,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __TVD__ Tierverkehrsdatenbank? What information can you find there?
 
-* __carcass category__ Category of different types of carcasses depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt _Was sind Schaufeln?_, MA = Bull older, OB = Ox until 4 Schaufeln, RG = Heifer until 4 Schaufeln, RV = Heifer/ young cow, cow until max 4 Schaufeln, VK = cow, JB = Young heifer, KV = Calf [@ABZ2017]
+* __Carcass category__ Category of different types of carcasses depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt _Was sind Schaufeln?_, MA = Bull older, OB = Ox until 4 Schaufeln, RG = Heifer until 4 Schaufeln, RV = Heifer/ young cow, cow until max 4 Schaufeln, VK = cow, JB = Young heifer, KV = Calf [@ABZ2017]
 
 * __CH-TAX__ Tool to categorize carcasses in different categories. The price of the carcass depends on the category and the carcass weight. C = very well fleshed, H = well fleshed, T = medium fleshed, A = poorly fleshed, X = very poorly fleshed [@ABZ2017].
 
@@ -96,7 +96,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Qualität-DB__ ?
 
-* __Pedigree__ Pedigree of the animal. How much data? How far back?
+* __Pedigree__ Pedigree of the animal[@VonRohr2017]. How much data? How far back?
 
 * __Mixed linear model__ Trying to remove effects of the environment on the model by calculating it into the model. Farm is random effekt because there is not enough data to calculate its effect reliably [@Kunz2018].
 
@@ -122,7 +122,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Software Mix99__ ?
 
-* __Variances of residuals__ A residual is the vertical difference between a regression line and the observed value. The variance of all residuals or sigma square is the quadratic mean of all residuals
+* __Variances of residuals__ A residual is the vertical difference between a regression line and the observed value. The variance of all residuals or sigma square is the quadratic mean of all residuals.
 
 * __Variance__ ($\sigma^2$) Here we use the empiric variance. It is calculated like in this example: We have a number row of 1,3,5,6,8,5. First we sum the values of the row: 1+5+3+6+5+6+8=34. The we divide the sum by the number of numbers: 34/6=5.7. That is the mean. Then we calculate the square differences (absolute) of the observations to the mean/Erwartungswert. Here we do e.g. (1-5.7)^2 = always positive :) ca. . Then we have 9,... 
 
@@ -141,31 +141,29 @@ sum(vec_a)
 The advantage of using R-code-chunks to do the examples is that computations are done automatically and do not lead to errors. Furthermore, we do not have to do computations explicitly, but we can use functions such as `sum` and `mean` which are readily available. 
 
 
-* __Standard deviation__ Is the mean absolute deviation to the mean of all observations or the Erwartungswert (when stetig). When we calculate a model, we have a line that is stetig, so there we can not just use the mean, but have to define what we mean. Usually we just mean the difference to the line. So to the expectation.
+* __Standard deviation__ Is the mean absolute deviation to the mean of all observations or the Erwartungswert (when stetig). When we calculate a model, we have a line that is stetig, so there we can not just use the mean, but have to define what we mean. Usually we just mean the difference to the line.
 
 * __Genetic variances__
 
 * __Farm*year variances__
 
-* __Heritability__ ($h^2$) Selection success divided by selection difference (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population.
+* __Heritability__ ($h^2$) Selection success divided by selection difference (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
 
 * __Rassenkonstante__ 
 
 * __Basis difference__ 
 
-* __Breeding valuation__ (ZWS)
+* __Breeding valuation__ (ZWS) Traditionally we use informations about phenotypic performances and degrees of relationships to estimate the breeding value.Now informations about the genetics of an animal can also be used [@VonRohr2017].
 
 * __Training animal__ Animal with own performance[@Burgisser2018].
 
-* __EBV__ ?
-
-* __Breeding valuation Mutterkuh Schweiz__ ccc = Conformation Bankkälber, cca = Conformation Banktiere, cfc = Fat coverage Bankkälber, cfa = Fat coverage Banktiere, cwc = carcass weight Bankkälber, cwa = carcass weight Banktiere. (c1 = ?, c2 = conformation, f2 = fat coverage, w2 = carcassweight, c3 = calf, a3 = animal)[@Kunz2018]
+* __Breeding valuation Mutterkuh Schweiz__ ccc = Conformation Bankkälber, cca = Conformation Banktiere, cfc = Fat coverage Bankkälber, cfa = Fat coverage Banktiere, cwc = carcass weight Bankkälber, cwa = carcass weight Banktiere. (c1 = ?, c2 = conformation, f2 = fat coverage, w2 = carcassweight, c3 = calf, a3 = animal) [@Kunz2018].
 
 * __Abbreviations cow breeds__ AN = Angus, AU = Aubrac, BV = Braunvieh, CH = Charolais, LM = Limousin, SM = Simmental [@Kunz2018].
 
 * __Typify__ Genomics not necessary yet.
 
-* __Data validation/selection__ 
+* __Data validation/selection__ Making sure that the data is describing what we want to look at and deciding which data will be used for further analysis.
 
 * __Estimated breeding value__ (EBV) EBVs are expressed in the units of measurement for each particular trait.  They are shown as + ive or - ive differences between an individual animal's genetics difference and the genetic base to which the animal is compared.  For example, a bull with an EBV of +50 kg for 600-Day Weight is estimated to have genetic merit 50 kg above the breed base of 0 kg.  Since the breed base is set to an historical benchmark, the average EBVs of animals in each year drop has changed over time as a result of genetic progress within the breed.
 The absolute value of any EBV is not critical, but rather the differences in EBVs between animals.  Particular animals should be viewed as being "above or below breed average" for a particular trait.   http://abri.une.edu.au/online/pages/understanding_ebvs_char.htm
@@ -174,7 +172,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Breeding valuation early maturity__ Only dependent on age and carcass weight?[@Kunz2018]
 
-* __Fat coverage__ 
+* __Fat coverage__ Trait describing the amount of fat on the meat of a carcass [@Kunz2018].
 
 * __Meat factory__ Where animals are slaughtered and processed.
 
