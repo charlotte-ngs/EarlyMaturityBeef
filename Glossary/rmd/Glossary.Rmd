@@ -3,7 +3,7 @@ title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
 output: html_document
-bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib", "vonRohr2017.bib"]
+bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib", "vonRohr2017.bib", "Kalisch2011.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -150,18 +150,17 @@ var(vec_a)
 
 The advantage of using R-code-chunks to do the examples is that computations are done automatically and do not lead to errors. Furthermore, we do not have to do computations explicitly, but we can use functions such as `sum` and `mean` which are readily available. 
 
+* __Standard deviation__ It is usually calculated as the square root of the variance. It is the mean absolute deviation to the mean of all observations or the Erwartungswert (when stetig) [@Kalisch2011]. 
 
-* __Standard deviation__ Is the mean absolute deviation to the mean of all observations or the Erwartungswert (when stetig). When we calculate a model, we have a line that is stetig, so there we can not just use the mean, but have to define what we mean. Usually we just mean the difference to the line.
+* __Genetic variances__ Phenotypic variances that can be explained by the genetics of the animal (by its pedigree).
 
-* __Genetic variances__
-
-* __Farm*year variances__
+* __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal.
 
 * __Heritability__ ($h^2$) Selection success divided by selection difference (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
 
-* __Rassenkonstante__ 
+* __Rassenkonstante__ ? 
 
-* __Basis difference__ 
+* __Basis difference__ ? 
 
 * __Breeding valuation__ (ZWS) Traditionally we use informations about phenotypic performances and degrees of relationships to estimate the breeding value.Now informations about the genetics of an animal can also be used [@VonRohr2017].
 
@@ -187,6 +186,19 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 * __Meat factory__ Where animals are slaughtered and processed.
 
 * __Degree of freedom__
+
+* __ISET__ ? Von Aktennotiz 16. Mai
+
+* __SHB__ ? Von Aktennotiz 16. Mai
+
+*__FW__ ? Von Aktennotiz 16. Mai
+
+*__IVF__ ? Von Aktennotiz 16. Mai
+
+*__NZW__ ? Von Aktennotiz 16. Mai
+
+*__RH__ ? Von Aktennotiz 16. Mai
+
 
 $$\sigma_{\bar{x_{1}} - \bar{x_{2}}}^2 = \frac {\sigma_{1}^2}{n_{1}} + \frac{\sigma_{2}^2}{n_{2}}$$ 
 $$\sigma^2$$
