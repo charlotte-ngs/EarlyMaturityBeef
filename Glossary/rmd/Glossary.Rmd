@@ -3,7 +3,7 @@ title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
 output: html_document
-bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib", "vonRohr2017.bib", "Kalisch2011.bib", "FLHB2017.bib", "Gresset2017.bib"]
+bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib", "vonRohr2017.bib", "Kalisch2011.bib", "FLHB2017.bib", "Gresset2017.bib", "vit.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -108,7 +108,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Phantom parents__ ?
 
-* __Basis animal__ Animals in the pedigree that do not have parents according to the model [@Burgisser2018].
+* __Basis animal__ Animals in the pedigree that do not have parents according to the model?? [@Burgisser2018]. Or: One of the animals that create as their mean the population mean. E.G. In the german breeding valuation the animals from 2006-2010 are used to calculate the population mean for the breeding values 2014. They change each year in Germany [@Vit].
 
 * __Bankkalb__ (KV) Watch carcass category
 
@@ -172,7 +172,7 @@ stdev
 
 * __Training animal__ Animal with own performance[@Burgisser2018].
 
-* __Breeding valuation Mutterkuh Schweiz__ ccc = Conformation Bankkälber, cca = Conformation Banktiere, cfc = Fat coverage Bankkälber, cfa = Fat coverage Banktiere, cwc = carcass weight Bankkälber, cwa = carcass weight Banktiere. (c1 = ?, c2 = conformation, f2 = fat coverage, w2 = carcassweight, c3 = calf, a3 = animal) [@Kunz2018].
+* __Abbreviations Breeding valuation Mutterkuh Schweiz__ ccc = Conformation Bankkälber, cca = Conformation Banktiere, cfc = Fat coverage Bankkälber, cfa = Fat coverage Banktiere, cwc = carcass weight Bankkälber, cwa = carcass weight Banktiere. (c1 = ?, c2 = conformation, f2 = fat coverage, w2 = carcassweight, c3 = calf, a3 = animal) [@Kunz2018].
 
 * __Abbreviations cow breeds__ AN = Angus, AU = Aubrac, BV = Braunvieh, CH = Charolais, LM = Limousin, SM = Simmental [@Kunz2018].
 
@@ -215,9 +215,24 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Linear descripition and classification__ (LB) LB is a phenotypic assessment of cattle. The traits assessed give information about the look of the dam or bull [@FLHB2017].
 
-* __Population mean of breeding value__ ($\mu$) Lies usually at 100. If an animal has a breeding value over 100 its offspring has the potential to be on average better in this trait than the average population [@KunzS.2018]. 
+* __Population mean of breeding value__ ($\mu$) Lies usually at 100, when relative breeding values are used. It is calculated as the mean of the basis animals. If an animal has a breeding value over 100 its offspring has the potential to be on average better in this trait than the average population [@KunzS.2018]. 
 
 * __QM Swiss meat__ Meat that originates from animals kept on farms complying with ÖLN rules.
+
+* __Covariable__ ?
+
+* __Fixed effect__ ?
+
+* __BLUP__
+
+* __Multi-trait model__
+
+* __Maternal genetic effect__
+
+* __Total breeding value__
+
+* __Ceartanty__ The more own or relative informations you have about a trait, the better you can compare the animals with each other and the more certain the breeding values are [@Vit]
+
 
 
 
