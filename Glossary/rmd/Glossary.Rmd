@@ -150,7 +150,13 @@ var(vec_a)
 
 The advantage of using R-code-chunks to do the examples is that computations are done automatically and do not lead to errors. Furthermore, we do not have to do computations explicitly, but we can use functions such as `sum` and `mean` which are readily available. 
 
-* __Standard deviation__ It is usually calculated as the square root of the variance. It is the mean absolute deviation to the mean of all observations or the Erwartungswert (when stetig) [@Kalisch2011]. 
+* __Standard deviation__ It is usually calculated as the square root of the variance. It is the mean absolute deviation to the mean of all observations or the Erwartungswert (when stetig) [@Kalisch2011]. Like in the example of variance:
+
+```{r}
+var_vec_a <- var(vec_a)
+stdev<- var_vec_a^0.5
+stdev
+```
 
 * __Genetic variances__ Phenotypic variances that can be explained by the genetics of the animal (by its pedigree).
 
