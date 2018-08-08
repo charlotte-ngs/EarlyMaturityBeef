@@ -3,7 +3,7 @@ title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
 output: html_document
-bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib", "vonRohr2017.bib", "Kalisch2011.bib", "FLHB2017"]
+bibliography: ["Erikson2003.bib", "Williams2010.bib", "Kunz2018.bib","ABZ2017.bib", "Mutterkuh2018.bib", "KunzStrasser2018.bib", "vonRohr2017.bib", "Kalisch2011.bib", "FLHB2017.bib", "Gresset2017.bib"]
 ---
 
 ```{r setup, include=FALSE}
@@ -86,7 +86,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Carcass category__ Category of different types of carcasses depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt _Was sind Schaufeln?_, MA = Bull older, OB = Ox until 4 Schaufeln, RG = Heifer until 4 Schaufeln, RV = Heifer/ young cow, cow until max 4 Schaufeln, VK = cow, JB = Young heifer, KV = Calf [@ABZ2017]
 
-* __CH-TAX__ Tool to categorize carcasses in different categories. The price of the carcass depends on the category and the carcass weight. C = very well fleshed, H = well fleshed, T = medium fleshed, A = poorly fleshed, X = very poorly fleshed [@ABZ2017].
+* __CH-TAX__ Tool to categorize visually carcasses in different categories. The price of the carcass depends on the category and the carcass weight. C = very well fleshed, H = well fleshed, T = medium fleshed, A = poorly fleshed, X = very poorly fleshed [@ABZ2017].
 
 * __Genetic correlation__ How much are different traits genetically linked to each other. Also called shared heritability. If the term is 0 the traits do not share any heritability with each other. If the term is 1 the traits share all the heritability with each other. Means: If one trait is higher in the next generation, the other will be higher by the same proportion. (proportional to each other). If the term is negative e.g. -1, the proportionality will be negative. If one trait is higher in the next generation the other one will be positive. 
 
@@ -189,7 +189,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Fat coverage__ Trait describing the amount of fat on the meat of a carcass [@Kunz2018].
 
-* __Meat factory__ Where animals are slaughtered and processed.
+* __Meat factory__ Where animals are slaughtered and processed.There are two categories of meat factories in Switzerland: big and small. If there are more than 1500 slaughter units (per day?), it belongs to the category big, which has more reglementations to fulfill [@Gresset2017].
 
 * __Degree of freedom__
 
@@ -197,25 +197,27 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __SHB__ ? Von Aktennotiz 16. Mai
 
-*__FW__ ? Von Aktennotiz 16. Mai
+* __FW__ ? Von Aktennotiz 16. Mai
 
-*__IVF__ ? Von Aktennotiz 16. Mai
+* __IVF__ ? Von Aktennotiz 16. Mai
 
-*__Nettozuwachs__ (NZW) Wie genau definiert? durchschnittlicher Zuwachs in kg pro Tag seit Geburt? 
+* __Nettozuwachs__ (NZW) Wie genau definiert? durchschnittlicher Zuwachs in kg pro Tag seit Geburt? 
 
-*__RH__ ? Von Aktennotiz 16. Mai
+* __RH__ ? Von Aktennotiz 16. Mai
 
-*__DAGE__ Deviation (Abweichung) in age at slaughter of each animal relative to its contemporaries for the same carcass weight and subcutaneous carcass fatness. Animals with different subcutaneus carcass fatness then not comparable? Comes from concept residual feed intake Sitzung 23.8.17.
+* __DAGE__ Deviation (Abweichung) in age at slaughter of each animal relative to its contemporaries for the same carcass weight and subcutaneous carcass fatness. Animals with different subcutaneus carcass fatness then not comparable? Comes from concept residual feed intake Sitzung 23.8.17.
 
-*__Residual feed intake__ 
+* __Residual feed intake__ 
 
-*__Beef herdbook__ (FLHB) The FLHB a part of Mutterkuh Schweiz. Its goal is to achieve genetic and economic improvements in suckle cow husbandry by collecting and analysing data for breeding [@FLHB2017].
+* __Beef herdbook__ (FLHB) The FLHB a part of Mutterkuh Schweiz. Its goal is to achieve genetic and economic improvements in suckle cow husbandry by collecting and analysing data for breeding [@FLHB2017].
 
-*__Beef performance control__ (FLEK) FLEK is a phenotypic assessment of cattle. The traits assessed are growing performance of calves and reproduction performance of the dam [@FLHB2017].
+* __Beef performance control__ (FLEK) FLEK is a phenotypic assessment of cattle. The traits assessed are growing performance of calves and reproduction performance of the dam [@FLHB2017].
 
-*__Linear descripition and classification__ (LB) LB is a phenotypic assessment of cattle. The traits assessed give information about the look of the dam or bull [@FLHB2017].
+* __Linear descripition and classification__ (LB) LB is a phenotypic assessment of cattle. The traits assessed give information about the look of the dam or bull [@FLHB2017].
 
-*__Population mean of breeding value__ ($\mu$) Lies usually at 100. If an animal has a breeding value over 100 its offspring has the potential to be on average better in this trait than the average population [@KunzS.2018]. 
+* __Population mean of breeding value__ ($\mu$) Lies usually at 100. If an animal has a breeding value over 100 its offspring has the potential to be on average better in this trait than the average population [@KunzS.2018]. 
+
+* __QM Swiss meat__ Meat that originates from animals kept on farms complying with ÖLN rules.
 
 
 
