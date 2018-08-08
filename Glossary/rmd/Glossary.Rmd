@@ -152,6 +152,9 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Data validation/selection__ 
 
+* __Estimated breeding value__ (EBV) EBVs are expressed in the units of measurement for each particular trait.  They are shown as + ive or - ive differences between an individual animal's genetics difference and the genetic base to which the animal is compared.  For example, a bull with an EBV of +50 kg for 600-Day Weight is estimated to have genetic merit 50 kg above the breed base of 0 kg.  Since the breed base is set to an historical benchmark, the average EBVs of animals in each year drop has changed over time as a result of genetic progress within the breed.
+The absolute value of any EBV is not critical, but rather the differences in EBVs between animals.  Particular animals should be viewed as being "above or below breed average" for a particular trait.   http://abri.une.edu.au/online/pages/understanding_ebvs_char.htm
+
 * __Breeding valuation carcass traits__ Fat coverage, conformation, carcass weight [@Kunz2018].
 
 * __Breeding valuation early maturity__ Only dependent on age and carcass weight?[@Kunz2018]
