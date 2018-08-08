@@ -100,7 +100,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Mixed linear model__ Trying to remove effects of the environment on the model by calculating it into the model. Farm is random effekt because there is not enough data to calculate its effect reliably [@Kunz2018].
 
-* __Additive genetic effect__ Has been part of the lecture.
+* __Additive genetic effect__ The effect of the genetics of an animal that are inherited to its offspring. Not included is the dominance and epistasy effect [@VonRohr2017].
 
 * __Animal model__ Has been part of the lecture.
 
@@ -122,20 +122,30 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Software Mix99__ ?
 
-* __Variances of residuals__ A residual is the vertical difference between a regression line and the observed value. The variance of all residuals or sigma square is the quadratic mean of all residuals.
+* __Residual__ A residual is the vertical difference between a regression line and the observed value. 
 
-* __Variance__ ($\sigma^2$) Here we use the empiric variance. It is calculated like in this example: We have a number row of 1,3,5,6,8,5. First we sum the values of the row: 1+5+3+6+5+6+8=34. The we divide the sum by the number of numbers: 34/6=5.7. That is the mean. Then we calculate the square differences (absolute) of the observations to the mean/Erwartungswert. Here we do e.g. (1-5.7)^2 = always positive :) ca. . Then we have 9,... 
-
-The computations of the above example can also be done in R-code-chunks as shown below. First, we define a vector called `vec_a` which contains the following numbers
-
+* __Variance__ ($\sigma^2$) Here we use the empiric variance. It is calculated like in this example: We have a number row (vector) of:
 ```{r}
 vec_a <- c(1,3,5,6,8,5)
 ```
-
-The sum of the numbers in `vec_a` can be computed as
-
+We take the arithmetic mean out of the vector values:
 ```{r}
-sum(vec_a)
+mvec_a <- mean(vec_a)
+mvec_a
+```
+We calculate the square differences (absolute) of the observations to the mean/Erwartungswert.
+```{r}
+sdvec_a <- (mvec_a-vec_a)^2
+sdvec_a
+```
+We take the sum of the square differences and divide it by the degrees of freedom which is the number of terms in the vector - 1.
+```{r}
+sum(sdvec_a)/(length(vec_a)-1)
+
+```
+Should be the same like
+```{r}
+var(vec_a)
 ```
 
 The advantage of using R-code-chunks to do the examples is that computations are done automatically and do not lead to errors. Furthermore, we do not have to do computations explicitly, but we can use functions such as `sum` and `mean` which are readily available. 
