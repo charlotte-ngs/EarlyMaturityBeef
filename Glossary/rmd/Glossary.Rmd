@@ -199,6 +199,10 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 *__RH__ ? Von Aktennotiz 16. Mai
 
+*__DAGE__ Deviation (Abweichung) in age at slaughter of each animal relative to its contemporaries for the same carcass weight and subcutaneous carcass fatness. Animals with different subcutaneus carcass fatness then not comparable? Comes from concept residual feed intake Sitzung 23.8.17.
+
+*__Residual feed intake__ 
+
 
 $$\sigma_{\bar{x_{1}} - \bar{x_{2}}}^2 = \frac {\sigma_{1}^2}{n_{1}} + \frac{\sigma_{2}^2}{n_{2}}$$ 
 $$\sigma^2$$
