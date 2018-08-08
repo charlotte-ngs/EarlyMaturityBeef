@@ -126,6 +126,21 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Variance__ ($\sigma^2$) Here we use the empiric variance. It is calculated like in this example: We have a number row of 1,3,5,6,8,5. First we sum the values of the row: 1+5+3+6+5+6+8=34. The we divide the sum by the number of numbers: 34/6=5.7. That is the mean. Then we calculate the square differences (absolute) of the observations to the mean/Erwartungswert. Here we do e.g. (1-5.7)^2 = always positive :) ca. . Then we have 9,... 
 
+The computations of the above example can also be done in R-code-chunks as shown below. First, we define a vector called `vec_a` which contains the following numbers
+
+```{r}
+vec_a <- c(1,3,5,6,8,5)
+```
+
+The sum of the numbers in `vec_a` can be computed as
+
+```{r}
+sum(vec_a)
+```
+
+The advantage of using R-code-chunks to do the examples is that computations are done automatically and do not lead to errors. Furthermore, we do not have to do computations explicitly, but we can use functions such as `sum` and `mean` which are readily available. 
+
+
 * __Standard deviation__ Is the mean absolute deviation to the mean of all observations or the Erwartungswert (when stetig). When we calculate a model, we have a line that is stetig, so there we can not just use the mean, but have to define what we mean. Usually we just mean the difference to the line. So to the expectation.
 
 * __Genetic variances__
