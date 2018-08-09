@@ -84,6 +84,25 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 * Can you give an example for each why you choose a variable to be a random effect or a fixed effect?
     *
     
+* At the Strickhhof I heard that early maturity could also be linked to sexual maturity. Do you think it is worth to look for more informations in this topic?
+    *
+    
+* Could you say that conformation is important, because it give you information about the proportion of meat and fat to bones and other slaughter by-products?
+    *
+    
+* What are Schaufeln?
+    * Schaufeln are Teeth of cattle to estimate their age.
+    
+* What is the purpose of genetic groups?
+    *
+    
+* What are variance components?
+    * Variables that explain the variance over a population? E.G. genetics, farm.
+    
+* What is a selection path?
+    *
+    
+
 
 
 
