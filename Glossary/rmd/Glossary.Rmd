@@ -74,7 +74,7 @@ The next paper that we are citing is [@Williams2010a]
 # Glossary
 * __Net growth__ Mean gain in weight in kg per d. ( $carcass weight - 0.5 * birth weight) * 1000 / age$ [@Kunz2018].
 
-* __Carcass weight__ (SG) Phenotypic carcass weight to produce a breeding value carcass weight. The weight data are collected in meat factories by a balance. I contains information about the enviromental and the genetic effects. Heritability of 0.22 for KV and 0.3 for MT show that breeding for carcass weight is possible. Breeding for a specific carcass weight is impossible [@KunzS.2018]. Why? 
+* __Carcass weight__ (SG) In the case of no legal definition, carcass weight should be defined as the hot weight of both half carcasses after being bled and eviscerated and after removal of skin, removal of external genitalia, the limbs at the carpus and tarsus, head, tail, kidneys and kidney fats and the udder [@ICAR]. Phenotypic carcass weight to produce a breeding value carcass weight. The weight data are collected in meat factories by a balance. It contains information about the enviromental and the genetic effects. Heritability of 0.22 for KV and 0.3 for MT show that breeding for carcass weight is possible. Breeding for a specific carcass weight is impossible. [@KunzS.2018]. The higher the breeding value, the higher the potential carcass weight of the progeny?
 
 * __Early maturity__ Either property of carcass fat coverage (optimum is class 3). Or property, how early an animal can be slaughtered when conditions are met. Should not be mixed up with sexual maturity. However corresponding to Andreas Landolt it may be linked to each other [@Kunz2018].
 
@@ -104,7 +104,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Animal model__ Has been part of the lecture.
 
-* __Genetic group__ ?
+* __Genetic groups__ Groups of animals with unknown parents. Groups are formed according to age (year born), country of origin and/or breed composition (if more than one breed is included) [@ICAR]. Example and purpose?
 
 * __Phantom parents__ ?
 
@@ -158,7 +158,7 @@ stdev<- var_vec_a^0.5
 stdev
 ```
 
-* __Genetic variances__ Phenotypic variances that can be explained by the genetics of the animal (by its pedigree).
+* __Genetic variances__ Phenotypic variances that can be explained by the genetics of the animal (by its pedigree) [@VonRohr2017].
 
 * __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal.
 
@@ -168,7 +168,7 @@ stdev
 
 * __Basis difference__ ? 
 
-* __Breeding valuation__ (ZWS) Traditionally we use informations about phenotypic performances and degrees of relationships to estimate the breeding value.Now informations about the genetics of an animal can also be used [@VonRohr2017].
+* __Breeding valuation__ (ZWS) Traditionally we use informations about phenotypic performances and degrees of relationships to estimate the breeding value.Now informations about the genetics of an animal can also be used [@VonRohr2017]. Also called genetic evaluation [@ICAR].
 
 * __Training animal__ Animal with own performance[@Burgisser2018].
 
@@ -213,7 +213,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Beef performance control__ (FLEK) FLEK is a phenotypic assessment of cattle. The traits assessed are growing performance of calves and reproduction performance of the dam [@FLHB2017].
 
-* __Linear descripition and classification__ (LB) LB is a phenotypic assessment of cattle. The traits assessed give information about the look of the dam or bull [@FLHB2017].
+* __Linear scoring (LB) LB is a phenotypic assessment of cattle. The traits assessed give information about the look of the dam or bull [@FLHB2017]. The visual assessment of an animal for one or more morphological characteristics using a linear scale which represents the biological extremes in the population of animals under consideration [@ICAR].
 
 * __Population mean of breeding value__ ($\mu$) Lies usually at 100, when relative breeding values are used. It is calculated as the mean of the basis animals. If an animal has a breeding value over 100 its offspring has the potential to be on average better in this trait than the average population [@KunzS.2018]. 
 
@@ -250,6 +250,40 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 * __Breeding farms__ Farms which specialize in the production of animals to be used as sires and dams on other farms which rear animals for animal producing animal products [@ICAR].
 
 * __Calculated or Derived traits__ Traits derived from recorded traits such as food conversion efficiency [@ICAR].
+
+* __Carcass composition__ The proportions of a connective tissue, bone, muscle and fat in a carcass [@ICAR].
+
+* __Carcass grade__ The relative level of  a carcass for certain aspects, such as fatness, colour, maturity and class (e.g. male, female, young, old) [@ICAR].
+
+* __Dressing percentage__ Dressing percentage describes the percent ratio between carcass weight and the live weight taken immediately before slaughter [@ICAR].
+
+* __Empty weights__ Animal weight when it consumes no feed or water for minimum 12 hours prior to weighing [@ICAR].
+
+* __Environmental effects__ Effects which influence the performance of an animal which are not genetic in origin [@ICAR].
+
+* __E-U-R-O-P__ EU carcass conformation system [@ICAR].
+
+* __Founder animal__ The earliest known ancestor of an animal [@ICAR].
+
+* __Generation interval__ Average age of parents when the offspring destined to replace
+them are born. It should be computed separately for male and female parents [@ICAR].
+
+* __Heterosis__ (Hybrid vigor) Amount by which the average performance for a trait in
+crossbred calves exceeds the average performance of the two or more purebreds that were mated in that particular cross [@ICAR].
+
+* __Indicator traits__ Traits that do not have direct economic importance, but aid in the prediction of economically important traits [@ICAR].
+
+* __Invariant data__ Data that is constant, such as an animals date of birth [@ICAR].
+
+* __Lean Meat__ Meat  with the connective tissue limits, but free of visible fat [@ICAR].
+
+* __Maintenance energy requirement__ The amount of feed energy required per day by an animal to maintain its body weight and support necessary metabolic functions [@ICAR].
+
+* __Meat yield__ The percentage of lean meat in the beef carcass as obtained by dissection [@ICAR].
+
+
+
+
 
 
 $$\sigma_{\bar{x_{1}} - \bar{x_{2}}}^2 = \frac {\sigma_{1}^2}{n_{1}} + \frac{\sigma_{2}^2}{n_{2}}$$ 
