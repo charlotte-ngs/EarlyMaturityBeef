@@ -96,7 +96,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Qualität-DB__ ?
 
-* __Pedigree__ Pedigree of the animal[@VonRohr2017]. How much data? How far back?
+* __Pedigree__ Pedigree of the animal[@VonRohr2017]. A tabulation of ids and names of an individual’s ancestors. Pedigree information is used to establish genetic relationships among individuals to use in genetic evaluations [@ICAR]. How much data? How far back?
 
 * __Mixed linear model__ Trying to remove effects of the environment on the model by calculating it into the model. Farm is random effekt because there is not enough data to calculate its effect reliably [@Kunz2018].
 
@@ -221,9 +221,9 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Covariable__ ?
 
-* __Fixed effect__ ?
+* __Adjusted traits__ Traits adjusted to facilitate more meaningful comparisons such as 365 day weights or eye muscle area adjusted to constant weight or age [@ICAR]. Adjusted by covariables?
 
-* __Random effect__ ?
+* __Fixed / random effects__ When a sample (? What kind) exhausts the population, the corresponding variable (?) is fixed; when the sample is a small (i.e., negligible) part of the population the corresponding variable is random [@ICAR]. ?
 
 * __Best linear unbiased prediction__ (BLUP) Is a solution of an equation system with many unknown variables. The solution is the breeding value of an animal. The equation system is fed by phenotypic performances of the observed animals and its relatives, the degree of relationship and environmental informations of the animals [@VonRohr2017].  
 
@@ -233,11 +233,23 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Total breeding value__
 
-* __Ceartanty__ The more own or relative informations you have about a trait, the better you can compare the animals with each other and the more certain the breeding values are [@Vit]
+* __Certainty__ The more own or relative informations you have about a trait, the better you can compare the animals with each other and the more certain the breeding values are [@Vit]
 
+* __Phenotype__ The set of observable charasteristics of an animal [@ICAR].
 
+* __Predictor trait__ A trait that can be measured easily on an animal and which is highly correlated to a relevant production trait. An example is scrotal circumference in the case of male fertility [@ICAR].
 
+* __Progeny Test__ he evaluation procedure of an animal based on the performance of its progeny [@ICAR].
 
+* __Steer__ Castrated male [@ICAR].
+
+* __Base Population__ A group of animals with unknown parents in genetic evaluations, whose EBV’s are set to zero [@ICAR].
+
+* __Breed__ Animals with a common origin and selection history. Animals within a breed have characteristics that distinguish them from other breeds or groups of animals within that same species [@ICAR].
+
+* __Breeding farms__ Farms which specialize in the production of animals to be used as sires and dams on other farms which rear animals for animal producing animal products [@ICAR].
+
+* __Calculated or Derived traits__ Traits derived from recorded traits such as food conversion efficiency [@ICAR].
 
 
 $$\sigma_{\bar{x_{1}} - \bar{x_{2}}}^2 = \frac {\sigma_{1}^2}{n_{1}} + \frac{\sigma_{2}^2}{n_{2}}$$ 
