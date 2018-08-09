@@ -1,0 +1,153 @@
+---
+title: "Frühreife beim Fleischrind"
+author: "Sophie Kunz und Peter von Rohr"
+date: "21.03.2018"
+output:
+  html_document: default
+  pdf_document: default
+bibliography: 20180321_FruehreifeFleischrind.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<style type="text/css">
+h1.title {
+  font-size: 32px;
+  color: Black;
+}
+h1 { /* Header 1 */
+  font-size: 28px;
+  color: DarkRed;
+}
+h2 { /* Header 2 */
+    font-size: 22px;
+  color: DarkRed;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+  color: DarkRed;
+}
+</style>
+
+## Hintergrund
+Bis im Sommer 2018 wurden in der Routine-Zuchtwertschätzung für Mutterkuh Schweiz (VMS) vor allem die Merkmale Nettozuwachs und  Fleischigkeit berücksichtigt. 
+
+Gewisse Gruppierungen in der Fleischrinderzucht vermuten, dass aufgrund der relativ starken Gewichtung der Fleischigkeit, bei gewissen Rassen eine Abnahme der  Fettabdeckung beobachtet werden kann. Als mögliche Quelle wird hier auf die  Masterarbeit von Andrea Hospenthal [@Hospenthal2016] verwiesen. Eine abnehmende Fettabdeckung würde sich negativ auf die Frühreife auswirken. Für die Mäster oder Mutterkuhhalter hat die Frühreife eine hohe wirtschaftliche Bedeutung. Aufgrund der Bezahlungssysteme in den Schlachthöfen müssen die Schlachtkörper der gemästeten Tiere bezüglich Fleischigkeit und Fettabdeckung bestimmte Anforderungen erfüllen, damit keine Preisabzüge gemacht werden. Wenn ein Tier früher geschlachtet werden kann und trotzdem die Anforderungen des Schlachthofs erfüllt, entstehen für den Mäster oder den Mutterkuhhalter weniger Kosten. Auf dieser Kosteneinsparung basiert die wirtschaftliche Bedeutung der Frühreife.
+
+Aus diesem Grund werden ab Sommer 2018 die Zuchtwerte für Schachtmerkmale überarbeitet. Neu werden Zuchtwerte für Fleischigkeit, Fettabdeckung und Schlachtgewicht geschätzt und publiziert. 
+
+
+## Ziel
+Das Ziel dieser Arbeit ist es verschiedene züchterische Massnahmen zur Verbesserung der Frühreife in der Fleischrinderzucht vorzuschlagen, diese zu beschreiben und die Vorschläge miteinander zu vergleichen. 
+
+
+## Massnahmen
+In diesem Abschnitt werden verschiedene Massnahmen zur Verbesserung der Frühreife beschrieben. Bei der Einführung des Zuchtwerts für das Merkmal Fettabdeckung steht die Umsetzung kurz bevor, die Einführung eines Schachtleistungsmerkmaleindex und der Ansatz von Berry et al. [@BCJ2017] sind geplant, aber deren Umsetzung ist noch nicht terminiert. Für die Massnahme mit den Wachstumsmodellen wurde noch keine Umsetzung geplant. Ziel dieser Arbeit ist es die vorgeschlagenen Massnahmen zu beschreiben und deren Brauchbarkeit für die Zucht auf Frühreife zu beurteilen.
+
+### Zuchtwert Fettabdeckung
+Ab der Routine-Zuchtwertschätzung im Sommer 2018 werden Zuchtwerte für das Merkmal Fettabdeckung (Klassen 1 bis 5) geschätzt und publiziert. Diese Einzelzuchtwerte im Merkmal Fettabdeckung sind ein erstes Werkzeug zur züchterischen Verbesserung der Frühreife. Hier geht es darum, wie der Einzelzuchtwert der Fettabdeckung in der Zuchtarbeit eingesetzt werden kann. 
+
+### Index Schlachtleistungsmerkmale
+Da in der Zuchtarbeit selten nur ein Merkmal von Bedeutung ist, müssen wir eine Strategie finden, wie eine Anzahl von Merkmalen gemeinsam für die Auswahl der Elterntiere der nächsten Generation berücksichtigt werden kann. Der optimale Ansatz für dieses Problem ist die Indexselektion, wobei ein Index als Schätzung des Gesamtzuchtwertes aufgestellt wird. Die für den Gesamtzuchtwert benötigten wirtschaftlichen Gewichte können aufgrund der Bezahlungssysteme im Schlachthof abgeleitet werden (siehe dazu [@vonRohr1998]).
+
+### Ansatz von Berry
+In einer Arbeit von Berry et al. [@BCJ2017] wird ein Merkmal "differential age" (DAGE) definiert und die genetische Variation für dieses Merkmal wird geschätzt. Dieses Merkmal soll quantifizieren, ob es bei konstanter Schlachtgewicht und konstanter Fettabdeckung genetische Unterschiede beim Schlachtalter der Tiere gibt. Ziel ist es, bei optimalen Schlachtleistungsmerkmalen möglichst junge, das heisst, möglichst frühreife Tiere zu selektieren.
+
+
+### Wachstumsmodelle
+Analog zur Arbeit von [@deGreef1992] bei den Schweinen, kann das Wachstum beim Fleischrind auch mittels Wachstumskurven modelliert werden. Aufgrund der Resultate der Wachstumsmodelle können Frühreife und andere Schlachtleistungsmerkmale abgeleitet werden. Bei diesem Ansatz stellt sich die Frage nach der Verfügbarkeit der Inputparametern für die Wachstumsmodelle. 
+
+
+## Vorgehen
+Wir schlagen vor, die Arbeiten aufgrund der folgenden Schritte umzusetzen
+
+* __Schritt 1__: Beschreibung der Problemstellung und der Relevanz der Zucht auf Frühreife bei den Fleischrindern in der Schweiz. Dabei soll vor allem auf die Heterogenität in den Sektoren Mutterkuhhaltung und Mäster eingegangen werden.
+* __Schritt 2__: Literaturübersicht zum gestellten Thema. Was wurde bereits gemacht und welche Ansätze sind im Ausland umgesetzt
+* __Schritt 3__: Beschreibung der vorgeschlagenen Massnahmen und eventuell Vorschlag eigener Massnahmen
+* __Schritt 4__: Vergleich der Massnahmen untereinander im Bezug auf Einfachheit bei der Umsetzung, Verfügbarkeit der benötigten Informationen und Erfolgsaussichten der züchterischen Verbesserung der Frühreife. 
+* __Schritt 5__: Konkrete Ausarbeitung einer Umsetzung für den Index der Schlachtleistungsmerkmale. Dieser Teil beinhaltet die eigentlichen Resultate der Arbeit
+* __Schritt 6__: Diskussion der Resultate und Ausblick
+
+
+## Anforderungen und Unterstützungen
+Das gestellte Thema muss vom Studierenden selbstständig bearbeitet werden. Dabei wird sie/er von der Betreuung bei Qualitas unterstützt. Diese __Unterstützung__ umfasst die folgenden Punkte 
+
+* Einführung in das Thema der Frühreife bei den Fleischrindern
+* Erklärung der Zuchtwertschätzung der Fettabdeckung
+* Vermittlung der Grundlagen der Indexzucht
+* Unterstützung bei der Aufbereitung von Daten
+* Anleiten bei der Gliederung und dem Verfassen der Arbeit
+* Weitere Unterstützung je nach Bedarf
+
+Die Studentin oder der Student soll für einen erfolgreichen Abschluss der Arbeit die folgenden __Anforderungen__ erfüllen 
+
+1. Erstellen einer Literaturübersicht zum Thema Frühreife in der Fleischrinderzucht
+2. Beschreibung der Relevanz der Frühreife in der Fleischrinderzucht
+3. Beschreibung der vorgeschlagenen Massnahmen zur züchterischen Verbesserung der Frühreife bei Fleischrindern
+4. Umsetzung der Eigenschaft der Frühreife in messbare Merkmale gemäss der vorgeschlagenen Massnahmen
+5. Ausarbeitung einer Umsetzungsvariante für einen Index der Schlachtleistungsmerkmale 
+6. __Erster Zusatz__: Umsetzung eines Indexes für Schlachtleistungsmerkmale mit konkreten Daten aus der Routinezuchtwertschätzung von VMS
+7. __Zweiter Zusatz__: Umsetzungen des Ansatzes von Berry et al. [@BCJ2017] und von Wachstumsmodellen
+
+
+## Bewertung
+Dieser Abschnitt beschreibt die Bewertung der eingereichten Masterarbeit. 
+
+* Für das Bestehen der Arbeit müssen die Punkte 1 - 3 zwingend vorhanden sein. 
+* Sofern die Punkte 1 - 5 gut umgesetzt sind, wird die Arbeit als sehr gut bewertet werden. 
+* Die Zusatzpunkte 6 und 7 können je nach Kapazitäten realisiert werden und fliessen, falls vorhanden positiv in die Bewertung ein.
+
+
+```{r BiblioDef, echo=FALSE, results='hide'}
+vec_bib <- c(bibentry(
+  bibtype = "MastersThesis",
+  title = "Schlachtdatenauswertung der Markenprogramme von Mutterkuh Schweiz",
+  author = as.person("A. Hospenthal [aut]"),
+  year = 2016,
+  school = "ETH Zürich",
+  key = "Hospenthal2016"),
+  bibentry(
+    bibtype = "Article",
+    title = "Rapid Communication: Large exploitable genetic variability exists to shorten age at slaughter in cattle",
+    author = c(as.person("D. P. Berry"),
+               as.person("A. R. Cromie"),
+               as.person("M. M.Judge")),
+    journal = "Journal of Animal Science",
+    volume = 95,
+    number = 10,
+    pages = "4526-4532",
+    year = 2017,
+    doi = "10.2527/jas2017.2016",
+    URL = "http://dx.doi.org/10.2527/jas2017.2016",
+    key = "BCJ2017"),
+  bibentry(
+    bibtype = "PhdThesis",
+    title = "Wirtschaftliche Gewichte für Mastleistungs- und Schlachtkörperqualitatsmerkmale beim Schwein",
+    author = as.person("P. von Rohr"),
+    year = 1998,
+    school = "ETH Zürich",
+    key = "vonRohr1998"),
+  bibentry(
+    bibtype = "PhdThesis",
+    title = "Prediction of production : nutrition induced tissue partitioning in growing pigs",
+    author = as.person("K.H. de Greef"),
+    year = 1992,
+    school = "Wageningen University",
+    key = "deGreef1992"
+  ))
+sBibFile <- "20180321_FruehreifeFleischrind.bib"
+if(!file.exists(sBibFile))
+  cat(paste(toBibtex(vec_bib), collapse = "\n"), "\n", file = sBibFile)
+```
+
+```{r, echo=FALSE, results='asis'}
+cat(rmddochelper::get_latest_change(ps_msg = "Letzte Änderung"))
+```
+
+---
+
+`r if (knitr:::is_html_output()) '# References {-}'`
+
+
