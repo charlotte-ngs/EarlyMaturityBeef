@@ -92,7 +92,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Carcass fat coverage__ (FET) There are 5 classes of fat coverages: 1 = non-covered, 2 = partially covered, 3 = evenly covered, 4 = strongly covered, 5 = overfatty. The higher the breeding value of FET, the higher potentially the fat class of its offspring [@KunzS.2018].
 
-* __Estimation of variance components__ ?
+* __Estimation of variance components__ Enable the calculation of heritabilities https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/.
 
 * __Qualität-DB__ ?
 
@@ -205,7 +205,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __RH__ ? Von Aktennotiz 16. Mai
 
-* __DAGE__ Deviation (Abweichung) in age at slaughter of each animal relative to its contemporaries for the same carcass weight and subcutaneous carcass fatness. Animals with different subcutaneus carcass fatness then not comparable? Comes from concept residual feed intake Sitzung 23.8.17.
+* __DAGE__ Deviation (genetic difference) in age at slaughter of each animal relative to its contemporaries for constant carcass weight and constant subcutaneous carcass fatness. Animals with different subcutaneus carcass fatness then not comparable? Comes from concept residual feed intake Sitzung 23.8.17.
 
 * __Residual feed intake__ 
 
@@ -227,11 +227,11 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Best linear unbiased prediction__ (BLUP) Is a solution of an equation system with many unknown variables. The solution is the breeding value of an animal. The equation system is fed by phenotypic performances of the observed animals and its relatives, the degree of relationship and environmental informations of the animals [@VonRohr2017].  
 
-* __Multi-trait model__
+* __Multi-trait model__ The breeding values of different traits are not calculated independently but are influence each other in using the knowledge about their shared heritability https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/.
 
 * __Maternal genetic effect__
 
-* __Total breeding value__
+* __Total breeding value__ A calculated index of all breeding values to enable the simultaneous improvement of multiple breeding values. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
 
 * __Certainty__ The more own or relative informations you have about a trait, the better you can compare the animals with each other and the more certain the breeding values are [@Vit]
 
@@ -243,7 +243,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Steer__ Castrated male [@ICAR].
 
-* __Base Population__ A group of animals with unknown parents in genetic evaluations, whose EBV’s are set to zero [@ICAR].
+* __Base Population__ A group of animals with unknown parents in genetic evaluations, whose EBV’s are set to zero [@ICAR]. Usually the base population consists of animals of the same breed.https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
 
 * __Breed__ Animals with a common origin and selection history. Animals within a breed have characteristics that distinguish them from other breeds or groups of animals within that same species [@ICAR].
 
@@ -280,6 +280,16 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 * __Maintenance energy requirement__ The amount of feed energy required per day by an animal to maintain its body weight and support necessary metabolic functions [@ICAR].
 
 * __Meat yield__ The percentage of lean meat in the beef carcass as obtained by dissection [@ICAR].
+
+* __Trait category__ Traits are categorized in two categories when we breed for them. One is called maximizing trait like carcass weight and conformation, where we breed only in one direction (more carcass weight). The other one is called optimizing trait like fat coverage where we try to move the population to an optimum value. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
+
+* __Post processing__ Breeding values are getting based on their separate breed base e.g. Simmental.
+
+* __Breed invariable__ Tool to assess relative differences in traits across different breeds. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
+
+* __Genetic trend__ Is calculated by the mean breeding values of following years. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
+
+
 
 
 
