@@ -2,14 +2,13 @@
 title: "Questions"
 author: "Silvan"
 date: "9 8 2018"
-output:
-  pdf_document: default
-  html_document: default
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
 
 
 # Formating rules
