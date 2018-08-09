@@ -86,17 +86,17 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Carcass category__ Category of different types of carcasses depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt _Was sind Schaufeln?_, MA = Bull older, OB = Ox until 4 Schaufeln, RG = Heifer until 4 Schaufeln, RV = Heifer/ young cow, cow until max 4 Schaufeln, VK = cow, JB = Young heifer, KV = Calf [@ABZ2017]
 
-* __CH-TAX__ Tool to categorize visually carcasses in different categories. The price of the carcass depends on the category and the carcass weight. C = very well fleshed, H = well fleshed, T = medium fleshed, A = poorly fleshed, X = very poorly fleshed [@ABZ2017].
+* __CH-TAX__ Tool to categorize visually carcasses in different categories, it describes the trait carcass conformation. The price of the carcass depends on the category and the carcass weight. C = very well fleshed, H = well fleshed, T = medium fleshed, A = poorly fleshed, X = very poorly fleshed [@ABZ2017].
 
 * __Genetic correlation__ How much are different traits genetically linked to each other. Also called shared heritability. If the term is 0 the traits do not share any heritability with each other. If the term is 1 the traits share all the heritability with each other. Means: If one trait is higher in the next generation, the other will be higher by the same proportion. (proportional to each other). If the term is negative e.g. -1, the proportionality will be negative. If one trait is higher in the next generation the other one will be positive. 
 
 * __Carcass fat coverage__ (FET) There are 5 classes of fat coverages: 1 = non-covered, 2 = partially covered, 3 = evenly covered, 4 = strongly covered, 5 = overfatty. The higher the breeding value of FET, the higher potentially the fat class of its offspring [@KunzS.2018].
 
-* __Estimation of variance components__ Enable the calculation of heritabilities https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/.
+* __Estimation of variance components__ Enables the calculation of heritabilities https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/.
 
 * __Qualität-DB__ ?
 
-* __Pedigree__ Pedigree of the animal[@VonRohr2017]. A tabulation of ids and names of an individual’s ancestors. Pedigree information is used to establish genetic relationships among individuals to use in genetic evaluations [@ICAR]. How much data? How far back?
+* __Pedigree__ Pedigree of the animal[@VonRohr2017]. A tabulation of ids and names of an individual’s ancestors. Pedigree information is used to establish genetic relationships among individuals to use in genetic evaluations [@ICAR]. 
 
 * __Mixed linear model__ Trying to remove effects of the environment on the model by calculating it into the model. Farm is random effekt because there is not enough data to calculate its effect reliably [@Kunz2018].
 
@@ -163,8 +163,6 @@ stdev
 * __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal.
 
 * __Heritability__ ($h^2$) Selection success divided by selection difference (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
-
-* __Rassenkonstante__ ? 
 
 * __Basis difference__ ? 
 
