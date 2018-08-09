@@ -75,6 +75,16 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 * What is ASR F&E? Found in notice of meeting 16.5.
     *
     
+* Somehow I could never really understand what the degrees of freedom means. Could you please give me a simple explanation?
+    *
+    
+* Is it a good idea to look at breeding methods of other animal species to compare it to beef cattle?
+    *
+    
+* Can you give an example for each why you choose a variable to be a random effect or a fixed effect?
+    *
+    
+
 
 
 
