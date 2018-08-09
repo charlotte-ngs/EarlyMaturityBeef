@@ -223,7 +223,9 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Fixed effect__ ?
 
-* __BLUP__
+* __Random effect__ ?
+
+* __Best linear unbiased prediction__ (BLUP) Is a solution of an equation system with many unknown variables. The solution is the breeding value of an animal. The equation system is fed by phenotypic performances of the observed animals and its relatives, the degree of relationship and environmental informations of the animals [@VonRohr2017].  
 
 * __Multi-trait model__
 
