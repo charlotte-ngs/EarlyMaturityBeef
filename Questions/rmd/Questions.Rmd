@@ -37,49 +37,49 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 ## Questions / Answers
 
 * Why do breeding values not have a unit? In this video they have a unit: https://www.youtube.com/watch?v=_JxcTELevoc.
-    *
+    * They have a unit, when the trait has a unit. (But not always shown)
     
 * How do you calculate the total breeding value at the moment?
-    *
+    * The total breeding value is not existing yet.
 
 * How big is the basis population at the moment. How could I find out myself?
-    *
+    * Defined, should be stable and not influence differences of Breeding values. Like in geography you use the sea level for measuring altitudes (Problem bridge building in different countries). But has to be adapted, to not have too high numbers.
     
 * How should I format the glossary so you could help me to get rid of my mistakes?
-    *
+    * Tag "?" inside.
     
 * How do you validate your data?
-    *
+    * You make a frame where the values should fit to exclude outliers.
     
 * Why do you do the breeding valuation separateley for Calves (KV) and Heifers (MT) and seperateley for each breed?
-    *
+    * Because you slaughter them at different ages where different genes are in action. It has political/economic reason that you either breed heifers or calves.
 
 * At the moment you are breeding carcass conformation to C, carcass weight to maximum and carcass fat coverage to maximum, don't you?
-    *
+    * Not actually breeding, but the maximum of breeding values also means the maximum of the trait.
     
 * Should I call Fettabdeckung carcass fat or carcass fat coverage?
-    *
+    * carcass fat
     
-* The big disadvantage of the introduction of carcass fat coverage as a breeding value is, that current animals can not be compared to past animals, isnt' it?
-    *
+* The big disadvantage of the introduction of carcass fat as a breeding value is, that current animals can not be compared to past animals, isnt' it?
+    * No there is no disadvantage. You could calculate the new model also for the past breeding values.
 
 * The big advantage of the introduction of carcass fat coverage as a breeding value is, that breeders can now breed organised towards more carcass fat coverage, which has generally declined over years, isn't it?
-    *
+    * No, the big advantage is, that you have a predictor trait for early maturity. Fat is usually created after the building up of proteins in a body. And it is important for good payment. So it can be easily linked to early maturity.
     
 * For Calves (KV) carcass fat coverage negativeley correlates with conformation, for beef it is the opposite, how can this be?
-    *
+    * The correlations mentioned are that small that the are not worthy to interpret.
     
 * Is the accuracy of breeding values the same as the certainty of breeding values?
-    *
+    * The accuracy is defined by Bestimmtheitsmass. Certainty can mean the same but may be context dependent.
     
 * What is ASR F&E? Found in notice of meeting 16.5.
-    *
+    * It is the umbrella association of all cattle breeding associations. It is superordinate to Mutterkuh Schweiz.
     
 * Somehow I could never really understand what the degrees of freedom means. Could you please give me a simple explanation?
-    *
+    * You either count the number of observations or the number of rest effects minus the possibilities of grouping in fixed effects? Could be clarified.
     
 * Is it a good idea to look at breeding methods of other animal species to compare it to beef cattle?
-    *
+    * Later it can be useful to look at the breeding program of growing pig, because they are ahead of the cattle breeders.
     
 * Can you give an example for each why you choose a variable to be a random effect or a fixed effect?
     *
