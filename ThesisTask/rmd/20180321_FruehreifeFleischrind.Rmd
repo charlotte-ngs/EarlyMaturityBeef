@@ -2,10 +2,10 @@
 title: "Frühreife beim Fleischrind"
 author: "Sophie Kunz und Peter von Rohr"
 date: "21.03.2018"
-output:
-  html_document: default
-  pdf_document: default
-bibliography: 20180321_FruehreifeFleischrind.bib
+output: 
+bibliography: 
+- 20180321_FruehreifeFleischrind.bib
+- FB-ZWS Qualitas-EarlyMaturityBeefCattle.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -35,7 +35,10 @@ h3 { /* Header 3 */
 
 # Background Silvan
 
-Now I am just writing a bit about what I understood and what not. Well, how to begin: Once there where cattle breeders in Switzerland that realized that their beef cattle is getting worse in early running to fat. It annoyed them because for cattle beef producers this is an important trait. Cattle beef producers get important selling price reductions for their animals when their sold animals do not have enough fat. In order to get no selling price reductions they have to feed their animals for a longer time. The problem now is that during this time they realize that their costs of feeding and keeping the animals is more than the additional revenue they get by having higher carcass weights and better carcass conformation. That is why they prefer their animals to have enough fat as early as possible, when they also gain enough carcass weight and carcass conformation. There are animals which have more carcass fat, are younger and have more carcass weight and better carcass conformation than other animals. Those animals should be selected in order to reduce the costs for cattle beef producers. At the moment you know a bit about the biology of cattles. They build up proteins earlier than fat usually. If you now know that carcass fat is somehow dependent on the already established carcass conformation and carcass weight to the right amount then you could say that you just have to breed for carcass fat corrected by the carcass age to have animals that can go early to the slaughterhouse and not receive any price reductions. For that you would need some evidence. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one trait which then is called early maturity or early readiness for slaughter.
+Now I am just writing a bit about what I understood and what not. Well, how to begin: Once there where cattle breeders in Switzerland that realized that their beef cattle is getting worse in early running to fat. It annoyed them because for cattle beef producers this is an important trait. Cattle beef producers get important selling price reductions for their animals when their sold animals do not have enough fat. In order to get no selling price reductions they have to feed their animals for a longer time. The problem now is that during this time they realize that their costs of feeding and keeping the animals is more than the additional revenue they get by having higher carcass weights and better carcass conformation. That is why they prefer their animals to have enough fat as early as possible, when they also gain enough carcass weight and carcass conformation. There are animals which have more carcass fat, are younger and have more carcass weight and better carcass conformation than other animals. This trait of an animal is what we call early maturity.Early mature animals should be selected in order to reduce the costs for cattle beef producers. But how do you get a strategy for selecting early mature animals? At the moment you know a bit about the biology of cattles. They build up proteins earlier than fat usually. If you now know that carcass fat is somehow dependent on the already established carcass conformation and carcass weight to the right amount then you could say that you just have to breed for carcass fat corrected by the carcass age to have animals that can go early to the slaughterhouse and not receive any price reductions. The heritability would be high enough for carcass fat to efficiently breed for it. For that you would need some evidence. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. Then the deriving trait carcass fat would not be sufficient to derive the trait early maturity. To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity or early readiness for slaughter. To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017].
+
+
+Another problem is, that 
 
 The profit of cattle breeders is dependent on their costs and incomes. Their income is mostly composed of the sale of their animals to slaughterhouses.
 
