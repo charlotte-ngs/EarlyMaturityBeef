@@ -3,8 +3,6 @@ title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
 output:
-  html_document: default
-  pdf_document: default
 bibliography:
 - Erikson2003.bib
 - Williams2010.bib
