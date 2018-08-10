@@ -31,6 +31,58 @@ h3 { /* Header 3 */
 }
 </style>
 
+# Script Silvan Wyss
+
+# Background Silvan
+
+Now I am just writing a bit about what I understood and what not. Well, how to begin: Once there where cattle breeders in Switzerland that realized that their beef cattle is getting worse in early running to fat. It annoyed them because for cattle beef producers this is an important trait. Cattle beef producers get important selling price reductions for their animals when their sold animals do not have enough fat. In order to get no selling price reductions they have to feed their animals for a longer time. The problem now is that during this time they realize that their costs of feeding and keeping the animals is more than the additional revenue they get by having higher carcass weights and better carcass conformation. That is why they prefer their animals to have enough fat as early as possible, when they also gain enough carcass weight and carcass conformation. There are animals which have more carcass fat, are younger and have more carcass weight and better carcass conformation than other animals. Those animals should be selected in order to reduce the costs for cattle beef producers. At the moment you know a bit about the biology of cattles. They build up proteins earlier than fat usually. If you now know that carcass fat is somehow dependent on the already established carcass conformation and carcass weight to the right amount then you could say that you just have to breed for carcass fat corrected by the carcass age to have animals that can go early to the slaughterhouse and not receive any price reductions. For that you would need some evidence. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one trait which then is called early maturity or early readiness for slaughter.
+
+The profit of cattle breeders is dependent on their costs and incomes. Their income is mostly composed of the sale of their animals to slaughterhouses.
+
+## Background Sophie/Peter
+Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations
+mainly on traits such as growth rate and proportion of carcass lean meat. There might be evidence that
+the level of carcass fatness is decreasing at least for some beef cattle breeds (see (Hospenthal 2016) for a
+possible source). Decreasing levels of carcass fatness has a negative effect on time of carcass maturity and an
+important economic impact for beef cattle producers, because slaughterhouses reduce the price for carcasses
+with an insufficient fatness level. To address this problem, beef cattle breeders in Switzerland have decided
+to estimate breeding values for carcass fatness. These breeding value estimates represent a first tool for
+improving early maturity in beef cattle. The first results of the routine breeding value estimation for carcass
+fatness will be published in summer 2018.
+
+## Aim Sophie/Peter
+This project aims at comparing different breeding strategies for improving early maturity in beef cattle. The
+different strategies that are proposed are described in the following section.
+
+## Strategies Sophie/Peter
+* Breeding value estimation for carcass fatness: Starting in summer 2018 breeding values for
+carcass fatness are estimated for beef cattle. The estimated breeding values for carcass fatness are a first
+tool to improve early maturity. At this stage it is important to describe how the estimated breeding
+values of carcass fatness as a single trait can be used to improve early maturity in beef cattle.
+* Carcass trait index: In most cases, animal breeders are interested to consider more than one trait
+simultaneously for their selection decisions. Selection index theory provides an approach to optimally
+combine a set of traits when selecting animals as potential parents.
+* Approach by Berry: (Berry, Cromie, and M.Judge 2017) defined a new trait called “deviation in age
+at slaughter” (DAGE). They used this trait to access the genetic potential of selection candidates for
+early maturity.
+* Growth models: In pigs, (de Greef 1992) used specialized growth models to quantify the transformation
+of nutrients into the deposition of protein and fat in a carcass. The same type of models can also be
+applied to beef cattle. Based on the results of these growth models, the property of early maturity can
+be derived.
+
+
+
+
+
+
+
+
+
+# German script Sophie/Peter
+
+## Ziel
+Das Ziel dieser Arbeit ist es verschiedene züchterische Massnahmen zur Verbesserung der Frühreife in der Fleischrinderzucht vorzuschlagen, diese zu beschreiben und die Vorschläge miteinander zu vergleichen. 
+
 ## Hintergrund
 Bis im Sommer 2018 wurden in der Routine-Zuchtwertschätzung für Mutterkuh Schweiz (VMS) vor allem die Merkmale Nettozuwachs und  Fleischigkeit berücksichtigt. 
 
@@ -38,13 +90,10 @@ Gewisse Gruppierungen in der Fleischrinderzucht vermuten, dass aufgrund der rela
 
 Aus diesem Grund werden ab Sommer 2018 die Zuchtwerte für Schachtmerkmale überarbeitet. Neu werden Zuchtwerte für Fleischigkeit, Fettabdeckung und Schlachtgewicht geschätzt und publiziert. 
 
-
-## Ziel
-Das Ziel dieser Arbeit ist es verschiedene züchterische Massnahmen zur Verbesserung der Frühreife in der Fleischrinderzucht vorzuschlagen, diese zu beschreiben und die Vorschläge miteinander zu vergleichen. 
-
-
 ## Massnahmen
 In diesem Abschnitt werden verschiedene Massnahmen zur Verbesserung der Frühreife beschrieben. Bei der Einführung des Zuchtwerts für das Merkmal Fettabdeckung steht die Umsetzung kurz bevor, die Einführung eines Schachtleistungsmerkmaleindex und der Ansatz von Berry et al. [@BCJ2017] sind geplant, aber deren Umsetzung ist noch nicht terminiert. Für die Massnahme mit den Wachstumsmodellen wurde noch keine Umsetzung geplant. Ziel dieser Arbeit ist es die vorgeschlagenen Massnahmen zu beschreiben und deren Brauchbarkeit für die Zucht auf Frühreife zu beurteilen.
+
+
 
 ### Zuchtwert Fettabdeckung
 Ab der Routine-Zuchtwertschätzung im Sommer 2018 werden Zuchtwerte für das Merkmal Fettabdeckung (Klassen 1 bis 5) geschätzt und publiziert. Diese Einzelzuchtwerte im Merkmal Fettabdeckung sind ein erstes Werkzeug zur züchterischen Verbesserung der Frühreife. Hier geht es darum, wie der Einzelzuchtwert der Fettabdeckung in der Zuchtarbeit eingesetzt werden kann. 
