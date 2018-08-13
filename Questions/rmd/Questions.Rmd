@@ -85,9 +85,13 @@ knitr::opts_chunk$set(echo = TRUE)
     *
 
 * Can you recommend me a paper that highlights the importance of early maturity and carcass fat?
-    *
+    * Hospenthal Thesis.
     
 * How would you translate Rind to English. Is it heifer or young bull?
+    * Heifer = young female, young bull = young male
+  
+    
+
 
 
     

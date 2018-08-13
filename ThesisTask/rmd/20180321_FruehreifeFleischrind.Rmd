@@ -35,17 +35,26 @@ h3 { /* Header 3 */
 
 # Background Silvan
 
-Now I am just writing a bit about what I understood and what not. Well, how to begin: Once there where cattle breeders in Switzerland that realized that their beef cattle is not as early mature anymore. Early maturity is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight.
+Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations
+mainly on growth rate and carcass conformation. There might be evidence that
+the level of carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016]. Decreasing levels of carcass fatness have a negative effect on time of carcass maturity.
+
+Early maturity is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight.
 
 Cattle beef producers get important selling price reductions for their animals when the carcass fat (Bild von Rückenspeckdicke dick und dünn), carcass conformation (Bild gute Fleischigkeit, schlechte Fleischigkeit) and carcass weight are not sufficient [@Proviande2018]. 
 
-In order to get no selling price reductions they have to feed their animals for a longer time, when their animals do not mature early. The problem now is that during this time they realize that their costs of feeding and keeping the animals is more than the additional revenue they get by having higher carcass weights. Also, in Switzerland the carcass should not weight too much. Actually generally the carcasses in Switzerland are much smaller than abroad in order to fulfill the wishes of the market. That is why beef cattle in Switzerland has to be earlier mature than abroad . 
+In order to get no selling price reductions they have to feed their animals for a longer time, when their animals do not mature early. The problem now is that during this time they realize that their costs of feeding and keeping the animals is more than the additional revenue they get by having higher carcass weights. Also, in Switzerland the carcass should not weight too much. Actually generally the carcasses in Switzerland are much smaller than abroad in order to fulfill the wishes of the market. That is why beef cattle in Switzerland has to be earlier mature than abroad [@Hospenthal2016]. 
 
 There are animals of lower age which have more carcass fat, more carcass weight and better carcass conformation than other animals. This trait of an animal is what we call early maturity. Early mature animals should be selected in order to reduce the costs for cattle beef producers. 
 
 But how do you get a strategy for selecting early mature animals? One possibility is to derive it from an already recorded trait.  They build up proteins earlier than fat usually [@Thonney2015]. If you now know that carcass fat is somehow dependent on the already established carcass conformation and carcass weight to the right amount then you could say that you just have to breed for carcass fat corrected by the age at slaughter to have animals that can go early to the slaughterhouse and not receive any price reductions. 
 
-The heritability would be high enough for carcass fat to efficiently breed for it. For that you would need some evidence. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. Then the deriving trait carcass fat would not be sufficient to derive the trait early maturity. To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity or early readiness for slaughter. To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017]. 
+To use this link between early maturity and carcass fat, beef cattle breeders in Switzerland have decided
+to estimate breeding values for carcass fat. The heritability would be high enough for carcass fat to efficiently breed for it. 
+
+However you need some evidence that carcass fat and early maturity are closely linked to each other. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. Then the deriving trait carcass fat would not be sufficient to derive the trait early maturity. 
+
+To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity or early readiness for slaughter. To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017]. 
 
 Commercial cattle are generally determined as ready for slaughter by visual inspection of the degree of fatness within the appropriate range of live weight [@VanGroningen2006].
 
