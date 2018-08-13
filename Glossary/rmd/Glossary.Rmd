@@ -201,6 +201,8 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Slaughterhouse__ Where animals are slaughtered and processed.There are two categories of slaughterhouses in Switzerland: big and small. If there are more than 1500 slaughter units (per day?), it belongs to the category big, which has more reglementations to fulfill [@Gresset2017].
 
+* __slaughter unit__ I determined as 1 cow, 1 heifer/young bull, 2 calves (Mail 2016).
+
 * __Degree of freedom__
 
 * __ISET__ ? Von Aktennotiz 16. Mai
