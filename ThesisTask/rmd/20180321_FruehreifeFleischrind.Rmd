@@ -54,7 +54,7 @@ to estimate breeding values for carcass fat. The heritability would be high enou
 
 However you need some evidence that carcass fat and early maturity are closely linked to each other. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. Then the deriving trait carcass fat would not be sufficient to derive the trait early maturity.
 
-Also there is the breed Limousin which underperforms in carcass fat. Nevertheless offspring of Limousin sires are most prevalent in the favoured category C3. This shows that for breeding you should always combine the two traits carcass conformation and carcass fat [@Hospenthal2016]. 
+Also there is the breed Limousin which underperforms in carcass fat. Nevertheless offspring of Limousin sires are most prevalent in the favoured category of carcass conformation C3. This shows that for breeding you should always combine the two traits carcass conformation and carcass fat [@Hospenthal2016]. 
 
 To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity or early readiness for slaughter. To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017]. 
 
