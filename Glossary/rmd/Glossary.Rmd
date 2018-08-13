@@ -96,7 +96,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Tierverkehrsdatenbank__ (TVD) There all animals are given a unique ID and informations about phenotypic performance, breeding values and relationship degrees are conserved.
 
-* __Carcass category__ Category of different types of carcasses depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt _Was sind Schaufeln?_, MA = Bull older, OB = Ox until 4 Schaufeln, RG = Heifer until 4 Schaufeln, RV = Heifer/ young cow, cow until max 4 Schaufeln, VK = cow, JB = Young heifer, KV = Calf [@ABZ2017]
+* __Carcass category__ Category of different types of carcasses depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt _Was sind Schaufeln?_, MA = Bull older, OB = Ox until 4 Schaufeln, RG = young bull until 4 Schaufeln, RV = young bull/ young cow, cow until max 4 Schaufeln, VK = cow, JB = Young bull, KV = Calf [@ABZ2017]
 
 * __CH-TAX__ Tool to categorize visually carcasses in different categories, it describes the trait carcass conformation. The price of the carcass depends on the category and the carcass weight. C = very well fleshed, H = well fleshed, T = medium fleshed, A = poorly fleshed, X = very poorly fleshed [@ABZ2017].
 
@@ -303,6 +303,15 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Dam__ Mother animal.
 
+* __Heifer__ Female which is had no calf yet.
+
+* __Young bull__ Bull which is still in growth.
+
+* __Age at slaughter__ Age of the animal that is slaughtered.
+
+* __Random regression modell__ 
+
+* __Economic weight__ Provide indications as to how much genetic improvement in a specific trait would be worth paying for.
 
 
 
