@@ -39,6 +39,8 @@ Now I am just writing a bit about what I understood and what not. Well, how to b
 
 Commercial cattle are generally determined as ready for slaughter by visual inspection of the degree of fatness within the appropriate range of live weight [@VanGroningen2006].
 
+The older the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
+
 The higher the age at slaughter of an animal is the higher is the impact of genetics on the beef carcass traits [@Englishby2017].
 
 In Ireland the usually cross crossbred suckler cows to purebred beef sires. Also they use an multi-trait across breed animal model. There the include 15 traits including carcass weight and carcass fat. The heritability is 0.31 for carcass fat [@Evans2007].
