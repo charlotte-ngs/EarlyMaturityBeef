@@ -89,6 +89,11 @@ knitr::opts_chunk$set(echo = TRUE)
     
 * How would you translate Rind to English. Is it heifer or young bull?
     * Heifer = young female, young bull = young male
+    
+* Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as BV?
+    *
+    
+    
   
     
 

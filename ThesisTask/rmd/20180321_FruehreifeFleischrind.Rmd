@@ -37,7 +37,7 @@ h3 { /* Header 3 */
 
 Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations
 mainly on growth rate and carcass conformation. There might be evidence that
-the level of carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016]. Decreasing levels of carcass fatness have a negative effect on time of carcass maturity.
+the level of carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016].
 
 Early maturity is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight.
 
@@ -52,11 +52,15 @@ But how do you get a strategy for selecting early mature animals? One possibilit
 To use this link between early maturity and carcass fat, beef cattle breeders in Switzerland have decided
 to estimate breeding values for carcass fat. The heritability would be high enough for carcass fat to efficiently breed for it. 
 
-However you need some evidence that carcass fat and early maturity are closely linked to each other. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. Then the deriving trait carcass fat would not be sufficient to derive the trait early maturity. 
+However you need some evidence that carcass fat and early maturity are closely linked to each other. Otherwise you might eventually select animals that are early in running to fat but are still light and thin. Then the deriving trait carcass fat would not be sufficient to derive the trait early maturity.
+
+Also there is the breed Limousin which underperforms in carcass fat. Nevertheless offspring of Limousin sires are most prevalent in the favoured category C3. This shows that for breeding you should always combine the two traits carcass conformation and carcass fat [@Hospenthal2016]. 
 
 To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity or early readiness for slaughter. To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017]. 
 
 Commercial cattle are generally determined as ready for slaughter by visual inspection of the degree of fatness within the appropriate range of live weight [@VanGroningen2006].
+
+Carcass conformation correlates with carcass fat by about 0.31. Age at slaughter correlates positiveley with carcass fat but not linear (concave with decreasing slope) [@Hospenthal2016].
 
 The older the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
 

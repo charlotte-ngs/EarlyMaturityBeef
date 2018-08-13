@@ -94,7 +94,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Weaning date__ Date when the calf does not get any milk from its mother anymore.
 
-* __Tierverkehrsdatenbank__ (TVD) There all animals are given a unique ID and informations about phenotypic performance, breeding values and relationship degrees are conserved.
+* __Tierverkehrsdatenbank__ (TVD) There all animals are given a unique ID and informations about phenotypic performance, breeding values and relationship degrees are conserved. Identitas AG is owner of the data in Switzerland.
 
 * __Carcass category__ Category of different types of carcasses depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt _Was sind Schaufeln?_, MA = Bull older, OB = Ox until 4 Schaufeln, RG = young bull until 4 Schaufeln, RV = young bull/ young cow, cow until max 4 Schaufeln, VK = cow, JB = Young bull, KV = Calf [@ABZ2017]
 
@@ -172,7 +172,7 @@ stdev
 
 * __Genetic variances__ Phenotypic variances that can be explained by the genetics of the animal (by its pedigree) [@VonRohr2017].
 
-* __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal.
+* __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal. Different feed, managents, location [@Hospenthal2016].
 
 * __Heritability__ ($h^2$) Selection success divided by selection difference (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
 
