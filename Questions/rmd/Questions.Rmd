@@ -64,7 +64,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * Later it can be useful to look at the breeding program of growing pig, because they are ahead of the cattle breeders.
     
 * Can you give an example for each why you choose a variable to be a random effect or a fixed effect?
-    *
+    * 
     
 * At the Strickhhof I heard that early maturity could also be linked to sexual maturity. Do you think it is worth to look for more informations in this topic?
     *
@@ -83,6 +83,13 @@ knitr::opts_chunk$set(echo = TRUE)
     
 * What is a selection path?
     *
+
+* Can you recommend me a paper that highlights the importance of early maturity and carcass fat?
+    *
+    
+* How would you translate Rind to English. Is it heifer or young bull?
+
+
     
 
 
