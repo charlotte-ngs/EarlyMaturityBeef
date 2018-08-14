@@ -104,7 +104,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Carcass fat coverage__ (FET) There are 5 classes of fat coverages: 1 = non-covered, 2 = partially covered, 3 = evenly covered, 4 = strongly covered, 5 = overfatty. The higher the breeding value of FET, the higher potentially the fat class of its offspring [@KunzS.2018].
 
-* __Estimation of variance components__ Enables the calculation of heritabilities https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/.
+* __Estimation of variance components__ Enables the calculation of heritabilities https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/. Usually with a sample.
 
 * __Qualität-DB__ ?
 
@@ -203,7 +203,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __slaughter unit__ I determined as 1 cow, 1 heifer/young bull, 2 calves (Mail 2016).
 
-* __Degree of freedom__
+* __Degree of freedom__ All possible values a random variable can express.
 
 * __ISET__ ? Von Aktennotiz 16. Mai
 
@@ -231,7 +231,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __QM Swiss meat__ Meat that originates from animals kept on farms complying with ÖLN rules.
 
-* __Covariable__ ?
+* __Covariable__ Connected to regressions (Stricker 2004). I still can not imagine it.
 
 * __Adjusted traits__ Traits adjusted to facilitate more meaningful comparisons such as 365 day weights or eye muscle area adjusted to constant weight or age [@ICAR]. Adjusted by covariables?
 
@@ -314,6 +314,13 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 * __Random regression modell__ 
 
 * __Economic weight__ Provide indications as to how much genetic improvement in a specific trait would be worth paying for.
+
+* __String variable__ Vector? (Stricker 2004)
+
+* __Expected value__ The long-run average value of a random variable, that has man possibilities which value it can possess. In other words, each possible value the random variable can assume is multiplied by its probability of occurring, and the resulting products are summed to produce the expected value https://en.wikipedia.org/wiki/Expected_value. 
+
+* __Index theory__ 
+
 
 
 
