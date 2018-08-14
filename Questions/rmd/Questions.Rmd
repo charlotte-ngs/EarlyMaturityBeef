@@ -3,6 +3,8 @@ title: "Questions"
 author: "Silvan"
 date: "9 8 2018"
 output: html_document
+bibliography:
+- library.bib
 ---
 
 ```{r setup, include=FALSE}

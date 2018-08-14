@@ -72,6 +72,7 @@ The following text is now citing our paper [@Eriksson2003b].
 
 The next paper that we are citing is [@Williams2010a]
 
+
 # Glossary
 * __Net growth__ Mean gain in weight in kg per d. ( $carcass weight - 0.5 * birth weight) * 1000 / age$ [@Kunz2018].
 
