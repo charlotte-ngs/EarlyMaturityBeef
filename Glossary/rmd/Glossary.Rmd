@@ -2,7 +2,7 @@
 title: "Glossary"
 author: "Silvan"
 date: "6 8 2018"
-output:
+output: html_document
 bibliography:
 - Erikson2003.bib
 - Williams2010.bib

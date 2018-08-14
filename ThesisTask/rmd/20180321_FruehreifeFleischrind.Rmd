@@ -2,7 +2,7 @@
 title: "Frühreife beim Fleischrind"
 author: "Sophie Kunz und Peter von Rohr"
 date: "21.03.2018"
-output: 
+output: html_document
 bibliography: 
 - 20180321_FruehreifeFleischrind.bib
 - library.bib
