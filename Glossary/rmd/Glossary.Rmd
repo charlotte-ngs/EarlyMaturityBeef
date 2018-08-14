@@ -104,7 +104,7 @@ The next paper that we are citing is [@Williams2010a]
 
 * __Carcass fat coverage__ (FET) There are 5 classes of fat coverages: 1 = non-covered, 2 = partially covered, 3 = evenly covered, 4 = strongly covered, 5 = overfatty. The higher the breeding value of FET, the higher potentially the fat class of its offspring [@KunzS.2018].
 
-* __Estimation of variance components__ Enables the calculation of heritabilities https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/. Usually with a sample.
+* __Estimation of variance components__ Enables the calculation of heritabilities https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/. Usually with a sample. You have multiple phenotypic values per farm, then you can calculate the variance (of the same animal?) accross different year over the same farm, you can calculate the variance of a estimator in the slaughterhouse per animal?.
 
 * __Qualität-DB__ ?
 
@@ -321,6 +321,9 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Index theory__ 
 
+* __Effect level__
+
+* __Ancestors__ The progeny you descends from.
 
 
 
