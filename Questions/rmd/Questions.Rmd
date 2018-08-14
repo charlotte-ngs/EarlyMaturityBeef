@@ -94,6 +94,10 @@ knitr::opts_chunk$set(echo = TRUE)
     
 * Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as BV?
     *
+
+In English I will call Frühreife not early maturity but rate of maturation, do you agree?
+    *
+    
     
     
   

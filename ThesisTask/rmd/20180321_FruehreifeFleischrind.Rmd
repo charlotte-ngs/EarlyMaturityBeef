@@ -36,9 +36,9 @@ h3 { /* Header 3 */
 
 Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations
 mainly on growth rate and carcass conformation. There might be evidence that
-the level of carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016]. Several stakeholders regard the decreasing levels of carcass fat as a trend to less early maturity of Swiss beef cattle.
+the level of carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016]. Several stakeholders regard the decreasing levels of carcass fat as decreasing rate of maturation of Swiss beef cattle.
 
-Early maturity ("Frühreife") is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight.
+The rate of maturation ("Frühreife") is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight.
 
 Cattle beef producers get important selling price reductions per carcass weight when the carcass fat (Bild von Rückenspeckdicke dick und dünn), carcass conformation (Bild gute Fleischigkeit, schlechte Fleischigkeit) and carcass weight are not fitting into the desired frame. For example a young bull of 200 kg carcass weight will cost 1910 when in the favouverd categories of carcass conformation and carcass fat and 1400 in the least favoured categories [@Proviande2018]. 
 
@@ -57,7 +57,7 @@ In order to get no selling price reductions they have to feed their animals for 
 
 There are animals of lower age which have more carcass fat, more carcass weight and better carcass conformation than other animals. Early mature animals should be selected in order to reduce the costs for cattle beef producers. 
 
-Early maturity is a complex and not directly measurable trait which complicates breeding for it. One possibility is to derive this trait from an already recorded closely correlated trait. Fortunateley   They build up proteins earlier than fat usually [@Thonney2015]. If you now know that carcass fat is somehow dependent on the already established carcass conformation and carcass weight to the right amount then you could say that you just have to breed for carcass fat corrected by the age at slaughter to have animals that can go early to the slaughterhouse and not receive any price reductions. 
+Early maturity is a complex and not directly measurable trait which complicates breeding for it. One possibility is to derive this trait from an already recorded closely correlated trait. As mentioned in the first paragraph several stakeholders believe that carcass fat and early maturity are closely correlated. Carcass fat could be closely correlated  They build up proteins earlier than fat usually [@Thonney2015]. If you now know that carcass fat is somehow dependent on the already established carcass conformation and carcass weight to the right amount then you could say that you just have to breed for carcass fat corrected by the age at slaughter to have animals that can go early to the slaughterhouse and not receive any price reductions. 
 
 To use this link between early maturity and carcass fat, beef cattle breeders in Switzerland have decided
 to estimate breeding values for carcass fat. The heritability would be high enough for carcass fat to efficiently breed for it. 
@@ -73,6 +73,10 @@ Commercial cattle are generally determined as ready for slaughter by visual insp
 Carcass conformation correlates with carcass fat by about 0.31. Age at slaughter correlates positiveley with carcass fat but not linear (concave with decreasing slope) [@Hospenthal2016].
 
 The older the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
+
+Most selection for growth changed the growth curve by decreasing or increasing adult size. Selection rareley changed the shape of the growth curve or the underlying biological relationships between growth and body composition [@Thonney2015].
+
+Weights across different ages are highly correlated. Growth rates at given age are generally related to adult size [@Thonney2015].
 
 The higher the age at slaughter of an animal is the higher is the impact of genetics on the beef carcass traits [@Englishby2017].
 
