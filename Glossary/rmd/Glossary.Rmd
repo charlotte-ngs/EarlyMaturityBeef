@@ -4,18 +4,6 @@ author: "Silvan"
 date: "6 8 2018"
 output: html_document
 bibliography:
-- Erikson2003.bib
-- Williams2010.bib
-- Kunz2018.bib
-- ABZ2017.bib
-- Mutterkuh2018.bib
-- KunzStrasser2018.bib
-- vonRohr2017.bib
-- Kalisch2011.bib
-- FLHB2017.bib
-- Gresset2017.bib
-- vit.bib
-- ICAR_Glossary.bib
 - library.bib
 ---
 
