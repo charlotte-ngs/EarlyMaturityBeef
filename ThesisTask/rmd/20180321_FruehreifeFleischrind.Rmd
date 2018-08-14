@@ -5,7 +5,7 @@ date: "21.03.2018"
 output: 
 bibliography: 
 - 20180321_FruehreifeFleischrind.bib
-- FB-ZWS Qualitas-EarlyMaturityBeefCattle.bib
+- library.bib
 ---
 
 ```{r setup, include=FALSE}
