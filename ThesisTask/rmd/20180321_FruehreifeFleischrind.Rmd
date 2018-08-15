@@ -83,9 +83,11 @@ The older the animal the higher the proportion of fat tissue in comparison to mu
 This shows that over time carcass fat is generally the limiting factor to meet the requirements to be slaughtered.
 
 Generally cattle gain weight as slightly sigmoid shaped curve (Fig. 21.1) which means that the weight gain is decreasing with increasing age. 
-The adult weight is defined as the asymptotic weight of this growth curve. 
-As the adult weight increases the growth rate generally increases aswell at a given weight. 
-Cattle with higher adult weight tend to increase carcass fat at lower body weight (Figure 21.4) [@Thonney2015].
+The adult weight is defined as the asymptotic weight of the growth curve. 
+Cattle that is higher in carcass fat at a given carcass weight has higher adult weights (Figure 21.4) . 
+As the adult weight decreases the growth rate generally decreases aswell at a given weight [@Thonney2015].
+It has been tried to resolve the negative correlation between growth rate and rate of maturation, but often unsuccessful.
+
 
 
 
