@@ -17,14 +17,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Background
 
 Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations mainly on growth rate and carcass conformation. 
-Lately it has been observed that carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016]. 
+Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds [@Hospenthal2016]. 
 Several stakeholders derive from the decreasing levels of carcass fat that Swiss cattle is worsening in the trait early maturity (Dieser Satz sollte auf grammatikalische Korrektheit überprüft werden).
 
 Early maturity ("Frühreife") is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight. 
 
 Cattle beef producers get important selling price reductions per carcass weight when carcass fat, carcass conformation and carcass weight are not fitting to the desired frame. 
 
-For example a young bull (MT) of 200 kg carcass weight will cost 1910.- when in the favouverd classes of carcass conformation and carcass fat and 1400.- in the least favoured classes, which is 27% less [@Proviande2018]. 
+For example the price of a young bull (MT) of 200 kg carcass weight is 1910.- when in the most favoured classes of carcass conformation and carcass fat and 1400.- when in the least favoured classes [@Proviande2018]. 
 
 ```{r}
 Gewicht <- 200
@@ -34,9 +34,20 @@ ErlösC3<-Gewicht * C3
 ErlösC3
 ErlösH4<- Gewicht * H4
 ErlösH4
-Prozent<-100-(ErlösH4/ErlösC3)*100
-Prozent
 ```
+
+Carcass fat and carcass conformation are used as meat quality indicators, because they correlate with important price-determining characteristics of beef meat [@Proviande2015]. 
+Positiveley correlated with carcass fat:
+
+* __Marbling (cited in [@Thonney2015])
+* __Intramuscular fat content []
+* __Tenderness
+* __Trimming effort
+
+Negativeley correlated with carcass fat:
+* __Cold shortening
+* __Storage weight loss
+* __Meat yield [@Proviande2015]   
 
 The beef meat market in Switzerland is controlled by the sector association "Proviande". Proviande employees classify beef carcasses in large-scale slaughterhouses to determine their price. 
 Their classification is based on the classification system CH-TAX [@Proviande2015]:
