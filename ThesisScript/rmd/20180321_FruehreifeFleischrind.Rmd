@@ -45,12 +45,14 @@ ErlösH4
 Carcass fat and carcass conformation are used as meat quality indicators, because they correlate with important price-determining characteristics of beef meat [@Proviande2015]. 
 
 Positiveley correlated with carcass fat:
+
 * __Marbling (cited in [@Thonney2015])
 * __Intramuscular fat content [@Kaufmann1995]
 * __Tenderness [@Proviande2015]
 * __Trimming effort [@Kaufmann1995]
 
 Negativeley correlated with carcass fat:
+
 * __Cold shortening [@Proviande2015]
 * __Storage weight loss [@Proviande2015]
 * __Meat yield [@Proviande2015]   
