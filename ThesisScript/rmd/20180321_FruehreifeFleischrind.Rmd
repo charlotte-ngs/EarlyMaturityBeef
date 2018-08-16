@@ -16,15 +16,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Background
 
-Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations
-mainly on growth rate and carcass conformation. 
-There might be evidence that
-the level of carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016]. 
-Several stakeholders derive from the decreasing levels of carcass fat a decreasing rate of maturation of Swiss beef cattle (Dieser Satz sollte auf grammatikalische Korrektheit überprüft werden).
+Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations mainly on growth rate and carcass conformation. 
+Lately it has been observed that carcass fatness is decreasing at least for some beef cattle breeds [@Hospenthal2016]. 
+Several stakeholders derive from the decreasing levels of carcass fat that Swiss cattle is worsening in the trait early maturity (Dieser Satz sollte auf grammatikalische Korrektheit überprüft werden).
 
-The rate of maturation ("Frühreife") is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight. Commercial cattle are generally determined as ready for slaughter by visual inspection of the degree of fatness within the appropriate range of live weight [@VanGroningen2006].
+Early maturity ("Frühreife") is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight. 
 
 Cattle beef producers get important selling price reductions per carcass weight when carcass fat (Bild von Rückenspeckdicke dick und dünn), carcass conformation (Bild gute Fleischigkeit, schlechte Fleischigkeit) and carcass weight are not fitting to the desired frame. 
+
 For example a young bull (MT) of 200 kg carcass weight will cost 1910.- when in the favouverd categories of carcass conformation and carcass fat and 1400.- in the least favoured categories, which is 27% less [@Proviande2018]. 
 
 ```{r}
@@ -39,15 +38,19 @@ Prozent<-100-(ErlösH4/ErlösC3)*100
 Prozent
 ```
 
+The beef meat market in Switzerland is controlled by the sector association "Proviande". Proviande employees classify carcass quality in large-scale slaughterhouses to determine the price. 
+Their classification is based on the classification system CH-TAX. 
 
-In order to get no selling price reductions they have to feed their animals for a longer time, when their animals do not mature early. 
-However, in Switzerland the carcass should not weight too much. More than 290 kg carcass weight for MT will result in a price discount of at least 0.1.-/kg carcass weight [@Proviande2018].
+First the category of the carcass is defined by physiological age at slaughter, sex and carcass weight (Tabelle von Hospenthal übernehmen). 
+Then the carcass is visually classified for carcass conformation and carcass fat. 
+Carcass conformation describes how meaty the carcass is and carcass fat describes how fat the carcass is.
+For carcass conformation the price is maximal at the end of the scale and for carcass fat at the center of the scale (3) [@Proviande2018].
+When weighted the carcass should be already trimmed as shown in this figure [@EDI2013, S.1].
 
-Here more information about classifying carcasses by age and gender. And more about Mutterkuh Schweiz and the situation that most beef cattle are crosses between beef sires and dairy dams? All the information in Hospenthal available.
-
-Generally beef carcasses in Switzerland are much smaller than abroad in order to fulfill the wishes of the market. 
+in Switzerland beef carcasses are generally much smaller than abroad in order to fulfill the wishes of the market. 
 Therefore beef cattle in Switzerland has to mature earlier than abroad [@Hospenthal2016]. 
-This project aims at comparing different breeding strategies to increase the rate of maturation of beef cattle in Switzerland to address this need.
+In summer 2018 the new breeding value carcass fat for beef cattle in Switzerland has been launched.
+This project aims at comparing different breeding strategies to improve the early maturity in land to address this need.
 
 
 ## Rate of maturation derived from carcass fat
@@ -88,6 +91,7 @@ Also there is the breed Limousin which underperforms in carcass fat.
 Nevertheless offspring of Limousin sires are most prevalent in the favoured category of carcass conformation C3. 
 This shows that for breeding you should always combine the two traits carcass conformation and carcass fat [@Hospenthal2016]. 
 
+Commercial cattle are generally determined as ready for slaughter by visual inspection of the degree of fatness within the appropriate range of live weight [@VanGroningen2006].
 
 Carcass conformation correlates with carcass fat by about 0.31. 
 Age at slaughter correlates positiveley with carcass fat but not linear (concave with decreasing slope) [@Hospenthal2016].
@@ -110,18 +114,8 @@ The heritability is 0.31 for carcass fat [@Evans2007].
 In Switzerland the "Bundesamt für Landwirtschaft" has to determine the methods to classify carcasses of ruminants. 
 The criteria are the age at slaughter, the carcass conformation and the carcass fat [@Bundesrat2002].
 
-
-
-
-
-
-
-
-
-
-
-
-
+In order to get no selling price reductions they have to feed their animals for a longer time, when their animals do not mature early. 
+However, in Switzerland the carcass should not weight too much. More than 290 kg carcass weight for MT will result in a price discount of at least 0.1.-/kg carcass weight [@Proviande2018].
 
 # References
 
