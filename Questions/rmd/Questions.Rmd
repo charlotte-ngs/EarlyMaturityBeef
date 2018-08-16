@@ -69,9 +69,9 @@ knitr::opts_chunk$set(echo = TRUE)
     * 
     
 * At the Strickhhof I heard that early maturity could also be linked to sexual maturity. Do you think it is worth to look for more informations in this topic?
-    *
+    * Yes it could be interesting too look e.g. at the differences of steers (not much testosterone) and bulls.
     
-* Could you say that conformation is important, because it give you information about the proportion of meat and fat to bones and other slaughter by-products?
+* Could you say that conformation is important, because it gives you information about the proportion of meat and fat to bones and other slaughter by-products?
     *
     
 * What are Schaufeln?
@@ -96,7 +96,7 @@ knitr::opts_chunk$set(echo = TRUE)
     *
 
 In English I will call Frühreife not early maturity but rate of maturation, do you agree?
-    *
+    * No, rate of maturation describes the process until an animal is mature. However we are not interested to breed for that. The only thing we are interested in is that the animals should be maturer as early as possible, no matter how. (Maybe we have to look at it later when we create the index)
     
     
     

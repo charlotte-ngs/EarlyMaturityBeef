@@ -79,7 +79,7 @@ The next paper that we are citing is [@Williams2010a]
 * __Carcass weight__ (SG) In the case of no legal definition, carcass weight should be defined as the hot weight of both half carcasses after being bled and eviscerated and after removal of skin, removal of external genitalia, the limbs at the carpus and tarsus, head, tail, kidneys and kidney fats and the udder [@ICAR]. 
 It is about what ICAR has as definition in the Swiss law [@EDI2013]. Phenotypic carcass weight to produce a breeding value carcass weight. The weight data are collected in meat factories by a balance. It contains information about the enviromental and the genetic effects. Heritability of 0.22 for KV and 0.3 for MT show that breeding for carcass weight is possible. Breeding for a specific carcass weight is impossible. [@KunzS.2018]. The higher the breeding value, the higher the potential carcass weight of the progeny?
 
-* __Early maturity/Rate of maturation?__ Either property of carcass fat coverage (optimum is class 3). Or property, how early an animal can be slaughtered when conditions (no price reductions per kg carcass weight) are met. Often expressed in the unit days. Should not be mixed up with sexual maturity. However corresponding to Andreas Landolt it may be linked to each other [@Kunz2018].
+* __Early maturity__ Either property of carcass fat coverage (optimum is class 3). Or property, how early an animal can be slaughtered when conditions (no price reductions per kg carcass weight) are met. Often expressed in the unit days. Should not be mixed up with sexual maturity. However corresponding to Andreas Landolt it may be linked to each other [@Kunz2018].
 
 * __Conformation__ (F) Conformation is determined by the method CH-TAX. It tells you how much meat there is compared to the body weight [@ABZ2017]. 
 
@@ -317,6 +317,10 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 * __Ancestors__ The progeny you descends from.
 
 * __Yearling weight__ 
+
+* __Genetic standard deviation__
+
+* __Index__ 
 
 
 
