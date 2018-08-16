@@ -22,9 +22,9 @@ Several stakeholders derive from the decreasing levels of carcass fat that Swiss
 
 Early maturity ("Frühreife") is here defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight. 
 
-Cattle beef producers get important selling price reductions per carcass weight when carcass fat (Bild von Rückenspeckdicke dick und dünn), carcass conformation (Bild gute Fleischigkeit, schlechte Fleischigkeit) and carcass weight are not fitting to the desired frame. 
+Cattle beef producers get important selling price reductions per carcass weight when carcass fat, carcass conformation and carcass weight are not fitting to the desired frame. 
 
-For example a young bull (MT) of 200 kg carcass weight will cost 1910.- when in the favouverd categories of carcass conformation and carcass fat and 1400.- in the least favoured categories, which is 27% less [@Proviande2018]. 
+For example a young bull (MT) of 200 kg carcass weight will cost 1910.- when in the favouverd classes of carcass conformation and carcass fat and 1400.- in the least favoured classes, which is 27% less [@Proviande2018]. 
 
 ```{r}
 Gewicht <- 200
@@ -38,19 +38,25 @@ Prozent<-100-(ErlösH4/ErlösC3)*100
 Prozent
 ```
 
-The beef meat market in Switzerland is controlled by the sector association "Proviande". Proviande employees classify carcass quality in large-scale slaughterhouses to determine the price. 
-Their classification is based on the classification system CH-TAX. 
+The beef meat market in Switzerland is controlled by the sector association "Proviande". Proviande employees classify beef carcasses in large-scale slaughterhouses to determine their price. 
+Their classification is based on the classification system CH-TAX [@Proviande2015]:
 
-First the category of the carcass is defined by physiological age at slaughter, sex and carcass weight (Tabelle von Hospenthal übernehmen). 
-Then the carcass is visually classified for carcass conformation and carcass fat. 
-Carcass conformation describes how meaty the carcass is and carcass fat describes how fat the carcass is.
-For carcass conformation the price is maximal at the end of the scale and for carcass fat at the center of the scale (3) [@Proviande2018].
+1. The category of the carcass is defined by physiological age at slaughter, sex and carcass weight (Own table according to table on page 5, Proviande2015). 
 When weighted the carcass should be already trimmed as shown in this figure [@EDI2013, S.1].
 
-in Switzerland beef carcasses are generally much smaller than abroad in order to fulfill the wishes of the market. 
+2. The carcass is visually classified for carcass conformation and carcass fat. 
+Carcass conformation describes how meaty the carcass is and carcass fat describes how fat the carcass is.
+
+3. The price of the carcass is estimated. For carcass conformation the price is maximal at the end of the scale and for carcass fat at the center of the scale (3).
+
+
+In Switzerland beef carcasses are generally much smaller than abroad in order to fulfill the wishes of the market. 
 Therefore beef cattle in Switzerland has to mature earlier than abroad [@Hospenthal2016]. 
-In summer 2018 the new breeding value carcass fat for beef cattle in Switzerland has been launched.
-This project aims at comparing different breeding strategies to improve the early maturity in land to address this need.
+In summer 2018 the new breeding value carcass fat for beef cattle in Switzerland has been launched to meet this need in long-term.
+
+However there may be other strategies to improve early maturity in beef cattle which could be more suitable.
+
+To facilitate the choice this project aims at comparing the existing breeding strategy to other valable breeding strategies.
 
 
 ## Rate of maturation derived from carcass fat
