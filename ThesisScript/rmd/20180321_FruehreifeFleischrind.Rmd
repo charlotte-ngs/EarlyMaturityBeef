@@ -24,10 +24,11 @@ Bitte hier Begründung, weshalb die obige Beobachtung und somit die Frühreife w
 ```
 
 ### Early maturity
+The terms including the verb mature can be confusing. 
+The similar term "rate of maturation" describes the amount of time until the adult weight is reached and the "degree of maturity" describes the proportion of the current weight to the adult weight [@Thonney2015]. 
+This could lead to the in this context misleading definition used in trout breeding that early maturity is the amount of time until the adult weight is reached [@Kause2003].
 
-Early maturity ("Frühreife") is defined as the amount of time until an animal reaches the necessary requirements to be slaughtered without any price reductions per kg of carcass weight. 
-The definitions including the verb mature can be confusing. 
-The similar term "rate of maturation" describes the amount of time until the adult weight is reached and the "degree of maturity" describes the proportion of the current weight to the adult weight [@Thonney2015].
+Early maturity ("Frühreife") in this context is defined as the amount of time until an animal meets the necessary requirements to be slaughtered without any price reductions per kg of carcass weight. 
 
 ```
 Referenz auf andere Defintionen ==> Literatur
