@@ -35,6 +35,9 @@ Early maturity ("Frühreife") in this context however is defined as the amount o
 ```
 Referenz auf andere Defintionen ==> Literatur
 ```
+
+### CHTAX
+
 Price reductions are dependent on the price formation process of the slaughterhouse.
 
 Since 1994 Swiss slaughterhouses value beef cattle based on the classification system CHTAX.  [Kaufmann1995]. 
@@ -57,44 +60,14 @@ For example the price of a young bull (MT) of `r Gewicht` kg carcass weight is `
 
 ### Meat quality indicators
 
-Carcass fat and carcass conformation have been introduced as meat quality indicators, because they coincide with important price-determining characteristics of beef meat [@Kaufmann1995].
+Carcass fat and carcass conformation have been introduced as price formation factors, because they coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
+Carcass fat when to low is related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse[@Kaufmann1995].
 
-
-Positiveley correlated with carcass fat:
-
-* __Marbling (cited in [@Thonney2015])
-* __Intramuscular fat content [@Kaufmann1995]
-* __Tenderness [@Proviande2015]
-* __Trimming effort [@Kaufmann1995]
-
-Negativeley correlated with carcass fat:
-
-* __Cold shortening [@Proviande2015]
-* __Storage weight loss [@Proviande2015]
-* __Meat yield [@Proviande2015]   
-
-A better carcass conformation positiveley effects meat/bone proportion [@Proviande2015]. 
-
-
-3. The price of the carcass is estimated. For carcass conformation the price is maximal at the end of the scale (C) and for carcass fat at the center of the scale (3).
+A better carcass conformation is has been observed to lead to a high exploitation of valuable meat pieces [@Proviande2015].
 
 ### Breeding strategy
 
-In Switzerland beef carcasses are generally much smaller than abroad in order to fulfill the wishes of the market. 
-Therefore beef cattle in Switzerland has to mature earlier than abroad [@Hospenthal2016]. 
-
-In summer 2018 the new breeding value carcass fat for beef cattle in Switzerland has been launched to meet this need in long-term.
-However there may be other strategies to improve early maturity in beef cattle which could be more suitable.
-
-To facilitate the choice this project aims at comparing the existing breeding strategy to other valable breeding strategies.
-
-
-
-
-
-
-
-
+In Summer 2018 carcass fat has joined carcass conformation and carcass weight to the existing multi-trait breeding valuation model carcass caracteristics.
 
 
 ## Rate of maturation derived from carcass fat (Noch nicht überarbeitet)
@@ -173,6 +146,10 @@ When weighted the carcass should be already trimmed as shown in this figure [@ED
 Carcass conformation describes how meaty the carcass is and carcass fat describes how fat the carcass is.
 
 3. The price of the carcass is estimated. For carcass conformation the price is maximal at the end of the scale (C) and for carcass fat at the center of the scale (3).
+
+In Switzerland beef carcasses are generally much smaller than abroad in order to fulfill the wishes of the market. 
+Therefore beef cattle in Switzerland has to mature earlier than abroad [@Hospenthal2016]. 
+
 
 # References
 
