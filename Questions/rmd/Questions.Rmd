@@ -106,6 +106,10 @@ knitr::opts_chunk$set(echo = TRUE)
 * Where can I find the files for the genetic trend figures?
     *
 
+* How can I include a figure of a reference into my markup file? E.G. Fig. 21.3 Thonney.
+    *
+    
+
 
     
 
