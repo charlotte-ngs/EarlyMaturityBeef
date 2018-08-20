@@ -15,7 +15,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Background
 
 Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations mainly on growth rate and carcass conformation. 
-Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds, which leads to a price reduction of the carcass [@Hospenthal2016]. (Hier noch Graph zeigen mit Entwicklung carcass fat over years in switzerland, Sophie fragen)
+Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds, which leads to a price reduction of the carcass [@Hospenthal2016].
+
+```{r, echo=FALSE, fig.cap = "Vergleich der Fettklasse 2014 - 2017"}
+
+knitr::include_graphics("Trend_CarcassFat.png")
+```
+
 
 Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
 
