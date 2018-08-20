@@ -29,7 +29,7 @@ Bitte hier Begründung, weshalb die obige Beobachtung und somit die Frühreife w
 ### Early maturity
 Terms rooting on the word mature can be confusing. 
 The "rate of maturation" describes the amount of time until the adult weight is reached and the "degree of maturity" describes the proportion of the current weight to the adult weight [@Thonney2015]. 
-This would lead to the definition used in trout breeding that early maturity is the amount of time until the adult weight is reached [@Kause2003].
+This would lead to the definition used in trout breeding that early maturity is the amount of time until the adult weight is reached [@Kause2014].
 
 Early maturity ("Frühreife") in this context however is defined as the amount of time until an animal meets the necessary requirements (within its category?) to be slaughtered without any price reductions per kg of carcass weight. 
 
@@ -41,9 +41,9 @@ Referenz auf andere Defintionen ==> Literatur
 
 Price reductions are dependent on the price formation process of the slaughterhouse.
 
-Since 1994 Swiss slaughterhouses value beef cattle based on the classification system CHTAX.  [Kaufmann1995]. 
+Since 1994 Swiss slaughterhouses value beef cattle based on the classification system CHTAX [Kaufmann1995]. 
 The first step of valuation is placing the animal in the correct category. The distinct categories differ in physiological age at slaughter, sex and weight. 
-Within each category the animal is classified in five classes of carcass fat (Tabelle) and carcass conformation ( Bild).
+Within each category the animal is classified in five classes of carcass fat (Tabelle) and carcass conformation (Bild).
 When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the price per carcass weight is reduced.
 
 ### Pricing
@@ -64,12 +64,12 @@ For example the price of a young bull (MT) of `r Gewicht` kg carcass weight is `
 Carcass fat and carcass conformation have been introduced as price formation factors, because they coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
 Carcass fat when to low is related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse[@Kaufmann1995].
 
-A better carcass conformation is has been observed to lead to a high exploitation of valuable meat pieces [@Proviande2015].
+A better carcass conformation in turn leads to a high exploitation of valuable meat pieces [@Proviande2015].
 
 ### Breeding strategy
 
 In Summer 2018 carcass fat has joined carcass conformation and carcass weight to the existing multi-trait breeding valuation model carcass caracteristics.
-The first results of the routine breeding value estimation for carcass fatness have been published in summer 2018.
+The first results of the routine breeding value estimation for carcass fat have been published in summer 2018.
 At the moment the trait carcass fat is used to derive the trait early maturity [@Kunz2018].
 
 
