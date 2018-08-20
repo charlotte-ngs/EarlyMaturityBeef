@@ -11,7 +11,7 @@ bibliography:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+knitr::include_graphics(rep("Bildschirmfoto 2018-08-20 um 11.44.24"))
 
 # Formating rules
 

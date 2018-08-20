@@ -20,6 +20,13 @@ Lately it has been observed that carcass fat is decreasing at least for some bee
 Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
 
 Protein deposition increases linearly with increasing body weight, but lipid deposition increases exponentially with increasing body weight (Figure 21.3 Thonney) [@Thonney2015].
+
+```{r, echo=FALSE, fig.cap = "Chemical components in the empty body (gut contents removed) of 49 beef steers. (From the data of Haecker, 1920.) [@Thonney2015]"}
+
+knitr::include_graphics("Bildschirmfoto.png")
+```
+
+
 Until 300 kg body weight the weight of protein is higher, then the weight of lipids is higher [@Thonney2015].
 The heavier the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
 Fat deposition is therefore usually the limiting factor for early maturity during growth [@Thonney2015].
