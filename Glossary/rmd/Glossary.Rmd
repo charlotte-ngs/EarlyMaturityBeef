@@ -174,11 +174,13 @@ stdev
 
 * __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal. Different feed, managents, location [@Hospenthal2016].
 
-* __Heritability__ ($h^2$) Selection success divided by selection difference (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
+* __Heritability__ ($h^2$) Selection success divided by selection differential (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
+
+* __Selection differential__ The measure of the selection applied, which is the average superiority of the selected parents compared to the population mean [@Falconer1996].
 
 * __Basis difference__ ? 
 
-* __Breeding valuation__ (ZWS) Traditionally we use informations about phenotypic performances and degrees of relationships to estimate the breeding value.Now informations about the genetics of an animal can also be used [@VonRohr2017]. Also called genetic evaluation [@ICAR].
+* __Breeding valuation__ (ZWS) Traditionally we use informations about phenotypic performances and degrees of relationships to estimate the breeding value. Now informations about the genetics of an animal can also be used [@VonRohr2017]. Also called genetic evaluation [@ICAR].
 
 * __Training animal__ Animal with own performance[@Burgisser2018].
 
@@ -331,7 +333,7 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Index__ 
 
-* __ 
+* __Mid-parent regression__ 
 
 
 
