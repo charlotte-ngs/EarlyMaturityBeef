@@ -95,8 +95,20 @@ knitr::opts_chunk$set(echo = TRUE)
 * Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as BV?
     *
 
-In English I will call Frühreife not early maturity but rate of maturation, do you agree?
+* In English I will call Frühreife not early maturity but rate of maturation, do you agree?
     * No, rate of maturation describes the process until an animal is mature. However we are not interested to breed for that. The only thing we are interested in is that the animals should be maturer as early as possible, no matter how. (Maybe we have to look at it later when we create the index)
+    
+* Should I fill in the CHTAX tables for carcass conformation and carcass fat and carcass category? Not very good quality and more distracting than helpful, I think.
+    *
+
+* Should I transform the Skript File into a Bookdown file? Somehow committing with Git does not work anymore when combined.
+    *
+* Where can I find the files for the genetic trend figures?
+    *
+
+
+    
+
     
     
     
