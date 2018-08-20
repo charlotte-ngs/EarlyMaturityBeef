@@ -18,7 +18,8 @@ Up until summer 2018, the Swiss beef cattle breeders association has been focusi
 Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds, which leads to a price reduction of the carcass [@Hospenthal2016]. (Hier noch Graph zeigen mit Entwicklung carcass fat over years in switzerland)
 
 Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
-Fat deposition is usually the limiting factor for early maturity during growth [@Thonney2015].
+The heavier the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
+Fat deposition is therefore usually the limiting factor for early maturity during growth [@Thonney2015].
 Early maturity is of high economical importance because a lower age at slaughter leads to less costs for the farmer and the environment [@Berry2017] (decreased feed and environment efficiency).
 
 ```
@@ -68,35 +69,9 @@ A better carcass conformation is has been observed to lead to a high exploitatio
 ### Breeding strategy
 
 In Summer 2018 carcass fat has joined carcass conformation and carcass weight to the existing multi-trait breeding valuation model carcass caracteristics.
-
-
-## Rate of maturation derived from carcass fat (Noch nicht überarbeitet)
-
-Early maturity is a complex and not directly measurable trait which complicates breeding for it. 
-One possibility is to derive this trait from an already recorded closely correlated trait. At the moment the trait carcass fat is used to derive the trait rate of maturity.
-
 The first results of the routine breeding value estimation for carcass fatness have been published in summer 2018.
+At the moment the trait carcass fat is used to derive the trait early maturity [@Kunz2018].
 
-Carcass fat has been chosen because of two reasons. 
-First it is being routineley collected in slaughterhouses since 1994 [@Kaufmann1995]. 
-Second correlation is given by the fact that "cattle growth and body composition are inextricably linked" [@Thonney2015]. 
-Muscels and bones decrease their growth rate with increasing body weight, but fat tissue is growing at an increasing rate with increasing body weight (Figure 21.3 Thonney) [@Thonney2015].
-The older the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
-This shows that over time carcass fat is generally the limiting factor to meet the requirements to be slaughtered.
-
-Generally cattle gain weight as slightly sigmoid shaped curve (Fig. 21.1) which means that the weight gain is decreasing with increasing age. 
-The adult weight is defined as the asymptotic weight of the growth curve. 
-Cattle that is higher in carcass fat at a given carcass weight has higher adult weights (Figure 21.4) . 
-As the adult weight decreases the growth rate generally decreases aswell at a given weight [@Thonney2015].
-It has been tried to resolve the negative correlation between growth rate and rate of maturation, but often unsuccessful.
-
-
-
-
-## Rate of maturation as index trait
-
-To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity or early readiness for slaughter. 
-To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017].
 
 
 
@@ -150,6 +125,28 @@ Carcass conformation describes how meaty the carcass is and carcass fat describe
 In Switzerland beef carcasses are generally much smaller than abroad in order to fulfill the wishes of the market. 
 Therefore beef cattle in Switzerland has to mature earlier than abroad [@Hospenthal2016]. 
 
+## Rate of maturation derived from carcass fat (Noch nicht überarbeitet)
+
+Early maturity is a complex and not directly measurable trait which complicates breeding for it. 
+One possibility is to derive this trait from an already recorded closely correlated trait. 
+
+Carcass fat has been chosen because of two reasons. 
+First it is being routineley collected in slaughterhouses since 1994 [@Kaufmann1995]. 
+Second correlation is given by the fact that "cattle growth and body composition are inextricably linked" [@Thonney2015]. 
+Muscels and bones decrease their growth rate with increasing body weight, but fat tissue is growing at an increasing rate with increasing body weight (Figure 21.3 Thonney) [@Thonney2015].
+The heavier the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
+This shows that over time carcass fat is generally the limiting factor to meet the requirements to be slaughtered.
+
+Generally cattle gain weight as slightly sigmoid shaped curve (Fig. 21.1) which means that the weight gain is decreasing with increasing age. 
+The adult weight is defined as the asymptotic weight of the growth curve. 
+Cattle that is higher in carcass fat at a given carcass weight has higher adult weights (Figure 21.4) . 
+As the adult weight decreases the growth rate generally decreases aswell at a given weight [@Thonney2015].
+It has been tried to resolve the negative correlation between growth rate and rate of maturation, but often unsuccessful.
+
+## Rate of maturation as index trait
+
+To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity. 
+To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017].
 
 # References
 
