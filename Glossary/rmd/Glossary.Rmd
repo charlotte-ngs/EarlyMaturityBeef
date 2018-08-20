@@ -31,8 +31,17 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
+## R chunks
+
+With "alt" + "cmd" + "i" you can create a r chunk:
+```{r}
+
+```
+
+
+
 ## Lists 
-Ther are two types of lists
+There are two types of lists
 
 1. numbered lists
 2. unnumbered lists
