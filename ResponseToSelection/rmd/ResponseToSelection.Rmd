@@ -11,8 +11,9 @@ bibliography:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 The change produced by selection that chiefly interests us is the change of the population mean. Th is is the response to selection, which will be symbolized by R. It is the difference of mean phenotypic value between the offspring of the selcted parents and the whole of the parental generation before selection. The measure of the selection applied is the average superiority of the selected parents, which is called the selection differential, and will be symbolized by S.
-If you can assume that there is no natural selection (fertility and viability not correlated with trait), you can say the ratio of response to selection differential is equal to the heritability [@Falconer1996]
-
+If you can assume that there is no natural selection (fertility and viability not correlated with trait), you can say the ratio of response to selection differential is equal to the heritability [@Falconer1996].
+$$R = h^2S$$
+Assortative mating can be disregarded, because it has very little effect on the mid-parent regression.
 The response to selection is dependent on the parameters:
 
 1. Selection intensity (si)
