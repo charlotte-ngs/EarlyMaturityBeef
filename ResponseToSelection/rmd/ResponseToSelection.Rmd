@@ -1,0 +1,48 @@
+---
+title: "Response to selection"
+author: "Silvan"
+date: "20 8 2018"
+output: html_document
+bibliography: 
+- /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The response to selection is dependent on the parameters:
+
+1. Selection intensity (si)
+2. Selection accuracy (sa)
+3. Genetic standard deviation (gsd)
+4. Generation intervall [y] (gi)
+5. The sex of the candidate (m/f)
+
+In this example I calculate the response to selection for the both sexes as shown on page 135 [@VonRohr1998]. The abbreviation "m or f" in front of the parameters will show if the parameter is from a male or female candidate.
+The first R chunk will define the necessary paramters:
+
+```{r}
+msi <- 1.4
+mgi <- 1.25
+fsi <- 0.8
+fgi <- 1.75
+
+
+
+```
+
+
+The second R chunk will calculate the asymptotic response to selection (R) per year for the total breeding value:
+
+```{r}
+x <- msi * msa * gsd + fsi * fsa * gsd
+y <- mgi + fgi
+
+R<- x/y
+print(R)
+```
+
+
+# References
+

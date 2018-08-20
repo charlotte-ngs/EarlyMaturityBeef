@@ -39,6 +39,8 @@ Fat deposition is therefore usually the limiting factor for early maturity durin
 
 Early maturity is of high economical importance because a lower age at slaughter leads to less costs for the farmer and less negative impacts on the environment [@Berry2017] (decreased feed and environment efficiency).
 
+[@Strasser2017]
+
 ```
 Bitte hier Begründung, weshalb die obige Beobachtung und somit die Frühreife wichtig sind
 ```
