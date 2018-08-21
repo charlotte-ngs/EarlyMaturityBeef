@@ -2,16 +2,16 @@
 title: "Questions"
 author: "Silvan"
 date: "9 8 2018"
-output: html_document
-bibliography:
-- library.bib
+output:
+  pdf_document: default
+  html_document: default
+bibliography: library.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-knitr::include_graphics(rep("Bildschirmfoto 2018-08-20 um 11.44.24"))
 
 # Formating rules
 
@@ -128,7 +128,7 @@ knitr::include_graphics(rep("Bildschirmfoto 2018-08-20 um 11.44.24"))
 * How do I sign variables? 
     * You do "_{sign}“
 
-* Should I always use the latech $$ writing when writing variables?
+* Should I always use the latech $$ writing when writing variables? I think it would be clearer.
     * 
     
 
