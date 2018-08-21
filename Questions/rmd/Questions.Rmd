@@ -92,22 +92,23 @@ knitr::include_graphics(rep("Bildschirmfoto 2018-08-20 um 11.44.24"))
 * How would you translate Rind to English. Is it heifer or young bull?
     * Heifer = young female, young bull = young male
     
-* Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as BV?
+* Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as Breeding value?
     *
 
 * In English I will call Frühreife not early maturity but rate of maturation, do you agree?
     * No, rate of maturation describes the process until an animal is mature. However we are not interested to breed for that. The only thing we are interested in is that the animals should be maturer as early as possible, no matter how. (Maybe we have to look at it later when we create the index)
     
 * Should I fill in the CHTAX tables for carcass conformation and carcass fat and carcass category? Not very good quality and more distracting than helpful, I think.
-    *
+    * Yes, you should fill in the CHTAX tables in the way of Andrea Hospenthal. The pricing table should also be included.
 
 * Should I transform the Skript File into a Bookdown file? Somehow committing with Git does not work anymore when combined.
     *
+    
 * Where can I find the files for the genetic trend figures?
-    *
+    * https://www.mutterkuh.ch/de/documents/herdebuch Herdebuchbericht 2017, page 37 or the presentation of Remo Ackermann http://www.swiss-limousin.ch/media/pdf/2017_01_31-Limousintag_Remo_Ackermann.pdf .
 
 * How can I include a figure of a reference into my markup file? E.G. Fig. 21.3 Thonney.
-    *
+    * You can include a figure with the command "knitr::include_graphics()". You can write the file name into the brackets and the file has to be deposited in the same folder as the markup file.
     
 
 
