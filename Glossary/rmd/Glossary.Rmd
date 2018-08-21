@@ -65,7 +65,6 @@ Formulas and special characters in text with $\sigma^2$
 Formulas and special characters in boxes with $$\sigma^2$$
 
 
-
 ## Citations
 This section explains how we do literature citations together with Mendeley. 
 
@@ -174,9 +173,13 @@ stdev
 
 * __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal. Different feed, managents, location [@Hospenthal2016].
 
-* __Heritability__ ($h^2$) Selection success divided by selection differential (Selektionsintensität). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
+* __Heritability__ ($h^2$) Selection success (mean of progeny) divided by selection differential (mean of selected parents). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
 
-* __Selection differential__ The measure of the selection applied, which is the average superiority of the selected parents compared to the population mean [@Falconer1996].
+* __Selection differential__ (S) The measure of the selection applied, which is the average superiority of the selected parents compared to the population mean [@Falconer1996].
+
+* __Selection intensity__ (i) The standardized selection differential, corrected by the phenotypic standard deviation of the values of a trait in the population.
+
+* __Phenotypic standard deviation__ ($\sigma_{P}$) You have values that have been measured for a certain trait. Of those values you can calculate the mean deviation of the mean of the values. This is the phenotypic standard deviation of a trait of a population [@Falconer1996].
 
 * __Basis difference__ ? 
 
@@ -335,6 +338,9 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Mid-parent regression__ 
 
+* __Additive genetic variance__ Square of the standard deviation of breeding values.
+
+* __Standard deviation of breeding values__ ($\sigma_{A})
 
 
 

@@ -18,6 +18,7 @@ $$R = h^2S$$
 Assortative mating can be disregarded, because it has very little effect on the mid-parent regression. 
 The chief use of this equation is for predicting the response to selection. The knowledge of heritability can be obtained from previous generations. The selection differential can not be known, but its expected value can be predicted.
 
+In the following example you can see how the response to selection for abdominal bristle number in drosophila.
 
 ```{r echo=FALSE}
 x <- data.frame(c("Parents", "Offspring"), c(35.3, 37.9), c(40.6, "-"), c(5.3, "-"), c(2.8,"-"), c("-", 2.6))
@@ -26,6 +27,21 @@ library(knitr)
 kable(x)
 
 ```
+
+```{r}
+h2 <- 0.52
+S <- 40.6 - 35.3
+R <- h2 * S
+oR <- 37.9 - 35.3
+```
+
+The heritability `r h2` of the bristle number was estimated in the previous generations. The selected parents had a mean superiority of `r S`. The predicted response is S * h2 = `r R`. The observed response was `r oR`.
+However this result is only valid for this generation, because heritability is expected to change in each generation.
+
+When a normal distribution of the values for a trait in a population can be assumed, which is always the case
+
+
+
 
 
 

@@ -110,6 +110,27 @@ knitr::include_graphics(rep("Bildschirmfoto 2018-08-20 um 11.44.24"))
 * How can I include a figure of a reference into my markup file? E.G. Fig. 21.3 Thonney.
     * You can include a figure with the command "knitr::include_graphics()". You can write the file name into the brackets and the file has to be deposited in the same folder as the markup file.
     
+* How can you create a nice table in R markdown?
+    * You can create a R chunk. There you use the function data.frame and with c() you define you columns top down. With the function "colnames(name of the data.frame)" you define the column names from left to rigth. Then you use the function "kable()". But why do you have always do library(knitr)?
+    
+* How can you include R result in the text of R markdown?
+    * The R chunk needs to be above and can be hid with "echo = FALSE". The you take the defined variables as results into the text with (press two times shift + ^) ``. In those quotation marks you fill in "r Variable name".
+    
+* How do I create a R chunk?
+    * With "alt" + "cmd" + "i" you can create a r chunk.
+    
+* How do I produce the back slash like this \?
+    * With the combination "alt" + "shift" + "7".
+
+* How can I produce curly brackets {}?
+    * "alt" + 8 and 9.
+
+* How do I sign variables? 
+    * You do "_{sign}“
+
+* Should I always use the latech $$ writing when writing variables?
+    * 
+    
 
 
     
