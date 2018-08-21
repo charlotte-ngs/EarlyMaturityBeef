@@ -9,8 +9,11 @@ bibliography: /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
+
+
+# Introduction derived from [@Falconer1996]
 The change produced by selection that chiefly interests us is the change of the population mean. Th is is the response to selection, which will be symbolized by R. 
 It is the difference of mean phenotypic value between the offspring of the selcted parents and the whole of the parental generation before selection. 
 The measure of the selection applied is the average superiority of the selected parents, which is called the selection differential, and will be symbolized by S.
@@ -27,7 +30,7 @@ The chief use of this equation is for predicting the response to selection. The 
 
 In the following example you can see how the response to selection for abdominal bristle number in drosophila.
 
-```{r echo=FALSE}
+```{r}
 x <- data.frame(c("Parents", "Offspring"), c(35.3, 37.9), c(40.6, "-"), c(5.3, "-"), c(2.8,"-"), c("-", 2.6))
 colnames(x) <- c("Generation", "Mean of all measured", "Mean of those selected", "Selection differential", "Experienced response", "Observed response")
 library(knitr)
@@ -55,38 +58,76 @@ However there are two factors that limit increasing intensity of selection:
 
 
 
+# Response to selection in index derived from [VonRohr1998]
 
+The response to selection of the total breeding value $R^*$ is dependent on the parameters:
 
+1. Intensity of selection $i$
+2. Selection accuracy $r^*$
+3. Genetic standard deviation $\sigma^*$
+4. Generation intervall $L$[y] 
 
-The response to selection is dependent on the parameters:
+It has to be calculated separateley for each sex $y$ and then summed up in the end. Selection accuracy and standard deviation are calculated with the total breeding value $^*$.
+In this example I calculate the response to selection for the both sexes as shown on page 135 [@VonRohr1998]:
 
-1. Selection intensity (si)
-2. Selection accuracy (sa)
-3. Genetic standard deviation (gsd)
-4. Generation intervall [y] (gi)
-5. The sex of the candidate (m/f)
+$$R^*= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
 
-In this example I calculate the response to selection for the both sexes as shown on page 135 [@VonRohr1998]. The abbreviation "m or f" in front of the parameters will show if the parameter is from a male or female candidate.
-The first R chunk will define the necessary paramters:
+The abbreviation "m or f" in front of the parameters will show if the parameter is from a male or female candidate.
+The first R chunk will define the given necessary paramters for two sexes: Selection intensity, generation intervall, number of evaluated full siblings (fs), number of evaluated half siblings (hs).
 
 ```{r}
+# Selection of intensity, generation intervall, number of full siblings, number of half siblings.
 msi <- 1.4
 mgi <- 1.25
+mfs <- 4
+mhs <- 16
 fsi <- 0.8
 fgi <- 1.75
-msa <- 500
-gsd <- 500
-fsa <- 500
+ffs <- 4
+fhs <- 8
+msa <-500
+fsa <-500
+gsd <-500
+```
 
+The variables $r^*$ and $\sigma^*$  have to be calculated first with the variables $a'$, $C_y^*$, $a$ and $G^*$:
+$$r^*=\sqrt{\frac {a'C_y^*a}{a'G^*a}}$$
+$$\sigma^*=\sqrt{a'G^*a}$$
 
+For this you need to first calculate the $C_y^*$.
+
+$$\\left[\begin{array}
+{rrr}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{array}\right]
+
+=
+
+\left[\begin{array}
+{rrr}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{array}\right]
+$$
+
+```{r}
 
 ```
 
 
-The second R chunk will calculate the asymptotic response to selection (R) per year for the total breeding value:
+
+
+
+
+
+
+The last R chunk will calculate the asymptotic response to selection (R) per year for the total breeding value:
 
 ```{r}
-x <- msi * msa * gsd + fsi * fsa * gsd
+x <- msi * msa*  gsd + fsi * fsa * gsd
 y <- mgi + fgi
 
 R<- x/y

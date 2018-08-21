@@ -131,10 +131,35 @@ knitr::opts_chunk$set(echo = TRUE)
 * Should I always use the latech $$ writing when writing variables? I think it would be clearer.
     * 
     
-
-
+* Are character and trait synonyms?
+    * Yes almost synonyms.
     
+* How do I write and interpret the summation symbol big sigma?
+    * You write it like this: $\sum_{i=1}^{n}$
 
+* How do I write square roots?
+    * You write it like this: $\sqrt{b^2 - 4ac}$
+    
+* How do I write matrices?
+    * You write it like this: 
+$$
+\mathbf{X} = \left[\begin{array}
+{rrr}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{array}\right]
+$$
+    
+* How do I write tables?
+    * Like this
+```{r}
+data.frame(Kalb =c(1,2,3,5,3),
+    Geschlecht =c("M","F","F","M","M"),
+    Vater =c(1,3,1,4,3),
+    Mutter =c(NA,2,2,5,6),
+    WWG =c(4.5,2.9,3.9,3.5,5.0))
+```
     
     
     

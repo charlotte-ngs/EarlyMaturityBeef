@@ -347,13 +347,17 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Standard deviation of breeding values__ ($\sigma_{A})
 
+* __Siblings__ Animals that share the same parents. Half siblings only share half of the parents.
 
 
+
+
+$$\sum_{i=1}^{n} X^3_i$$
 
 
 
 $$\sigma_{\bar{x_{1}} - \bar{x_{2}}}^2 = \frac {\sigma_{1}^2}{n_{1}} + \frac{\sigma_{2}^2}{n_{2}}$$ 
-$$\sigma^2$$
+
 
 # References
 
