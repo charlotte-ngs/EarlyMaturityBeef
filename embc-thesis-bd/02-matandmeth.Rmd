@@ -1,8 +1,21 @@
 # Material and Methods {#matandmeth}
-Based on the earlier made observation in chapter \@ref(intro), it is important to improve __early maturity__ in Swiss beef cattle. One possibility for improving a certain trait is to use this trait in a breeding program. An important prerequisite for the use of a certain trait in a breeding program is that we can precisely define the trait and that the trait can easily and efficiently be measured.
+Based on the earlier made observation in chapter \@ref(intro), it is important to improve __early maturity__ in Swiss beef cattle. 
+One possibility for improving a certain trait is to use this trait in a breeding program. 
+An important prerequisite for the use of a certain trait in a breeding program is that we can precisely define the trait and that the trait can easily and efficiently be measured.
 
 ## Definition of Early Maturity {#defem}
-In the context of this project, animals are earlier mature if they reach the state of carcass maturity faster than others. Carcass maturity is given by the minimal requirements of the pricing system given by Proviande ().
+In the context of this project, animals are earlier mature if they reach the state of carcass maturity faster than others. 
+Animals reach carcass maturity when their carcass does not get any price reductions due to insufficient or excessive carcass fat. 
+
+##
+
+Price reductions are dependent on the price formation process of the slaughterhouse.
+Since 1994 Swiss large-scale slaughterhouses price beef cattle based on the classification system CHTAX [Kaufmann1995]. 
+The first step of valuation is placing the animal in the correct category. The distinct categories differ in physiological age at slaughter, sex and weight. 
+Within each category the animal is visually classified in five classes of carcass fat (Tabelle) and carcass conformation (Bild).
+When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the price per carcass weight is reduced.
+
+
 
 
 ## Improvement of Early Maturity

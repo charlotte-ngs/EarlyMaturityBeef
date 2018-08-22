@@ -172,7 +172,10 @@ knitr::kable(tbl_prop_sel)
 * How should I call Gesamtzuchtwert? Overall breeding value probably.
     * 
     
-* Is the covariance (Zusammenhang) between these breeding values connected by the heritability of each trait?
+* Is the covariance (Zusammenhang) between the true and estimated breeding values defined by the heritability of each trait?
+    *
+  
+* Should I use a table to collect all known variables, or is a r chunk enough with just the arrows? The advantage of the table is, that it looks tidier.
     *
     
 
