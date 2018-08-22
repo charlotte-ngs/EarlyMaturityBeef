@@ -1,0 +1,849 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Glossary},
+            pdfauthor={Silvan},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Glossary}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Silvan}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{6 8 2018}
+
+
+\begin{document}
+\maketitle
+
+\subsection{R Markdown}\label{r-markdown}
+
+This is an R Markdown document. Markdown is a simple formatting syntax
+for authoring HTML, PDF, and MS Word documents. For more details on
+using R Markdown see \url{http://rmarkdown.rstudio.com}.
+
+When you click the \textbf{Knit} button a document will be generated
+that includes both content as well as the output of any embedded R code
+chunks within the document. You can embed an R code chunk like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(cars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+\end{verbatim}
+
+\subsection{Including Plots}\label{including-plots}
+
+You can also embed plots, for example:
+
+\includegraphics{Glossary_files/figure-latex/pressure-1.pdf}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.
+
+\subsection{R chunks}\label{r-chunks}
+
+With ``alt'' + ``cmd'' + ``i'' you can create a r chunk:
+
+\subsection{Lists}\label{lists}
+
+There are two types of lists
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  numbered lists
+\item
+  unnumbered lists
+\end{enumerate}
+
+\subsubsection{numbered lists}\label{numbered-lists}
+
+Numbered lists start with a number and a dot.
+
+\subsubsection{unnumbered lists}\label{unnumbered-lists}
+
+Unnumbered lists start with a star.
+
+\begin{itemize}
+\tightlist
+\item
+  list item
+\item
+  list item
+\end{itemize}
+
+\subsection{formating}\label{formating}
+
+Bold face with two \textbf{underscores} or \textbf{two stars}.
+
+Italics with one \emph{underscore} or one \emph{star}.
+
+Formulas and special characters in text with \(\sigma^2\)
+
+Formulas and special characters in boxes with \[\sigma^2\]
+
+\subsection{Citations}\label{citations}
+
+This section explains how we do literature citations together with
+Mendeley.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First we have to export the *.bib-file for our papers by either
+
+  \begin{itemize}
+  \tightlist
+  \item
+    setting up automatic *.bib-generation in Mendeley-Desktop via the
+    menu \texttt{Mendeley\ Desktop} \textgreater{} \texttt{Preferences}
+    or by
+  \item
+    explicitly exporting the *.bib file from one paper by right click on
+    the record and hit \texttt{Export}
+  \end{itemize}
+\item
+  As the next step, we copy the *.bib file into the rmd-directory.
+\item
+  The paper can then be cited using the key of the bib-record from the
+  *.bib-file.
+\end{enumerate}
+
+For more details see
+\url{https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html}
+
+The following text is now citing our paper ({\textbf{???}}).
+
+The next paper that we are citing is ({\textbf{???}})
+
+\section{Glossary}\label{glossary}
+
+\begin{itemize}
+\item
+  \textbf{Net growth} Mean gain in weight in kg per d. (
+  \(carcass weight - 0.5 * birth weight) * 1000 / age\) (Kunz Sophie
+  2018).
+\item
+  \textbf{Carcass weight} (SG) In the case of no legal definition,
+  carcass weight should be defined as the hot weight of both half
+  carcasses after being bled and eviscerated and after removal of skin,
+  removal of external genitalia, the limbs at the carpus and tarsus,
+  head, tail, kidneys and kidney fats and the udder (ICAR 2018). It is
+  about what ICAR has as definition in the Swiss law (EDI 2013).
+  Phenotypic carcass weight to produce a breeding value carcass weight.
+  The weight data are collected in meat factories by a balance. It
+  contains information about the enviromental and the genetic effects.
+  Heritability of 0.22 for KV and 0.3 for MT show that breeding for
+  carcass weight is possible. Breeding for a specific carcass weight is
+  impossible. (Kunz S. and Strasser S. 2018). The higher the breeding
+  value, the higher the potential carcass weight of the progeny?
+\item
+  \textbf{Early maturity} Either property of carcass fat coverage
+  (optimum is class 3). Or property, how early an animal can be
+  slaughtered when conditions (no price reductions per kg carcass
+  weight) are met. Often expressed in the unit days. Should not be mixed
+  up with sexual maturity. However corresponding to Andreas Landolt it
+  may be linked to each other (Kunz Sophie 2018).
+\item
+  \textbf{Conformation} (F) Conformation is determined by the method
+  CH-TAX. It tells you how much meat there is compared to the body
+  weight (ABZ 2017).
+\item
+  \textbf{Weaning date} Date when the calf does not get any milk from
+  its mother anymore.
+\item
+  \textbf{Tierverkehrsdatenbank} (TVD) There all animals are given a
+  unique ID and informations about phenotypic performance, breeding
+  values and relationship degrees are conserved. Identitas AG is owner
+  of the data in Switzerland.
+\item
+  \textbf{Carcass category} Category of different types of carcasses
+  depends on their age, sexual maturity and sex. MT = Bull ungeschaufelt
+  \emph{Was sind Schaufeln?}, MA = Bull older, OB = Ox until 4
+  Schaufeln, RG = young bull until 4 Schaufeln, RV = young bull/ young
+  cow, cow until max 4 Schaufeln, VK = cow, JB = Young bull, KV = Calf
+  (ABZ 2017)
+\item
+  \textbf{CH-TAX} Tool to categorize visually carcasses in different
+  categories, it describes the trait carcass conformation. The price of
+  the carcass depends on the category and the carcass weight. C = very
+  well fleshed, H = well fleshed, T = medium fleshed, A = poorly
+  fleshed, X = very poorly fleshed (ABZ 2017).
+\item
+  \textbf{Genetic correlation} How much are different traits genetically
+  linked to each other. Also called shared heritability. If the term is
+  0 the traits do not share any heritability with each other. If the
+  term is 1 the traits share all the heritability with each other.
+  Means: If one trait is higher in the next generation, the other will
+  be higher by the same proportion. (proportional to each other). If the
+  term is negative e.g. -1, the proportionality will be negative. If one
+  trait is higher in the next generation the other one will be positive.
+\item
+  \textbf{Carcass fat coverage} (FET) There are 5 classes of fat
+  coverages: 1 = non-covered, 2 = partially covered, 3 = evenly covered,
+  4 = strongly covered, 5 = overfatty. The higher the breeding value of
+  FET, the higher potentially the fat class of its offspring (Kunz S.
+  and Strasser S. 2018).
+\item
+  \textbf{Estimation of variance components} Enables the calculation of
+  heritabilities
+  \url{https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/}.
+  Usually with a sample. You have multiple phenotypic values per farm,
+  then you can calculate the variance (of the same animal?) accross
+  different year over the same farm, you can calculate the variance of a
+  estimator in the slaughterhouse per animal?.
+\item
+  \textbf{Qualität-DB} ?
+\item
+  \textbf{Pedigree} Pedigree of the animal(Rohr 2017). A tabulation of
+  ids and names of an individual's ancestors. Pedigree information is
+  used to establish genetic relationships among individuals to use in
+  genetic evaluations (ICAR 2018).
+\item
+  \textbf{Mixed linear model} Trying to remove effects of the
+  environment on the model by calculating it into the model. Farm is
+  random effekt because there is not enough data to calculate its effect
+  reliably (Kunz Sophie 2018).
+\item
+  \textbf{Additive genetic effect} The effect of the genetics of an
+  animal that are inherited to its offspring. Not included is the
+  dominance and epistasy effect (Rohr 2017).
+\item
+  \textbf{Animal model} Is a version of BLUP, where the phenotypic
+  observation of an animal depends on the breeding value of the animal
+  and the breeding value of the animal is dependent on the breeding
+  values of all its relatives. Also the breeding value is corrected by
+  the breeding value of its mating partners (Rohr 2017).
+\item
+  \textbf{Genetic groups} Groups of animals with unknown parents. Groups
+  are formed according to age (year born), country of origin and/or
+  breed composition (if more than one breed is included) (ICAR 2018).
+  Example and purpose?
+\item
+  \textbf{Phantom parents} ?
+\item
+  \textbf{Basis animal} Animals in the pedigree that do not have parents
+  according to the model?? (Bürgisser 2018). Or: One of the animals that
+  create as their mean the population mean. E.G. In the german breeding
+  valuation the animals from 2006-2010 are used to calculate the
+  population mean for the breeding values 2014. They change each year in
+  Germany (Vit, n.d.).
+\item
+  \textbf{Bankkalb} (KV) Watch carcass category. Why differentiate
+  breeding values of KV and MT?
+\item
+  \textbf{Banktier} (MT) Watch carcass category
+\item
+  \textbf{Selection path} ?
+\item
+  \textbf{Variance components} ?
+\item
+  \textbf{Software VCE} ?
+\item
+  \textbf{Software Mix99} ?
+\item
+  \textbf{Residual} A residual is the vertical difference between a
+  regression line and the observed value.
+\item
+  \textbf{Variance} (\(\sigma^2\)) It is the square mean deviation of
+  the expected value. Here we use the empiric variance. It is calculated
+  like in this example: We have a number row (vector) of:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{vec_a <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We take the arithmetic mean out of the vector values:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mvec_a <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(vec_a)}
+\NormalTok{mvec_a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.666667
+\end{verbatim}
+
+We calculate the square differences (absolute) of the observations to
+the mean/Erwartungswert.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sdvec_a <-}\StringTok{ }\NormalTok{(mvec_a}\OperatorTok{-}\NormalTok{vec_a)}\OperatorTok{^}\DecValTok{2}
+\NormalTok{sdvec_a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13.4444444  2.7777778  0.1111111  1.7777778 11.1111111  0.1111111
+\end{verbatim}
+
+We take the sum of the square differences and divide it by the degrees
+of freedom which is the number of terms in the vector - 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(sdvec_a)}\OperatorTok{/}\NormalTok{(}\KeywordTok{length}\NormalTok{(vec_a)}\OperatorTok{-}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.866667
+\end{verbatim}
+
+Should be the same like
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{var}\NormalTok{(vec_a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.866667
+\end{verbatim}
+
+The advantage of using R-code-chunks to do the examples is that
+computations are done automatically and do not lead to errors.
+Furthermore, we do not have to do computations explicitly, but we can
+use functions such as \texttt{sum} and \texttt{mean} which are readily
+available.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Standard deviation} It is usually calculated as the square
+  root of the variance. It is the mean absolute deviation to the mean of
+  all observations or the Erwartungswert (when stetig) (Kalisch 2011).
+  Like in the example of variance:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{var_vec_a <-}\StringTok{ }\KeywordTok{var}\NormalTok{(vec_a)}
+\NormalTok{stdev<-}\StringTok{ }\NormalTok{var_vec_a}\OperatorTok{^}\FloatTok{0.5}
+\NormalTok{stdev}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.42212
+\end{verbatim}
+
+\begin{itemize}
+\item
+  \textbf{Genetic variances} Phenotypic variances that can be explained
+  by the genetics of the animal (by its pedigree) (Rohr 2017).
+\item
+  \_\_Farm*year variances\_\_ Phenotypic variances that can be explained
+  by the environment (of which data is available like farm and year) of
+  the animal. Different feed, managents, location (Hospenthal 2016).
+\item
+  \textbf{Heritability} (\(h^2\)) Selection success (mean of progeny)
+  divided by selection differential (mean of selected parents). The
+  higher, the more the trait is dependent on the genetics of the
+  population (Rohr 2017).
+\item
+  \textbf{Selection differential} (S) The measure of the selection
+  applied, which is the average superiority of the selected parents
+  compared to the population mean ({\textbf{???}}).
+\item
+  \textbf{Intensity of selection} (i) The standardized selection
+  differential, corrected by the phenotypic standard deviation of the
+  values of a trait in the population. If you can assume a normal
+  distribution you can derivate it from the proportion of the population
+  selected as parents ({\textbf{???}}).
+\item
+  \textbf{Phenotypic standard deviation} (\(\sigma_{P}\)) You have
+  values that have been measured for a certain trait. Of those values
+  you can calculate the mean deviation of the mean of the values. This
+  is the phenotypic standard deviation of a trait of a population
+  ({\textbf{???}}).
+\item
+  \textbf{Response to selection} (R) \(R=ih^2\sigma_{P}\)
+\item
+  \textbf{Basis difference} ?
+\item
+  \textbf{Breeding valuation} (ZWS) Traditionally we use informations
+  about phenotypic performances and degrees of relationships to estimate
+  the breeding value. Now informations about the genetics of an animal
+  can also be used (Rohr 2017). Also called genetic evaluation (ICAR
+  2018).
+\item
+  \textbf{Training animal} Animal with own performance(Bürgisser 2018).
+\item
+  \textbf{Abbreviations Breeding valuation Mutterkuh Schweiz} ccc =
+  Conformation Bankkälber, cca = Conformation Banktiere, cfc = Fat
+  coverage Bankkälber, cfa = Fat coverage Banktiere, cwc = carcass
+  weight Bankkälber, cwa = carcass weight Banktiere. (c1 = ?, c2 =
+  conformation, f2 = fat coverage, w2 = carcassweight, c3 = calf, a3 =
+  animal) (Kunz Sophie 2018).
+\item
+  \textbf{Abbreviations cow breeds} AN = Angus, AU = Aubrac, BV =
+  Braunvieh, CH = Charolais, LM = Limousin, SM = Simmental (Kunz Sophie
+  2018).
+\item
+  \textbf{Typify} Genomics not necessary yet.
+\item
+  \textbf{Data validation/selection} Making sure that the data is
+  describing what we want to look at and deciding which data will be
+  used for further analysis.
+\item
+  \textbf{Estimated breeding value} (EBV) EBVs are expressed in the
+  units of measurement for each particular trait. They are shown as +
+  ive or - ive differences between an individual animal's genetics
+  difference and the genetic base to which the animal is compared. For
+  example, a bull with an EBV of +50 kg for 600-Day Weight is estimated
+  to have genetic merit 50 kg above the breed base of 0 kg. Since the
+  breed base is set to an historical benchmark, the average EBVs of
+  animals in each year drop over time as a result of genetic progress
+  within the breed. The absolute value of any EBV is not critical, but
+  rather the differences in EBVs between animals. Particular animals
+  should be viewed as being ``above or below breed average'' for a
+  particular trait.
+  \url{http://abri.une.edu.au/online/pages/understanding_ebvs_char.htm}
+\item
+  \textbf{Breeding valuation carcass traits} Fat coverage, conformation,
+  carcass weight (Kunz Sophie 2018).
+\item
+  \textbf{Breeding valuation early maturity} Only dependent on age and
+  carcass weight?(Kunz Sophie 2018)
+\item
+  \textbf{Fat coverage} Trait describing the amount of fat on the meat
+  of a carcass (Kunz Sophie 2018).
+\item
+  \textbf{Slaughterhouse} Where animals are slaughtered and
+  processed.There are two categories of slaughterhouses in Switzerland:
+  big and small. If there are more than 1500 slaughter units (per day?),
+  it belongs to the category big, which has more reglementations to
+  fulfill (Gresset, Python, and Réviron 2017).
+\item
+  \textbf{slaughter unit} I determined as 1 cow, 1 heifer/young bull, 2
+  calves (Mail 2016).
+\item
+  \textbf{Degree of freedom} All possible values a random variable can
+  express.
+\item
+  \textbf{ISET} ? Von Aktennotiz 16. Mai
+\item
+  \textbf{SHB} ? Von Aktennotiz 16. Mai
+\item
+  \textbf{FW} ? Von Aktennotiz 16. Mai
+\item
+  \textbf{IVF} ? Von Aktennotiz 16. Mai
+\item
+  \textbf{Nettozuwachs} (NZW) Wie genau definiert? durchschnittlicher
+  Zuwachs in kg pro Tag seit Geburt?
+\item
+  \textbf{RH} ? Von Aktennotiz 16. Mai
+\item
+  \textbf{DAGE} Deviation (genetic difference) in age at slaughter of
+  each animal relative to its contemporaries for constant carcass weight
+  and constant subcutaneous carcass fatness. Animals with different
+  subcutaneus carcass fatness then not comparable? Comes from concept
+  residual feed intake Sitzung 23.8.17.
+\item
+  \textbf{Residual feed intake}
+\item
+  \textbf{Beef herdbook} (FLHB) The FLHB a part of Mutterkuh Schweiz.
+  Its goal is to achieve genetic and economic improvements in suckle cow
+  husbandry by collecting and analysing data for breeding (FLHB 2017).
+\item
+  \textbf{Beef performance control} (FLEK) FLEK is a phenotypic
+  assessment of cattle. The traits assessed are growing performance of
+  calves and reproduction performance of the dam (FLHB 2017).
+\item
+  \_\_Linear scoring (LB) LB is a phenotypic assessment of cattle. The
+  traits assessed give information about the look of the dam or bull
+  (FLHB 2017). The visual assessment of an animal for one or more
+  morphological characteristics using a linear scale which represents
+  the biological extremes in the population of animals under
+  consideration (ICAR 2018).
+\item
+  \textbf{Population mean of breeding value} (\(\mu\)) Lies usually at
+  100, when relative breeding values are used. It is calculated as the
+  mean of the basis animals. If an animal has a breeding value over 100
+  its offspring has the potential to be on average better in this trait
+  than the average population (Kunz S. and Strasser S. 2018).
+\item
+  \textbf{QM Swiss meat} Meat that originates from animals kept on farms
+  complying with ÖLN rules.
+\item
+  \textbf{Covariable} Connected to regressions (Stricker 2004). I still
+  can not imagine it.
+\item
+  \textbf{Adjusted traits} Traits adjusted to facilitate more meaningful
+  comparisons such as 365 day weights or eye muscle area adjusted to
+  constant weight or age (ICAR 2018). Adjusted by covariables?
+\item
+  \textbf{Fixed / random effects} When a sample (? What kind) exhausts
+  the population, the corresponding variable (?) is fixed; when the
+  sample is a small (i.e., negligible) part of the population the
+  corresponding variable is random (ICAR 2018). ?
+\item
+  \textbf{Best linear unbiased prediction} (BLUP) Is a solution of an
+  equation system with many unknown variables. The solution is the
+  breeding value of an animal. The equation system is fed by phenotypic
+  performances of the observed animals and its relatives, the degree of
+  relationship and environmental informations of the animals (Rohr
+  2017).
+\item
+  \textbf{Multi-trait model} The breeding values of different traits are
+  not calculated independently but are influence each other in using the
+  knowledge about their shared heritability
+  \url{https://qualitasag.ch/neu-im-juli-2018-update-zuchtwertschaetzung-schlachtmerkmale/}.
+\item
+  \textbf{Maternal genetic effect}
+\item
+  \textbf{Total breeding value} A calculated index of all breeding
+  values to enable the simultaneous improvement of multiple breeding
+  values.
+  \url{https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/}
+\item
+  \textbf{Certainty} The more own or relative informations you have
+  about a trait, the better you can compare the animals with each other
+  and the more certain the breeding values are (Vit, n.d.)
+\item
+  \textbf{Phenotype} The set of observable charasteristics of an animal
+  (ICAR 2018).
+\item
+  \textbf{Predictor trait} A trait that can be measured easily on an
+  animal and which is highly correlated to a relevant production trait.
+  An example is scrotal circumference in the case of male fertility
+  (ICAR 2018).
+\item
+  \textbf{Progeny Test} he evaluation procedure of an animal based on
+  the performance of its progeny (ICAR 2018).
+\item
+  \textbf{Steer} Castrated male (ICAR 2018).
+\item
+  \textbf{Base Population} A group of animals with unknown parents in
+  genetic evaluations, whose EBV's are set to zero (ICAR 2018). Usually
+  the base population consists of animals of the same
+  breed.\url{https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/}
+\item
+  \textbf{Breed} Animals with a common origin and selection history.
+  Animals within a breed have characteristics that distinguish them from
+  other breeds or groups of animals within that same species (ICAR
+  2018).
+\item
+  \textbf{Breeding farms} Farms which specialize in the production of
+  animals to be used as sires and dams on other farms which rear animals
+  for animal producing animal products (ICAR 2018).
+\item
+  \textbf{Calculated or Derived traits} Traits derived from recorded
+  traits such as food conversion efficiency (ICAR 2018).
+\item
+  \textbf{Carcass composition} The proportions of a connective tissue,
+  bone, muscle and fat in a carcass (ICAR 2018).
+\item
+  \textbf{Carcass grade} The relative level of a carcass for certain
+  aspects, such as fatness, colour, maturity and class (e.g.~male,
+  female, young, old) (ICAR 2018).
+\item
+  \textbf{Dressing percentage} Dressing percentage describes the percent
+  ratio between carcass weight and the live weight taken immediately
+  before slaughter (ICAR 2018).
+\item
+  \textbf{Empty weights} Animal weight when it consumes no feed or water
+  for minimum 12 hours prior to weighing (ICAR 2018).
+\item
+  \textbf{Environmental effects} Effects which influence the performance
+  of an animal which are not genetic in origin (ICAR 2018).
+\item
+  \textbf{E-U-R-O-P} EU carcass conformation system (ICAR 2018).
+\item
+  \textbf{Founder animal} The earliest known ancestor of an animal (ICAR
+  2018).
+\item
+  \textbf{Generation interval} (\(L\)) Average age of parents when the
+  offspring destined to replace them are born. It should be computed
+  separately for male and female parents (ICAR 2018) {[}Falconer1996{]}.
+\item
+  \textbf{Heterosis} (Hybrid vigor) Amount by which the average
+  performance for a trait in crossbred calves exceeds the average
+  performance of the two or more purebreds that were mated in that
+  particular cross (ICAR 2018).
+\item
+  \textbf{Indicator traits} Traits that do not have direct economic
+  importance, but aid in the prediction of economically important traits
+  (ICAR 2018).
+\item
+  \textbf{Invariant data} Data that is constant, such as an animals date
+  of birth (ICAR 2018).
+\item
+  \textbf{Lean Meat} Meat with the connective tissue limits, but free of
+  visible fat (ICAR 2018).
+\item
+  \textbf{Maintenance energy requirement} The amount of feed energy
+  required per day by an animal to maintain its body weight and support
+  necessary metabolic functions (ICAR 2018).
+\item
+  \textbf{Meat yield} The percentage of lean meat in the beef carcass as
+  obtained by dissection (ICAR 2018).
+\item
+  \textbf{Trait category} Traits are categorized in two categories when
+  we breed for them. One is called maximizing trait like carcass weight
+  and conformation, where we breed only in one direction (more carcass
+  weight). The other one is called optimizing trait like fat coverage
+  where we try to move the population to an optimum value.
+  \url{https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/}
+\item
+  \textbf{Post processing} Breeding values are getting based on their
+  separate breed base e.g.~Simmental.
+\item
+  \textbf{Breed invariable} Tool to assess relative differences in
+  traits across different breeds.
+  \url{https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/}
+\item
+  \textbf{Genetic trend} Is calculated by the mean breeding values of
+  following years.
+  \url{https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/}
+\item
+  \textbf{Sire} Father animal.
+\item
+  \textbf{Dam} Mother animal.
+\item
+  \textbf{Heifer} Female which is had no calf yet.
+\item
+  \textbf{Young bull} Bull which is still in growth.
+\item
+  \textbf{Age at slaughter} Age of the animal that is slaughtered.
+\item
+  \textbf{Random regression modell}
+\item
+  \textbf{Economic weight} Provide indications as to how much genetic
+  improvement in a specific trait would be worth paying for.
+\item
+  \textbf{String variable} Vector? (Stricker 2004)
+\item
+  \textbf{Expected value} The long-run average value of a random
+  variable, that has many possibilities which value it can possess. In
+  other words, each possible value the random variable can assume is
+  multiplied by its probability of occurring, and the resulting products
+  are summed to produce the expected value
+  \url{https://en.wikipedia.org/wiki/Expected_value}. In a probability
+  function the expected value is the on the long run most probable
+  value. Usually when we have a sample, we take the arithmetic mean and
+  the variance around the mean and say, that the sample is
+  representative for infinite sampling points. The we can derive a
+  function of probability through the points, which is defined by the
+  mean and the variance of the sample.
+\item
+  \textbf{Index theory}
+\item
+  \textbf{Effect level}
+\item
+  \textbf{Ancestors} The progeny you descends from.
+\item
+  \textbf{Yearling weight}
+\item
+  \textbf{Genetic standard deviation}
+\item
+  \textbf{Index} Index values are reported as EBVs, in units of relative
+  earning capacity (\$'s) for a given market. They reflect both the
+  short-term profit generated by a sire through the sale of his progeny,
+  and the longer-term profit generated by his daughters in a
+  self-replacing cow herd. A selection index combines the EBVs with
+  economic information (costs and returns) for specific market and
+  production systems to rank animals based on relative profit values
+  ({\textbf{???}}).
+\item
+  \textbf{Selection accuracy} {[}\%{]} is based on the amount of
+  performance information available on the animal and its close
+  relatives - particularly the number of progeny analysed. Accuracy is
+  also based on the heritability of the trait and the genetic
+  correlations with other recorded traits. Hence accuracy indicates the
+  ``confidence level'' of the EBV. The higher the accuracy value the
+  lower the likelihood of change in the animal's EBV as more information
+  is analysed for that animal or its relatives ({\textbf{???}}).
+\item
+  \textbf{Mid-parent regression}
+\item
+  \textbf{Additive genetic variance} Square of the standard deviation of
+  breeding values.
+\item
+  \textbf{Standard deviation of breeding values} (\$\sigma\_\{A\})
+\end{itemize}
+
+\[\sigma_{\bar{x_{1}} - \bar{x_{2}}}^2 = \frac {\sigma_{1}^2}{n_{1}} + \frac{\sigma_{2}^2}{n_{2}}\]
+\[\sigma^2\]
+
+\section*{References}\label{references}
+\addcontentsline{toc}{section}{References}
+
+\hypertarget{refs}{}
+\hypertarget{ref-ABZ2017}{}
+ABZ. 2017. \emph{Lebensmitteltechnologie ETH - Frischfleisch}. Edited by
+ABZ / WDH. 4th ed. Spiez.
+
+\hypertarget{ref-Burgisser2018}{}
+Bürgisser, Monica. 2018. ``Protokoll FLHB-Kommission.'' In \emph{134.
+Flhb-Kommissionssitzung}. Mutterkuh Schweiz.
+
+\hypertarget{ref-EDI2013}{}
+EDI. 2013. ``Schlachtgewichtsverordnung.''
+
+\hypertarget{ref-FLHB2017}{}
+FLHB. 2017. ``Das Fleischrinderherdebuch für eine erfolgreiche Zucht.''
+Brugg: Mutterkuh Schweiz.
+
+\hypertarget{ref-Gresset2017}{}
+Gresset, Fabienne, Pascal Python, and Sophie Réviron. 2017.
+``Wertschöpfungskette Rindfleisch.'' Lausanne: AGRIDEA.
+
+\hypertarget{ref-Hospenthal2016}{}
+Hospenthal, Andrea. 2016. ``Pilot-study to evaluate optimal ages at
+slaughter in beef cattle.'' PhD thesis, ETH Zurich.
+
+\hypertarget{ref-ICAR}{}
+ICAR. 2018. ``Glossary for animal production sector.'' Accessed August
+9.
+
+\hypertarget{ref-Kalisch2011}{}
+Kalisch, Markus. 2011. ``Statistik,'' no. September.
+
+\hypertarget{ref-KunzS.2018}{}
+Kunz S., and Strasser S. 2018. ``Merkblätter.'' Zug: Qualitas AG.
+
+\hypertarget{ref-Kunz2018}{}
+Kunz Sophie. 2018. ``Zuchtwertschätzung: Neue Schlachtmerkmale.'' Zug:
+Qualitas AG.
+
+\hypertarget{ref-VonRohr2017}{}
+Rohr, Peter von. 2017. ``Züchtungslehre.'' Zug: Qualitas AG.
+
+\hypertarget{ref-Vit}{}
+Vit. n.d. ``ZWS Produktionsmerkmale - Relativzuchtwert Fleisch.'' vit.
+
+
+\end{document}

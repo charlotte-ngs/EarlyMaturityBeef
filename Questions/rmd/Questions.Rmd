@@ -142,6 +142,7 @@ knitr::opts_chunk$set(echo = TRUE)
     
 * How do I write matrices?
     * You write it like this: 
+    
 $$
 \mathbf{X} = \left[\begin{array}
 {rrr}
@@ -161,7 +162,14 @@ data.frame(Kalb =c(1,2,3,5,3),
     WWG =c(4.5,2.9,3.9,3.5,5.0))
 ```
     
-    
+* How do I include Latech terms into a table?
+     * Like this: 
+```{r, results='asis'}
+tbl_prop_sel <- tibble::data_frame(male=c(.2), female=c(.5))
+rownames(tbl_prop_sel) <- c("Proportion selected $P$ [%]")
+knitr::kable(tbl_prop_sel)
+```
+
     
   
     

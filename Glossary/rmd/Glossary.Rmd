@@ -349,6 +349,7 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Siblings__ Animals that share the same parents. Half siblings only share half of the parents.
 
+* __Normal distribution__
 
 
 

@@ -68,20 +68,30 @@ The response to selection of the total breeding value $R^*$ is dependent on the 
 4. Generation intervall $L$[y] 
 
 It has to be calculated separateley for each sex $y$ ($_1=male$, $_2=female$) and then summed up in the end. Selection accuracy and standard deviation are calculated with the total breeding value $^*$.
-In this example I calculate the response to selection for the both sexes as shown on page 135 [@VonRohr1998]:
+In this example I calculate the response to selection for the both sexes by the formula as shown on page 135 [@VonRohr1998]:
 
 $$R^*= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
 
-The abbreviation "m or f" in front of the parameters will show if the parameter is from a male or female candidate.
-The first R chunk will define the given necessary paramters for two sexes: Selection intensity, generation intervall, number of evaluated full siblings (fs), number of evaluated half siblings (hs).
+The following table will define the given necessary parameters for two sexes $male=_1$ and $female=_2$: Selection intensity, generation intervall, number of evaluated full siblings (fs), number of evaluated half siblings (hs).
+
+```{r, results='asis'}
+tbl_given <- tibble::data_frame(male=c(.2, 1.4, 1.25, 4, 16), female=c(.5, 0.798, 1.75, 4, 8))
+rownames(tbl_given) <- c("Proportion selected $P$ [%]", "Intensity of selection $i$", "Generation intervall $L$ [y]", "Number of full siblings", "Number of half siblings")
+knitr::kable(tbl_prop_sel)
+```
 
 ```{r}
 # Selection of intensity, generation intervall, number of full siblings, number of half siblings.
-msi <- 1.4
+i1 <- 1.4
+i2 <- 0.8
+p1 <- 0.2
+p2 <- 0.8
+L1 <- 1.25
+L2 <- 1.75
 mgi <- 1.25
 mfs <- 4
 mhs <- 16
-fsi <- 0.8
+
 fgi <- 1.75
 ffs <- 4
 fhs <- 8
@@ -90,37 +100,73 @@ fsa <-500
 gsd <-500
 ```
 
-The variables $r^*$ and $\sigma^*$  have to be calculated first with the variables $a'$, $C_y^*$, $a$ and $G^*$:
+The variables $r^*$ and $\sigma^*$  have to be calculated first with the variables deviation of the vector of the economical weights $a'$, the asymptotic covariance $C_y^*$ between true and estimated breeding values of the male or female candidates before the selection, the vector of the economical weights $a$ and the asymptotic genetic variance-covariance $G^*$:
 $$r^*=\sqrt{\frac {a'C_y^*a}{a'G^*a}}$$
 $$\sigma^*=\sqrt{a'G^*a}$$
 
-For this you need to first calculate the $C_y^*$.
+To solve these equations you need to first calculate the $C_y^*$ by the formula:
 
 $$
-\\\begin{array}
-{rrr}
-1 & 2 & 3 \\
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{array}
-
+\begin{bmatrix}
+C_1^* \\
+C_2^*
+\end{bmatrix}
 =
-
-\\\begin{array}
-{rrr}
-1 & 2 & 3 \\
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{array}
+\left( 
+\begin{bmatrix}
+1+1/2k_1  &  1/2k_2 \\
+1/2k_1    &  1+1/2k_2
+\end{bmatrix}^{-1}
+\otimes I_n
+\right)
+\bullet
+\begin{bmatrix}
+C_1 \\
+C_2
+\end{bmatrix}
 $$
+
 In this equation you have the factors of variance reduction based on the selection of the male or female candidates $k_1$, $k_2$, the covariance matrices $C_1$, $C_2$ between true and estimated breeding values of the male or female candidates before the selection and the identity matrix $I_n$ of $n$ traits existing in the total breeding value.
 
 You can derive $k_1$ and $k_2$ from the intensities of selection $i_1$, $i_2$ and from the value of trunctation $x_1$, $x_2$ for male and female candidates ,
 $$k_y=i_y(i_y-x_y)$$
-The intensities $i_1$=`r msi`
+The intensities of selection are given $i_1$=`r i1`, $i_2$=`r i2` and can also be calculated by the proportion selected $p_1$, $p_2$. 
+Given the proportion selected, we want to compute the selection intensity. For this we need some properties of the normal distribution.
+
+The first quantity to compute are the quantiles that belong to the proportions.
+```{r, results='asis'}
+tbl_prop_sel <- tibble::data_frame(male=.2, female=.5)
+rownames(tbl_prop_sel) <- "proportion selected"
+knitr::kable(tbl_prop_sel)
+```
+
+
 ```{r}
+(quant_male <- qnorm(tbl_prop_sel$male, lower.tail = FALSE))
+(quant_female <- qnorm(tbl_prop_sel$female, lower.tail = FALSE))
+(sel_quant <- qnorm(c(tbl_prop_sel$male, tbl_prop_sel$female), lower.tail = FALSE))
 
 ```
+From the quantiles we can compute the ordinates ($z$)
+
+```{r}
+(sel_ords <- dnorm(c(quant_male, quant_female)))
+```
+
+Finally the selection intensity is computed as
+
+$$i = z/p$$
+
+```{r}
+(sel_int <- sel_ords/tbl_prop_sel["proportion selected",])
+```
+
+Computing the values of the variance reductions ($k$)
+
+```{r}
+(sel_k <- sel_int * (sel_int - sel_quant))
+```
+
 
 
 
@@ -131,13 +177,6 @@ The intensities $i_1$=`r msi`
 
 The last R chunk will calculate the asymptotic response to selection (R) per year for the total breeding value:
 
-```{r}
-x <- msi * msa*  gsd + fsi * fsa * gsd
-y <- mgi + fgi
-
-R<- x/y
-print(R)
-```
 
 
 # References
