@@ -177,6 +177,12 @@ diag(n)
 
 The only variables not yet defined in the equation above are the covariance matrices $C_1$, $C_2$ between true and estimated breeding values of the male or female candidates before the selection.
 
+The true breeding value is the genetic merit of an individual which can be conceptually defined as twice the average deviation of its offspring from the population mean when mated randomly to an infinite population.
+
+The estimated breeding value is only based on phenotypic values of itself or its relatives, but not on those of its progeny.
+
+I guess the covariance (Zusammenhang) between these breeding values is connected by the heritability of each trait.
+
 
 
 

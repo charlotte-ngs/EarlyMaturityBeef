@@ -172,7 +172,8 @@ knitr::kable(tbl_prop_sel)
 * How should I call Gesamtzuchtwert? Overall breeding value probably.
     * 
     
-  
+* Is the covariance (Zusammenhang) between these breeding values connected by the heritability of each trait?
+    *
     
 
 
