@@ -1,0 +1,190 @@
+---
+title: "Response to selection"
+author: "Silvan"
+date: "20 8 2018"
+output:
+  html_document: default
+  pdf_document: default
+bibliography: /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+# Introduction derived from [@Falconer1996]
+The change produced by selection that chiefly interests us is the change of the population mean. Th is is the response to selection, which will be symbolized by R. 
+It is the difference of mean phenotypic value between the offspring of the selcted parents and the whole of the parental generation before selection. 
+The measure of the selection applied is the average superiority of the selected parents, which is called the selection differential, and will be symbolized by S.
+If you can assume that there is no natural selection (fertility and viability not correlated with trait), you can say the ratio of response to selection differential is equal to the heritability [@Falconer1996].
+$$R = h^2S$$
+$$S = i\sigma_{P}$$
+$$R = ih^2\sigma_{P}$$
+$$h = \sigma_{A}/\sigma_{P}$$
+$$R = ih\sigma_{A}$$
+
+
+Assortative mating can be disregarded, because it has very little effect on the mid-parent regression. 
+The chief use of this equation is for predicting the response to selection. The knowledge of heritability can be obtained from previous generations. The selection differential can not be known, but its expected value can be predicted.
+
+In the following example you can see how the response to selection for abdominal bristle number in drosophila.
+
+```{r}
+x <- data.frame(c("Parents", "Offspring"), c(35.3, 37.9), c(40.6, "-"), c(5.3, "-"), c(2.8,"-"), c("-", 2.6))
+colnames(x) <- c("Generation", "Mean of all measured", "Mean of those selected", "Selection differential", "Experienced response", "Observed response")
+library(knitr)
+kable(x)
+
+```
+
+```{r}
+h2 <- 0.52
+S <- 40.6 - 35.3
+R <- h2 * S
+oR <- 37.9 - 35.3
+```
+
+The heritability `r h2` of the bristle number was estimated in the previous generations. The selected parents had a mean superiority of `r S`. The predicted response is S * h2 = `r R`. The observed response was `r oR`.
+However this result is only valid for this generation, because heritability is expected to change in each generation.
+
+When a normal distribution of the values for a trait in a population can be assumed, which is usually the case you can derivate the intensity of selection of the proportion selected.
+
+The goal is of course to increase the response to selection when we are breeding. 
+Increasing intensity of selection seems at first sight to be a straightforward  way of improving the response.
+However there are two factors that limit increasing intensity of selection:
+1. The reproductive rate
+2. Inbreeding
+
+
+
+# Response to selection in index derived from [VonRohr1998]
+
+The response to selection of the total breeding value $R^*$ is dependent on the parameters:
+
+1. Intensity of selection $i$
+2. Selection accuracy $r^*$
+3. Genetic standard deviation $\sigma^*$
+4. Generation intervall $L$[y] 
+
+It has to be calculated separateley for each sex $y$ ($_1=male$, $_2=female$) and then summed up in the end. Selection accuracy and standard deviation are calculated with the total breeding value $^*$.
+In this example I calculate the response to selection for the both sexes by the formula as shown on page 135 [@VonRohr1998]:
+
+$$R^*= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
+
+The following table will define the given necessary parameters for two sexes $male=_1$ and $female=_2$: Selection intensity, generation intervall, number of evaluated full siblings (fs), number of evaluated half siblings (hs).
+
+```{r, results='asis'}
+tbl_given <- tibble::data_frame(male=c(.2, 1.4, 1.25, 4, 16), female=c(.5, 0.798, 1.75, 4, 8))
+rownames(tbl_given) <- c("Proportion selected $P$ [%]", "Intensity of selection $i$", "Generation intervall $L$ [y]", "Number of full siblings", "Number of half siblings")
+knitr::kable(tbl_given)
+```
+
+```{r}
+# Selection of intensity, generation intervall, number of full siblings, number of half siblings.
+i1 <- 1.4
+i2 <- 0.8
+p1 <- 0.2
+p2 <- 0.8
+L1 <- 1.25
+L2 <- 1.75
+n <- 8
+
+mgi <- 1.25
+mfs <- 4
+mhs <- 16
+
+fgi <- 1.75
+ffs <- 4
+fhs <- 8
+msa <-500
+fsa <-500
+gsd <-500
+```
+
+The variables $r^*$ and $\sigma^*$  have to be calculated first with the variables deviation of the vector of the economical weights $a'$, the asymptotic covariance $C_y^*$ between true and estimated breeding values of the male or female candidates before the selection, the vector of the economical weights $a$ and the asymptotic genetic variance-covariance $G^*$:
+$$r^*=\sqrt{\frac {a'C_y^*a}{a'G^*a}}$$
+$$\sigma^*=\sqrt{a'G^*a}$$
+
+To solve these equations you need to first calculate the $C_y^*$ by the formula:
+
+$$
+\begin{bmatrix}
+C_1^* \\
+C_2^*
+\end{bmatrix}
+=
+\left( 
+\begin{bmatrix}
+1+1/2k_1  &  1/2k_2 \\
+1/2k_1    &  1+1/2k_2
+\end{bmatrix}^{-1}
+\otimes I_n
+\right)
+\bullet
+\begin{bmatrix}
+C_1 \\
+C_2
+\end{bmatrix}
+$$
+
+In this equation you have the factors of variance reduction based on the selection of the male or female candidates $k_1$, $k_2$, the covariance matrices $C_1$, $C_2$ between true and estimated breeding values of the male or female candidates before the selection and the identity matrix $I_n$ of $n$ traits existing in the total breeding value.
+
+You can derive $k_1$ and $k_2$ from the intensities of selection $i_1$, $i_2$ and from the value of trunctation $x_1$, $x_2$ for male and female candidates ,
+$$k_y=i_y(i_y-x_y)$$
+The intensities of selection are given $i_1$=`r i1`, $i_2$=`r i2` and can also be calculated by the proportion selected $p_1$, $p_2$. 
+Given the proportion selected, we want to compute the selection intensity. For this we need some properties of the normal distribution.
+
+The first quantity to compute are the quantiles that belong to the proportions.
+```{r, results='asis'}
+tbl_prop_sel <- tibble::data_frame(male=.2, female=.5)
+rownames(tbl_prop_sel) <- "proportion selected"
+knitr::kable(tbl_prop_sel)
+```
+
+
+```{r}
+(quant_male <- qnorm(tbl_prop_sel$male, lower.tail = FALSE))
+(quant_female <- qnorm(tbl_prop_sel$female, lower.tail = FALSE))
+(sel_quant <- qnorm(c(tbl_prop_sel$male, tbl_prop_sel$female), lower.tail = FALSE))
+
+```
+From the quantiles we can compute the ordinates ($z$)
+
+```{r}
+(sel_ords <- dnorm(c(quant_male, quant_female)))
+```
+
+Finally the selection intensity is computed as
+
+$$i = z/p$$
+
+```{r}
+(sel_int <- sel_ords/tbl_prop_sel["proportion selected",])
+```
+
+Computing the values of the variance reductions ($k$)
+
+```{r}
+(sel_k <- sel_int * (sel_int - sel_quant))
+```
+
+The next variable we need to know is the identity matrix $I_n$. It is defined by the number of traits existing in the total breeding value $n$. In this example we have `r n` traits, which results in the following identity matrix:
+
+```{r}
+diag(n)
+```
+
+The only variables not yet defined in the equation above are the covariance matrices $C_1$, $C_2$ between true and estimated breeding values of the male or female candidates before the selection.
+
+The true breeding value is the genetic merit of an individual which can be conceptually defined as twice the average deviation of its offspring from the population mean when mated randomly to an infinite population.
+
+The estimated breeding value is only based on phenotypic values of itself or its relatives, but not on those of its progeny.
+
+I guess the covariance (Zusammenhang) between these breeding values is connected by the heritability of each trait.
+
+
+
+
+# References
+

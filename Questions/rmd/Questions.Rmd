@@ -2,16 +2,16 @@
 title: "Questions"
 author: "Silvan"
 date: "9 8 2018"
-output: html_document
-bibliography:
-- library.bib
+output:
+  pdf_document: default
+  html_document: default
+bibliography: library.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-knitr::include_graphics(rep("Bildschirmfoto 2018-08-20 um 11.44.24"))
 
 # Formating rules
 
@@ -92,31 +92,88 @@ knitr::include_graphics(rep("Bildschirmfoto 2018-08-20 um 11.44.24"))
 * How would you translate Rind to English. Is it heifer or young bull?
     * Heifer = young female, young bull = young male
     
-* Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as BV?
+* Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as Breeding value?
     *
 
 * In English I will call Frühreife not early maturity but rate of maturation, do you agree?
     * No, rate of maturation describes the process until an animal is mature. However we are not interested to breed for that. The only thing we are interested in is that the animals should be maturer as early as possible, no matter how. (Maybe we have to look at it later when we create the index)
     
 * Should I fill in the CHTAX tables for carcass conformation and carcass fat and carcass category? Not very good quality and more distracting than helpful, I think.
-    *
+    * Yes, you should fill in the CHTAX tables in the way of Andrea Hospenthal. The pricing table should also be included.
 
 * Should I transform the Skript File into a Bookdown file? Somehow committing with Git does not work anymore when combined.
     *
+    
 * Where can I find the files for the genetic trend figures?
-    *
+    * https://www.mutterkuh.ch/de/documents/herdebuch Herdebuchbericht 2017, page 37 or the presentation of Remo Ackermann http://www.swiss-limousin.ch/media/pdf/2017_01_31-Limousintag_Remo_Ackermann.pdf .
 
 * How can I include a figure of a reference into my markup file? E.G. Fig. 21.3 Thonney.
+    * You can include a figure with the command "knitr::include_graphics()". You can write the file name into the brackets and the file has to be deposited in the same folder as the markup file.
+    
+* How can you create a nice table in R markdown?
+    * You can create a R chunk. There you use the function data.frame and with c() you define you columns top down. With the function "colnames(name of the data.frame)" you define the column names from left to rigth. Then you use the function "kable()". But why do you have always do library(knitr)?
+    
+* How can you include R result in the text of R markdown?
+    * The R chunk needs to be above and can be hid with "echo = FALSE". The you take the defined variables as results into the text with (press two times shift + ^) ``. In those quotation marks you fill in "r Variable name".
+    
+* How do I create a R chunk?
+    * With "alt" + "cmd" + "i" you can create a r chunk.
+    
+* How do I produce the back slash like this \?
+    * With the combination "alt" + "shift" + "7".
+
+* How can I produce curly brackets {}?
+    * "alt" + 8 and 9.
+
+* How do I sign variables? 
+    * You do "_{sign}“
+
+* Should I always use the latech $$ writing when writing variables? I think it would be clearer.
+    * 
+    
+* Are character and trait synonyms?
+    * Yes almost synonyms.
+    
+* How do I write and interpret the summation symbol big sigma?
+    * You write it like this: $\sum_{i=1}^{n}$
+
+* How do I write square roots?
+    * You write it like this: $\sqrt{b^2 - 4ac}$
+    
+* How do I write matrices?
+    * You write it like this: 
+    
+$$
+\mathbf{X} = \left[\begin{array}
+{rrr}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{array}\right]
+$$
+    
+* How do I write tables?
+    * Like this
+```{r}
+data.frame(Kalb =c(1,2,3,5,3),
+    Geschlecht =c("M","F","F","M","M"),
+    Vater =c(1,3,1,4,3),
+    Mutter =c(NA,2,2,5,6),
+    WWG =c(4.5,2.9,3.9,3.5,5.0))
+```
+    
+* How do I include Latech terms into a table?
+     * Like this: 
+```{r, results='asis'}
+tbl_prop_sel <- tibble::data_frame(male=c(.2), female=c(.5))
+rownames(tbl_prop_sel) <- c("Proportion selected $P$ [%]")
+knitr::kable(tbl_prop_sel)
+```
+* How should I call Gesamtzuchtwert? Overall breeding value probably.
+    * 
+    
+* Is the covariance (Zusammenhang) between these breeding values connected by the heritability of each trait?
     *
-    
-
-
-    
-
-    
-    
-    
-  
     
 
 
