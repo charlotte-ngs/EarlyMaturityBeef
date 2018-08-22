@@ -76,7 +76,7 @@ The following table will define the given necessary parameters for two sexes $ma
 
 ```{r, results='asis'}
 tbl_given <- tibble::data_frame(male=c(.2, 1.4, 1.25, 4, 16), female=c(.5, 0.798, 1.75, 4, 8))
-rownames(tbl_given) <- c("Proportion selected $P$ [%]", "Intensity of selection $i$", "Generation intervall $L$ [y]", "Number of full siblings", "Number of half siblings")
+rownames(tbl_given) <- c("Proportion selected $P$ [%]", "Intensity of selection $i$ [units of standard deviations]", "Generation intervall $L$ [y]", "Number of full siblings", "Number of half siblings")
 knitr::kable(tbl_given)
 ```
 
