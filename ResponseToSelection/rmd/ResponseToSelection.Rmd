@@ -67,7 +67,7 @@ The response to selection of the total breeding value $R^*$ is dependent on the 
 3. Genetic standard deviation $\sigma^*$
 4. Generation intervall $L$[y] 
 
-It has to be calculated separateley for each sex $y$ and then summed up in the end. Selection accuracy and standard deviation are calculated with the total breeding value $^*$.
+It has to be calculated separateley for each sex $y$ ($_1=male$, $_2=female$) and then summed up in the end. Selection accuracy and standard deviation are calculated with the total breeding value $^*$.
 In this example I calculate the response to selection for the both sexes as shown on page 135 [@VonRohr1998]:
 
 $$R^*= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
@@ -96,23 +96,28 @@ $$\sigma^*=\sqrt{a'G^*a}$$
 
 For this you need to first calculate the $C_y^*$.
 
-$$\\left[\begin{array}
+$$
+\\\begin{array}
 {rrr}
 1 & 2 & 3 \\
 4 & 5 & 6 \\
 7 & 8 & 9
-\end{array}\right]
+\end{array}
 
 =
 
-\left[\begin{array}
+\\\begin{array}
 {rrr}
 1 & 2 & 3 \\
 4 & 5 & 6 \\
 7 & 8 & 9
-\end{array}\right]
+\end{array}
 $$
+In this equation you have the factors of variance reduction based on the selection of the male or female candidates $k_1$, $k_2$, the covariance matrices $C_1$, $C_2$ between true and estimated breeding values of the male or female candidates before the selection and the identity matrix $I_n$ of $n$ traits existing in the total breeding value.
 
+You can derive $k_1$ and $k_2$ from the intensities of selection $i_1$, $i_2$ and from the value of trunctation $x_1$, $x_2$ for male and female candidates ,
+$$k_y=i_y(i_y-x_y)$$
+The intensities $i_1$=`r msi`
 ```{r}
 
 ```
