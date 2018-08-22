@@ -77,7 +77,7 @@ The following table will define the given necessary parameters for two sexes $ma
 ```{r, results='asis'}
 tbl_given <- tibble::data_frame(male=c(.2, 1.4, 1.25, 4, 16), female=c(.5, 0.798, 1.75, 4, 8))
 rownames(tbl_given) <- c("Proportion selected $P$ [%]", "Intensity of selection $i$", "Generation intervall $L$ [y]", "Number of full siblings", "Number of half siblings")
-knitr::kable(tbl_prop_sel)
+knitr::kable(tbl_given)
 ```
 
 ```{r}
@@ -88,6 +88,8 @@ p1 <- 0.2
 p2 <- 0.8
 L1 <- 1.25
 L2 <- 1.75
+n <- 8
+
 mgi <- 1.25
 mfs <- 4
 mhs <- 16
@@ -167,15 +169,14 @@ Computing the values of the variance reductions ($k$)
 (sel_k <- sel_int * (sel_int - sel_quant))
 ```
 
+The next variable we need to know is the identity matrix $I_n$. It is defined by the number of traits existing in the total breeding value $n$. In this example we have `r n` traits, which results in the following identity matrix:
 
+```{r}
+diag(n)
+```
 
+The only variables not yet defined in the equation above are the covariance matrices $C_1$, $C_2$ between true and estimated breeding values of the male or female candidates before the selection.
 
-
-
-
-
-
-The last R chunk will calculate the asymptotic response to selection (R) per year for the total breeding value:
 
 
 

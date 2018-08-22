@@ -169,7 +169,8 @@ tbl_prop_sel <- tibble::data_frame(male=c(.2), female=c(.5))
 rownames(tbl_prop_sel) <- c("Proportion selected $P$ [%]")
 knitr::kable(tbl_prop_sel)
 ```
-
+* How should I call Gesamtzuchtwert? Overall breeding value probably.
+    * 
     
   
     

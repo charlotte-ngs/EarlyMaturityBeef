@@ -199,7 +199,7 @@ stdev
 * __Data validation/selection__ Making sure that the data is describing what we want to look at and deciding which data will be used for further analysis.
 
 * __Estimated breeding value__ (EBV) EBVs are expressed in the units of measurement for each particular trait.  They are shown as + ive or - ive differences between an individual animal's genetics difference and the genetic base to which the animal is compared.  For example, a bull with an EBV of +50 kg for 600-Day Weight is estimated to have genetic merit 50 kg above the breed base of 0 kg.  Since the breed base is set to an historical benchmark, the average EBVs of animals in each year drop over time as a result of genetic progress within the breed.
-The absolute value of any EBV is not critical, but rather the differences in EBVs between animals.  Particular animals should be viewed as being "above or below breed average" for a particular trait.   http://abri.une.edu.au/online/pages/understanding_ebvs_char.htm
+The absolute value of any EBV is not critical, but rather the differences in EBVs between animals.  Particular animals should be viewed as being "above or below breed average" for a particular trait.   http://abri.une.edu.au/online/pages/understanding_ebvs_char.htm. an estimate of the ability of an individual to produce superior offspring; based on one or more measurements of performance, using phenotypic values, taken on the animal itself or, more commonly, on a number of its relatives https://medical-dictionary.thefreedictionary.com/true+breeding+value.
 
 * __Breeding valuation carcass traits__ Fat coverage, conformation, carcass weight [@Kunz2018].
 
@@ -251,7 +251,9 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Maternal genetic effect__
 
-* __Total breeding value__ A calculated index of all breeding values to enable the simultaneous improvement of multiple breeding values. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
+* __Overall breeding value__ A calculated index of all breeding values to enable the simultaneous improvement of multiple breeding values. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/. the true, overall breeding value arrived at by the addition of the true breeding values for each selection objective with each true breeding value multiplied by the relevant net economic value. https://medical-dictionary.thefreedictionary.com/true+breeding+value
+
+* __True breeding value__ Genetic merit of an individual which can be conceptually defined as twice the average deviation of its offspring from the population mean when mated randomly to an infinite population. https://medical-dictionary.thefreedictionary.com/true+breeding+value
 
 * __Certainty__ The more own or relative informations you have about a trait, the better you can compare the animals with each other and the more certain the breeding values are [@Vit]
 
