@@ -1,0 +1,23 @@
+--- 
+title: "Early Maturity in Swiss Beef Cattle"
+author: "Silvan Wyss"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [embc-thesis-bd.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: charlotte-ngs/EarlyMaturityBeef
+description: "Master thesis on early maturity in Swiss Beef Cattle."
+---
+
+# Preface {-}
+If you want to write a preface, please write it here.
+
+
+# Summary {-}
+
+
+# Task Description {-}
+Here comes the description of the MSc task.
