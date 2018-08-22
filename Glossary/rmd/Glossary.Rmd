@@ -5,7 +5,7 @@ date: "6 8 2018"
 output:
   pdf_document: default
   html_document: default
-bibliography: library.bib
+bibliography: /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
 ---
 
 ```{r setup, include=FALSE}
