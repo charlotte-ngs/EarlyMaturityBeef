@@ -43,3 +43,43 @@ Computing the values of the variance reductions ($k$)
 (sel_k <- sel_int * (sel_int - sel_quant))
 ```
 
+
+$$X = \begin{bmatrix}1 & x_{1}\\
+1 & x_{2}\\
+1 & x_{3}
+\end{bmatrix}$$
+
+
+More complicated example
+
+$$
+\begin{bmatrix}
+C_1^* \\
+C_2^*
+\end{bmatrix}
+=
+\left( 
+\begin{bmatrix}
+1+1/2k_1  &  1/2k_2 \\
+1/2k_1    &  1+1/2k_2
+\end{bmatrix}^{-1}
+\otimes I_n
+\right)
+\bullet
+\begin{bmatrix}
+C_1 \\
+C_2
+\end{bmatrix}
+$$
+
+
+
+
+
+
+
+
+
+
+
+
