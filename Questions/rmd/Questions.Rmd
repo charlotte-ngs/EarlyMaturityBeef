@@ -102,7 +102,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * Yes, you should fill in the CHTAX tables in the way of Andrea Hospenthal. The pricing table should also be included.
 
 * Should I transform the Skript File into a Bookdown file? Somehow committing with Git does not work anymore when combined.
-    *
+    * If something does not work anymore in RStudio the easiest way to fix it is to restart RStudio. Also I have installed the Tex program which is necessary to build a book in bookdown.
     
 * Where can I find the files for the genetic trend figures?
     * https://www.mutterkuh.ch/de/documents/herdebuch Herdebuchbericht 2017, page 37 or the presentation of Remo Ackermann http://www.swiss-limousin.ch/media/pdf/2017_01_31-Limousintag_Remo_Ackermann.pdf .
@@ -113,7 +113,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * How can you create a nice table in R markdown?
     * You can create a R chunk. There you use the function data.frame and with c() you define you columns top down. With the function "colnames(name of the data.frame)" you define the column names from left to rigth. Then you use the function "kable()". But why do you have always do library(knitr)?
     
-* How can you include R result in the text of R markdown?
+* How can you include R results in the text of R markdown?
     * The R chunk needs to be above and can be hid with "echo = FALSE". The you take the defined variables as results into the text with (press two times shift + ^) ``. In those quotation marks you fill in "r Variable name".
     
 * How do I create a R chunk?
@@ -129,10 +129,10 @@ knitr::opts_chunk$set(echo = TRUE)
     * You do "_{sign}“
 
 * Should I always use the latech $$ writing when writing variables? I think it would be clearer.
-    * 
+    * Yes I should do so. It looks better because then it is clear that it is not just a common letter.
     
 * Are character and trait synonyms?
-    * Yes almost synonyms.
+    * Yes almost synonyms, trait is more suitable then character, when used in the aspect of breeding.
     
 * How do I write and interpret the summation symbol big sigma?
     * You write it like this: $\sum_{i=1}^{n}$
@@ -173,9 +173,12 @@ knitr::kable(tbl_prop_sel)
     * 
     
 * Is the covariance (Zusammenhang) between the true and estimated breeding values defined by the heritability of each trait?
-    *
+    * No, it is defined by the Prediction error variance ($PEV_y$) and the additive genetic variance-covariance matrix ($G$) before the selection.
   
 * Should I use a table to collect all known variables, or is a r chunk enough with just the arrows? The advantage of the table is, that it looks tidier.
+    *
+
+* How works the shortcut to produce <- at once?
     *
     
 

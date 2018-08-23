@@ -90,16 +90,6 @@ L1 <- 1.25
 L2 <- 1.75
 n <- 8
 
-mgi <- 1.25
-mfs <- 4
-mhs <- 16
-
-fgi <- 1.75
-ffs <- 4
-fhs <- 8
-msa <-500
-fsa <-500
-gsd <-500
 ```
 
 The variables $r^*$ and $\sigma^*$  have to be calculated first with the variables deviation of the vector of the economical weights $a'$, the asymptotic covariance $C_y^*$ between true and estimated breeding values of the male or female candidates before the selection, the vector of the economical weights $a$ and the asymptotic genetic variance-covariance $G^*$:
@@ -181,9 +171,31 @@ The true breeding value is the genetic merit of an individual which can be conce
 
 The estimated breeding value is only based on phenotypic values of itself or its relatives, but not on those of its progeny.
 
-I guess the covariance (Zusammenhang) between these breeding values is connected by the heritability of each trait.
+$C_y$ is defined by the Prediction error variance ($PEV_y$) and the additive genetic variance-covariance matrix ($G$) before the selection.
+You can not yet know $PEV_y$ because you would need data of the breeding valuation, but $G$ is possible to compute with the available data.
 
+The variances and covariances of $G$ are dependent on the genetic standard deviation of each trait ($\sigma_g$), the genetic correlations between the traits ($r_{x,y}$) and the genetic variance of each trait ($\sigma_g^2$) but also the pedigree informations.
 
+The pedigree informations are not available yet. Therefore the matrix $\Omega$ with including the remaining information will be first computed.
+
+The variances of the traits are the diagonal values of the matrix $\Omega$ for the covariance between the same trait is the variance of the trait:
+$$Cov(x, x)=\sigma_x^2$$
+The covariance between different traits is defined by the correlation between them and the variance of each trait:
+$$Cov(x,y)=r_{x,y}\sigma_x\sigma_y$$
+In the following table the necessary information to compute the covariances are listed: The diagonal values are the genetic standard deviations $\sigma_g$ and the the others the genetic correlations between the traits ($r_{x,y}$).
+```{r, results='asis'}
+tbl_cov <-data.frame(c(42.31, -0.15, -0.33, 0.11, -0.02, 0.15, 0.04, -2.4), 
+                     c(-0.15, 0.09, -0.66, 0.16, -0.14, -0.04, -0.09, -0.06),
+                     c(-0.33, -0.66, 1.78, -0.07, -0.09, -0.04, 0.08, 0.54), 
+                     c(0.110, 0.16,  -0.07, 0.33, 0.36, 0.24, -0.08, -0.326), 
+                     c(-0.020, -0.14, -0.09, 0.36, 0.09, 0.43, -0.7, -0.5), 
+                     c(0.150, -0.04, -0.04, 0.24, 0.43, 0.02, -0.36, -0.008), 
+                     c(0.040, -0.09, 0.08, -0.08, -0.7, -0.36, 1.58, -0.08), 
+                     c(-2.40, -0.06, 0.54, -0.326, -0.5, -0.008, -0.08, 0.86))
+colnames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+rownames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+knitr::kable(tbl_cov)
+```
 
 
 # References
