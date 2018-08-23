@@ -182,8 +182,20 @@ The variances of the traits are the diagonal values of the matrix $\Omega$ for t
 $$Cov(x, x)=\sigma_x^2$$
 The covariance between different traits is defined by the correlation between them and the variance of each trait:
 $$Cov(x,y)=r_{x,y}\sigma_x\sigma_y$$
-In the following table the necessary information to compute the covariances are listed:
-
+In the following table the necessary information to compute the covariances are listed: The diagonal values are the genetic standard deviations $\sigma_g$ and the the others the genetic correlations between the traits ($r_{x,y}$).
+```{r, results='asis'}
+tbl_cov <-data.frame(c(42.31, -0.15, -0.33, 0.11, -0.02, 0.15, 0.04, -2.4), 
+                     c(-0.15, 0.09, -0.66, 0.16, -0.14, -0.04, -0.09, -0.06),
+                     c(-0.33, -0.66, 1.78, -0.07, -0.09, -0.04, 0.08, 0.54), 
+                     c(0.110, 0.16,  -0.07, 0.33, 0.36, 0.24, -0.08, -0.326), 
+                     c(-0.020, -0.14, -0.09, 0.36, 0.09, 0.43, -0.7, -0.5), 
+                     c(0.150, -0.04, -0.04, 0.24, 0.43, 0.02, -0.36, -0.008), 
+                     c(0.040, -0.09, 0.08, -0.08, -0.7, -0.36, 1.58, -0.08), 
+                     c(-2.40, -0.06, 0.54, -0.326, -0.5, -0.008, -0.08, 0.86))
+colnames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+rownames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+knitr::kable(tbl_cov)
+```
 
 
 # References
