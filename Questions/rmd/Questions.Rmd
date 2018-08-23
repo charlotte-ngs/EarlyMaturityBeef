@@ -72,7 +72,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * Yes it could be interesting too look e.g. at the differences of steers (not much testosterone) and bulls.
     
 * Could you say that conformation is important, because it gives you information about the proportion of meat and fat to bones and other slaughter by-products?
-    *
+    * I would just say, it is the degree of meatiness.
     
 * What are Schaufeln?
     * Schaufeln are Teeth of cattle to estimate their age.
@@ -166,11 +166,11 @@ data.frame(Kalb =c(1,2,3,5,3),
      * Like this: 
 ```{r, results='asis'}
 tbl_prop_sel <- tibble::data_frame(male=c(.2), female=c(.5))
-rownames(tbl_prop_sel) <- c("Proportion selected $P$ [%]")
+rownames(tbl_prop_sel) <- c("Proportion selected $\sigma$ [%]")
 knitr::kable(tbl_prop_sel)
 ```
 * How should I call Gesamtzuchtwert? Overall breeding value probably.
-    * 
+    * No, total genetic merit refering to Peter.
     
 * Is the covariance (Zusammenhang) between the true and estimated breeding values defined by the heritability of each trait?
     * No, it is defined by the Prediction error variance ($PEV_y$) and the additive genetic variance-covariance matrix ($G$) before the selection.
@@ -181,7 +181,9 @@ knitr::kable(tbl_prop_sel)
 * How works the shortcut to produce <- at once?
     *
 
-* Is the vector of economical weights $a$  
+* How do I give figures and tables numbers and labels, so that I can refer to them?
+    *
+
     
 
 

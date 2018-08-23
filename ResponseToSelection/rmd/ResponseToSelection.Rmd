@@ -228,11 +228,10 @@ It works:
 42.31*-0.15*0.09
 (matO <-matD %*% matE %*% matD)
 ```
-We can further define the vector of the economical weights $a$ which is the economical weights per genetic standard deviation multiplied by the standard deviation.
+We can further define the vector of the economical weights $a$ which is the change in revenue [Sfr.] per genetic standard deviation.
 
 ```{r}
-weightsperstdv <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
-(a <- diag(matrix_cov) * weightsperstdv)
+a <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
 ```
 
 
