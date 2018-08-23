@@ -197,6 +197,30 @@ rownames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
 knitr::kable(tbl_cov)
 ```
 
+The matrix will the look like this:
+
+```{r, results='asis'}
+matrix_cov <- as.matrix(tbl_cov)
+matrix_cov
+
+
+
+```
+
+
+
+
+```{r}
+ex <- matrix(c(1,2,3,4), c(1,2,3,4), c(1,2,3,4), c(1,2,3,4))
+ex
+```
+
+
+
+
+
+
+
 
 # References
 
