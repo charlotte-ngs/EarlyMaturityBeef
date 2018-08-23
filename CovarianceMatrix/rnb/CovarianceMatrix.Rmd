@@ -1,0 +1,36 @@
+---
+title: "Matrix from Dataframe"
+output: html_notebook
+---
+
+
+Given a dataframe
+
+```{r}
+(df_example <- data.frame(mtz = c(4,.6,.3), fv=c(.4,2,-.7), fe=c(.3,.1,5)))
+```
+
+How to convert this into a matrix
+
+```{r}
+(mat_example <- as.matrix(df_example))
+```
+
+
+Multiplikation
+
+```{r}
+mat_example %*% diag(c(1,2,3))
+```
+
+
+```{r}
+(mat_m <- diag(diag(mat_example), nrow = 3, ncol = 3))
+```
+
+```{r}
+mat_e <- mat_example
+diag(mat_e) <- 1
+mat_e
+```
+
