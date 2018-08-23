@@ -89,6 +89,7 @@ p2 <- 0.8
 L1 <- 1.25
 L2 <- 1.75
 n <- 8
+a <- c()
 
 ```
 
@@ -202,22 +203,37 @@ The matrix will the look like this:
 ```{r, results='asis'}
 matrix_cov <- as.matrix(tbl_cov)
 matrix_cov
-
-
-
 ```
+The problem is now that the diagonal elements should be squared and the correlation should be multiplied with the variances of the involved traits respecteveley.
+This can be done by matrix scalar multiplication.
+We build a diagonal matrix with the standard deviations inside $D$ and a matrix with all the correlation but with 1,1,1,... as diagonal elements $E$.
 
-
-
+First $D$:
 
 ```{r}
-ex <- matrix(c(1,2,3,4), c(1,2,3,4), c(1,2,3,4), c(1,2,3,4))
-ex
+(matD <- diag(diag(matrix_cov), nrow = 8, ncol = 8))
 ```
+Then $E$:
 
+```{r}
+matE <- matrix_cov
+diag(matE) <- 1
+matE
+```
+Then we get the required matrix $\Omega$ by the following equation:
+$$\Omega=D \bullet E \bullet D$$
+It works:
 
+```{r}
+42.31*-0.15*0.09
+(matO <-matD %*% matE %*% matD)
+```
+We can further define the vector of the economical weights $a$ which is the economical weights per genetic standard deviation multiplied by the standard deviation.
 
-
+```{r}
+weightsperstdv <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
+(a <- diag(matrix_cov) * weightsperstdv)
+```
 
 
 

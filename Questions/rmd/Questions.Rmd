@@ -180,6 +180,8 @@ knitr::kable(tbl_prop_sel)
 
 * How works the shortcut to produce <- at once?
     *
+
+* Is the vector of economical weights $a$  
     
 
 

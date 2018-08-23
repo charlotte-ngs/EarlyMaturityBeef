@@ -34,3 +34,8 @@ diag(mat_e) <- 1
 mat_e
 ```
 
+
+```{r}
+(matx <- (mat_m)%*% mat_e%*% mat_m)
+
+```
