@@ -1,3 +1,8 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "[Get Started](https://bookdown.org/yihui/bookdown/get-started.html)" at https://bookdown.org/yihui/bookdown/ for how to compile this example into HTML. You may generate a copy of the book in `bookdown::pdf_book` format by calling `bookdown::render_book('index.Rmd', 'bookdown::pdf_book')`. More detailed instructions are available here https://bookdown.org/yihui/bookdown/build-the-book.html.
+This is the Master Thesis by Silvan Wyss on __Early Maturity in Swiss Beef Cattle__. The thesis is written in [R Markdown](https://rmarkdown.rstudio.com/) using the bookdown package.
 
-You can find the preview of this example at https://bookdown.org/yihui/bookdown-demo/.
+The following list of reference is useful when working with bookdown.
+
+* The website https://bookdown.org/ contains a collection of books that are written using the bookdown package.
+* The bookdown guide: https://bookdown.org/yihui/bookdown/
+* The definitive guide to R Markdown: https://bookdown.org/yihui/rmarkdown/
+
