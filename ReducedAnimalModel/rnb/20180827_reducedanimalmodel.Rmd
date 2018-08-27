@@ -1,0 +1,35 @@
+---
+title: "Reduced Animal Model"
+output: html_notebook
+---
+
+This notebook tries to reproduce the chapter on `Reduced Animal Models` in Mrode (Chapter 3.4.2).
+
+
+## Background
+The ordinary animal model involves setting up equations for every animal, i.e. all parents and all offspring. Quaas and Pollak (1980) developed the reduced animal model (RAM). A RAM allows equations to be set up only for parents in the MME. Breeding values for progeny are obtained by back-solving from the predicted parental breeding values. 
+
+### Defining the model
+RAM involves setting up animal equations for parents only and representing the breeding values of non-parents in terms of parental breeding values. Thus for a non-parent $i$, its breeding value can be expressed as 
+
+$$
+a_i = {1\over 2}(a_s + a_d) + m_i
+$$
+
+where $a_s$ and $a_d$ are breeding values of sire and dam and $m_i$ corresponds to the Mendelian sampling effect. 
+
+The model for a single observation $y_{ij}$ which was already used for the full model is given by
+
+$$
+y_{ij} = p_i + a_j + e_{ij}
+$$
+
+where $p_i$ is the fixed effect of sex $i$ and $a_j$ is the breeding value of animal $j$.
+
+In matrix notation the model is given as
+
+$$
+y = Xb + Za + e
+$$
+
+Using the decomposition of the $a_i$ into the parent breeding values in the model equation leads to 
