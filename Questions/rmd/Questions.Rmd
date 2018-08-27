@@ -126,7 +126,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * "alt" + 8 and 9.
 
 * How do I sign variables? 
-    * You do "_{sign}“
+    * You do $x_{sign}$
 
 * Should I always use the latech $$ writing when writing variables? I think it would be clearer.
     * Yes I should do so. It looks better because then it is clear that it is not just a common letter.
@@ -135,7 +135,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * Yes almost synonyms, trait is more suitable then character, when used in the aspect of breeding.
     
 * How do I write and interpret the summation symbol big sigma?
-    * You write it like this: $\sum_{i=1}^{n}$
+    * You write it like this: $\sum_{i=1}^{n}$. The variable below always indicates which value it will perform in the following term. So if i = 1 then the following formula i + 2 is 1 + 2. The value on the top of the summation sign is the last value of the row of whole numbers that will be i. For example below i = 1, the value on the top is 4 and the following term is i + 2 then the whole calculation that has to be performed is 1+2 + 2+2 + 3+2 + 4+2 and the solution is 18. 
 
 * How do I write square roots?
     * You write it like this: $\sqrt{b^2 - 4ac}$
@@ -163,10 +163,10 @@ data.frame(Kalb =c(1,2,3,5,3),
 ```
     
 * How do I include Latech terms into a table?
-     * Like this: 
+     * Like this: But it does not work with sigma! 
 ```{r, results='asis'}
 tbl_prop_sel <- tibble::data_frame(male=c(.2), female=c(.5))
-rownames(tbl_prop_sel) <- c("Proportion selected $\sigma$ [%]")
+rownames(tbl_prop_sel) <- c("Proportion selected $x$ [%]")
 knitr::kable(tbl_prop_sel)
 ```
 * How should I call Gesamtzuchtwert? Overall breeding value probably.
@@ -183,6 +183,10 @@ knitr::kable(tbl_prop_sel)
 
 * How do I give figures and tables numbers and labels, so that I can refer to them?
     *
+
+* How do I achieve to create tables that fit into the frame of a PDF, when knitted?
+    *
+
 
     
 

@@ -9,25 +9,39 @@ Animals reach carcass maturity when their carcass does not get any price reducti
 
 Price reductions are dependent on the price formation process of the slaughterhouse.
 Since 1994 Swiss large-scale slaughterhouses price beef cattle based on the classification system CHTAX [Kaufmann1995]. 
-The first step in this system is placing the animal in the correct carcass category. 
+
+The meat sector association "Proviande" is responsible for the implementation of CHTAX in the Swiss slaughterhouses and the cattle markets. 
+There Proviande employees classify beef carcasses either as live or dead animals to determine their price and record the classification of each animal.
+For we are interested in the carcass traits of the slaughtered animal, we only use the data coming from the records in the slaughterhouses.
+
+The first step in the classification system CHTAX is placing the animal in the correct carcass category. 
 The distinct carcass categories differ in physiological age at slaughter, sex and weight.
 In this project the focus lies on the categories MT and KV [@Proviande2018].
 
 ```{r, results='asis'}
-tbl_prop_sel <- tibble::data_frame(Abbreviation=c("__KV__", "JB", "__MT__", "MA", "OB", "RG", "RV", "VK"), Category=c("calves", "young cattle", "young bulls", "bulls or steers", "young steers", "young heifers", "Heifers or young cows", "cows"), Criteria=c("<161 days old", " >161 days <11 months old, <320 kg live weight", ">161 days old, no incissors", ">161 days old, >0 incissors for bulls, >4 incissors for steers", ">161 days old, <5 incissors", ">161 days old, <5 incissors", ">161 days old, >4 incissors for heifers, <5 incissors for young cows", ">161 days old"))
+tbl_prop_sel <- tibble::data_frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), Category=c("calves", "young cattle", "young bulls", "bulls or steers", "young steers", "young heifers", "Heifers or young cows", "cows"), Criteria=c("<161 days old", " >161 days <11 months old, <320 kg live weight", ">161 days old, no incissors", ">161 days old, >0 incissors for bulls, >4 incissors for steers", ">161 days old, <5 incissors", ">161 days old, <5 incissors", ">161 days old, >4 incissors for heifers, <5 incissors for young cows", ">161 days old"))
 
 knitr::kable(tbl_prop_sel)
 ```
 
-Within each category the animal is visually classified in five classes of carcass fat (Tabelle) and carcass conformation (Bild).
+Within each category the animal the Proviande employees visually and gropingly classify the carcass in five classes of carcass fat (Tabelle) and carcass conformation (Tabelle).
 
-```{r, results='asis'}
+The employes determine the class of carcass fat by the area and the accentuation of fat that covers the carcass.
+
+```{r, results='asis', table.cap = "Classification for carcass conformation in CHTAX"}
 tbl_prop_sel <- tibble::data_frame(Class = c("C", "H", "T", "A", "X"), Profile=c("very convex", "convex", "linear", "concave", "very concave"), Criteria=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
 
 knitr::kable(tbl_prop_sel)
 ```
 
-When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the price per carcass weight is reduced.
+
+```{r, results='asis', table.cap = "Classification for carcass conformation in CHTAX"}
+tbl_prop_sel <- tibble::data_frame(Class = c("C", "H", "T", "A", "X"), Profile=c("very convex", "convex", "linear", "concave", "very concave"), Criteria=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
+
+knitr::kable(tbl_prop_sel)
+```
+
+When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the carcass of the animal will obtain a lower price per carcass weight.
 
 $\leqq$
 
