@@ -1,0 +1,26 @@
+---
+title: "Genetic Additive Relationship Matrix"
+output: html_notebook
+---
+
+We can compute the genetic additive relationship matrix $A$ for a given pedigree using the `pedigreemm` package.
+
+```{r}
+suppressPackageStartupMessages( library(pedigreemm) )
+nNrAni <- 5
+ped <- pedigree(sire = c(NA,NA,1,1,3), dam = c(NA,NA,2,2,4), label = 1:nNrAni)
+print(ped)
+```
+
+The function `getA` computes the additive relationship matrix
+
+```{r}
+getA(ped)
+```
+
+The inverse is computed as 
+
+```{r}
+getAInv(ped)
+```
+
