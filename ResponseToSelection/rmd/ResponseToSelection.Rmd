@@ -248,17 +248,48 @@ We just need to fill in the information about the parents of each animal.
 First I compute the pedigree of a male candidate. There we have 2 parents, 20 siblings and the candidate wich in total are 23 animals. The parents of the parents are unnkown.
 
 ```{r}
-install.packages("pedigreem")
-library(pedigreemm)
+suppressPackageStartupMessages( library(pedigreemm))
 nNrAni <- 23
 ped <- pedigree(sire = c(NA,NA,1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:nNrAni)
 print(ped)
 ```
 
+Now we have $G_y$. To get $G_y^*$ and $C_y^*$ we first have to compute $C_y$. $C_y$ is the difference from $G_y$ to $PEV_y$.
+$$C_y=G_y-PEV_y$$
 
+However we do not have the matrix $PEV_y$ yet. 
+We can compute $PEV_y$ with the formula derived from [@Phocas1996].
 
+$$
+PEV
+=
+\left( 
+\begin{matrix}
+1/\sigma_e^2X'X  &  1/\sigma_e^2X'Z \\
+1/\sigma_e^2Z'X   &  1/\sigma_e^2Z'Z+1/\sigma_e^2A^{-1}
+\end{matrix}
+\right)^{-1}
+$$
 
+For this formula you need again the relationship matrix $A_y$, but also the genetic and phenotypic variances $\sigma_g$ and $\sigma_p$.
+You will not need any other data.
+$Z$ is a design matrix that connects the observations with the breeding values.
+$X$ is a vector of the values 1,1,1, etc.
+$\sigma_e$, which is the variance of the environment, is the difference between $\sigma_g$ and $\sigma_p$.
+$$\sigma_e=\sigma_p-\sigma_g$$
+For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values. Where is $\sigma_p$?
 
+```{r}
+sigmap <- c()
+```
+
+For $Z$ we have the following matrix:
+
+```{r}
+Z <- matrix(0,nrow=23, ncol=21)
+diag(Z)<-1
+Z
+```
 
 
 

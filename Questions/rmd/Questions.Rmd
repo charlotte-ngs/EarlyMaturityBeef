@@ -204,7 +204,9 @@ knitr::kable(tbl_prop_sel)
 
 * How do I show solutions of variables in R to the text?
     * You use `r variable`
-    
+  
+* How can I cite directly in the text? For example: Focas (1996) observed this special event.  
+    *
     
 
 
