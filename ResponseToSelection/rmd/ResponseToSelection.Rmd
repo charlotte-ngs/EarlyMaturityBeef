@@ -88,6 +88,10 @@ p1 <- 0.2
 p2 <- 0.8
 L1 <- 1.25
 L2 <- 1.75
+mfs <- 4
+mhs <- 16
+ffs <- 4
+fhs <- 8
 n <- 8
 a <- c()
 
@@ -228,11 +232,47 @@ It works:
 42.31*-0.15*0.09
 (matO <-matD %*% matE %*% matD)
 ```
+
+Now we can compute $G$ out of $\Omega$ because the pedigree of the male and female candidate is available.
+
+To compute $G$ we need to compute the crossproduct of $\Omega$ with the relationsship matrix $A_y$ for each sex separateley:
+
+$$G_y = \Omega \times A_y$$
+
+We know that the male candidate has `r mfs` full siblings, `r mhs` half siblings and a female has `r ffs` full siblings and `r fhs` half siblings.
+
+Based on the number of siblings we can create a relationship matrix.
+We can compute the genetic additive relationship matrix $A$ for a given pedigree using the `pedigreemm` package.
+We just need to fill in the information about the parents of each animal.
+
+First I compute the pedigree of a male candidate. There we have 2 parents, 20 siblings and the candidate wich in total are 23 animals. The parents of the parents are unnkown.
+
+```{r}
+install.packages("pedigreem")
+library(pedigreemm)
+nNrAni <- 23
+ped <- pedigree(sire = c(NA,NA,1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:nNrAni)
+print(ped)
+```
+
+
+
+
+
+
+
+
+
+
+
 We can further define the vector of the economical weights $a$ which is the change in revenue [Sfr.] per genetic standard deviation.
 
 ```{r}
 a <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
 ```
+
+
+
 
 
 

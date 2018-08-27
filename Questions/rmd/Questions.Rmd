@@ -187,7 +187,24 @@ knitr::kable(tbl_prop_sel)
 * How do I achieve to create tables that fit into the frame of a PDF, when knitted?
     *
 
+* How can I merge table rows? E.G. Distinction of T+/- in CHTAX?
+    *
 
+* How do I shortcut in RStudio Zoom Source?
+    * Ctrl + 1
+    
+* Do we have carcass or live weight as data for the breeding valuation for carcass traits?
+    *
+
+* How can I cite tables or figure in a text of bookdown?
+    *
+    
+* Do I have to compute the pedigree for each sex seperateley? I think I do.
+    *
+
+* How do I show solutions of variables in R to the text?
+    * You use `r variable`
+    
     
 
 
