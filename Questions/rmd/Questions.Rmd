@@ -207,7 +207,15 @@ knitr::kable(tbl_prop_sel)
   
 * How can I cite directly in the text? For example: Focas (1996) observed this special event.  
     *
+
+* How can I shift the diagonal by 3 to the right, so it starts at the third column?
+    *
+
+* How can I multiply a diagonal matrix so it has the same diagonal values repetedeley 23 times and then again the same value 23 and again until I have 8 times 23 times the same value (184)?
+    *
     
+* Will I also need to have the relationship matrix 8 times?
+    *
 
 
 

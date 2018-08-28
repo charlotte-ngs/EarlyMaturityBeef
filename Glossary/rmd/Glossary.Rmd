@@ -174,7 +174,7 @@ stdev
 
 * __Farm*year variances__ Phenotypic variances that can be explained by the environment (of which data is available like farm and year) of the animal. Different feed, managents, location [@Hospenthal2016].
 
-* __Heritability__ ($h^2$) Selection success (mean of progeny) divided by selection differential (mean of selected parents). The higher, the more the trait is dependent on the genetics of the population [@VonRohr2017].
+* __Heritability__ ($h^2$) Selection success (mean of progeny) divided by selection differential (mean of selected parents). The higher, the more the trait is dependent on the genetics of the population. It is the genetic additive variance divided by the phenotypic variance [@VonRohr2017].
 
 * __Selection differential__ (S) The measure of the selection applied, which is the average superiority of the selected parents compared to the population mean [@Falconer1996].
 
@@ -351,6 +351,24 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 * __Siblings__ Animals that share the same parents. Half siblings only share half of the parents.
 
 * __Normal distribution__
+
+* __Crossproduct__
+
+* __Scalarproduct__
+
+* __Kronecker product__
+
+* __Vector product__
+
+* __Matrix transpose__
+
+* __Matrix inverse__
+
+* __Design matrices__
+
+* __Residual effects__
+
+* __Matrix addition__
 
 
 

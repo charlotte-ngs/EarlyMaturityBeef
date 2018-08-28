@@ -328,19 +328,26 @@ getAInv(fped)
 
 
 Only the vector $X_y$ and the design matrix $Z_y$ are still missing.
-$X_1$ is `r mfs+mhs+3` times 1.
+
+$X_y$ is a matrix that connects the records with the levels of fixed effects.
+I do not have any fixed effects.
+Therefore we can assume that $X_y$ is just a vector with the number of values that correspond to the number of records.
+
+The number of records for a male candidate is here `r (mfs+mhs)*n`
+
 ```{r}
-(mX <- rep.int(1, times=mfs+mhs+3))
+(mX <- rep.int(1, times=(mfs+mhs)*n))
 ```
 $X_2$ is `r ffs+fhs+3` times 1.
 ```{r}
-(fX <- rep.int(1, times=ffs+fhs+3))
+(fX <- rep.int(1, times=(ffs+fhs)*n))
 ```
 For $Z_y$ we have the following matrix for a male candidate:
 
 ```{r}
-mZ <- matrix(0,nrow=n, ncol=n)
+mZ <- matrix(0,nrow=(mfs+mhs)*n, ncol=(mfs+mhs+3)*n)
 diag(mZ)<-1
+mZ[,1:3]=0
 mZ
 ```
 
@@ -353,11 +360,20 @@ fZ[1:2,]=0
 fZ
 ```
 
-I only have to compute the inverse of $G$, then I can get started.
+I have to compute the inverse of $G$ and multiply each value
 
 ```{r}
 (Ginv<-solve(matO))
 ```
+
+
+Now I can compute the matrix $PEV_y$ first for a male candidate.
+To compute it I have to compute first all four parts of the whole matrix. 
+
+
+First I will compute the left top part
+$$1/\sigma_e^2X_y^TX_y$$
+
 
 
 Now I can compute the matrix $PEV_y$ first for a male candidate.
@@ -370,8 +386,11 @@ $$X_y^TR^{-1}X_y$$
 Which is
 
 
-```{r}
+```{r, eval=FALSE}
 (XX<-t(mX)%*%Rinv%*%mX)
+
+(XX<-crossprod(mX))
+
 ```
 
 Then I compute the right top part which from
@@ -380,7 +399,7 @@ becomes
 $$X_y^TZ_y$$
 which is
 
-```{r}
+```{r eval=FALSE}
 (XZ <- t(mX) %*% mZ)
 nrow(mZ)
 length(mX)
@@ -393,15 +412,16 @@ $$Z^T_yX_y$$
 Which is
 
 
-```{r}
+```{r eval=FALSE}
 (ZX <- t(mZ)%*%mX)
 ```
+
 
 
 Then I compute the right bottom part
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
 which is
-```{r}
+```{r eval=FALSE}
 Rinv
 mAinv%x%Ginv
 kronecker(mAinv,Ginv)
@@ -411,36 +431,12 @@ kronecker(mAinv,Ginv)
 
 
 
-
-
-
-```{r}
-ZtZ <- crossprod(mat_Z)
-```
-
-```{r}
-XtZ <- t(mat_X) %*% mat_Z 
-```
-
-
-```{r}
+```{r eval=FALSE}
 (mat_coeff <- rbind(cbind(XtX, XtZ), cbind(t(XtZ), ZtZ)))
 ```
 
 
 # Annex
-
-
-
-
-
-Then I can compute the transpose of X and Z with t(), which actually does not change much.
-
-```{r}
-(tX<-t(X))
-(tZ<-t(Z))
-```
-
 
 
 
@@ -452,6 +448,9 @@ a <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
 ```
 
 
+```{r}
+8*23
+```
 
 
 
