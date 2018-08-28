@@ -345,6 +345,32 @@ Now I can compute the matrix $PEV_y$ first for a male candidate.
 (mPEV<-matrix(c(1/sige^2*tX*X,1/sige^2*tZ*X,1/sige^2*tX*Z,1/sige^2*tZ*Z+1/sigg^2*Ainv)))
 ```
 
+```{r}
+(mat_X <- matrix(c(1,0,1,1), byrow = TRUE, ncol=2))
+```
+```{r}
+(mat_Z <- matrix(c(1,1,0,0,1,0), ncol = 3, byrow = TRUE))
+```
+
+```{r}
+t(mat_X) %*% mat_X
+```
+```{r}
+XtX <- crossprod(mat_X)
+```
+
+```{r}
+ZtZ <- crossprod(mat_Z)
+```
+
+```{r}
+XtZ <- t(mat_X) %*% mat_Z 
+```
+
+
+```{r}
+(mat_coeff <- rbind(cbind(XtX, XtZ), cbind(t(XtZ), ZtZ)))
+```
 
 
 # Annex
