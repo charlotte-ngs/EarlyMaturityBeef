@@ -238,12 +238,12 @@ However we do not have the matrix $PEV_y$ yet.
 We can compute $PEV_y$ with the formula derived from [@Phocas1996].
 
 $$
-PEV
+PEV_y
 =
 \left( 
 \begin{matrix}
-1/\sigma_e^2X'X  &  1/\sigma_e^2X'Z \\
-1/\sigma_e^2Z'X   &  1/\sigma_e^2Z'Z+1/\sigma_e^2A^{-1}
+1/\sigma_e^2X^TX  &  1/\sigma_e^2X^TZ_y \\
+1/\sigma_e^2Z^T_yX   &  1/\sigma_e^2Z_y^TZ_y+1/\sigma_a^2A_y^{-1}
 \end{matrix}
 \right)^{-1}
 $$
@@ -251,7 +251,7 @@ $$
 For this formula you need the relationship matrix $A_y$, but also the genetic and phenotypic variances $\sigma_g$ and $\sigma_p$.
 You will not need any other data.
 $Z$ is a design matrix that connects the observations with the breeding values.
-$X$ is a vector of the values 1,1,1, etc.
+$X$ is a vector of the values 1,1,1, etc. It could connect the observations to fixed factors, but we do not have any.
 $\sigma_e$, which is the variance of the environment, is the difference between $\sigma_g$ and $\sigma_p$.
 $$\sigma_e=\sigma_p-\sigma_g$$
 For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
@@ -278,7 +278,7 @@ First I compute the pedigree of a male candidate. There we have 2 parents, 20 si
 
 ```{r}
 suppressPackageStartupMessages( library(pedigreemm))
-mnumb <- 23
+mnumb <- mfs+mhs+2
 mped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:mnumb)
 print(mped)
 ```
@@ -292,22 +292,57 @@ getA(mped)
 The inverse is computed as 
 
 ```{r}
-getAInv(mped)
+Ainv <- getAInv(mped)
+```
+
+Then I need to do the same for a female candidate:
+A female candidate has `r ffs` full siblings and `r fhs` half siblings. And 2 parents. Which is a total of 14 animals.
+```{r}
+suppressPackageStartupMessages( library(pedigreemm))
+fnumb <- ffs+fhs+2
+fped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA), label = 1:fnumb)
+print(fped)
+```
+Then I create a matrix out of the pedigree:
+The function `getA` computes the additive relationship matrix $A$.
+
+```{r}
+getA(fped)
+```
+
+The inverse $A^{-1}$ is computed as 
+
+```{r}
+getAInv(fped)
+```
+
+Only the vector $X$ and the design matrix $Z$ are still missing.
+$X$ is `r n` times 1.
+```{r}
+(X <- rep.int(1, times=n))
 ```
 
 
-
-
-```{r}
-sigmap <- c()
-```
-
-For $Z$ we have the following matrix:
+For $Z_y$ we have the following matrix for a male candidate:
 
 ```{r}
-Z <- matrix(0,nrow=23, ncol=21)
+Z <- matrix(0,nrow=mfs+mhs+2, ncol=mfs+mhs+2)
 diag(Z)<-1
+Z[1:2,]=0
 Z
+```
+
+Then I can compute the transpose of X and Z with t(), which actually does not change much.
+
+```{r}
+(tX<-t(X))
+(tZ<-t(Z))
+```
+
+Now I can compute the matrix $PEV_y$ first for a male candidate.
+
+```{r}
+(mPEV<-matrix(c(1/sige^2*tX*X,1/sige^2*tZ*X,1/sige^2*tX*Z,1/sige^2*tZ*Z+1/sigg^2*Ainv)))
 ```
 
 
@@ -333,20 +368,7 @@ a <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
 
 
 
-We know that the male candidate has `r mfs` full siblings, `r mhs` half siblings and a female has `r ffs` full siblings and `r fhs` half siblings.
 
-Based on the number of siblings we can create a relationship matrix.
-We can compute the genetic additive relationship matrix $A$ for a given pedigree using the `pedigreemm` package.
-We just need to fill in the information about the parents of each animal.
-
-First I compute the pedigree of a male candidate. There we have 2 parents, 20 siblings and the candidate wich in total are 23 animals. The parents of the parents are unnkown.
-
-```{r}
-suppressPackageStartupMessages( library(pedigreemm))
-nNrAni <- 23
-ped <- pedigree(sire = c(NA,NA,1,1,1,1,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:nNrAni)
-print(ped)
-```
 
 
 # References
