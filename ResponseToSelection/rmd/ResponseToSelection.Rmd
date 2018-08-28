@@ -339,8 +339,9 @@ $X_2$ is `r ffs+fhs+3` times 1.
 For $Z_y$ we have the following matrix for a male candidate:
 
 ```{r}
-mZ <- matrix(0,nrow=n, ncol=n)
+mZ <- matrix(0,nrow=mfs+mhs+3, ncol=mfs+mhs+3)
 diag(mZ)<-1
+mZ[1:2,]=0
 mZ
 ```
 
@@ -362,6 +363,15 @@ I only have to compute the inverse of $G$, then I can get started.
 
 Now I can compute the matrix $PEV_y$ first for a male candidate.
 To compute it I have to compute first all four parts of the whole matrix. 
+
+
+First I will compute the left top part
+$$1/\sigma_e^2X_y^TX_y$$
+
+
+
+Now I can compute the matrix $PEV_y$ first for a male candidate.
+To compute it I have to compute first all four parts of the whole matrix. 
 Also we can take out the $\sigma_e$ of the matrix elements and multiply the whole matrix afterwards with it. 
 Then I need to change the parts of the matrix $PEV_y$ aswell:
 
@@ -372,6 +382,9 @@ Which is
 
 ```{r}
 (XX<-t(mX)%*%Rinv%*%mX)
+
+(XX<-crossprod(mX))
+
 ```
 
 Then I compute the right top part which from
@@ -398,6 +411,7 @@ Which is
 ```
 
 
+
 Then I compute the right bottom part
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
 which is
@@ -409,18 +423,6 @@ kronecker(mAinv,Ginv)
 ```
 
 
-
-
-
-
-
-```{r}
-ZtZ <- crossprod(mat_Z)
-```
-
-```{r}
-XtZ <- t(mat_X) %*% mat_Z 
-```
 
 
 ```{r}
