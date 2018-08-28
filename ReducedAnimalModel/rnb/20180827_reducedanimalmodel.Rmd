@@ -33,3 +33,65 @@ y = Xb + Za + e
 $$
 
 Using the decomposition of the $a_i$ into the parent breeding values in the model equation leads to 
+
+$$
+y_{ij} = p_i + {1\over 2}(a_s + a_d) + m_j + e_{ij}
+$$
+
+For non-parents the term $m_j + e_{ij}$ can be combined into a single residual term $e_{ij}^*$. The variance of this re-defined residual term corresponds to 
+
+$$
+var(e_{ij}^*) = var(m_j) + var(e_{ij})
+$$
+
+In general $var(m_j) = d_j * (1-F_j)\sigma_a^2$ where $d_j$ is ${1\over 2}$, ${3\over 4}$ and $1$ if both, one or no parents are known and $F_j$ is the average inbreeding coefficient of both parents. Ignoring inbreeding, we get
+
+$$
+var(e_{ij}^*) = \sigma_e^2 + d_j\sigma_a^2 = (1 + d_j\alpha^{-1})\sigma_e^2
+$$
+
+The application ot the RAM involves applying the model 
+
+$$
+y_p = X_pb + Za_p + e
+$$
+for parents and the model 
+
+$$
+y_n = X_nb + Z_1a_p + e^*
+$$
+to non-parents. $X_n$ is the incidence matrix that relates non-parent records to fixed effects ($b$) and $Z_1$ is an incidence matrix of zeros and halves that links parent breeding values ($a_p$) to non-parent records. 
+
+Combining the above two models for $y_p$ and $y_n$ into one model
+
+$$
+\left[\begin{array}{c}
+y_p \\
+y_n
+\end{array}\right]
+=
+\left[\begin{array}{c}
+X_p \\
+X_n
+\end{array}\right]
+b + 
+\left[\begin{array}{c}
+Z \\
+Z_1
+\end{array}\right]
+a_p + 
+\left[\begin{array}{c}
+e \\
+e^*
+\end{array}\right]
+$$
+
+Setting $X=\left[\begin{array}{c}
+X_p \\
+X_n
+\end{array}\right]$ and 
+
+
+
+
+
