@@ -99,6 +99,7 @@ a <- c()
 
 The variables $r^*$ and $\sigma^*$  have to be calculated first with the variables deviation of the vector of the economical weights $a'$, the asymptotic covariance $C_y^*$ between true and estimated breeding values of the male or female candidates before the selection, the vector of the economical weights $a$ and the asymptotic genetic variance-covariance $G^*$:
 $$r^*=\sqrt{\frac {a'C_y^*a}{a'G^*a}}$$
+
 $$\sigma^*=\sqrt{a'G^*a}$$
 
 To solve these equations you need to first calculate the $C_y^*$ by the formula:
@@ -242,27 +243,34 @@ PEV_y
 =
 \left( 
 \begin{matrix}
-1/\sigma_e^2X^TX  &  1/\sigma_e^2X^TZ_y \\
-1/\sigma_e^2Z^T_yX   &  1/\sigma_e^2Z_y^TZ_y+1/\sigma_a^2A_y^{-1}
+X^T_yR^{-1}X_y  &  X_y^TR^{-1}Z_y \\
+Z^T_yR^{-1}X_y   &  Z_y^TR^{-1}Z_y+G \otimes A_y^{-1}
 \end{matrix}
 \right)^{-1}
 $$
 
-For this formula you need the relationship matrix $A_y$, but also the genetic and phenotypic variances $\sigma_g$ and $\sigma_p$.
+For this formula you need the relationship matrix $A_y$, but also the genetic and phenotypic variances $\sigma_g$ and $\sigma_p$ and $G$.
 You will not need any other data.
+
 $Z$ is a design matrix that connects the observations with the breeding values.
-$X$ is a vector of the values 1,1,1, etc. It could connect the observations to fixed factors, but we do not have any.
-$\sigma_e$, which is the variance of the environment, is the difference between $\sigma_g$ and $\sigma_p$.
+$X$ is a vector of the values 1,1,1, as long as there are animals involved. It could connect the observations to fixed factors, but we do not have any.
+$R^{-1}$ is the inverse vector of variance of the environment. Each value of the vector is the difference between $\sigma_g$ and $\sigma_p$ for each trait:
 $$\sigma_e=\sigma_p-\sigma_g$$
 For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
-$\sigma_g$ is given and $\sigma_p$ is possible to compute from the heritability $h^2$ of each trait:
+
+$\sigma_g$ is available and $\sigma_p$ is possible to compute from the heritability $h^2$ for each trait:
 $$\sigma_p=\sigma_g^2/h^2$$
-$h^2$ for all traits is given.
+$h^2$ for all traits is available.
 ```{r}
 h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
 (sigg<- diag(matrix_cov))
 (sigp<-sigg/h2)
 (sige<-sigp-sigg)
+R <- matrix(0,nrow=n,ncol=n)
+diag(R)=sige
+R
+Rinv <- solve(R)
+Rinv
 ```
 Now we have $\sigma_e$.
 
@@ -278,9 +286,10 @@ First I compute the pedigree of a male candidate. There we have 2 parents, 20 si
 
 ```{r}
 suppressPackageStartupMessages( library(pedigreemm))
-mnumb <- mfs+mhs+2
+mnumb <- mfs+mhs+3
 mped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:mnumb)
 print(mped)
+mnumb
 ```
 Then I create a matrix out of the pedigree:
 The function `getA` computes the additive relationship matrix
@@ -292,15 +301,15 @@ getA(mped)
 The inverse is computed as 
 
 ```{r}
-Ainv <- getAInv(mped)
+mAinv <- getAInv(mped)
 ```
 
 Then I need to do the same for a female candidate:
-A female candidate has `r ffs` full siblings and `r fhs` half siblings. And 2 parents. Which is a total of 14 animals.
+A female candidate has `r ffs` full siblings and `r fhs` half siblings. And 2 parents. And the candidate. Which is a total of 14 animals.
 ```{r}
 suppressPackageStartupMessages( library(pedigreemm))
-fnumb <- ffs+fhs+2
-fped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA), label = 1:fnumb)
+fnumb <- ffs+fhs+3
+fped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:fnumb)
 print(fped)
 ```
 Then I create a matrix out of the pedigree:
@@ -316,48 +325,87 @@ The inverse $A^{-1}$ is computed as
 getAInv(fped)
 ```
 
-Only the vector $X$ and the design matrix $Z$ are still missing.
-$X$ is `r n` times 1.
+Only the vector $X_y$ and the design matrix $Z_y$ are still missing.
+$X_1$ is `r mfs+mhs+3` times 1.
 ```{r}
-(X <- rep.int(1, times=n))
+(mX <- rep.int(1, times=mfs+mhs+3))
 ```
-
-
+$X_2$ is `r ffs+fhs+3` times 1.
+```{r}
+(fX <- rep.int(1, times=ffs+fhs+3))
+```
 For $Z_y$ we have the following matrix for a male candidate:
 
 ```{r}
-Z <- matrix(0,nrow=mfs+mhs+2, ncol=mfs+mhs+2)
-diag(Z)<-1
-Z[1:2,]=0
-Z
+mZ <- matrix(0,nrow=mfs+mhs+3, ncol=mfs+mhs+3)
+diag(mZ)<-1
+mZ[1:2,]=0
+mZ
 ```
 
-Then I can compute the transpose of X and Z with t(), which actually does not change much.
+For $Z_y$ we have the following matrix for a female candidate:
 
 ```{r}
-(tX<-t(X))
-(tZ<-t(Z))
+fZ <- matrix(0,nrow=ffs+fhs+2, ncol=ffs+fhs+3)
+diag(fZ)<-1
+fZ[1:2,]=0
+fZ
 ```
 
 Now I can compute the matrix $PEV_y$ first for a male candidate.
+To compute it I have to compute first all four parts of the whole matrix. 
+Also we can take out the $\sigma_e$ of the matrix elements and multiply the whole matrix afterwards with it. 
+Then I need to change the parts of the matrix $PEV_y$ aswell:
+
+First I will compute the left top part
+$$1/\sigma_e^2X_y^TX_y$$
+becomes
+$$X_y^TX_y$$
+Which is
+
 
 ```{r}
-(mPEV<-matrix(c(1/sige^2*tX*X,1/sige^2*tZ*X,1/sige^2*tX*Z,1/sige^2*tZ*Z+1/sigg^2*Ainv)))
+(XX<-crossprod(mX))
 ```
 
-```{r}
-(mat_X <- matrix(c(1,0,1,1), byrow = TRUE, ncol=2))
-```
-```{r}
-(mat_Z <- matrix(c(1,1,0,0,1,0), ncol = 3, byrow = TRUE))
-```
+Then I compute the right top part which from
+$$1/\sigma_e^2X_y^TZ_y$$
+becomes
+$$X_y^TZ_y$$
+which is
 
 ```{r}
-t(mat_X) %*% mat_X
+(XZ <- t(mX) %*% mZ)
+nrow(mZ)
+length(mX)
 ```
+
+Then I compute the left bottom part which from
+$$1/\sigma_e^2Z^T_yX_y$$
+Changed to
+$$Z^T_yX_y$$
+Which is
+
+
 ```{r}
-XtX <- crossprod(mat_X)
+(ZX <- t(mZ)%*%mX)
 ```
+
+
+Then I compute the right bottom part which from
+$$1/\sigma_e^2Z_y^TZ_y+1/\sigma_a^2A_y^{-1}$$
+changed to (be aware that the whole matrix is an inverse)
+$$Z_y^TZ_y+\sigma_e^2/\sigma_a^2A_y^{-1}$$
+which is
+```{r}
+(ZZ <- crossprod(mZ)+as.vector(sige/sigg)*mAinv)
+```
+
+
+
+
+
+
 
 ```{r}
 ZtZ <- crossprod(mat_Z)
@@ -379,7 +427,12 @@ XtZ <- t(mat_X) %*% mat_Z
 
 
 
+Then I can compute the transpose of X and Z with t(), which actually does not change much.
 
+```{r}
+(tX<-t(X))
+(tZ<-t(Z))
+```
 
 
 
