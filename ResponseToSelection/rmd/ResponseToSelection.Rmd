@@ -266,8 +266,8 @@ h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
 (sigg<- diag(matrix_cov))
 (sigp<-sigg/h2)
 (sige<-sigp-sigg)
-R <- matrix(0,nrow=n,ncol=n)
-diag(R)=sige
+R <- matrix(0,nrow=(mfs+mhs+3)*n,ncol=(mfs+mhs+3)*n)
+diag(R)=rep(as.vector(sige),each=mfs+mhs+3)
 R
 Rinv <- solve(R)
 Rinv
@@ -301,7 +301,7 @@ getA(mped)
 The inverse is computed as 
 
 ```{r}
-mAinv <- getAInv(mped)
+(mAinv <- getAInv(mped))
 ```
 
 Then I need to do the same for a female candidate:
@@ -348,6 +348,8 @@ For $Z_y$ we have the following matrix for a male candidate:
 mZ <- matrix(0,nrow=(mfs+mhs)*n, ncol=(mfs+mhs+3)*n)
 diag(mZ)<-1
 mZ[,1:3]=0
+
+
 mZ
 ```
 
@@ -360,7 +362,11 @@ fZ[1:2,]=0
 fZ
 ```
 
+
 I have to compute the inverse of $G$ and multiply each value
+
+I only have to compute the inverse of $G$, then I can get started.
+
 
 ```{r}
 (Ginv<-solve(matO))
@@ -386,7 +392,9 @@ $$X_y^TR^{-1}X_y$$
 Which is
 
 
+
 ```{r, eval=FALSE}
+
 (XX<-t(mX)%*%Rinv%*%mX)
 
 (XX<-crossprod(mX))
@@ -422,7 +430,6 @@ Then I compute the right bottom part
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
 which is
 ```{r eval=FALSE}
-Rinv
 mAinv%x%Ginv
 kronecker(mAinv,Ginv)
 (ZZ <- t(mZ)%*%Rinv%*%mZ+mAinv%x%Ginv)
@@ -431,7 +438,9 @@ kronecker(mAinv,Ginv)
 
 
 
+
 ```{r eval=FALSE}
+
 (mat_coeff <- rbind(cbind(XtX, XtZ), cbind(t(XtZ), ZtZ)))
 ```
 
