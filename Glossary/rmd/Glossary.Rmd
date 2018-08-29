@@ -364,7 +364,7 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Matrix inverse__
 
-* __Design matrices__
+* __Design matrices__ $X_y$ is a matrix that connects the records with the levels of fixed effects. I do not have any fixed effects. Therefore we can assume that $X_y$ is just a vector with the number of values that correspond to the number of records. $Z$ is a design matrix that connects the observations with the breeding values.
 
 * __Residual effects__
 

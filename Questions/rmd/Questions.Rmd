@@ -191,7 +191,7 @@ knitr::kable(tbl_prop_sel)
     *
 
 * How do I shortcut in RStudio Zoom Source?
-    * Ctrl + 1
+    * "Ctrl" "+" "1"
     
 * Do we have carcass or live weight as data for the breeding valuation for carcass traits?
     *
@@ -200,7 +200,7 @@ knitr::kable(tbl_prop_sel)
     *
     
 * Do I have to compute the pedigree for each sex seperateley? I think I do.
-    *
+    * Yes
 
 * How do I show solutions of variables in R to the text?
     * You use `r variable`
@@ -211,11 +211,18 @@ knitr::kable(tbl_prop_sel)
 * How can I shift the diagonal by 3 to the right, so it starts at the third column?
     *
 
-* How can I multiply a diagonal matrix so it has the same diagonal values repetedeley 23 times and then again the same value 23 and again until I have 8 times 23 times the same value (184)?
-    *
+* How can I multiply a diagonal matrix so it has the same diagonal value repetedeley 23 times and then again the same value 23 times and again until I have 8 times 23 times the same value (184x184 matrix)?
+    * You just have to use the command rep(as.vector(sige),each=mfs+mhs+3), then you can repeat the elements of the diagonal vector which results in the required matrix.
     
 * Will I also need to have the relationship matrix 8 times?
-    *
+    * No, probably not, Kronecker creates in cooperation with G a 184x184 matrix.
+    
+* R^-1 could be confused with the variable R^* which is the response to selection. Would you rename one of them?
+    * Yes you should rename the variable for the response to selection.
+    
+*
+
+
 
 
 
