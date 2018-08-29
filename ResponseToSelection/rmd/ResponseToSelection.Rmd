@@ -254,25 +254,37 @@ You will not need any other data.
 
 $Z$ is a design matrix that connects the observations with the breeding values.
 $X$ is a vector of the values 1,1,1, as long as there are animals involved. It could connect the observations to fixed factors, but we do not have any.
-$R^{-1}$ is the inverse vector of variance of the environment. Each value of the vector is the difference between $\sigma_g$ and $\sigma_p$ for each trait:
+$R^{-1}$ is the inverse diagonal matrix of the values of variance of the environment for the traits and the recorded animals. 
+Each diagonal value of the vector is the difference between $\sigma_g$ and $\sigma_p$ for each trait:
 $$\sigma_e=\sigma_p-\sigma_g$$
 For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
 
 $\sigma_g$ is available and $\sigma_p$ is possible to compute from the heritability $h^2$ for each trait:
 $$\sigma_p=\sigma_g^2/h^2$$
 $h^2$ for all traits is available.
+According to the model, the environomental or residual variances exist only for those animals that have a record.
+The candidate and the parents do not have a record.
+Therefore the candidate and the parents should not own an element in the vector, but all other animals that have a record own an element of each trait. 
+This results in a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)` dimension for a male candidate.
+
 ```{r}
 h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
 (sigg<- diag(matrix_cov))
 (sigp<-sigg/h2)
 (sige<-sigp-sigg)
-R <- matrix(0,nrow=(mfs+mhs+3)*n,ncol=(mfs+mhs+3)*n)
-diag(R)=rep(as.vector(sige),each=mfs+mhs+3)
+R <- matrix(0,nrow=(mfs+mhs)*n,ncol=(mfs+mhs)*n)
+diag(R)=rep(as.vector(sige),each=mfs+mhs)
 R
-Rinv <- solve(R)
-Rinv
+mRinv <- solve(R)
 ```
-Now we have $R^{-1}$.
+Now we have $R^{-1}_1$.
+
+
+
+Here I have to compute $R^{-1}_2$ aswell.
+
+
+
 
 The next variable we need is the inverse of the relationship matrix $A_y$ for each sex.
 
@@ -282,7 +294,7 @@ Based on the number of siblings we can create a relationship matrix.
 We can compute the genetic additive relationship matrix $A$ for a given pedigree using the `pedigreemm` package.
 We just need to fill in the information about the parents of each animal.
 
-First I compute the pedigree of a male candidate. There we have 2 parents, 20 siblings and the candidate wich in total are 23 animals. The parents of the parents are unnkown.
+First I compute the pedigree of a male candidate. There are 2 parents, 20 siblings and the candidate wich in total are 23 animals. The parents of the parents are unnkown.
 
 ```{r}
 suppressPackageStartupMessages( library(pedigreemm))
@@ -301,8 +313,11 @@ getA(mped)
 The inverse is computed as 
 
 ```{r}
-(mAinv <- getAInv(mped))
+mAinv <- getAInv(mped)
 ```
+
+
+
 
 Then I need to do the same for a female candidate:
 A female candidate has `r ffs` full siblings and `r fhs` half siblings. And 2 parents. And the candidate. Which is a total of 14 animals.
@@ -322,7 +337,7 @@ getA(fped)
 The inverse $A^{-1}$ is computed as 
 
 ```{r}
-getAInv(fped)
+fAinv<-getAInv(fped)
 ```
 
 
@@ -333,41 +348,36 @@ $X_y$ is a matrix that connects the records with the levels of fixed effects.
 I do not have any fixed effects.
 Therefore we can assume that $X_y$ is just a vector with the number of values that correspond to the number of records.
 
-The number of records for a male candidate is here `r (mfs+mhs)*n`
+First I compute $X_1$
+The number of records for a male candidate is here `r (mfs+mhs)*n`.
 
 ```{r}
 (mX <- rep.int(1, times=(mfs+mhs)*n))
 ```
+
+Then I compute $X_2$.
 $X_2$ is `r ffs+fhs+3` times 1.
 ```{r}
 (fX <- rep.int(1, times=(ffs+fhs)*n))
 ```
+
+
 For $Z_1$ I can compute the required matrix by a kronecker product.
 I have the matrix $z1$ that tells us what $Z_1$ would be for only one trait and I have the unit matrix $t8$ that has the size of the number of traits.
 Together as kronecker product they form the required matrix $Z_1$ for all traits.
+
 ```{r}
-z1<-cbind(matrix(0, nrow=mhs+mfs,ncol=3),diag(mhs+mfs))
-t8<-diag(n)
-t8%x%z1
+mZ<-diag(n)%x%cbind(matrix(0, nrow=mhs+mfs,ncol=3),diag(mhs+mfs))
+dim(mZ)
 ```
 
 
-```{r}
-mZ <- matrix(0,nrow=(mfs+mhs)*n, ncol=(mfs+mhs+3)*n)
-diag(mZ)<-1
-mZ[,1:3]=0
 
-
-mZ
-```
-
-For $Z_y$ we have the following matrix for a female candidate:
+For $Z_2$ we have the following matrix for a female candidate:
 
 ```{r}
-fZ <- matrix(0,nrow=ffs+fhs+2, ncol=ffs+fhs+3)
-diag(fZ)<-1
-fZ[1:2,]=0
-fZ
+fZ<-diag(n)%x%cbind(matrix(0, nrow=fhs+ffs,ncol=3),diag(fhs+ffs))
+dim(fZ)
 ```
 
 
@@ -377,16 +387,17 @@ I only have to compute the inverse of $G$, then I can get started.
 
 
 ```{r}
-(Ginv<-solve(matO))
+Ginv<-solve(matO)
 ```
 
 
-Now I can compute the matrix $PEV_y$ first for a male candidate.
+Now I can compute the matrix $PEV_1$ first for a male candidate.
 To compute it I have to compute first all four parts of the whole matrix. 
 
 
 First I will compute the left top part
 $$1/\sigma_e^2X_y^TX_y$$
+Which is
 
 
 
@@ -438,9 +449,13 @@ Then I compute the right bottom part
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
 which is
 ```{r eval=FALSE}
-mAinv%x%Ginv
-kronecker(mAinv,Ginv)
-(ZZ <- t(mZ)%*%Rinv%*%mZ+mAinv%x%Ginv)
+dim(Rinv)
+dim(mZ)
+dim(t(mZ))
+dim(mAinv)
+dim(Ginv)
+ZZ <- t(mZ)%*%Rinv%*%mZ+mAinv%x%Ginv
+dim(ZZ)
 ```
 
 
