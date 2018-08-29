@@ -243,8 +243,8 @@ PEV_y
 =
 \left( 
 \begin{matrix}
-X^T_yR^{-1}X_y  &  X_y^TR^{-1}Z_y \\
-Z^T_yR^{-1}X_y   &  Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}
+X^T_yR^{-1}_yX_y  &  X_y^TR^{-1}_yZ_y \\
+Z^T_yR^{-1}_yX_y   &  Z_y^TR^{-1}_yZ_y+A_y^{-1} \otimes G^{-1}
 \end{matrix}
 \right)^{-1}
 $$
@@ -278,8 +278,6 @@ mRinv <- solve(R)
 dim(mRinv)
 ```
 Now we have $R^{-1}_1$.
-
-
 
 Here I have to compute $R^{-1}_2$ aswell.
 
@@ -317,8 +315,6 @@ mAinv <- getAInv(mped)
 ```
 
 
-
-
 Then I need to do the same for a female candidate:
 A female candidate has `r ffs` full siblings and `r fhs` half siblings. And 2 parents. And the candidate. Which is a total of 14 animals.
 ```{r}
@@ -340,8 +336,6 @@ The inverse $A^{-1}$ is computed as
 fAinv<-getAInv(fped)
 ```
 
-
-
 Only the vector $X_y$ and the design matrix $Z_y$ are still missing.
 
 $X_y$ is a matrix that connects the records with the levels of fixed effects.
@@ -361,7 +355,6 @@ $X_2$ is `r ffs+fhs+3` times 1 level of fixed effects.
 (fX <- rep.int(1, times=(ffs+fhs)*n))
 ```
 
-
 For $Z_1$ I can compute the required matrix by a kronecker product.
 I have a matrix that tells us what $Z_1$ would be for only one trait and I have a unit matrix that has the size of the number of traits.
 Together as kronecker product they form the required matrix $Z_1$ for all traits.
@@ -370,7 +363,6 @@ Together as kronecker product they form the required matrix $Z_1$ for all traits
 mZ<-diag(n)%x%cbind(matrix(0, nrow=mhs+mfs,ncol=3),diag(mhs+mfs))
 dim(mZ)
 ```
-
 
 
 For $Z_2$ we have the following matrix for a female candidate:
@@ -382,11 +374,9 @@ dim(fZ)
 
 I only have to compute the inverse of $G$, then I can get started.
 
-
 ```{r}
 Ginv<-solve(matO)
 ```
-
 
 Now I can compute the matrix $PEV_1$.
 To compute it I have to compute all four parts of the whole matrix. 
@@ -395,39 +385,31 @@ Then I will bind the part together in the right order.
 First I will compute the left top part of the matrix.
 
 $$X_y^TR^{-1}_yX_y$$
-
-Which is
-
-```{r, eval=FALSE}
-
-XX<-t(mX)%*%mRinv%*%mX
-dim(XX)
-```
-
-Then I compute the right top part which from
-$$1/\sigma_e^2X_y^TZ_y$$
-becomes
-$$X_y^TZ_y$$
 which is
+```{r}
 
-```{r eval=FALSE}
-(XZ <- t(mX) %*% mZ)
-nrow(mZ)
-length(mX)
+mXX<-t(mX)%*%mRinv%*%mX
+dim(mXX)
 ```
 
-Then I compute the left bottom part which from
-$$1/\sigma_e^2Z^T_yX_y$$
-Changed to
-$$Z^T_yX_y$$
+
+Then I compute the right top part
+$$X_y^TR^{-1}_yZ_y$$
+which is
+```{r}
+mXZ <- t(mX)%*%mRinv%*%mZ
+dim(mXZ)
+```
+
+Then I compute the left bottom part
+$$Z^T_yR^{-1}_yX_y$$
+
 Which is
 
-
-```{r eval=FALSE}
-(ZX <- t(mZ)%*%mX)
+```{r}
+mZX <- t(mZ)%*%mRinv%*%mX
+dim(mZX)
 ```
-
-
 
 Then I compute the right bottom part
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
@@ -438,17 +420,15 @@ dim(mZ)
 dim(t(mZ))
 dim(mAinv)
 dim(Ginv)
-ZZ <- t(mZ)%*%Rinv%*%mZ+mAinv%x%Ginv
+mZZ <- t(mZ)%*%Rinv%*%mZ+mAinv%x%Ginv
 dim(ZZ)
 ```
+Now I can bind the 4 parts of the matrix together.
 
+```{r}
 
-
-
-
-```{r eval=FALSE}
-
-(mat_coeff <- rbind(cbind(XtX, XtZ), cbind(t(XtZ), ZtZ)))
+mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
+dim(mPEV)
 ```
 
 
