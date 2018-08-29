@@ -342,7 +342,15 @@ $X_2$ is `r ffs+fhs+3` times 1.
 ```{r}
 (fX <- rep.int(1, times=(ffs+fhs)*n))
 ```
-For $Z_y$ we have the following matrix for a male candidate:
+For $Z_1$ I can compute the required matrix by a kronecker product.
+I have the matrix $z1$ that tells us what $Z_1$ would be for only one trait and I have the unit matrix $t8$ that has the size of the number of traits.
+Together as kronecker product they form the required matrix $Z_1$ for all traits.
+```{r}
+z1<-cbind(matrix(0, nrow=mhs+mfs,ncol=3),diag(mhs+mfs))
+t8<-diag(n)
+t8%x%z1
+```
+
 
 ```{r}
 mZ <- matrix(0,nrow=(mfs+mhs)*n, ncol=(mfs+mhs+3)*n)
