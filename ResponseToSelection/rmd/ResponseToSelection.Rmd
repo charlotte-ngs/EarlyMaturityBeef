@@ -202,11 +202,10 @@ rownames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
 knitr::kable(tbl_cov)
 ```
 
-The matrix will the look like this:
+I can transform the data frame into a matrix.
 
 ```{r, results='asis'}
 matrix_cov <- as.matrix(tbl_cov)
-matrix_cov
 ```
 The problem is now that the diagonal elements should be squared and the correlation should be multiplied with the variances of the involved traits respecteveley.
 This can be done by matrix scalar multiplication.
@@ -215,14 +214,13 @@ We build a diagonal matrix with the standard deviations as diagonal elements $D$
 First $D$:
 
 ```{r}
-(matD <- diag(diag(matrix_cov), nrow = 8, ncol = 8))
+matD <- diag(diag(matrix_cov), nrow = 8, ncol = 8)
 ```
 Then $E$:
 
 ```{r}
 matE <- matrix_cov
 diag(matE) <- 1
-matE
 ```
 Then we get the required matrix $G$ by the following equation:
 $$G=D \bullet E \bullet D$$
@@ -230,7 +228,8 @@ It works:
 
 ```{r}
 42.31*-0.15*0.09
-(matO <-matD %*% matE %*% matD)
+G <-matD %*% matE %*% matD
+dim(matO)
 ```
 Now we have $G_y$, it describes how the different traits in the index are related to each other.
 The next variable we need is $PEV_y$.
@@ -298,14 +297,12 @@ First I compute the pedigree of a male candidate. There are 2 parents, 20 siblin
 suppressPackageStartupMessages( library(pedigreemm))
 mnumb <- mfs+mhs+3
 mped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:mnumb)
-print(mped)
-mnumb
 ```
 Then I create a matrix out of the pedigree:
 The function `getA` computes the additive relationship matrix
 
 ```{r}
-getA(mped)
+mA<-getA(mped)
 ```
 
 The inverse is computed as 
@@ -321,13 +318,12 @@ A female candidate has `r ffs` full siblings and `r fhs` half siblings. And 2 pa
 suppressPackageStartupMessages( library(pedigreemm))
 fnumb <- ffs+fhs+3
 fped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:fnumb)
-print(fped)
 ```
 Then I create a matrix out of the pedigree:
 The function `getA` computes the additive relationship matrix $A$.
 
 ```{r}
-getA(fped)
+fA<-getA(fped)
 ```
 
 The inverse $A^{-1}$ is computed as 
@@ -375,7 +371,7 @@ dim(fZ)
 I only have to compute the inverse of $G$, then I can get started.
 
 ```{r}
-Ginv<-solve(matO)
+Ginv<-solve(G)
 ```
 
 Now I can compute the matrix $PEV_1$.
@@ -431,6 +427,15 @@ mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
 dim(mPEV)
 ```
 
+Now I should be able to compute $C_y$ out of $PEV_y$ and $G$.
+First I compute $C_1$
+```{r}
+dim(G)
+dim(mPEV)
+mC<-G-mPEV
+```
+
+
 
 # Annex
 
@@ -442,15 +447,6 @@ We can further define the vector of the economical weights $a$ which is the chan
 ```{r}
 a <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
 ```
-
-
-```{r}
-8*23
-```
-
-
-
-
 
 # References
 

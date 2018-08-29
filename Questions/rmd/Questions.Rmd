@@ -220,7 +220,8 @@ knitr::kable(tbl_prop_sel)
 * R^-1 could be confused with the variable R^* which is the response to selection. Would you rename one of them?
     * Yes you should rename the variable for the response to selection.
     
-*
+* How can I number formulas, so I can refer to them?
+    *
 
 
 
