@@ -254,7 +254,7 @@ You will not need any other data.
 
 $Z$ is a design matrix that connects the observations with the breeding values.
 $X$ is a vector of the values 1,1,1, as long as there are animals involved. It could connect the observations to fixed factors, but we do not have any.
-$R^{-1}$ is the inverse diagonal matrix of the values of variance of the environment for the traits and the recorded animals. 
+$R^{-1}_y$ is the inverse diagonal matrix of the values of variance of the environment for the traits and the recorded animals. 
 Each diagonal value of the vector is the difference between $\sigma_g$ and $\sigma_p$ for each trait:
 $$\sigma_e=\sigma_p-\sigma_g$$
 For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
@@ -269,13 +269,13 @@ This results in a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)`
 
 ```{r}
 h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
-(sigg<- diag(matrix_cov))
-(sigp<-sigg/h2)
-(sige<-sigp-sigg)
+sigg<- diag(matrix_cov)
+sigp<-sigg/h2
+sige<-sigp-sigg
 R <- matrix(0,nrow=(mfs+mhs)*n,ncol=(mfs+mhs)*n)
 diag(R)=rep(as.vector(sige),each=mfs+mhs)
-R
 mRinv <- solve(R)
+dim(mRinv)
 ```
 Now we have $R^{-1}_1$.
 
@@ -352,18 +352,18 @@ First I compute $X_1$
 The number of records for a male candidate is here `r (mfs+mhs)*n`.
 
 ```{r}
-(mX <- rep.int(1, times=(mfs+mhs)*n))
+mX <- rep.int(1, times=(mfs+mhs)*n)
 ```
 
 Then I compute $X_2$.
-$X_2$ is `r ffs+fhs+3` times 1.
+$X_2$ is `r ffs+fhs+3` times 1 level of fixed effects.
 ```{r}
 (fX <- rep.int(1, times=(ffs+fhs)*n))
 ```
 
 
 For $Z_1$ I can compute the required matrix by a kronecker product.
-I have the matrix $z1$ that tells us what $Z_1$ would be for only one trait and I have the unit matrix $t8$ that has the size of the number of traits.
+I have a matrix that tells us what $Z_1$ would be for only one trait and I have a unit matrix that has the size of the number of traits.
 Together as kronecker product they form the required matrix $Z_1$ for all traits.
 
 ```{r}
@@ -380,9 +380,6 @@ fZ<-diag(n)%x%cbind(matrix(0, nrow=fhs+ffs,ncol=3),diag(fhs+ffs))
 dim(fZ)
 ```
 
-
-I have to compute the inverse of $G$ and multiply each value
-
 I only have to compute the inverse of $G$, then I can get started.
 
 
@@ -391,33 +388,20 @@ Ginv<-solve(matO)
 ```
 
 
-Now I can compute the matrix $PEV_1$ first for a male candidate.
-To compute it I have to compute first all four parts of the whole matrix. 
+Now I can compute the matrix $PEV_1$.
+To compute it I have to compute all four parts of the whole matrix. 
+Then I will bind the part together in the right order.
 
+First I will compute the left top part of the matrix.
 
-First I will compute the left top part
-$$1/\sigma_e^2X_y^TX_y$$
+$$X_y^TR^{-1}_yX_y$$
+
 Which is
-
-
-
-Now I can compute the matrix $PEV_y$ first for a male candidate.
-To compute it I have to compute first all four parts of the whole matrix. 
-Also we can take out the $\sigma_e$ of the matrix elements and multiply the whole matrix afterwards with it. 
-Then I need to change the parts of the matrix $PEV_y$ aswell:
-
-First I will compute the left top part
-$$X_y^TR^{-1}X_y$$
-Which is
-
-
 
 ```{r, eval=FALSE}
 
-(XX<-t(mX)%*%Rinv%*%mX)
-
-(XX<-crossprod(mX))
-
+XX<-t(mX)%*%mRinv%*%mX
+dim(XX)
 ```
 
 Then I compute the right top part which from
