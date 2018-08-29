@@ -177,10 +177,10 @@ The true breeding value is the genetic merit of an individual which can be conce
 
 The estimated breeding value is only based on phenotypic values of itself or its relatives, but not on those of its progeny.
 
-$C_y$ is defined by the prediction error variance ($PEV_y$) and the additive genetic variance-covariance matrix ($G$) before the selection.
-$$C_y=G-PEV_y$$
-You can compute $PEV_y$ and $G$ with the available data.
-$G$ owns as values the covariances between each trait.
+$C_y$ is defined by the prediction error variance ($PEV_y$) and the additive genetic variance-covariance matrix ($G$) multiplied by the relationship matrix $A_y$ the kronecker operator $\otimes$ before the selection.
+$$C_y=A_y \otimes G-PEV_y$$
+You can compute $PEV_y$ and $A_y \otimes G$ with the available data.
+$A_y \otimes G$ owns as values the covariances between each trait and the relationship matrix.
 The covariances of $G$ are dependent on the genetic standard deviation of each trait ($\sigma_g$), the genetic correlations between the traits ($r_{x,y}$) and the genetic variance of each trait ($\sigma_g^2$).
 
 The variances of the traits are the diagonal values of the matrix $G$ for the covariance between the same trait is the variance of the trait:
@@ -188,7 +188,7 @@ $$Cov(x, x)=\sigma_x^2$$
 The covariance between different traits is defined by the correlation between them and the variance of each trait:
 $$Cov(x,y)=r_{x,y}\sigma_x\sigma_y$$
 In the following table the necessary information to compute the covariances are listed: The diagonal values are the genetic standard deviations $\sigma_g$ and the the others the genetic correlations between the traits ($r_{x,y}$).
-```{r, results='asis'}
+```{r}
 tbl_cov <-data.frame(c(42.31, -0.15, -0.33, 0.11, -0.02, 0.15, 0.04, -2.4), 
                      c(-0.15, 0.09, -0.66, 0.16, -0.14, -0.04, -0.09, -0.06),
                      c(-0.33, -0.66, 1.78, -0.07, -0.09, -0.04, 0.08, 0.54), 
@@ -199,7 +199,6 @@ tbl_cov <-data.frame(c(42.31, -0.15, -0.33, 0.11, -0.02, 0.15, 0.04, -2.4),
                      c(-2.40, -0.06, 0.54, -0.326, -0.5, -0.008, -0.08, 0.86))
 colnames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
 rownames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
-knitr::kable(tbl_cov)
 ```
 
 I can transform the data frame into a matrix.
@@ -229,13 +228,12 @@ It works:
 ```{r}
 42.31*-0.15*0.09
 G <-matD %*% matE %*% matD
-dim(matO)
+dim(G)
 ```
-Now we have $G_y$, it describes how the different traits in the index are related to each other.
-The next variable we need is $PEV_y$.
+Now we have $G$, it describes how the different traits in the index are related to each other.
+The next variable we need is $A_y$ and $PEV_y$ which depends on $A_y$ aswell.
 
-However we do not have the matrix $PEV_y$ yet. 
-We can compute $PEV_y$ with the formula derived from [@Phocas1996].
+I can compute $PEV_y$ with the formula derived from [@Phocas1996].
 
 $$
 PEV_y
@@ -348,7 +346,7 @@ mX <- rep.int(1, times=(mfs+mhs)*n)
 Then I compute $X_2$.
 $X_2$ is `r ffs+fhs+3` times 1 level of fixed effects.
 ```{r}
-(fX <- rep.int(1, times=(ffs+fhs)*n))
+fX <- rep.int(1, times=(ffs+fhs)*n)
 ```
 
 For $Z_1$ I can compute the required matrix by a kronecker product.
@@ -417,23 +415,23 @@ dim(t(mZ))
 dim(mAinv)
 dim(Ginv)
 mZZ <- t(mZ)%*%Rinv%*%mZ+mAinv%x%Ginv
-dim(ZZ)
 ```
-Now I can bind the 4 parts of the matrix together.
+
+Actually I can at this moment say that $PEV_1$ is the right bottom part of the matrix $PEV_1$.
 
 ```{r}
-
-mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
-dim(mPEV)
+mPEV<-mZZ
 ```
 
-Now I should be able to compute $C_y$ out of $PEV_y$ and $G$.
+
+Now I should be able to compute $C_y$ out of $PEV_y$ and $A_y \otimes G$.
 First I compute $C_1$
 ```{r}
-dim(G)
+dim(mA%x%G)
 dim(mPEV)
-mC<-G-mPEV
+mC<-mA%x%G-mPEV
 ```
+
 
 
 
@@ -441,6 +439,15 @@ mC<-G-mPEV
 
 
 
+
+
+
+
+The following formula is not important yet.
+```{r, eval=FALSE}
+mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
+dim(mPEV)
+```
 
 We can further define the vector of the economical weights $a$ which is the change in revenue [Sfr.] per genetic standard deviation.
 
