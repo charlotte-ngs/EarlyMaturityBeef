@@ -12,6 +12,25 @@ github-repo: charlotte-ngs/EarlyMaturityBeef
 description: "Master thesis on early maturity in Swiss Beef Cattle."
 ---
 
+```{r setup-preq, echo=FALSE, results='hide'}
+### # required packages from CRAN
+vec_reqpkgs_cran <- c("knitr", "rmarkdown", "roxygen2", "bookdown", "caTools", "citr", "devtools", "tidyverse", "huxtable")
+vec_instpkgs <- installed.packages()
+for (p in vec_reqpkgs_cran){
+  if (!p %in% vec_instpkgs)
+    install.packages(pkgs = p, repos = "https://cran.rstudio.com")
+}
+
+### # required packages from github
+list_reqpkgs_github <- list(repo=c("charlotte-ngs"), package = c("rmddochelper"))
+for (idx in seq_along(1:length(list_reqpkgs_github$package))){
+  p <- list_reqpkgs_github$package[idx]
+  if (!p %in% vec_instpkgs)
+    devtools::install_github(paste(list_reqpkgs_github$repo[idx], p, sep = "/"))
+}
+```
+
+
 # Preface {-}
 If you want to write a preface, please write it here.
 
