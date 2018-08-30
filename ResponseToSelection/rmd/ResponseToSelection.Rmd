@@ -89,7 +89,6 @@ mhs <- 16
 ffs <- 4
 fhs <- 8
 n <- 8
-a <- c()
 
 ```
 
@@ -101,7 +100,8 @@ $$\sigma^*=\sqrt{a^TG^*a}$$
 The vector of the economical weights $a$ is the change in revenue [Sfr.] per genetic standard deviation and $a^T$ is the transpose of $a$.
 
 ```{r}
-a <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
+a <- as.matrix(c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0))
+
 ```
 
 However to solve these equations you need to first calculate the $C_y^*$ by the formula:
@@ -507,9 +507,15 @@ Now I have $C_y^*$.
 With the following formula I can compute $G^*$:
 $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 
-First I compute the sum including $C_1^*$
+First I compute the part of the sum including $C_1^*$. 
+I call it $S1$.
 ```{r}
-
+mCa<-Ca[1:8,]
+dim(mCa)
+dim(a)
+dim(t(a)%*%mCa%*%a)
+S1<-mk*(solve(t(a)%*%mCa%*%a)%*%mCa%*%a%*%t(a)%*%mCa)
+dim(S1)
 ```
 
 
