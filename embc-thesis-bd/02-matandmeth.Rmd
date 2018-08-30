@@ -81,7 +81,13 @@ ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
 # cell content is aligned to the top
 huxtable::valign(ht_prop_sel) <- "top"
 # setting the caption
-ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, "Carcass Conformation Classes in CHTAX")
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:chtaxclass)'
+} else {
+  stab_flag <- '(\\#tab:chtaxclass)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Carcass Conformation Classes in CHTAX'))
 ht_prop_sel
 ```
 
