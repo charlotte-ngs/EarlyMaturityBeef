@@ -97,15 +97,7 @@ $$r^*=\sqrt{\frac {a^TC_y^*a}{a^TG^*a}}$$
 
 $$\sigma^*=\sqrt{a^TG^*a}$$
 
-The vector of the economical weights $a$ is the change in revenue [Sfr.] per genetic standard deviation and $a^T$ is the transpose of $a$.
-
-```{r}
-a <- as.matrix(c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0))
-a
-```
-
 However to solve these equations you need to first calculate the $C_y^*$ by the formula:
-
 $$
 \begin{bmatrix}
 C_1^* \\
@@ -432,8 +424,8 @@ dim(fZZ)
 ```
 
 ```{r}
-mPEV<-mZZ
-fPEV<-fZZ
+mPEV<-solve(mZZ)
+fPEV<-solve(fZZ)
 ```
 
 Now I should be able to compute $C_y$ out of $PEV_y$ and $A_y \otimes G$.
@@ -505,6 +497,12 @@ Now I have $C_y^*$.
 
 With the following formula I can compute $G^*$:
 $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
+$a$ is the vector of economical weights in Swiss francs (Sfr.). I therefore have to divide the economic weights in genetic standard deviations by the genetic standard deviations of the trait
+```{r}
+ew <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
+a <-as.matrix(ew/sigg)
+a
+```
 
 First I compute the part of the sum including $C_1^*$. 
 I call it $S1$.
@@ -514,6 +512,8 @@ dim(mCa)
 sqrt(as.numeric(t(a)%*%mCa%*%a))
 S1<-mk*sqrt(as.numeric(t(a)%*%mCa%*%a))*mCa%*%a%*%t(a)%*%mCa
 dim(S1)
+S1
+G
 ```
 
 Then I compute the part of the sum including $C_2^*$. 
@@ -546,29 +546,17 @@ mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
 # Annex
 
 
-
-I can compute the required matrix by a kronecker product.
-I have a matrix that tells us what $Z_1$ would be for only one trait and I have a unit matrix that has the size of the number of traits.
-Together as kronecker product they form the required matrix $Z_1$ for all traits.
-
-```{r}
-mZ<-diag(n)%x%cbind(matrix(0, nrow=mhs+mfs,ncol=3),diag(mhs+mfs))
-dim(mZ)
-```
-
-
-
-
 The following formula is not important yet.
 ```{r, eval=FALSE}
 mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
 dim(mPEV)
 ```
 
-The vector of the economical weights $a$ is the change in revenue [Sfr.] per genetic standard deviation.
+The vector of the economical weights $a$ is the change in revenue [Sfr.] per genetic standard deviation and $a^T$ is the transpose of $a$.
 
 ```{r}
-a <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
+ewstd <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
+a
 ```
 
 # References
