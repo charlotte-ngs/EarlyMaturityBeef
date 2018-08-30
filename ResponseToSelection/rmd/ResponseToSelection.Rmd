@@ -276,8 +276,8 @@ h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
 sigg<- diag(matrix_cov)
 sigp<-sigg/h2
 sige<-sigp-sigg
-mR <- matrix(0,nrow=(mfs+mhs)*n,ncol=(mfs+mhs)*n)
-diag(mR)=rep(as.vector(sige),each=mfs+mhs)
+sige
+mR <- diag(mfs+mhs)%x%diag(sige)
 mRinv <- solve(mR)
 dim(mRinv)
 ```
@@ -285,8 +285,7 @@ Now I have $R^{-1}_1$.
 
 Here I have to compute $R^{-1}_2$ aswell, which is
 ```{r}
-fR <- matrix(0,nrow=(ffs+fhs)*n,ncol=(ffs+fhs)*n)
-diag(fR)=rep(as.vector(sige),each=ffs+fhs)
+fR <- diag(ffs+fhs)%x%diag(sige)
 fRinv <- solve(fR)
 dim(fRinv)
 ```
@@ -304,7 +303,7 @@ I do not know the parents of the parents.
 Number 1 and 2 are the parents and number 3 is the selection candidate.
 
 ```{r}
-suppressPackageStartupMessages( library(pedigreemm))
+suppressPackageStartupMessages(library(pedigreemm))
 mnumb <- mfs+mhs+3
 mped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:mnumb)
 ```
@@ -537,8 +536,8 @@ First I compute $r^*_1$
 ```{r}
 as.numeric(t(a)%*%fCa%*%a)
 as.numeric(t(a)%*%Ga%*%a)
+as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
-mr
 ```
 
 
