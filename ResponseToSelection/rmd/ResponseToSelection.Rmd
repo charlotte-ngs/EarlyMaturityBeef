@@ -163,6 +163,7 @@ The next variable we need to know is the identity matrix $I_n$. It is defined by
 
 ```{r}
 In<-diag(n)
+In
 ```
 
 The only variables not yet defined in the equation above are the covariance matrices $C_1$, $C_2$ ($C_y$) between true and estimated breeding values of the male or female candidates before the selection.
@@ -423,41 +424,30 @@ fZZ <- t(fZ)%*%fRinv%*%fZ+fAinv%x%Ginv
 dim(fZZ)
 ```
 
+Also I only need the part of the selection candidate.
+
 ```{r}
 mPEV<-solve(mZZ)
+mPEV<-mPEV[17:24,17:24]
 fPEV<-solve(fZZ)
+fPEV<-fPEV[17:24,17:24]
 ```
 
-Now I should be able to compute $C_y$ out of $PEV_y$ and $A_y \otimes G$.
+Now I should be able to compute $C_y$ out of $PEV_y$ and $G$.
 First I compute $C_1$
 ```{r}
 dim(mA%x%G)
 dim(mPEV)
-mC<-mA%x%G-mPEV
+mC<-G-mPEV
 ```
 
-Then $C_1$
+Then $C_2$
 ```{r}
 dim(fA%x%G)
 dim(fPEV)
-fC<-fA%x%G-fPEV
+fC<-G-fPEV
 ```
 
-$C_1$ and $C_2$ been the last variable not yet defined in the following formula.
-In this formula I only use the values of the selection candite as $C_1$ and $C_2$.
-First select for $C_1$
-```{r}
-dim(fC)
-fC<-fC[17:24,17:24]
-dim(fC)
-```
-
-Then for $C_2$
-```{r}
-dim(mC)
-mC<-mC[17:24,17:24]
-dim(mC)
-```
 
 $$
 \begin{bmatrix}
@@ -481,8 +471,10 @@ $$
 
 First I compute the inner matrix
 ```{r}
-Sinv<-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2))
+matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2)
+Sinv<-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2, byrow=TRUE))
 dim(Sinv)
+Sinv
 ```
 Then the whole matrix
 ```{r}
