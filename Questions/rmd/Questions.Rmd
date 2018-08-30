@@ -216,8 +216,19 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How can I number formulas, so I can refer to them?
     *
 
-* What is the differen between $ A \bullet B $ and $AB$?
-
+* What is the difference between $ A \bullet B $ and $AB$?
+    * There is no difference. Both are meaning matrix multiplication.
+    
+* What is n of I_n?
+    * n is the number of traits.
+    
+* Is x and z the same?
+    * No, x is the x value of a density function (selection border) and z is the y value of the density function (ordinate). It is so called in this paper, but sometimes x is called z in other sources, which was confusing.
+    
+* Cbind does not work with C_1 and C_2. How can I bind them together?
+    * The problem is, that after this point we only use the values of the candidate of each sex. Then the binding should work.
+    
+* 
 
 
 
