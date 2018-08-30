@@ -101,7 +101,7 @@ The vector of the economical weights $a$ is the change in revenue [Sfr.] per gen
 
 ```{r}
 a <- as.matrix(c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0))
-
+a
 ```
 
 However to solve these equations you need to first calculate the $C_y^*$ by the formula:
@@ -512,14 +512,34 @@ I call it $S1$.
 ```{r}
 mCa<-Ca[1:8,]
 dim(mCa)
-dim(a)
-dim(t(a)%*%mCa%*%a)
-S1<-mk*(solve(t(a)%*%mCa%*%a)%*%mCa%*%a%*%t(a)%*%mCa)
+sqrt(as.numeric(t(a)%*%mCa%*%a))
+S1<-mk*sqrt(as.numeric(t(a)%*%mCa%*%a))*mCa%*%a%*%t(a)%*%mCa
 dim(S1)
 ```
 
+Then I compute the part of the sum including $C_2^*$. 
+I call it $S2$.
+```{r}
+fCa<-Ca[9:16,]
+dim(mCa)
+sqrt(as.numeric(t(a)%*%fCa%*%a))
+S2<-fk*sqrt(as.numeric(t(a)%*%fCa%*%a))*fCa%*%a%*%t(a)%*%fCa
+dim(S2)
+```
 
+Then I can compute $G^*$
+```{r}
+Ga<-G-0.5*(S1+S2)
+```
 
+Then I can compute $r^*_y$.
+First I compute $r^*_1$
+```{r}
+as.numeric(t(a)%*%fCa%*%a)
+as.numeric(t(a)%*%Ga%*%a)
+mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
+mr
+```
 
 
 

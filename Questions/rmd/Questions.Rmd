@@ -228,7 +228,8 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Cbind does not work with C_1 and C_2. How can I bind them together?
     * The problem is, that after this point we only use the values of the candidate of each sex. Then the binding should work.
     
-* 
+* How can I transform a matrix back to a numeric value, so that I can use sqrt() etc.?
+    * You can use as.numeric()
 
 
 
