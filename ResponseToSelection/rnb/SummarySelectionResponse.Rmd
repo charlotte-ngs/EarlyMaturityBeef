@@ -1,0 +1,35 @@
+---
+title: "Calculation of Genetic Gain - A Summary"
+author: "Peter von Rohr"
+date: "30.08.2018"
+output: html_notebook
+---
+
+## Disclaimer
+This document summaries the approach to calculate the genetic gain. This approach was first developed by [Phocas and Colleau in 1996](https://link.springer.com/article/10.1007%2FBF00225759). 
+
+
+## Background
+We assume a breeding program with several traits which are combined in an aggregate genotype (AG) (Gesamtzuchtwert). This aggregate genotype is estimated via an Index $I$ which is defined as 
+
+$$I = a^T\hat{u}$$
+
+where $a$ is a vector of economic values (in SFr per unit of the trait) and $\hat{u}$ is the vector of estimated breeding values. 
+
+When the selection is based on $I$, the general formula to calculate the genetic gain per year ($\Delta$) is given by
+
+$$
+\Delta = \frac{\sum_{j=1}^2 i_j \cdot r_j \cdot \sigma}{\sum_{j=1}^2 L_j}
+$$
+
+where: $i_j$ is the selection intensity among selection candidates of sex $j$; $r_j$ is the accuracy of the Index $I$ for candidates of sex $j$; $\sigma$ is the standard deviation of the Index and $L_j$ is the generation interval of sex $j$. In this example, we assume that the sex $j$ can either be male or female. The parameters $r_j$ and $\sigma$ are assumed to be taken from an unselected base population
+
+
+## Asymptotic Genetic Gain - The Bulmer Effect
+Selection changes the parameters such as $r_j$ and $\sigma$. This was found out by Bulmer (1971). This change of the parameters is called the __Bulmer Effect__. The asymptotic genetic gain corresponds to the genetic gain when taking into account the changes caused by the Bulmer effect. Phocas and Colleau (1996) have shown how to do this. The asymptotic genetic gain is called $\Delta^*$ and is computed as
+
+$$
+\Delta^* = \frac{\sum_{j=1}^2 i_j \cdot r_j^* \cdot \sigma^*}{\sum_{j=1}^2 L_j}
+$$
+
+
