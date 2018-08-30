@@ -179,7 +179,7 @@ fk<-sel_k[,"female"]
 The next variable we need to know is the identity matrix $I_n$. It is defined by the number of traits existing in the total breeding value $n$. In this example we have `r n` traits, which results in the following identity matrix:
 
 ```{r}
-diag(n)
+In<-diag(n)
 ```
 
 The only variables not yet defined in the equation above are the covariance matrices $C_1$, $C_2$ ($C_y$) between true and estimated breeding values of the male or female candidates before the selection.
@@ -491,10 +491,16 @@ Sinv<-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2))
 ```
 Then the whole matrix
 ```{r}
-c(mCa,fCa) <- (Sinv%x%In) 
+dim(mC)
+dim(fC)
+dim(Sinv)
+dim(In)
+dim(Sinv%x%In)
+c(mCa,fCa) <- (Sinv%x%In)%*%rbind(mC,fC) 
 ```
 
-
+With the following formula I can compute $G^*$:
+$$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 
 
 
