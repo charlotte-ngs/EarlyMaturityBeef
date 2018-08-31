@@ -63,3 +63,5 @@ $$
 
 
 ## Stepwise Approach of Computation
+This section describes the necessary steps to be able to compute 
+the asymptotic selection response.
