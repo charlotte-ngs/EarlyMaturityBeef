@@ -10,7 +10,12 @@ This document summaries the approach to calculate the genetic gain. This approac
 
 
 ## Background
-We assume a breeding program with several traits which are combined in an aggregate genotype (AG) (Gesamtzuchtwert). This aggregate genotype is estimated via an Index $I$ which is defined as 
+We assume a breeding program with several traits which are combined in an aggregate genotype (Gesamtzuchtwert). The aggregate genotype ($H$) is computed as 
+
+$$
+H = a^Tu
+$$
+where $a$ is the vector of economic values and $u$ is the vector of true breeding values. $H$ cannot be computed, but it has to be estimated via an Index $I$ which is defined as 
 
 $$I = a^T\hat{u}$$
 
@@ -22,7 +27,20 @@ $$
 \Delta = \frac{\sum_{j=1}^2 i_j \cdot r_j \cdot \sigma}{\sum_{j=1}^2 L_j}
 $$
 
-where: $i_j$ is the selection intensity among selection candidates of sex $j$; $r_j$ is the accuracy of the Index $I$ for candidates of sex $j$; $\sigma$ is the standard deviation of the Index and $L_j$ is the generation interval of sex $j$. In this example, we assume that the sex $j$ can either be male or female. The parameters $r_j$ and $\sigma$ are assumed to be taken from an unselected base population
+where: $i_j$ is the selection intensity among selection candidates of sex $j$; $r_j$ is the accuracy of the Index $I$ for candidates of sex $j$; $\sigma$ is the standard deviation of the aggregate genotype and $L_j$ is the generation interval of sex $j$. In this example, we assume that the sex $j$ can either be male or female. The parameters $r_j$ and $\sigma$ are assumed to be taken from an unselected base population. 
+
+From selection index theory, it has been shown that $\sigma$ and $r_j$ can be computed as
+
+$$
+\sigma = \sqrt{var(H)} = \sqrt{var(a^Tu)} = \sqrt{a^TGa}
+$$
+where $G = var(u)$, the genetic-additive variance-covariance matrix. The accuracy $r_j$ for candidates of sex $j$ of the Index $I$ corresponds to the correlation between the index $I$ and the aggregate genotype $H$. 
+
+$$
+r_{I,H} = \frac{Cov(I,H)}{\sqrt{Var(I)*Var(H)}} = \sqrt{\frac{Var(I)}{Var(H)}} = \sqrt{\frac{a^TCa}{a^TGa}}
+$$
+where $C = var(\hat{u})$, the variance-covariance matrix of estimated breeding values. For a detailed derivation of the formula of $r_{I,H}$, please see http://charlotte-ngs.github.io/LivestockBreedingAndGenomics/notes/zl_Herleitungen.pdf and http://charlotte-ngs.github.io/GELASM/w9/DeRegressEbvSummaryGTF2009.pdf.
+
 
 
 ## Asymptotic Genetic Gain - The Bulmer Effect
@@ -32,4 +50,16 @@ $$
 \Delta^* = \frac{\sum_{j=1}^2 i_j \cdot r_j^* \cdot \sigma^*}{\sum_{j=1}^2 L_j}
 $$
 
+where $r_j^*$ and $\sigma^*$ denote the same parameters, but they are corrected for the Bulmer effect. That means
 
+$$
+\sigma^* =  \sqrt{a^TG^*a}
+$$
+and
+
+$$
+r_j^* = \sqrt{\frac{a^TC_j^*a}{a^TG^*a}}
+$$
+
+
+## Stepwise Approach of Computation
