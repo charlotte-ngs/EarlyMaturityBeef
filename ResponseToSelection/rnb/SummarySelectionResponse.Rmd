@@ -65,3 +65,22 @@ $$
 ## Stepwise Approach of Computation
 This section describes the necessary steps to be able to compute 
 the asymptotic selection response.
+
+* __Step 1__: Set up lower right part of coefficient matrix of mixed model equations to compute __PEV__ for both sexes, as shown in Phocas ans Colleau 1996.
+
+* __Step 2__: From $PEV_j$ for sex $j$, compute $C_j$ as $C_j = G - PEV_j$. 
+
+* __Step 3__: From $C_j$ compute $C_j^*$ 
+
+* __Step 4__: From $G$ and $C_j^*$ compute $G^*$ 
+
+* __Step 5__: Use $C_j^*$ and $G^*$ tp compute $\sigma^*$ and $r_j^*$, as shown above
+
+* __Step 6__: Compute $\Delta^*$ as shown above
+
+
+
+```{r, echo=FALSE, results='asis'}
+cat(rmddochelper::get_latest_change(), "\n")
+```
+
