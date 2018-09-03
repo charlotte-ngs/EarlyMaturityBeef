@@ -166,7 +166,6 @@ The next variable we need to know is the identity matrix $I_n$. It is defined by
 
 ```{r}
 In<-diag(n)
-In
 ```
 
 The only variables not yet defined in the equation above are the covariance matrices $C_1$, $C_2$ ($C_y$) between true and estimated breeding values of the male or female candidates before the selection.
@@ -230,6 +229,10 @@ G <-matD %*% matE %*% matD
 dim(G)
 ```
 Now we have $G$, it describes how the variances of different traits in the index are related to each other.
+Then I compute the inverse of $G$.
+```{r}
+Ginv<-solve(G)
+```
 
 The next variable we need is $A_y$ and $PEV_y$ which depends on $A_y$ aswell.
 I can compute $PEV_y$ with the formula derived from [@Phocas1996].
@@ -336,10 +339,11 @@ fX <- rep.int(1, times=(ffs+fhs)*n)
 
 $R^{-1}_y$ is the inverse variance-covariance matrix of the environment/residuals for the traits and the recorded animals.
 I can compute $R_y$ with the following formula.
-$$R_y=V-Z^T(A_y\otimes G)Z$$
+$$R_y=Z(A_y\otimes V)Z^T-Z(A_y\otimes G)Z^T$$
 $V$ is the variance-covariance matrix of the phenotypic records.
-$G$ is the genetic variance-covariance matrix.
+$G$ is the genetic variance-covariance matrix and already computed.
 $A_y$ is the relationsship matrix of the selection candidate.
+$Z$ is already computed.
 
 ## Variance-covariance matrix of phenotypical records $V$
 I can compute $V$ similarly to $G$, but using the phenotypic variances and correlations.
@@ -378,10 +382,10 @@ diag(corp)=sigp
 ```
 
 I can transform the data frame into a matrix.
-Now I should not have to compute each element of the required n dimensional matrix $V$ separateley.
-The problem is now that the diagonal elements should be squared and the correlation should be multiplied with the variances of the involved traits respectiveley.
+Now I do not want to compute each element of the required n dimensional matrix $V$ separateley.
+However I can not do the same operation for all elements of the matrix. 
+The diagonal elements should be squared and the correlation should be multiplied with the variances of the involved traits respectiveley.
 I have to split up the matrix therefore into the diagonal part and the non-diagonal part.
-Then I can transform the two matrices by scalar multiplication.
 I build a diagonal matrix with the standard deviations as diagonal elements $D$ and a matrix with all the correlation but with 1,1,1,... as diagonal elements $E$.
 
 First $D$:
@@ -397,52 +401,31 @@ diag(matE) <- 1
 
 Then I get the required matrix $V$ by using two times the matrix multiplication.
 $$V=DED$$
-It works:
+It fortunateley works. Glückstreffer :)
 
 ```{r}
 42.31*-0.15*0.09
 V <-matD %*% matE %*% matD
 dim(V)
 ```
+Now I have all necessary variables defined to compute $R_y$
 
-Then I compute the inverse of $G$.
+## Variance-covariance matrix of the residuals for the traits and the recorded animals $R_y$
+First I compute $R_1$
 ```{r}
-Ginv<-solve(G)
+mR <- mZ%*%(mA%x%V)%*%t(mZ)-mZ%*%(mA%x%G)%*%t(mZ)
+mRinv <- solve(mR)
+fR <- fZ%*%(fA%x%V)%*%t(fZ)-fZ%*%(fA%x%G)%*%t(fZ)
+fRinv<-solve(fR)
+dim(mR)
 ```
 
 ## Prediction error variance $PEV_y$
 Now I can compute the matrix $PEV_1$.
 To compute it I have to compute all four parts of the whole matrix. 
 Then I will bind the part together in the right order.
-How ever you can skip to the right bottom part right now.
-It is sufficient for the moment.
-
-First I will compute the left top part of the matrix.
-$$X_y^TR^{-1}_yX_y$$
-which is
-```{r}
-
-mXX<-t(mX)%*%mRinv%*%mX
-dim(mXX)
-```
-
-Then I compute the right top part
-$$X_y^TR^{-1}_yZ_y$$
-which is
-```{r}
-mXZ <- t(mX)%*%mRinv%*%mZ
-dim(mXZ)
-```
-
-Then I compute the left bottom part
-$$Z^T_yR^{-1}_yX_y$$
-which is
-```{r}
-mZX <- t(mZ)%*%mRinv%*%mX
-dim(mZX)
-```
-
-Then I compute the right bottom part
+How ever you can skip to the right bottom part right now, because I do not have any fixed effects at the moment.
+First I compute the right bottom part for a male selection candidate $PEV_1$.
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
 which is
 ```{r}
@@ -454,8 +437,7 @@ dim(Ginv)
 mZZ <- t(mZ)%*%mRinv%*%mZ+mAinv%x%Ginv
 ```
 
-Actually I can at this moment say that $PEV_1$ is the right bottom part of the matrix $PEV_1$ and for $PEV_2$ the same.
-Therefore I only compute the right bottom part of $PEV_2$ at the moment.
+Then I compute the right bottom part of $PEV_2$ for a female selection candidate.
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
 which is
 ```{r}
@@ -512,7 +494,6 @@ First I compute the inner matrix
 solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2))
 Sinv<-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2, byrow=TRUE))
 dim(Sinv)
-Sinv
 ```
 Then the whole matrix
 ```{r}
@@ -552,7 +533,7 @@ Then I compute the part of the sum including $C_2^*$.
 I call it $S2$.
 ```{r}
 fCa<-Ca[9:16,]
-dim(mCa)
+dim(fCa)
 sqrt(as.numeric(t(a)%*%fCa%*%a))
 S2<-fk*sqrt(as.numeric(t(a)%*%fCa%*%a))*fCa%*%a%*%t(a)%*%fCa
 dim(S2)
@@ -560,6 +541,7 @@ dim(S2)
 
 Then I can compute $G^*$
 ```{r}
+G
 Ga<-G-0.5*(S1+S2)
 ```
 
@@ -571,6 +553,7 @@ as.numeric(t(a)%*%fCa%*%a)
 as.numeric(t(a)%*%Ga%*%a)
 as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
+mr
 ```
 
 
@@ -591,7 +574,6 @@ Therefore the candidate and the parents should not own an element in the matrix,
 This leads to a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)` dimension for a male candidate.
 ```{r}
 sige<-sigp-sigg
-sige
 mR <- diag(mfs+mhs)%x%diag(sige)
 mRinv <- solve(mR)
 dim(mRinv)
@@ -619,6 +601,33 @@ The vector of the economical weights $a$ is the change in revenue [Sfr.] per gen
 ewstd <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
 a
 ```
+
+
+First I will compute the left top part of the matrix.
+$$X_y^TR^{-1}_yX_y$$
+which is
+```{r}
+
+mXX<-t(mX)%*%mRinv%*%mX
+dim(mXX)
+```
+
+Then I compute the right top part
+$$X_y^TR^{-1}_yZ_y$$
+which is
+```{r}
+mXZ <- t(mX)%*%mRinv%*%mZ
+dim(mXZ)
+```
+
+Then I compute the left bottom part
+$$Z^T_yR^{-1}_yX_y$$
+which is
+```{r}
+mZX <- t(mZ)%*%mRinv%*%mX
+dim(mZX)
+```
+
 
 # References
 
