@@ -183,7 +183,7 @@ $$Cov(x,y)=r_{x,y}\sigma_x\sigma_y$$
 
 In the following table the necessary information to compute the covariances are listed: The diagonal values are the genetic standard deviations $\sigma_g$ and the the others the genetic correlations between the traits ($r_{x,y}$).
 ```{r}
-tbl_cov <-data.frame(c(42.31, -0.15, -0.33, 0.11, -0.02, 0.15, 0.04, -2.4), 
+corg <-data.frame(c(42.31, -0.15, -0.33, 0.11, -0.02, 0.15, 0.04, -2.4), 
                      c(-0.15, 0.09, -0.66, 0.16, -0.14, -0.04, -0.09, -0.06),
                      c(-0.33, -0.66, 1.78, -0.07, -0.09, -0.04, 0.08, 0.54), 
                      c(0.110, 0.16,  -0.07, 0.33, 0.36, 0.24, -0.08, -0.326), 
@@ -191,15 +191,11 @@ tbl_cov <-data.frame(c(42.31, -0.15, -0.33, 0.11, -0.02, 0.15, 0.04, -2.4),
                      c(0.150, -0.04, -0.04, 0.24, 0.43, 0.02, -0.36, -0.008), 
                      c(0.040, -0.09, 0.08, -0.08, -0.7, -0.36, 1.58, -0.08), 
                      c(-2.40, -0.06, 0.54, -0.326, -0.5, -0.008, -0.08, 0.86))
-colnames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
-rownames(tbl_cov) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+colnames(corg) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+rownames(corg) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
 ```
 
 I can transform the data frame into a matrix.
-```{r, results='asis'}
-matrix_cov <- as.matrix(tbl_cov)
-```
-
 Then I do not have to compute each element of the required n dimensional matrix $G$ separateley.
 The problem is now that the diagonal elements should be squared and the correlation should be multiplied with the variances of the involved traits respectiveley.
 I have to split up the matrix therefore into the diagonal part and the non-diagonal part.
@@ -208,12 +204,12 @@ I build a diagonal matrix with the standard deviations as diagonal elements $D$ 
 
 First $D$:
 ```{r}
-matD <- diag(diag(matrix_cov), nrow = 8, ncol = 8)
+matD <- diag(diag(as.matrix(corg)), nrow = 8, ncol = 8)
 ```
 
 Then $E$:
 ```{r}
-matE <- matrix_cov
+matE <- as.matrix(corg)
 diag(matE) <- 1
 ```
 
@@ -225,6 +221,7 @@ It works:
 42.31*-0.15*0.09
 G <-matD %*% matE %*% matD
 dim(G)
+G
 ```
 Now we have $G$, it describes how the variances of different traits in the index are related to each other.
 
@@ -249,40 +246,44 @@ $Z$ is a design matrix that connects the records of observations (does not inclu
 $X$ is a design vector of the values 1,1,1, as long as there are animals involved. 
 It could connect the observations to fixed factors, but we do not have any fixed factors.
 
-$R^{-1}_y$ is the inverse diagonal matrix of the values of variance of the environment/residuals for the traits and the recorded animals. 
-The diagonal values of $R^{-1}_y$ are consisting of the repetition of residual variances of each trait. 
-The number of repetitions of here `r n` values is dependent on the number of records.
+$R^{-1}_y$ is the inverse variance-covariance matrix of the environment/residuals for the traits and the recorded animals.
+I can compute $R_y$ with the following formula.
+$$R=V-Z^TMZ$$
+$V$ is the variance-covariance matrix of the phenotypic records.
+$M$ is the genetic variance-covariance matrix which consists of $G$ and $A_y$.
 
-The environmental/residual variance $\sigma_e$ is the difference between $\sigma_g$ and $\sigma_p$ for each trait.
-$$\sigma_e=\sigma_p-\sigma_g$$
-For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
-$\sigma_g$ is available and $\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
+The diagonal elements of V are the phenotypic variances $\sigma_p$ of each trait.
+$\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
 $$\sigma_p=\sigma_g^2/h^2$$
-$h^2$ for all traits is available.
-According to the model, the environomental or residual variances exist only for those animals that have a record.
-The candidate and the parents do not have a record.
-Therefore the candidate and the parents should not own an element in the matrix, but all other animals that have a record own an element of each trait. 
-
-This leads to a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)` dimension for a male candidate.
-
+$h^2$ and $\sigma_g$ for all traits is available.
 ```{r}
 h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
 sigg<- diag(matrix_cov)
 sigp<-sigg/h2
-sige<-sigp-sigg
-sige
-mR <- diag(mfs+mhs)%x%diag(sige)
-mRinv <- solve(mR)
-dim(mRinv)
 ```
-Now I have $R^{-1}_1$.
+I also have the the non-diagonal elements, which are the phenotypical covariances.
+Therefore I can compute $V$ similarly to $G$.
 
-Here I have to compute $R^{-1}_2$ aswell, which is
 ```{r}
-fR <- diag(ffs+fhs)%x%diag(sige)
-fRinv <- solve(fR)
-dim(fRinv)
+corp <-data.frame(c(1, -0.358, -0.22, 0.069, 0.031, -0.041, 0.111, -0.047), 
+                     c(-0.358, 1, -0.588, 0.201, -0.004, -0.048, -0.082, -0.082),
+                     c(-0.22, -0.588, 1, -0.253, -0.077, -0.031, 0.023, 0.462), 
+                     c(0.069, 0.201,  -0.253, 1, 0.133, 0.068, 0.012, -0.2), 
+                     c( 0.031, -0.004, -0.077, 0.133, 1, 0.177, -0.488, 0.146), 
+                     c(-0.041, -0.048, -0.031, 0.068, 0.177, 1, -0.301, -0.01), 
+                     c(0.111, -0.082, 0.023, 0.012, -0.488, -0.301, 1, 0.008), 
+                     c(-0.047, -0.082, 0.462, -0.2, 0.146, -0.01, 0.008,1))
+colnames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+rownames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+diag(corp)=sigp
 ```
+
+
+
+
+
+
+
 
 The next variable I need is the inverse of the relationship matrix $A_y$ for each sex.
 
@@ -534,6 +535,34 @@ mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
 
 
 # Annex
+The diagonal values of $R_y$ are consisting of the repetition of residual variances of `r n` trait. 
+The environmental/residual variance $\sigma_e$ is the difference between $\sigma_g$ and $\sigma_p$ for each trait.
+$$\sigma_e=\sigma_p-\sigma_g$$
+For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
+$\sigma_g$ is available and $\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
+$$\sigma_p=\sigma_g^2/h^2$$
+$h^2$ for all traits is available.
+According to the model, the environomental or residual variances exist only for those animals that have a record.
+The candidate and the parents do not have a record.
+Therefore the candidate and the parents should not own an element in the matrix, but all other animals that have a record own an element of each trait.
+
+This leads to a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)` dimension for a male candidate.
+```{r}
+sige<-sigp-sigg
+sige
+mR <- diag(mfs+mhs)%x%diag(sige)
+mRinv <- solve(mR)
+dim(mRinv)
+```
+Now I have $R^{-1}_1$.
+
+Here I have to compute $R^{-1}_2$ aswell, which is
+```{r}
+fR <- diag(ffs+fhs)%x%diag(sige)
+fRinv <- solve(fR)
+dim(fRinv)
+```
+
 
 
 The following formula is not important yet.
