@@ -24,7 +24,6 @@ $$Q = ih^2\sigma_{P}$$
 $$h = \sigma_{A}/\sigma_{P}$$
 $$Q = ih\sigma_{A}$$
 
-
 Assortative mating can be disregarded, because it has very little effect on the mid-parent regression. 
 The chief use of this equation is for predicting the response to selection. The knowledge of heritability can be obtained from previous generations. The selection differential can not be known, but its expected value can be predicted.
 
@@ -54,29 +53,28 @@ However there are two factors that limit increasing intensity of selection:
 1. The reproductive rate
 2. Inbreeding
 
+
+
+
+
+
 # Response to selection in index derived from [VonRohr1998]
 
-The response to selection of the total breeding value $Q$ is dependent on the parameters:
-
-1. Intensity of selection $i$
-2. Selection accuracy $r^*$
-3. Genetic standard deviation $\sigma^*$
-4. Generation intervall $L$[y] 
-
-It has to be calculated separateley for each sex $y$ ($_1=male$, $_2=female$) and then summed up in the end. Selection accuracy and standard deviation are calculated with the total breeding value $^*$.
-In this example I calculate the response to selection for the both sexes by the formula as shown on page 135 [@VonRohr1998]:
+The response to selection of the total breeding value $Q$ is defined by the formula as shown on page 135 [@VonRohr1998]:
 
 $$Q= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
 
-The following table will define the given necessary parameters for two sexes $male=_1$ and $female=_2$: Selection intensity, generation intervall, number of evaluated full siblings (fs), number of evaluated half siblings (hs).
-
-```{r, results='asis'}
-tbl_given <- tibble::data_frame(male=c(.2, 1.4, 1.25, 4, 16), female=c(.5, 0.798, 1.75, 4, 8))
-rownames(tbl_given) <- c("Proportion selected $P$ [%]", "Intensity of selection $i$ [units of standard deviations]", "Generation intervall $L$ [y]", "Number of full siblings", "Number of half siblings")
-tbl_given
-```
-
 ```{r}
+# Here I define the available data to compute the response to selection.
+# 1 = male, 2 = female
+# m = male, f = female
+# i = intensity of selection
+# p = proportion selected
+# L = generation interval
+# fs = number of full siblings
+# hs = number of half siblings
+# n = number of traits
+
 i1 <- 1.4
 i2 <- 0.8
 p1 <- 0.2
@@ -90,7 +88,12 @@ fhs <- 8
 n <- 8
 ```
 
-The variables $r^*$ and $\sigma^*$  have to be calculated first with the variables deviation of the vector of the economical weights $a'$, the asymptotic covariance $C_y^*$ between true and estimated breeding values of the male or female candidates before the selection, the vector of the economical weights $a$ and the asymptotic genetic variance-covariance $G^*$:
+$i_y$ is the selection intensity and is available.
+$L_y$ is the generation intervall in years and is available.
+$r^*$ is the accuracy of the estimated overall breeding value of the selection candidate.
+$\sigma^*$ is the standard deviation of the overall breeding value.
+$y$ Is the sex of the breeding candidate ($_1=male$, $_2=female$)
+The variables $r^*$ and $\sigma^*$ have to be calculated first the the asymptotic covariance $C_y^*$ between true and estimated breeding values of the male or female candidates before the selection, the vector of the economical weights $a$ and the asymptotic genetic variance-covariance $G^*$:
 $$r^*=\sqrt{\frac {a^TC_y^*a}{a^TG^*a}}$$
 
 $$\sigma^*=\sqrt{a^TG^*a}$$
@@ -115,6 +118,7 @@ C_2
 \end{bmatrix}
 $$
 
+## Factor of variance reduction $k_y$
 In this equation you have the factors of variance reduction based on the selection of the male or female candidates $k_1$, $k_2$, the covariance matrices $C_1$, $C_2$ between true and estimated breeding values of the male or female candidates before the selection and the identity matrix $I_n$ of $n$ traits existing in the total breeding value.
 
 You can derive $k_1$ and $k_2$ from the intensities of selection $i_1$, $i_2$ and from the value of trunctation $x_1$, $x_2$ for male and female candidates ,
@@ -149,7 +153,7 @@ $$i_y = z_y/p_y$$
 (sel_int <- sel_ords/tbl_prop_sel["proportion selected",])
 ```
 
-Computing the values of the variance reductions ($k$)
+Computing the values of the variance reduction ($k$)
 
 ```{r}
 (sel_k <- sel_int * (sel_int - sel_quant))
@@ -157,6 +161,7 @@ mk<-sel_k[,"male"]
 fk<-sel_k[,"female"]
 ```
 
+## Identity matrix with dimension $n$
 The next variable we need to know is the identity matrix $I_n$. It is defined by the number of traits existing in the total breeding value $n$. In this example we have `r n` traits, which results in the following identity matrix:
 
 ```{r}
@@ -174,9 +179,11 @@ $C_y$ is defined by the prediction error variance ($PEV_y$) and the additive gen
 $$C_y=A_y \otimes G-PEV_y$$
 You can compute $PEV_y$ and $A_y \otimes G$ with the available data.
 $A_y \otimes G$ owns as values the covariances between each trait and the relationship matrix.
+
+## Genetic variance-covariance matrix $G$
 The covariances of $G$ are dependent on the genetic standard deviation of each trait ($\sigma_g$), the genetic correlations between the traits ($r_{x,y}$) and the genetic variance of each trait ($\sigma_g^2$).
 
-The variances of the traits are the diagonal values of the matrix $G$ for the covariance between the same trait is the variance of the trait:
+The variances of the traits are the diagonal values of the matrix $G$ for the covariance between the same trait $x$ is the variance of the trait:
 $$Cov(x, x)=\sigma_x^2$$
 The covariance between different traits is defined by the correlation between them and the variance of each trait.
 $$Cov(x,y)=r_{x,y}\sigma_x\sigma_y$$
@@ -221,7 +228,6 @@ It works:
 42.31*-0.15*0.09
 G <-matD %*% matE %*% matD
 dim(G)
-G
 ```
 Now we have $G$, it describes how the variances of different traits in the index are related to each other.
 
@@ -241,55 +247,10 @@ $$
 For this formula I need the relationship matrix $A_y$, but also the genetic and phenotypic variances $\sigma_g$ and $\sigma_p$ and $G$.
 I will not need any other data.
 
-$Z$ is a design matrix that connects the records of observations (does not include the breeding candidate and its parents) with the breeding values (includes the candidate and its parents).
-
-$X$ is a design vector of the values 1,1,1, as long as there are animals involved. 
-It could connect the observations to fixed factors, but we do not have any fixed factors.
-
-$R^{-1}_y$ is the inverse variance-covariance matrix of the environment/residuals for the traits and the recorded animals.
-I can compute $R_y$ with the following formula.
-$$R=V-Z^TMZ$$
-$V$ is the variance-covariance matrix of the phenotypic records.
-$M$ is the genetic variance-covariance matrix which consists of $G$ and $A_y$.
-
-The diagonal elements of V are the phenotypic variances $\sigma_p$ of each trait.
-$\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
-$$\sigma_p=\sigma_g^2/h^2$$
-$h^2$ and $\sigma_g$ for all traits is available.
-```{r}
-h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
-sigg<- diag(matrix_cov)
-sigp<-sigg/h2
-```
-I also have the the non-diagonal elements, which are the phenotypical covariances.
-Therefore I can compute $V$ similarly to $G$.
-
-```{r}
-corp <-data.frame(c(1, -0.358, -0.22, 0.069, 0.031, -0.041, 0.111, -0.047), 
-                     c(-0.358, 1, -0.588, 0.201, -0.004, -0.048, -0.082, -0.082),
-                     c(-0.22, -0.588, 1, -0.253, -0.077, -0.031, 0.023, 0.462), 
-                     c(0.069, 0.201,  -0.253, 1, 0.133, 0.068, 0.012, -0.2), 
-                     c( 0.031, -0.004, -0.077, 0.133, 1, 0.177, -0.488, 0.146), 
-                     c(-0.041, -0.048, -0.031, 0.068, 0.177, 1, -0.301, -0.01), 
-                     c(0.111, -0.082, 0.023, 0.012, -0.488, -0.301, 1, 0.008), 
-                     c(-0.047, -0.082, 0.462, -0.2, 0.146, -0.01, 0.008,1))
-colnames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
-rownames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
-diag(corp)=sigp
-```
-
-
-
-
-
-
-
-
-The next variable I need is the inverse of the relationship matrix $A_y$ for each sex.
-
+## Relationship matrix $A_y$
 I know that the male candidate has `r mfs` full siblings, `r mhs` half siblings and a female has `r ffs` full siblings and `r fhs` half siblings.
 Based on the number of siblings I can create a relationship matrix.
-I can compute the genetic additive relationship matrix $A$ for a given pedigree using the `pedigreemm` package.
+I can compute the genetic additive relationship matrix $A_y$ for a given pedigree using the `pedigreemm` package.
 I need to identify the parents of each animal, not known parents I name NA.
 
 First I compute the pedigree of a male candidate. 
@@ -303,7 +264,7 @@ mnumb <- mfs+mhs+3
 mped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:mnumb)
 ```
 
-Then I create a matrix out of the pedigree:
+Then I create a matrix from the pedigree:
 The function `getA` computes the additive relationship matrix $A_1$.
 ```{r}
 mA<-getA(mped)
@@ -314,7 +275,7 @@ Then I compute the inverse of $A_1$.
 mAinv <- getAInv(mped)
 ```
 
-I need to do the same for a female candidate.
+I need to do the same for a female candidate to get $A_2$.
 A female candidate has `r ffs` full siblings and `r fhs` half siblings and 2 parents. Including the candidate this is a total of `r ffs+fhs+3` animals.
 Number 1 and 2 are the parents and number 3 is the selection candidate.
 ```{r}
@@ -334,6 +295,28 @@ Then I compute the inverse $A^{-1}_2$.
 fAinv<-getAInv(fped)
 ```
 
+
+## Design matrix connecting the records with breeding values $Z$
+$Z$ is a design matrix that connects the records of observations (does not include the breeding candidate and its parents) with the breeding values (includes the candidate and its parents).
+$Z_y$ should exclude the animals without records.
+For both sexes there are 3 animals that do not have records.
+
+First I compute $Z_1$.
+I can exclude the 3 animals attaching a zero matrix of the dimensions `(mfs+mhs)*n` x `3*n` on the left side to the columns of the identity matrix with dimensions  `(mfs+mhs)*n` x `(mfs+mhs)*n`.
+```{r}
+mZ<-cbind(matrix(0, nrow=(mhs+mfs)*n,ncol=3*n),diag((mhs+mfs)*n))
+dim(mZ)
+```
+
+Then I compute $Z_2$.
+```{r}
+fZ<-cbind(matrix(0, nrow=(fhs+ffs)*n,ncol=3*n),diag((fhs+ffs)*n))
+dim(fZ)
+```
+
+## Design vector that connects the records with fixed factors $X$
+$X$ is a design vector of the values 1,1,1, as long as there are animals involved. 
+It could connect the observations to fixed factors, but we do not have any fixed factors.
 Then I compute $X_y$.
 $X_y$ is a matrix that connects the records with the levels of fixed effects.
 I do not have any fixed effects.
@@ -351,21 +334,75 @@ $X_2$ is `r ffs+fhs+3` times 1 level of fixed effects.
 fX <- rep.int(1, times=(ffs+fhs)*n)
 ```
 
-Then I compute $Z_y$.
-$Z_y$ should exclude the animals without records.
-For both sexes there are 3 animals that do not have records.
+$R^{-1}_y$ is the inverse variance-covariance matrix of the environment/residuals for the traits and the recorded animals.
+I can compute $R_y$ with the following formula.
+$$R_y=V-Z^T(A_y\otimes G)Z$$
+$V$ is the variance-covariance matrix of the phenotypic records.
+$G$ is the genetic variance-covariance matrix.
+$A_y$ is the relationsship matrix of the selection candidate.
 
-First I compute $Z_1$.
-I can exclude the 3 animals attaching a zero matrix of the dimensions `(mfs+mhs)*n` x `3*n` on the left side to the columns of the identity matrix with dimensions  `(mfs+mhs)*n` x `(mfs+mhs)*n`.
+## Variance-covariance matrix of phenotypical records $V$
+I can compute $V$ similarly to $G$, but using the phenotypic variances and correlations.
+The covariances of $V$ are dependent on the phenotypic standard deviation of each trait ($\sigma_p$), the phenotypic correlations between the traits ($r_{x,y}$) and the phenotypic variance of each trait ($\sigma_p^2$).
+
+The variances of the traits are the diagonal values of the matrix $V$ for the covariance between the same trait $x$ is the variance of the trait:
+$$Cov(x, x)=\sigma_x^2$$
+
+The covariance between different traits is defined by the correlation between them and the variance of each trait.
+$$Cov(x,y)=r_{x,y}\sigma_x\sigma_y$$
+
+In the following table the necessary information to compute the covariances is listed: The diagonal values are the phenotypic standard deviations $\sigma_p$ and the other values the phenotypic correlations between the traits ($r_{x,y}$).
+
+$\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
+$$\sigma_p=\sigma_g^2/h^2$$
+
+$h^2$ and $\sigma_g$ for all traits is available.
 ```{r}
-mZ<-cbind(matrix(0, nrow=(mhs+mfs)*n,ncol=3*n),diag((mhs+mfs)*n))
-dim(mZ)
+h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
+sigg<- diag(matrix_cov)
+sigp<-sigg/h2
 ```
 
-Then I compute $Z_2$.
 ```{r}
-fZ<-cbind(matrix(0, nrow=(fhs+ffs)*n,ncol=3*n),diag((fhs+ffs)*n))
-dim(fZ)
+corp <-data.frame(c(1, -0.358, -0.22, 0.069, 0.031, -0.041, 0.111, -0.047), 
+                     c(-0.358, 1, -0.588, 0.201, -0.004, -0.048, -0.082, -0.082),
+                     c(-0.22, -0.588, 1, -0.253, -0.077, -0.031, 0.023, 0.462), 
+                     c(0.069, 0.201,  -0.253, 1, 0.133, 0.068, 0.012, -0.2), 
+                     c( 0.031, -0.004, -0.077, 0.133, 1, 0.177, -0.488, 0.146), 
+                     c(-0.041, -0.048, -0.031, 0.068, 0.177, 1, -0.301, -0.01), 
+                     c(0.111, -0.082, 0.023, 0.012, -0.488, -0.301, 1, 0.008), 
+                     c(-0.047, -0.082, 0.462, -0.2, 0.146, -0.01, 0.008,1))
+colnames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+rownames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+diag(corp)=sigp
+```
+
+I can transform the data frame into a matrix.
+Now I should not have to compute each element of the required n dimensional matrix $V$ separateley.
+The problem is now that the diagonal elements should be squared and the correlation should be multiplied with the variances of the involved traits respectiveley.
+I have to split up the matrix therefore into the diagonal part and the non-diagonal part.
+Then I can transform the two matrices by scalar multiplication.
+I build a diagonal matrix with the standard deviations as diagonal elements $D$ and a matrix with all the correlation but with 1,1,1,... as diagonal elements $E$.
+
+First $D$:
+```{r}
+matD <- diag(diag(as.matrix(corp)), nrow = 8, ncol = 8)
+```
+
+Then $E$:
+```{r}
+matE <- as.matrix(corp)
+diag(matE) <- 1
+```
+
+Then I get the required matrix $V$ by using two times the matrix multiplication.
+$$V=DED$$
+It works:
+
+```{r}
+42.31*-0.15*0.09
+V <-matD %*% matE %*% matD
+dim(V)
 ```
 
 Then I compute the inverse of $G$.
@@ -373,6 +410,7 @@ Then I compute the inverse of $G$.
 Ginv<-solve(G)
 ```
 
+## Prediction error variance $PEV_y$
 Now I can compute the matrix $PEV_1$.
 To compute it I have to compute all four parts of the whole matrix. 
 Then I will bind the part together in the right order.
@@ -417,7 +455,6 @@ mZZ <- t(mZ)%*%mRinv%*%mZ+mAinv%x%Ginv
 ```
 
 Actually I can at this moment say that $PEV_1$ is the right bottom part of the matrix $PEV_1$ and for $PEV_2$ the same.
-
 Therefore I only compute the right bottom part of $PEV_2$ at the moment.
 $$Z_y^TR^{-1}Z_y+A_y^{-1} \otimes G^{-1}$$
 which is
@@ -427,7 +464,6 @@ dim(fZZ)
 ```
 
 Also I only need the part of the selection candidate.
-
 ```{r}
 mPEV<-solve(mZZ)
 mPEV<-mPEV[17:24,17:24]
@@ -435,6 +471,7 @@ fPEV<-solve(fZZ)
 fPEV<-fPEV[17:24,17:24]
 ```
 
+## Covariance matrix between true and estimated breeding values $C_y$
 Now I should be able to compute $C_y$ out of $PEV_y$ and $G$.
 First I compute $C_1$
 ```{r}
@@ -449,7 +486,7 @@ fC<-G-fPEV
 dim(fC)
 ```
 
-
+## Asymptotic covariance $C_y^*$ between true and estimated breeding values
 $$
 \begin{bmatrix}
 C_1^* \\
@@ -488,8 +525,11 @@ Ca <- (Sinv%x%In)%*%rbind(mC,fC)
 ```
 Now I have $C_y^*$.
 
+To get $r^*$ and $\sigma^*$ the variable $G^*$ is still missing.
 With the following formula I can compute $G^*$:
 $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
+
+## Vector of economical weights $a$
 $a$ is the vector of economical weights in Swiss francs (Sfr.). I therefore have to divide the economic weights in genetic standard deviations by the genetic standard deviations of the trait
 ```{r}
 ew <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
@@ -497,6 +537,7 @@ a <-as.matrix(ew/sigg)
 a
 ```
 
+## Asymptotic genetic variance-covariance $G^*$
 First I compute the part of the sum including $C_1^*$. 
 I call it $S1$.
 ```{r}
@@ -522,6 +563,7 @@ Then I can compute $G^*$
 Ga<-G-0.5*(S1+S2)
 ```
 
+## Accuracy of the estimated overall breeding value of the selection candidate $r^*_y$
 Then I can compute $r^*_y$.
 First I compute $r^*_1$
 ```{r}
