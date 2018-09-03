@@ -553,8 +553,36 @@ as.numeric(t(a)%*%fCa%*%a)
 as.numeric(t(a)%*%Ga%*%a)
 as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
-mr
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -586,8 +614,6 @@ fR <- diag(ffs+fhs)%x%diag(sige)
 fRinv <- solve(fR)
 dim(fRinv)
 ```
-
-
 
 The following formula is not important yet.
 ```{r, eval=FALSE}
