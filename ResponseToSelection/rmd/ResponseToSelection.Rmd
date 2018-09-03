@@ -553,8 +553,29 @@ as.numeric(t(a)%*%fCa%*%a)
 as.numeric(t(a)%*%Ga%*%a)
 as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
-mr
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
