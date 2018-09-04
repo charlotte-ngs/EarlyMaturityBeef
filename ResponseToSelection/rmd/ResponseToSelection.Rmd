@@ -541,7 +541,6 @@ dim(S2)
 
 Then I can compute $G^*$
 ```{r}
-G
 Ga<-G-0.5*(S1+S2)
 ```
 
@@ -555,6 +554,31 @@ as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
