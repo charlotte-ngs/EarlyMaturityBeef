@@ -237,6 +237,9 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Which unit does $a$ have?
     *
 
+* Should I write in "we" or "I" when I write the material and methods part?
+    *
+    
 * 
 
 ```{r}

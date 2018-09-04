@@ -1,73 +1,54 @@
 # Material and Methods {#matandmeth}
 Based on the earlier made observation in chapter \@ref(intro), it is important to improve __early maturity__ in Swiss beef cattle. 
 One possibility for improving a certain trait is to use this trait in a breeding program. 
-An important prerequisite for the use of a certain trait in a breeding program is that we can precisely define the trait and that the trait can easily and efficiently be measured.
+To include a certain trait in a breeding program it is important that the trait is preciseley defined and efficiently measurable.
 
 ## Definition of Early Maturity {#defem}
-In the context of this project, animals are earlier mature if they reach the state of carcass maturity faster than others. 
+In the context of this project we use the following definition of "early maturity". Animals are earlier mature if they reach the state of carcass maturity faster than others. 
 Animals reach carcass maturity when their carcass does not get any price reductions due to insufficient or excessive carcass fat. 
 
-Carcass price reductions are dependent on the price formation process of the slaughterhouse.
-Since 1994 Swiss large-scale slaughterhouses price beef cattle based on the classification system CHTAX [Kaufmann1995]. 
+Carcass price reductions are dependent on the payment system of the slaughterhouse.
+Since 1994 the payment system of Swiss slaughterhouses for beef cattle is based on the classification system called CHTAX [Kaufmann1995]. 
 
-The meat sector association "Proviande" is responsible for the implementation of CHTAX in Swiss slaughterhouses and on cattle markets. 
-In slaughterhouses and on cattle markets Proviande employees classify beef carcasses either as live or dead animals to determine their price.
-For each carcass the employees record their classification and assign it to the correspondent animal.
-
-(For we are interested in the carcass traits of the slaughtered animal, we only use the data coming from the records in the slaughterhouses.)
-
-The first step in the classification system CHTAX is placing the animal in the correct carcass category. 
-The distinct carcass categories differ in age at slaughter, sex and weight.
-
-The age at slaughter can either be the physiological age at slaughter or the temporal age at slaughter. 
-To determine the physiological age at slaughter the employees count the number of incissors in the mouth of the animals.
-The more incissors the physiologically older the animal. Table \@ref(tab:agecategory) contains a list of age categories.
-
-For breeding valuation in Switzeland exists only for the categories "young bulls" and "calves", in this project the focus lies on the categories MT and KV aswell [@Proviande2018].
-The choice of carcass category determines the basis price of an animal per kilogram live weight or carcass weight.
-
-The live weight of an animal is the weight of the animals whole body, when the animal is still living, but corrected by the amount of f (S. 5 Proviande 2015)
+## Beef carcass classification system CHTAX {#CHTAX}
+The Swiss meat industry association "Proviande" is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
+In slaughterhouses Proviande employees classify beef either as live or dead animals to determine their price.
+The first step in the classification system CHTAX is to assign the animal to a slaughter category. 
+The distinct slaughter categories differ in age at slaughter, sex and weight.
+Proviande employees either calculate age at slaughter as the time between birth and slaughter or determine it based on the number of incissors (front teeth) the animal has developed.
+The more incissors the physiologically older the animal. Table \@ref(tab:agecategory) contains a list of carcass categories used in CHTAX.
+The choice of slaughter category determines the basis price of an animal per kilogram carcass or live weight.
+The law "Schlachtgewichtsverordnung" of the the Swiss federal departement EDI defines how slaughterhouses have to assess the carcass weight [@EDI2013, S.1]. Eventuell hier noch ein Bild eines Schlachtkörpers zeigen.
+The live weight is defined as the body weight of the living animal but visually corrected by the size and filling grade of the rumen, the size of udder and skin, the transport to the slaughterhouse, the state of gestiation and the carcass maturity [@Proviande2015].
 
 ```{r agecategory, echo=FALSE, results='asis'}
-tbl_prop_sel <- tibble::data_frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
-                                   Category=c("calves", "young cattle", "young bulls", "bulls or steers", 
+tbl_prop_sel <- tibble::data_frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
+                                   slaughter category=c("calves", "young cattle", "young bulls", "bulls or steers", 
                                               "young steers", "young heifers", "Heifers or young cows", "cows"), 
-                                   Criteria=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
+                                   criteria=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
                                               ">161 days old, no incissors", 
                                               ">161 days old, >0 incissors for bulls, >4 incissors for steers", 
                                               ">161 days old, <5 incissors", ">161 days old, <5 incissors", 
                                               ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
                                               ">161 days old"))
 
-knitr::kable(tbl_prop_sel, booktabs = TRUE, caption = "Age Categories Of Slaughter Animals")
+knitr::kable(tbl_prop_sel, booktabs = TRUE, caption = "slaughter categories for beef used in CHTAX")
 ```
 
-Within each category the animal the Proviande employees visually and gropingly classify the carcass into five classes of carcass fat and carcass conformation.
-
-Carcass fat and carcass conformation have been introduced as price formation factors, because they coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
-Carcass fat when to low is related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse[@Kaufmann1995].
-
-A better carcass conformation in turn leads to a high exploitation of valuable meat pieces [@Proviande2015].
-
+The second step in the classification system CHTAX is to assign the animal within its slaughter category to a carcass conformation class and a carcass fat class.
+Proviande employees visually and gropingly classify the carcass into five classes of carcass fat and into five classes of carcass conformation.
 The employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (Table).
-To class number 1 belong the least fatty carcasses and to class number 5 the fattiest carcasses.
-The optimal class is number 3.
-When a carcass does not belong to class number 3, the carcass obtains a price reduction in Swiss Francs (Sfr.) per kilogramm carcass or live weight.
-
-Informations about classification of carcass conformation
-
-```{r, results='asis', table.cap = "Classification for carcass conformation in CHTAX"}
-tbl_prop_sel <- tibble::data_frame(Class = c("C", "H", "T", "A", "X"), Profile=c("very convex", "convex", "linear", "concave", "very concave"), Criteria=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
-
-knitr::kable(tbl_prop_sel, align = c('l', 'c', 'l'))
-```
+The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class number 5.
+The carcass conformation class in turn depends on the accentuation of certain muscels and on the profile of the body (Table).
+The meatier the carcass the higher the carcass conformation class.
+The lowest carcass conformation class is called X and the highest class is called C.
 
 
-```{r chtaxclass, echo=FALSE}
-tbl_prop_sel <- tibble::data_frame(Class = c("C", "H", "T", "A", "X"), Profile=c("very convex", "convex", "linear", "concave", "very concave"), Criteria=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
+```{r fatclass, echo=FALSE}
+tbl_fatclass <- tibble::data_frame("carcass fat class" = c("1", "2", "3", "4", "5"), "carcass fat coverage"=c("uncovered", "partially covered", "evenly covered", "strongly covered", "excessiveley fatty"), "description"=c("no fat coverage; grips not developed","light fat coverage; muscels partially visible; all grips slightly tangible", "average even fat coverage; muscles generally covered; all grips tangible and robust", "strong fat coverage; excessive fat deposition; grips strongly developed", "fat coverage generally excessive; bulging fat formations; all grips very strongly developed"))
 
 # convert data_frame into a hux
-ht_prop_sel <- huxtable::as_hux(tbl_prop_sel)
+ht_prop_sel <- huxtable::as_hux(tbl_fatclass)
 # specify total width of table compared to textwidth
 huxtable::width(ht_prop_sel) <- .8
 # specify width of each column
@@ -91,8 +72,41 @@ ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel,
 ht_prop_sel
 ```
 
-When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the carcass of the animal will obtain a lower price per carcass weight.
 
+
+```{r conformationclass, echo=FALSE}
+tbl_conformationclass <- tibble::data_frame("carcass conformation class" = c("C", "H", "T", "A", "X"), profile=c("very convex", "convex", "linear", "concave", "very concave"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_conformationclass)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- .8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .5)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:chtaxclass)'
+} else {
+  stab_flag <- '(\\#tab:chtaxclass)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Carcass Conformation Classes in CHTAX'))
+ht_prop_sel
+```
+The optimal class is number 3.
+When a carcass does not belong to class number 3, the carcass obtains a price reduction in Swiss Francs (Sfr.) per kilogramm carcass or live weight.
+When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the carcass of the animal will obtain a lower price per carcass weight.
+Carcass fat and carcass conformation have been introduced as price formation factors, because they coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
+Carcass fat when too low is related to poor tenderness, juiciness and palatability
+When carcass fat is too high with increased trimming effort for the slaughterhouse[@Kaufmann1995].
 The CHTAX-classes are shown in Table \@ref(tab:chtaxclass). 
 
 $\leqq$
