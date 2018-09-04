@@ -363,7 +363,7 @@ $$\sigma_p=\sigma_g^2/h^2$$
 $h^2$ and $\sigma_g$ for all traits is available.
 ```{r}
 h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
-sigg<- diag(matrix_cov)
+sigg<- diag(as.matrix(corg))
 sigp<-sigg/h2
 ```
 
@@ -555,20 +555,6 @@ as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
