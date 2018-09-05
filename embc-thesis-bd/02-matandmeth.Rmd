@@ -5,9 +5,9 @@ To include a certain trait in a breeding program it is important that the trait 
 
 ## Definition of Early Maturity {#defem}
 In the context of this project we use the following definition of "early maturity". Animals are earlier mature if they reach the state of carcass maturity faster than others. 
-Animals reach carcass maturity when their carcass does not get any price reductions due to insufficient or excessive carcass fat. 
+Animals reach carcass maturity when their carcass does not get any markdowns due to insufficient or excessive carcass fat. 
 
-Carcass price reductions are dependent on the payment system of the slaughterhouse.
+Carcass price markdowns are dependent on the payment system of the slaughterhouse.
 Since 1994 the payment system of Swiss slaughterhouses for beef cattle is based on the classification system called CHTAX [Kaufmann1995]. 
 
 ## Beef carcass classification system CHTAX {#CHTAX}
@@ -17,6 +17,7 @@ The first step in the classification system CHTAX is to assign the animal to a s
 The distinct slaughter categories differ in age at slaughter, sex and weight.
 Proviande employees either calculate age at slaughter as the time between birth and slaughter or determine it based on the number of incissors (front teeth) the animal has developed.
 The more incissors the physiologically older the animal. Table \@ref(tab:agecategory) contains a list of carcass categories used in CHTAX.
+
 The choice of slaughter category determines the basis price of an animal per kilogram carcass or live weight.
 The law "Schlachtgewichtsverordnung" of the the Swiss federal departement EDI defines how slaughterhouses have to assess the carcass weight [@EDI2013, S.1]. Eventuell hier noch ein Bild eines Schlachtkörpers zeigen.
 The live weight is defined as the body weight of the living animal but visually corrected by the size and filling grade of the rumen, the size of udder and skin, the transport to the slaughterhouse, the state of gestiation and the carcass maturity [@Proviande2015].
@@ -36,16 +37,29 @@ knitr::kable(tbl_prop_sel, booktabs = TRUE, caption = "slaughter categories for 
 ```
 
 The second step in the classification system CHTAX is to assign the animal within its slaughter category to a carcass conformation class and a carcass fat class.
-Proviande employees visually and gropingly classify the carcass into five classes of carcass fat and into five classes of carcass conformation.
-The employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (Table).
-The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class number 5.
-The carcass conformation class in turn depends on the accentuation of certain muscels and on the profile of the body (Table).
+
+In this step Proviande employees visually and gropingly classify the carcass into five classes of carcass fat and into five classes of carcass conformation.
+
+The assigned carcass conformation class depends on the accentuation of certain muscels and on the profile the animals body shows (Figure with living animals from Proviande 2015?).
 The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
+A detailed description of the distinct carcass conformation classes is available at \@ref(tab:conformationclass).
+In combination with the slaughter category the carcass conformation class determines the basis price of an animal per kilogram carcass or live weight.
+As an example \@ref(tab:conformationclass) the basis prices per kilogram carcass and live weight for a carcass of the slaughter category MT due to its carcass conformation class are available.
+The determination of beef carcass weight and live weight at slaughterhouses is legally specified.
+The law "Schlachtgewichtsverordnung" of the the Swiss federal departement EDI defines how slaughterhouses have to assess the carcass weight [@EDI2013, S.1]. Eventuell hier noch ein Bild eines Schlachtkörpers zeigen.
+Proviande defines live weight as the body weight of the living animal but visually corrected by the size and filling grade of the rumen, the size of udder and skin, the transport to the slaughterhouse, the state of gestiation and the carcass maturity [@Proviande2015].
+
+The determination of carcass fat class can further change the base price per kilogramm carcass weight or live weight.
+Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (\@ref(tab:fatclass).
+The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class number 5.
+The optimal carcass fat class is number 3.
+When a carcass does not belong to class number 3, the carcass gets a markdown in Swiss Francs (Sfr.) per kilogramm carcass or live weight.
+As an example \@ref(tab:fatclass) the markdowns per kilogram carcass weight for a carcass of the slaughter category MT due to its carcass fat class are available.
 
 
 ```{r fatclass, echo=FALSE}
-tbl_fatclass <- tibble::data_frame("carcass fat class" = c("1", "2", "3", "4", "5"), "carcass fat coverage"=c("uncovered", "partially covered", "evenly covered", "strongly covered", "excessiveley fatty"), "description"=c("no fat coverage; grips not developed","light fat coverage; muscels partially visible; all grips slightly tangible", "average even fat coverage; muscles generally covered; all grips tangible and robust", "strong fat coverage; excessive fat deposition; grips strongly developed", "fat coverage generally excessive; bulging fat formations; all grips very strongly developed"))
+tbl_fatclass <- tibble::data_frame("carcass fat class" = c("1", "2", "3", "4", "5"), "carcass fat coverage"=c("uncovered", "partially covered", "evenly covered", "strongly covered", "excessiveley fatty"), "description"=c("no fat coverage; grips not developed","light fat coverage; muscels partially visible; all grips slightly tangible", "average even fat coverage; muscles generally covered; all grips tangible and robust", "strong fat coverage; excessive fat deposition; grips strongly developed", "fat coverage generally excessive; bulging fat formations; all grips very strongly developed"), "surcharge/markdown for MT" = c("")
 
 # convert data_frame into a hux
 ht_prop_sel <- huxtable::as_hux(tbl_fatclass)
@@ -101,13 +115,10 @@ ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel,
                                      paste(stab_flag, 'Carcass Conformation Classes in CHTAX'))
 ht_prop_sel
 ```
-The optimal class is number 3.
-When a carcass does not belong to class number 3, the carcass obtains a price reduction in Swiss Francs (Sfr.) per kilogramm carcass or live weight.
-When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the carcass of the animal will obtain a lower price per carcass weight.
-Carcass fat and carcass conformation have been introduced as price formation factors, because they coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
-Carcass fat when too low is related to poor tenderness, juiciness and palatability
-When carcass fat is too high with increased trimming effort for the slaughterhouse[@Kaufmann1995].
-The CHTAX-classes are shown in Table \@ref(tab:chtaxclass). 
+
+Carcass fat and carcass conformation have been introduced as price formation factors in Swiss slaughterhouses, because they suppose to coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
+Carcass fat when too low at the moment of its introduction has been related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse [@Kaufmann1995].
+A better carcass conformation in turn has been related to a higher yield of valuable meat pieces [@Proviande2015].
 
 $\leqq$
 
