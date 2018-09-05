@@ -160,6 +160,28 @@ Fat deposition is therefore usually the limiting factor for early maturity durin
 ## Fat Coverage 
 Why is fat coverage a good trait to describe early maturity? ... (Growth models give the answer)
 
+```{r}
+knitr::kable(tbl_category)
+```
+```{r}
+knitr::kable(tbl_conformationclass)
+```
+```{r}
+library(kableExtra)
+library(knitr)
+kable(tbl_conformationclass, "latex", booktabs = T)
+ kable_styling(latex_options =c"scale_down"))
+```
+
+
+```{r}
+kable(dt, "latex", booktabs = T)
+```
+
+
+
 
 ## Index for Carcass Performance Traits
+
+
 
