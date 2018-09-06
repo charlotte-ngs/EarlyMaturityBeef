@@ -75,7 +75,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * I would just say, it is the degree of meatiness.
     
 * What are Schaufeln?
-    * Schaufeln are Teeth of cattle to estimate their age.
+    * Schaufeln are Teeth of cattle to estimate their age. In English called incissors.
     
 * What is the purpose of genetic groups?
     *
@@ -93,7 +93,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * Heifer = young female, young bull = young male
     
 * Are at the moment carcass weight and carcass conformation corrected for age at slaughter when calculated as Breeding value?
-    *
+    * Yes and carcass fat too. Also they are all corrected by sex, category, farm, Proviande employee and ...
 
 * In English I will call Frühreife not early maturity but rate of maturation, do you agree?
     * No, rate of maturation describes the process until an animal is mature. However we are not interested to breed for that. The only thing we are interested in is that the animals should be maturer as early as possible, no matter how. (Maybe we have to look at it later when we create the index)
@@ -175,10 +175,10 @@ data.frame(Kalb =c(1,2,3,5,3),
     *
 
 * How do I give figures and tables numbers and labels, so that I can refer to them?
-    *
+    * By including the name in the top header of the r chunk. Then I can do \@table:name of table and reference it in the text.
 
 * How do I achieve to create tables that fit into the frame of a PDF, when knitted?
-    *
+    * 
 
 * How can I merge table rows? E.G. Distinction of T+/- in CHTAX?
     *
@@ -189,7 +189,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Do we have carcass or live weight as data for the breeding valuation for carcass traits?
     *
 
-* How can I cite tables or figure in a text of bookdown?
+* How can I cite tables or figures in a text of bookdown?
     *
     
 * Do I have to compute the pedigree for each sex seperateley? I think I do.
@@ -202,7 +202,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     *
 
 * How can I shift the diagonal by 3 to the right, so it starts at the third column?
-    *
+    * By cbind and including a 0-Matrix of the right dimension. Or with a kronecker product.
 
 * How can I multiply a diagonal matrix so it has the same diagonal value repetedeley 23 times and then again the same value 23 times and again until I have 8 times 23 times the same value (184x184 matrix)?
     * You just have to use the command rep(as.vector(sige),each=mfs+mhs+3), then you can repeat the elements of the diagonal vector which results in the required matrix.
@@ -211,7 +211,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     * No, probably not, Kronecker creates in cooperation with G a 184x184 matrix.
     
 * R^-1 could be confused with the variable R^* which is the response to selection. Would you rename one of them?
-    * Yes you should rename the variable for the response to selection.
+    * Yes you should rename the variable for the response to selection. It is now called Q.
     
 * How can I number formulas, so I can refer to them?
     *
@@ -240,16 +240,8 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Should I write in "we" or "I" when I write the material and methods part?
     *
     
-* 
-
-```{r}
-x<-matrix(c(1,3,4,3,6,7,8,3,5), ncol=3)
-x
-solve(x)
-5*13-4.5-3.5-5
-```
-
-
+* How do you compute the additive genetic variance of a traits values in a population? Do you subtract from the phenotypical variance the variance components of the fixed factors (known environmental factors?
+    *
 
     
 

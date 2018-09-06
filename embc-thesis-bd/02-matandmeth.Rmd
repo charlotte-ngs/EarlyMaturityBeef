@@ -160,6 +160,13 @@ To breed for early maturity you can derive it from the trait carcass fat and cor
 
 
 ## Fat Coverage
+Why is fat coverage a good trait to describe early maturity? ... (Growth models give the answer)
+Does this part not belong to the part "discussion"? It is not actually describing where and how I get my data to evaluate it.
+Here I should just shortly describe how the breeding value for carcass fat has been created refering to Sophies documentation.
+Unfortunateley I do not know much about it.
+
+Actually I do not have to explain this when I know that early maturity is only dependent on age and carcass fat.
+
 Fortunateley carcass fat corrected by age may not only describe how early an animal begins to deposit fat, but also how early it deposits muscles and reaches a sufficient carcass weight.
 Carcass fat corrected by age at slaughter may describe the other two traits because they are closely linked by the way how beef cattle grows.
 
@@ -170,22 +177,30 @@ Considering that the growth rate means about the same as the carcass weight corr
 High levels of carcass fat corrected by age at slaughter lead to high levels of carcass weight corrected by age at slaughter.
 
 Secondly I will explain how carcass fat corrected by age is linked to carcass conformation corrected by age:
-Carcass fat mainly consists of lipids while carcass meat mainly consists of proteins. 
-Protein deposition in beef cattle increases linearly with increasing body weight, but lipid deposition increases exponentially with increasing body weight (Figure 21.3 Thonney) [@Thonney2015].
-Therefore lead high levels of carcass fat corrected by age at slaughter to high levels of carcass conformation corrected by age at slaughter.
+Carcass fat mainly consists of lipids while carcass meat mainly consists of proteins.
+The deposition of lipids in cattle beef bodies occurs later during growth than the deposition of protein.
+Protein deposition in beef cattle increases linearly with increasing body weight, but lipid deposition increases exponentially with increasing body weight (Figure 21.3 Thonney)
+Until 300 kg body weight the weight of protein is higher in a beef body, afterwards the weight of lipids is higher [@Thonney2015].
+This shows that over time carcass fat is generally the limiting factor to meet the requirements to be slaughtered compared to carcass conformation.
 
-## Fat Coverage 
-Why is fat coverage a good trait to describe early maturity? ... (Growth models give the answer)
-
-Actually I do not have to explain this when I know that early maturity is only dependent on age and carcass fat.
-
-
+Based on this theory the trait carcass fat corrected by age could tell us how early beef cattle reaches carcass maturity not only in terms of carcass fat but also in terms of carcass conformation or carcass weight.
+There is a possibility to check this theory by the results of the breeding value estimation of the breeding values for the three traits.
+The following part belongs to results and discussion, no?
 
 
 
 
 
 ## Index for Carcass Performance Traits
+
+
+
+
+
+
+
+
+
 
 
 
