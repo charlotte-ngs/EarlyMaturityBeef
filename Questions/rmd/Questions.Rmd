@@ -242,6 +242,11 @@ data.frame(Kalb =c(1,2,3,5,3),
     
 * How do you compute the additive genetic variance of a traits values in a population? Do you subtract from the phenotypical variance the variance components of the fixed factors (known environmental factors?
     *
+    
+* How did you compute the heritablities, covariances and variances of the traits?
+    *
+    
+* How could I create a pedigree just by knowing how man full sibling and half siblings there are?
 
     
 
