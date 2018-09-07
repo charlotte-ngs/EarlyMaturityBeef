@@ -161,14 +161,33 @@ Mutterkuh Schweiz, the Swiss beef breeders association, has introduced a breedin
 To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will here be explained.
 The explanations refering to the creation of the breeding value are based on the documentation of Sophie Kunz, geneticist at Qualitas AG [@Kunz2018].
 
-To compute the breeding values the best linear unbiased prediction (BLUP) model has been used.
-BLUP is a statistical model assuming that the breeding value of an animal is the genetic additive effect on the phenotypic observation of a measurable trait of an animal.
-The phenotypic observation in this case is the class of carcass fat as described in \@ref(tab:fatclass) the animal belongs to.
-The genetic additive properties of an animal are not the only effect on its phenotypical observation.
-A phenotypical observation of an animal is also dependent on the environmental conditions the animal lives in and on the genetic effects of dominance and epistasis.
+To compute the breeding values a multivariate best linear unbiased prediction (BLUP) model has been used.
+BLUP is a statistical model assuming that the breeding value of an animal is the deviation of the genetic additive effect on the phenotypic observation of an animals measurable trait
+The phenotypic observation in this case is the class of carcass fat the animal belongs to, as described in \@ref(tab:fatclass).
+The genetic additive properties of an animal are not the only effect on the animals phenotypical observation.
+An animals phenotypical observation is also dependent on the environmental conditions the animal lives in and on the genetic effects dominance and epistasis.
+
 In BLUP the non genetic additive effects on a phenotypic observation are either known fixed effects or unnkown random effects.
-The known fixed effects are included in BlUP and are subtracted from the phenotypical observation to get the breeding value.
-The unnkown random effects are 
+To compute the breeding value for carcass fat the following parameters of the animals environment have been used as fixed effects:
+* Proviande carcass classifying employee
+* sex (as covariable)
+* age and squared age at slaughter
+* slaughterhouse
+
+There is only one known random effect used in the model:
+* farm x year
+
+The known fixed effects are included in BLUP and are used to separate additive genetic effects from environmental effects.
+
+The next assumption you need is that the heritability ($h^2$) of a trait is valid for all animals.
+Then the genetic additive effect is the coefficient of relationship times the heritability times the phenotypic value minus the heritability times the mean value observations of the base population in the same environment defined by the fixed effects.
+
+When one phenotypic record is the only available information on each
+animal, the estimated breeding value (ai) for animal i can be calculated as:
+a$ i = b(y i − m) [1.3]
+where b is the regression of true breeding value on phenotypic performance
+and m, as indicated earlier, is the mean performance of animals in
+the same management group and is assumed to be known.
 
 
 The breeding values for carcass fat are based on the knowledge of the carcass fat classifications as described in \@ref(tab:fatclass) and the degrees relationship of beef animals.

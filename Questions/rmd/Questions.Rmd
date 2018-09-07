@@ -248,6 +248,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     
 * How could I create a pedigree just by knowing how man full sibling and half siblings there are?
 
+* Are the phenotypical observations in BLUP all expressed as deviation from the population mean of the base population?
     
 
 
