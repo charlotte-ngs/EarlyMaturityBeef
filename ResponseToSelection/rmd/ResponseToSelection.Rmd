@@ -445,7 +445,7 @@ fZZ <- t(fZ)%*%fRinv%*%fZ+fAinv%x%Ginv
 dim(fZZ)
 ```
 
-Also I only need the part of the selection candidate.
+Also I only need the part of the selection candidate and I have to do the inverse.
 ```{r}
 mPEV<-solve(mZZ)
 mPEV<-mPEV[17:24,17:24]

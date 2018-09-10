@@ -156,28 +156,39 @@ For there are two traits at once that influence early maturity, early maturity i
 
 
 ## Improvement of Early Maturity
-Based on the knowledge of beef growth carcass fat could be a usefull trait to derive early maturity from.
-Mutterkuh Schweiz, the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
+Usually muscles grow in an earlier stadium of growth than fat tissue indicating that carcass fat is usually the limiting factor for early maturity in beef cattle.
+This means that carcass fat is highly correlated with early maturity.
+Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity from.
+Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
 To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will here be explained.
 The explanations refering to the creation of the breeding value are based on the documentation of Sophie Kunz, geneticist at Qualitas AG [@Kunz2018].
 
-To compute the breeding values a multivariate best linear unbiased prediction (BLUP) model has been used.
-BLUP is a statistical model assuming that the breeding value of an animal is the deviation of the genetic additive effect on the phenotypic observation of an animals measurable trait
-The phenotypic observation in this case is the class of carcass fat the animal belongs to, as described in \@ref(tab:fatclass).
-The genetic additive properties of an animal are not the only effect on the animals phenotypical observation.
-An animals phenotypical observation is also dependent on the environmental conditions the animal lives in and on the genetic effects dominance and epistasis.
+A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
+The breeding value is a widespread tool to rank animals in a breeding program.
+To compute the breeding values for carcass fat a multivariate best linear unbiased prediction (BLUP) model has been used.
+Multivariate BLUP is a statistical model combining the given knowledge about animal relationships, trait heritabilities, phenotypical variances of traits in a population, environment factors, individual phenotypic observations and trait correlations to a breeding value.
+The phenotypic observations used are:
 
-In BLUP the non genetic additive effects on a phenotypic observation are either known fixed effects or unnkown random effects.
+* carcass fat class as described in \@ref(tab:fatclass) corrected by age at slaughter [d]
+* conformation class as described in \@ref(tab:conformationclass) corrected by age at slaughter [d]
+* carcass weight [dt] corrected by age at slaughter [d]
+
+
+An animals phenotypical observation is beside the genetic effects dependent on the environmental conditions the animal lives in.
+In BLUP the environmental effects on a phenotypic observation are either known fixed effects or unnkown random effects.
 To compute the breeding value for carcass fat the following parameters of the animals environment have been used as fixed effects:
+
 * Proviande carcass classifying employee
 * sex (as covariable)
 * age and squared age at slaughter
 * slaughterhouse
 
 There is only one known random effect used in the model:
+
 * farm x year
 
-The known fixed effects are included in BLUP and are used to separate additive genetic effects from environmental effects.
+These environmental effects have been included in BLUP and used to separate additive genetic effects from environmental effects. 
+
 
 The next assumption you need is that the heritability ($h^2$) of a trait is valid for all animals.
 Then the genetic additive effect is the coefficient of relationship times the heritability times the phenotypic value minus the heritability times the mean value observations of the base population in the same environment defined by the fixed effects.
