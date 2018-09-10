@@ -156,51 +156,87 @@ For there are two traits at once that influence early maturity, early maturity i
 
 
 ## Improvement of Early Maturity
+To breed for early maturity employees from Qualitas AG have proposed four strategies.
+One of them is to derive the trait early maturity from the trait carcass fat.
+The derivation is based on the theoretical knowledge about growth and body composition in beef cattle.
+
+### EBV Carcass Fat
 Usually muscles grow in an earlier stadium of growth than fat tissue indicating that carcass fat is usually the limiting factor for early maturity in beef cattle.
-This means that carcass fat is highly correlated with early maturity.
+This means that carcass fat should be highly correlated with early maturity.
 Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity from.
 Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
-To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will here be explained.
+To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
 The explanations refering to the creation of the breeding value are based on the documentation of Sophie Kunz, geneticist at Qualitas AG [@Kunz2018].
 
 A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
 The breeding value is a widespread tool to rank animals in a breeding program.
 To compute the breeding values for carcass fat a multivariate best linear unbiased prediction (BLUP) model has been used.
-Multivariate BLUP is a statistical model combining the given knowledge about animal relationships, trait heritabilities, phenotypical variances of traits in a population, environment factors, individual phenotypic observations and trait correlations to a breeding value.
+Multivariate BLUP is a statistical model combining the given knowledge about animal relationships, trait heritabilities, phenotypical variances of multiple traits in a population, environment factors, individual phenotypic observations and trait correlations to a breeding value.
 The phenotypic observations used are:
 
-* carcass fat class as described in \@ref(tab:fatclass) corrected by age at slaughter [d]
-* conformation class as described in \@ref(tab:conformationclass) corrected by age at slaughter [d]
-* carcass weight [dt] corrected by age at slaughter [d]
+* carcass fat class as described in \@ref(tab:fatclass) 
+* conformation class as described in \@ref(tab:conformationclass)
+* carcass weight [dt]
 
+Proviande employees have recorded the phenotypical observations at the slaughterhouses in Switzerland during the classification CHTAX of the beef carcasses. 
+The phenotypic observations have then been divided into to groups in order to from two breeding values for carcass fat: One for "Banktiere" and one for "Bankkälber".
+While "Bankkälber" have been less or 180 d old at slaughter, "Banktiere" have been older than 180 d at slaughter.
 
 An animals phenotypical observation is beside the genetic effects dependent on the environmental conditions the animal lives in.
 In BLUP the environmental effects on a phenotypic observation are either known fixed effects or unnkown random effects.
-To compute the breeding value for carcass fat the following parameters of the animals environment have been used as fixed effects:
+To compute the breeding value for carcass fat, carcass conformation and carcass weight the following parameters of the animals environment have been used as fixed effects:
 
-* Proviande carcass classifying employee
+* Proviande carcass classifying employee for carcass fat and carcass conformation
 * sex (as covariable)
 * age and squared age at slaughter
 * slaughterhouse
 
-There is only one known random effect used in the model:
+Beside the random animal effect which is the breeding value, there is only one known random effect used in the model:
 
 * farm x year
 
-These environmental effects have been included in BLUP and used to separate additive genetic effects from environmental effects. 
+These environmental effects have been included in BLUP and used to separate additive genetic effects from environmental effects on the phenotypic observations.
+
+Trait correlations, heritabilities and phenotypic/genetic variances have been computed by the method estimation of variance components using the Software VCE created by Groeneveld.
+For the estimation of variance components the records for carcass fat, carcass conformation and carcass weight from 31'269 Angus, Aubrac, Braunvieh, Charolais, Swiss Fleckvieh, Grauvieh, Holstein, Limousin, Montbéliarde, Original Braunvieh and Simmental animals have been used.
+The results shown as heritabilities, genetic standard deviations and genetic correlations are available at ...
+
+```{r variancecomponents, echo=FALSE}
+sigg<-c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14)
+
+tbl_variancecomponents <- tibble::data_frame(c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), sigg)
+colnames(tbl_variancecomponents) <- c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight", "genetic standard deviations")
+rownames(tbl_variancecomponents) <- c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight")
 
 
-The next assumption you need is that the heritability ($h^2$) of a trait is valid for all animals.
-Then the genetic additive effect is the coefficient of relationship times the heritability times the phenotypic value minus the heritability times the mean value observations of the base population in the same environment defined by the fixed effects.
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_variancecomponents)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- 1.2
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .8)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:variancecomponents)'
+} else {
+  stab_flag <- '(\\#tab:variancecomponents)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Carcass conformation classes in CHTAX'))
+ht_prop_sel
+```
 
-When one phenotypic record is the only available information on each
-animal, the estimated breeding value (ai) for animal i can be calculated as:
-a$ i = b(y i − m) [1.3]
-where b is the regression of true breeding value on phenotypic performance
-and m, as indicated earlier, is the mean performance of animals in
-the same management group and is assumed to be known.
 
 
-The breeding values for carcass fat are based on the knowledge of the carcass fat classifications as described in \@ref(tab:fatclass) and the degrees relationship of beef animals.
+
+
 
 

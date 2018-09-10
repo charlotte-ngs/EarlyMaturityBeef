@@ -249,7 +249,19 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How could I create a pedigree just by knowing how man full sibling and half siblings there are?
 
 * Are the phenotypical observations in BLUP all expressed as deviation from the population mean of the base population?
+
+* How should I call "Bankkälber" and "Banktiere"?
+
+* How should I format abbreviations?
+
+* How should I abbreviate carcass conformation, carcass fat and carcass weight?
     
+```{r}
+A<-matrix(c(6400,1376,1376,1376,6400,0,1376,0,6400), nrow=3, byrow=T)
+g<-c(2752,1376,1376)
+solve(A)%*%g
+sqrt((0.372*2752+0.135*1376+0.135*1376)/2752)
+```
 
 
 
