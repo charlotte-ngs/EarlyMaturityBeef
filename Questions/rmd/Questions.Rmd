@@ -3,8 +3,8 @@ title: "Questions"
 author: "Silvan"
 date: "9 8 2018"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 bibliography: /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
 ---
 
@@ -216,7 +216,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How can I number formulas, so I can refer to them?
     *
 
-* What is the difference between $ A \bullet B $ and $AB$?
+* What is the difference between A bullet B and AB?
     * There is no difference. Both are meaning matrix multiplication.
     
 * What is n of I_n?
@@ -263,16 +263,34 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * I do not like abbreviations, because the block text fluency, how can I avoid them? Especially in tables.
 
-*
+* How can I compute the phenotypic correlations from the genetic correlations?
+
+* Should I indicate a transpose with ' or ^T?
+
+* Should I explain all variables in each formula?
+
+* How can I mention a R command in Rmarkdown?
+    * You can do it embracing the command with ``
     
-```{r}
-A<-matrix(c(6400,1376,1376,1376,6400,0,1376,0,6400), nrow=3, byrow=T)
-g<-c(2752,1376,1376)
-solve(A)%*%g
-sqrt((0.372*2752+0.135*1376+0.135*1376)/2752)
-```
+* Should I always specify the required dimension of the used matrix?
+    *
+    
+* How can I make the bibliography in bookdown work?
+
+* Should I explain how we computed the intesity of selection?
 
 
 
+\begin{equation}
+\label{eq-abc}
+a + b = c
+\end{equation}
 
+
+\begin{equation}
+\label{Qm}
+Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
+\end{equation}
+
+see \autoref{Qm}
 
