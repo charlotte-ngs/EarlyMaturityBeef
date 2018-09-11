@@ -90,8 +90,8 @@ n <- 8
 
 $i_y$ is the selection intensity and is available.
 $L_y$ is the generation intervall in years and is available.
-$r^*$ is the accuracy of the estimated overall breeding value of the selection candidate.
-$\sigma^*$ is the standard deviation of the overall breeding value.
+$r^*$ is the accuracy of the estimated aggregate genotype of the selection candidate.
+$\sigma^*$ is the standard deviation of the aggregate genotype.
 $y$ Is the sex of the breeding candidate ($_1=male$, $_2=female$)
 The variables $r^*$ and $\sigma^*$ have to be calculated first the the asymptotic covariance $C_y^*$ between true and estimated breeding values of the male or female candidates before the selection, the vector of the economical weights $a$ and the asymptotic genetic variance-covariance $G^*$:
 $$r^*=\sqrt{\frac {a^TC_y^*a}{a^TG^*a}}$$

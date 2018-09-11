@@ -23,9 +23,8 @@ The distinct slaughter categories differ in age at slaughter, sex and weight.
 Proviande employees either calculate age at slaughter as the time between birth and slaughter or determine it based on the number of incissors (front teeth) the animal has developed.
 The more incissors the physiologically older the animal. Table \@ref(tab:slaughtercategory) contains a list of carcass categories used in CHTAX.
 
-The choice of slaughter category determines the basis price of an animal per kilogram carcass weight (CW) or live weight (LW).
-The law "Schlachtgewichtsverordnung" of the the Swiss federal departement EDI defines how slaughterhouses have to determine the carcass weight [@EDI2013, S.1]. Eventuell hier noch ein Bild eines Schlachtkörpers zeigen.
-The live weight is defined as the body weight of the living animal but visually corrected by the size and filling grade of the rumen, the size of udder and skin, the transport to the slaughterhouse, the state of gestiation and the carcass maturity [@Proviande2015].
+The choice of slaughter category determines the basis price of an animal per kilogram carcass weight (CW).
+The law "Schlachtgewichtsverordnung" of the the Swiss federal departement EDI defines how slaughterhouses have to determine the carcass weight [@EDI2013, S.1].
 
 ```{r slaughtercategory, echo=FALSE, results='asis'}
 tbl_category <- tibble::data_frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
@@ -78,17 +77,12 @@ The lowest carcass conformation class is called X and the highest class is calle
 A detailed description of the distinct carcass conformation classes is available at \@ref(tab:conformationclass).
 In combination with the slaughter category the carcass conformation class determines the basis price of an animal per kilogram carcass or live weight.
 As an example \@ref(tab:conformationclass) the basis prices per kilogram carcass and live weight for a carcass of the slaughter category young bulls (MT) are available.
-The determination of beef carcass weight and live weight at slaughterhouses is legally specified.
-The law "Schlachtgewichtsverordnung" of the the Swiss federal departement EDI defines how slaughterhouses have to assess the carcass weight [@EDI2013, S.1]. Eventuell hier noch ein Bild eines Schlachtkörpers zeigen.
-Proviande defines live weight as the body weight of the living animal but visually corrected by the size and filling grade of the rumen, the size of udder and skin, the transport to the slaughterhouse, the state of gestiation and the carcass maturity [@Proviande2015].
-
 The determination of carcass fat class can further change the base price per kilogramm carcass weight or live weight.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (\@ref(tab:fatclass).
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
 The optimal carcass fat class is 3.
 When a carcass does not belong to class 3, the carcass gets a markdown in Swiss Francs (Sfr.) per kilogramm carcass or live weight.
 As an example \@ref(tab:fatclass) the markdowns per kilogram carcass weight for a carcass of the slaughter category MT are available.
-
 
 ```{r fatclass, echo=FALSE}
 tbl_fatclass <- tibble::data_frame("carcass fat class" = c("1", "2", "3", "4", "5"), "carcass fat coverage"=c("uncovered", "partially covered", "evenly covered", "strongly covered", "excessiveley fatty"), "description"=c("no fat coverage; grips not developed","light fat coverage; muscels partially visible; all grips slightly tangible", "average even fat coverage; muscles generally covered; all grips tangible and robust", "strong fat coverage; excessive fat deposition; grips strongly developed", "fat coverage generally excessive; bulging fat formations; all grips very strongly developed"), "markdown for MT in Sfr. / kg carcass weight" = c("-0.9","-0.3","0","-0.3","-0.7"))
@@ -170,17 +164,18 @@ The explanations refering to the creation of the breeding value are based on the
 
 A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
 The breeding value is a widespread tool to rank animals in a breeding program.
-To compute the breeding values for carcass fat a multivariate best linear unbiased prediction (BLUP) model has been used.
-Multivariate BLUP is a statistical model combining the given knowledge about animal relationships, trait heritabilities, phenotypical variances of multiple traits in a population, environment factors, individual phenotypic observations and trait correlations to a breeding value.
+To compute the breeding values for carcass fat a best linear unbiased prediction (BLUP) model has been used.
+Multivariate BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, phenotypical variances of multiple traits in a population, environment factors, individual phenotypic observations and trait correlations to a breeding value [@Mrode2003].
 The phenotypic observations used are:
 
 * carcass fat class as described in \@ref(tab:fatclass) 
 * conformation class as described in \@ref(tab:conformationclass)
 * carcass weight [dt]
 
-Proviande employees have recorded the phenotypical observations at the slaughterhouses in Switzerland during the classification CHTAX of the beef carcasses. 
-The phenotypic observations have then been divided into to groups in order to from two breeding values for carcass fat: One for "Banktiere" and one for "Bankkälber".
+Proviande employees have recorded the phenotypical observations at slaughterhouses in Switzerland during classification CHTAX of beef carcasses. 
+The phenotypic observations have then been divided into two groups based on the animals age of slaughter.
 While "Bankkälber" have been less or 180 d old at slaughter, "Banktiere" have been older than 180 d at slaughter.
+The two groups formed separate breeding values for carcass fat.
 
 An animals phenotypical observation is beside the genetic effects dependent on the environmental conditions the animal lives in.
 In BLUP the environmental effects on a phenotypic observation are either known fixed effects or unnkown random effects.
@@ -199,14 +194,11 @@ These environmental effects have been included in BLUP and used to separate addi
 
 Trait correlations, heritabilities and phenotypic/genetic variances have been computed by the method estimation of variance components using the Software VCE created by Groeneveld.
 For the estimation of variance components the records for carcass fat, carcass conformation and carcass weight from 31'269 Angus, Aubrac, Braunvieh, Charolais, Swiss Fleckvieh, Grauvieh, Holstein, Limousin, Montbéliarde, Original Braunvieh and Simmental animals have been used.
-The results shown as heritabilities, genetic standard deviations and genetic correlations are available at ...
+The results shown as heritabilities, genetic standard deviations and genetic correlations are available at \@ref(tab:variancecomponents).
 
 ```{r variancecomponents, echo=FALSE}
-sigg<-c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14)
-
-tbl_variancecomponents <- tibble::data_frame(c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), sigg)
-colnames(tbl_variancecomponents) <- c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight", "genetic standard deviations")
-rownames(tbl_variancecomponents) <- c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight")
+tbl_variancecomponents <- tibble::data_frame(c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight"), c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14))
+colnames(tbl_variancecomponents) <- c(NA,"Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight", "genetic standard deviations")
 
 
 # convert data_frame into a hux
@@ -233,6 +225,33 @@ ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel,
                                      paste(stab_flag, 'Carcass conformation classes in CHTAX'))
 ht_prop_sel
 ```
+
+Heritabilities and genetic/phenotypic variances have been used to predict the response to selection (Q) for the breeding value carcass fat.
+
+### Response to selection (Q)
+
+The value of response to selection selection for a breeding value predicts the traits improvement over a period of time, on which the selection occurs.
+Therefore it is a useful tool to evaluate the effectiveness of the breeding value carcass fat in improving the desired trait early maturity.
+The traits improvement is defined as change of the population mean due to selection [@Falconer1996].
+We have computed the response to selection $Q$ based on the following formula:
+$$Q= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
+* $Q$ = response to selection
+* $_y$ = sex of the predicted selection candidate (1 = male, 2 = female)
+* $i$ = intensity of selection
+* $^*$ = indicates that reduction of variance during selection has been taken into account
+* $r$ = accuracy of aggregate genotype
+* $\sigma$ = standard deviation of aggregate genotype
+* $L$ = generation intervall in years
+
+
+To compute the response to selection you need to know, how intese the selection will be, how accurate the selection is and how large the phenotypic and genetic variances are in the population during selection.
+
+We then assumed the known number of relatives, their degree of relationship to a selection candidate and the proportion of selected male/female animals that will be parents in a generation.
+From the proportion of selected animals we have computed intensities of selection applied on the population assuming that carcass fat, carcass conformation and carcass weight are normally distributed in the examined beef cattle population.
+Here we computed response to selection for carcass fat in multiple scenarios for male and female selection candidates.
+Then we combined scenarios for female and male candidates to one scenario.
+
+
 
 
 

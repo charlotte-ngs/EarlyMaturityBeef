@@ -251,10 +251,19 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Are the phenotypical observations in BLUP all expressed as deviation from the population mean of the base population?
 
 * How should I call "Bankkälber" and "Banktiere"?
+    *
 
 * How should I format abbreviations?
 
 * How should I abbreviate carcass conformation, carcass fat and carcass weight?
+    * See Sophie's presentation. There she uses CC, CF, CW respecteveley.
+    
+* Do I need to introduce unit abbreviations like day d?
+
+
+* I do not like abbreviations, because the block text fluency, how can I avoid them? Especially in tables.
+
+*
     
 ```{r}
 A<-matrix(c(6400,1376,1376,1376,6400,0,1376,0,6400), nrow=3, byrow=T)
