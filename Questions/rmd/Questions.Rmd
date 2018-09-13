@@ -2,9 +2,8 @@
 title: "Questions"
 author: "Silvan"
 date: "9 8 2018"
-output:
-  pdf_document: default
-  html_document: default
+output: 
+ pdf_document: default
 bibliography: /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
 ---
 
@@ -84,7 +83,7 @@ knitr::opts_chunk$set(echo = TRUE)
     * Variables that explain the variance over a population? E.G. genetics, farm.
     
 * What is a selection path?
-    *
+    * It is can be sire of sire, sire of dam, dam of sire or dam of dam.
 
 * Can you recommend me a paper that highlights the importance of early maturity and carcass fat?
     * Hospenthal Thesis.
@@ -129,7 +128,8 @@ knitr::opts_chunk$set(echo = TRUE)
     * You do $x_{sign}$
 
 * Should I always use the latech $$ writing when writing variables? I think it would be clearer.
-    * Yes I should do so. It looks better because then it is clear that it is not just a common letter.
+    * Yes I should do so. It looks better because then it is clear that it is not just a common letter. But abbreviations not.
+    
     
 * Are character and trait synonyms?
     * Yes almost synonyms, trait is more suitable then character, when used in the aspect of breeding.
@@ -172,7 +172,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     *
 
 * How works the shortcut to produce <- at once?
-    *
+    * 
 
 * How do I give figures and tables numbers and labels, so that I can refer to them?
     * By including the name in the top header of the r chunk. Then I can do \@table:name of table and reference it in the text.
@@ -190,7 +190,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     *
 
 * How can I cite tables or figures in a text of bookdown?
-    *
+    * Use \@ref(tab:conformationclass) for tables, \@ref(figure:conformationclass)
     
 * Do I have to compute the pedigree for each sex seperateley? I think I do.
     * Yes
@@ -199,7 +199,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     * You use ` r variable `
   
 * How can I cite directly in the text? For example: Focas (1996) observed this special event.  
-    *
+    * Just use @Phocas1996.
 
 * How can I shift the diagonal by 3 to the right, so it starts at the third column?
     * By cbind and including a 0-Matrix of the right dimension. Or with a kronecker product.
@@ -214,7 +214,12 @@ data.frame(Kalb =c(1,2,3,5,3),
     * Yes you should rename the variable for the response to selection. It is now called Q.
     
 * How can I number formulas, so I can refer to them?
-    *
+    * You need to frame the formula with the following commands, then you need fill in the brackets of label the name of the required equation. You the refer to the equation in the text with the following commands: \autoref{eq-abc} or \ref{eq-abc}.
+    \begin{equation}
+    \label{eq-abc}
+    \end{equation}
+
+* This only works for PDF, but not for HTML. Should I use the syntax working for both?
 
 * What is the difference between A bullet B and AB?
     * There is no difference. Both are meaning matrix multiplication.
@@ -226,7 +231,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     * No, x is the x value of a density function (selection border) and z is the y value of the density function (ordinate). It is so called in this paper, but sometimes x is called z in other sources, which was confusing.
     
 * Cbind does not work with C_1 and C_2. How can I bind them together?
-    * The problem is, that after this point we only use the values of the candidate of each sex. Then the binding should work.
+    * The problem is, that after this point we only use the values of the candidate of each sex. Then the binding should work. Or try rbind().
     
 * How can I transform a matrix back to a numeric value, so that I can use sqrt() etc.?
     * You can use as.numeric()
@@ -235,7 +240,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     *
     
 * Which unit does $a$ have?
-    *
+    * 
 
 * Should I write in "we" or "I" when I write the material and methods part?
     *
@@ -246,7 +251,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How did you compute the heritablities, covariances and variances of the traits?
     *
     
-* How could I create a pedigree just by knowing how man full sibling and half siblings there are?
+* How could I create a pedigree automatically just by knowing how many full siblings, half siblings and progeny there are?
 
 * Are the phenotypical observations in BLUP all expressed as deviation from the population mean of the base population?
 
@@ -273,19 +278,34 @@ data.frame(Kalb =c(1,2,3,5,3),
     * You can do it embracing the command with ``
     
 * Should I always specify the required dimension of the used matrix?
-    *
+    * According to Sophie it is not necessary.
     
 * How can I make the bibliography in bookdown work?
 
-* Should I explain how we computed the intesity of selection?
+* Should I explain how we computed the intensity of selection?
+
+* May I refer to a presentation that I read and use it as a reference source?
+
+* How can a single performance have a variance? It should be 0 shouldn't it? See presentation Wageningen 2017 p. 15.
+
+* What do you mean with selection index theory? The method to calculate EBV or the method to calculate aggregate genotype?
+
+* How can I refer to a section, chapter?
+    * Just label the section header with {#id} then you can refer to it by \@ref(id).
 
 
 
 \begin{equation}
 \label{eq-abc}
-a + b = c
 \end{equation}
 
+
+\begin{equation}
+Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
+(\#eq:Qm)
+\end{equation}
+
+Watch \@ref(eq:Qm)
 
 \begin{equation}
 \label{Qm}
@@ -293,4 +313,37 @@ Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_
 \end{equation}
 
 see \autoref{Qm}
+
+```{r variancecomponents, echo=FALSE}
+tbl_variancecomponents <- tibble::data_frame(c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight"), c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14))
+colnames(tbl_variancecomponents) <- c("genetic correlations and heritabilities","Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight", "genetic standard deviations")
+
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_variancecomponents)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- 0.8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.1, .1, .1, .1,.1,.1,.1,.1)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- FALSE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+bottom_border(ht_prop_sel)[1, ] <- 1
+right_border(ht_prop_sel)[,1 ] <- 1
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:variancecomponents)'
+} else {
+  stab_flag <- '(\\#tab:variancecomponents)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'variancecomponents'))
+ht_prop_sel
+```
+
+
 

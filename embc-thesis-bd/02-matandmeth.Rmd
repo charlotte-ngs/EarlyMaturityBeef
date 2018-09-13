@@ -160,6 +160,7 @@ This means that carcass fat should be highly correlated with early maturity.
 Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
 Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
 To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
+I will use the results from the breeding value estimation as "material" to evaluate the efficiency of the breeding program.
 The explanations refering to the creation of the breeding value are based on the documentation [@Kunz2018].
 
 A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
@@ -205,7 +206,7 @@ colnames(tbl_variancecomponents) <- c("genetic correlations and heritabilities",
 # convert data_frame into a hux
 ht_prop_sel <- huxtable::as_hux(tbl_variancecomponents)
 # specify total width of table compared to textwidth
-huxtable::width(ht_prop_sel) <- 1.2
+huxtable::width(ht_prop_sel) <- 0.8
 # specify width of each column
 huxtable::col_width(ht_prop_sel) <- c(.2, .3, .8)
 # column content is wrapped
@@ -231,8 +232,10 @@ Heritabilities and genetic/phenotypic variances have been used to predict the re
 
 ### Response to selection (Q)
 
-The value of response to selection selection for a breeding value predicts the traits improvement over a period of time, on which the selection occurs.
+The value of response to selection selection for a breeding value predicts the traits improvement in a population over a period of time, on which the selection occurs.
 Therefore it is a useful tool to evaluate the effectiveness of the breeding value carcass fat in improving the desired trait early maturity.
+
+#### Response to selection based on Phocas and Vonrohr.
 
 The response to selection is highly dependent on the breeding conditions in a population.
 Therefore we created likely scenarios simulating breeding conditions for male and female selection candidates to assess the effect of breeding conditions on response to selection for this case.
@@ -364,10 +367,28 @@ Where
 
 
 
+#### Response to selection based on Pimentel
+
+In contrast to the approach of Phocas and Vonrohr, Pimentel does not assume a probable breeding scenario using records from relatives.
+Pimentel's approach is based on the selection index theory developed by Hazel.
+The selection index theory describes how an aggregate genotype can be computed.
+The term genotype is here used as synonym for breeding value.
 
 
 
 
+\begin{equation}
+Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
+(\#eq:Qm)
+\end{equation}
 
+Watch \@ref(eq:Qm)
 
+\begin{equation}
+\label{Qm}
+Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
+\end{equation}
 
+see \autoref{Qm}
+
+@Phocas1996

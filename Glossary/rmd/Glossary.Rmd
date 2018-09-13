@@ -185,7 +185,7 @@ stdev
 
 * __Phenotypic standard deviation__ ($\sigma_{P}$) You have values that have been measured for a certain trait. Of those values you can calculate the mean deviation of the mean of the values. This is the phenotypic standard deviation of a trait of a population [@Falconer1996].
 
-* __Response to selection__ (R) $R=ih^2\sigma_{P}$. Is the difference of the population mean over a period of time. You can predict it using the information of the deterministic breeding plan: Intensity of selection, the variance of the aggregate genotypes and breeding accuracy.
+* __Response to selection__ (R) $R=ih^2\sigma_{P}$. Is the difference of the population mean over a period of time. You can predict it using the information of the deterministic breeding plan: Intensity of selection, the variance of the aggregate genotypes and breeding accuracy [@Falconer1996].
 
 * __Basis difference__ ? 
 
@@ -254,7 +254,7 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __Maternal genetic effect__ A random effect that describes how the mother can have an influence on the performance of its progeny. Is used to correct the breeding values of its progeny.
 
-* __Aggregate genotype__ A calculated index of all breeding values to enable the simultaneous improvement of multiple breeding values. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/. The true, overall breeding value arrived at by the addition of the true breeding values for each selection objective with each true breeding value multiplied by the relevant net economic value. https://medical-dictionary.thefreedictionary.com/true+breeding+value
+* __Aggregate genotype__ A calculated index of all breeding values to enable the simultaneous improvement of multiple breeding values. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/. The true, overall breeding value arrived at by the addition of the true breeding values for each selection objective with each true breeding value multiplied by the relevant net economic value. https://medical-dictionary.thefreedictionary.com/true+breeding+value. In Pimentel 2012 called breeding goal.
 
 * __True breeding value__ (u) Genetic merit of an individual which can be conceptually defined as twice the average deviation of its offspring from the population mean when mated randomly to an infinite population. https://medical-dictionary.thefreedictionary.com/true+breeding+value
 
@@ -394,7 +394,11 @@ accuracy of prediction.
 
 * __Asymptotic covariance matrix between the true and estimated breeding values of the selection candidate__ (C^*) C that is dependent on the factor of variance reduction.
 
-* __Asymptotic genetic additive variance-covariance matrix__ (G^*) An n x n matrix (n=number of traits) that is dependent on G, asymptotic C and a.
+* __Asymptotic genetic additive variance-covariance matrix__ (G^*) An n x n matrix (n=number of traits) that is dependent on G, asymptotic C and a [Vonrohr1998].
+
+* __Genetic gain__ (deltaG) Often used as synonym for response to selection. In this glossary I defined response to selection differently than genetic gain. Genetic gain is the difference of the mean additive genetic potential expressed in unit of the trait per time unit. You can predict it knowing the selection intensity, the genetic variance and the accuracy of selection of the trait [Presentation Wageningen].
+
+* __Selection index theory__ Used to predict the accuracy of selection. Firs you mimic breeding value estimation using linear regression using genetic parameters of the population of breeding values on phenotypes in a probable scenario. Then you find the regression coefficients (b) and find the accuracy [Presentation Wageningen]. 
 
 
 

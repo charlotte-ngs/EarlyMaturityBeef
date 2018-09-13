@@ -195,5 +195,9 @@ Based on this theory the trait carcass fat corrected by age could tell us how ea
 There is a possibility to check this theory by the results of the breeding value estimation of the breeding values for the three traits.
 The following part belongs to results and discussion, no?
 
+# Genetic gain / Response to selection Pimentel
+
+
+
 # References
 
