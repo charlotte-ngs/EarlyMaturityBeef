@@ -3,8 +3,8 @@ title: "Response to selection"
 author: "Silvan"
 date: "20 8 2018"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 bibliography: /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
 ---
 
@@ -225,9 +225,14 @@ $$G=DED$$
 It works:
 
 ```{r}
+library(Matrix)
 42.31*-0.15*0.09
 G <-matD %*% matE %*% matD
 dim(G)
+G<-nearPD(G)$mat
+str(G)
+dim(G)
+eigen(G)
 ```
 Now we have $G$, it describes how the variances of different traits in the index are related to each other.
 Then I compute the inverse of $G$.
@@ -553,7 +558,6 @@ as.numeric(t(a)%*%fCa%*%a)
 as.numeric(t(a)%*%Ga%*%a)
 as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
-
 ```
 
 

@@ -256,7 +256,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Are the phenotypical observations in BLUP all expressed as deviation from the population mean of the base population?
 
 * How should I call "Bankkälber" and "Banktiere"?
-    *
+    * calves and stirks http://beef2live.com/story-cattle-terminology-bulls-springers-freemartins-85-103895
 
 * How should I format abbreviations?
 
@@ -293,7 +293,8 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How can I refer to a section, chapter?
     * Just label the section header with {#id} then you can refer to it by \@ref(id).
 
-
+* Shouldn't we compute the prediction error variance with a scenario of more known records? Usually you know the records of parents and grandparents as well, dont you?
+    *
 
 \begin{equation}
 \label{eq-abc}
@@ -315,14 +316,15 @@ Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_
 see \autoref{Qm}
 
 ```{r variancecomponents, echo=FALSE}
-tbl_variancecomponents <- tibble::data_frame(c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight"), c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14))
-colnames(tbl_variancecomponents) <- c("genetic correlations and heritabilities","Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight", "genetic standard deviations")
+library(huxtable)
+tbl_variancecomponents <- tibble::data_frame(c("calf cc","stirk cc", "calf cf", "stirk cf", "calf cw", "stirk cw"), c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14), escape=FALSE)
+colnames(tbl_variancecomponents) <- c(NA,"calf cc","stirk cc", "calf cf", "stirk cf", "calf cw", "stirk cw", "gen sd")
 
 
 # convert data_frame into a hux
 ht_prop_sel <- huxtable::as_hux(tbl_variancecomponents)
 # specify total width of table compared to textwidth
-huxtable::width(ht_prop_sel) <- 0.8
+huxtable::width(ht_prop_sel) <- 1
 # specify width of each column
 huxtable::col_width(ht_prop_sel) <- c(.1, .1, .1, .1,.1,.1,.1,.1)
 # column content is wrapped
@@ -330,20 +332,37 @@ huxtable::wrap(ht_prop_sel) <- FALSE
 # add column names
 ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
 # borders are added
-bottom_border(ht_prop_sel)[1, ] <- 1
-right_border(ht_prop_sel)[,1 ] <- 1
+
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+
 # cell content is aligned to the top
 huxtable::valign(ht_prop_sel) <- "top"
 # setting the caption
-if (knitr::is_html_output()){
-  stab_flag <- '(#tab:variancecomponents)'
-} else {
-  stab_flag <- '(\\#tab:variancecomponents)'
-}
-ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
-                                     paste(stab_flag, 'variancecomponents'))
+caption(ht_prop_sel) <- 'genetic correlations and heritabilities'
+
 ht_prop_sel
 ```
 
+```{r}
+ht <- huxtable(a = 1:3, b = 1:3)
+set_all_borders(ht, 1:3, 1:2, 1)
+# When cells span multiple rows:
+ht <- tribble_hux(
+  ~Col1,                   ~Col2,
+  "Cell 1,1 spans 2 rows", "Cell 1,2",
+  "Cell 2,1 is invisible", "Cell 2,2"
+)
+rowspan(ht)[1, 1] <- 2
+ht
+bottom_border(ht)[2, ] <- 1
+bottom_border_color(ht)[2, ] <- 'red'
+# Cell 1, 1 does not have a border set:
+ht
+# Fixed:
+bottom_border(ht)[1, 1] <- 1
+bottom_border_color(ht)[1, 1] <- 'red'
+ht
+
+```
 
 
