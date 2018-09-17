@@ -406,3 +406,11 @@ Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_
 see \autoref{Qm}
 
 @Phocas1996
+
+
+```{r}
+pnumb=1+2
+x<-pedigree(sire=c(NA,NA,1), dam=c(NA,NA,2), label=1:pnumb)
+getA(x)
+```
+

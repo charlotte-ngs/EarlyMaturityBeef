@@ -295,6 +295,11 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * Shouldn't we compute the prediction error variance with a scenario of more known records? Usually you know the records of parents and grandparents as well, dont you?
     *
+    
+* Should I compute the response to selection for Banktier and Bankkalb separateley or together? Should the aggregate breeding value be separate for both groups? Yes I think so.
+    *
+    
+* Can I compute the response to selection with different information sources within a trait? Is it possible to reproduce the results from Peter with Pimentel's approach?
 
 \begin{equation}
 \label{eq-abc}
