@@ -238,6 +238,20 @@ Therefore it is a useful tool to evaluate the effectiveness of the breeding valu
 #### Response to selection based on Phocas and Vonrohr.
 
 The response to selection is highly dependent on the breeding conditions in a population.
+The response to selection achieved in one generation is the product of the intensity of selection ($i$), the square root of the accuracy of the breeding value ($r$) and the genetic variance ($\sigma_{g}$).
+$$Q = ir\sigma_{g}$$
+The intensity of selection describes, how big the proportion of animals chosen to be parents compared to the whole population is.
+For example the intensity of selection is higher when you choose two of 10 animals to be parents than if you choose 5 animals to be parents.
+The accuracy of the breeding value tells, how big chances are that the best animals are chosen as parents. 
+For example if you have no means to distinguish between the best parents because you do not have any information about them (no records of them or relatives) or you know that the characteristics of the parents will not be inherited to their progeny (heritability=0) it would be completeley random if you choose the best parents.
+The additive genetic variance in the population limits the potential for improvement using selection.
+For example if you have cows that have the additive genetic potential of daily milk yields in kg of 1, 5, 7, 20 respecteveley you have the potential to get a mean additive genetic potential in milk yield of almost 20 kg by selecting the best animals for parents. 
+If you have cows with an additive genetic potential in daily milk yields of 2, 3, 5, 6 respectiveley you will reach not more than an additive genetic potential of 6 kg even if you intensity and accuracy of selection is very high.
+The intensity of selection is a value usually based on the usual percentage of animals chosen as parents. In this value the assumption of normal distribution for all traits is assumed (Here formula).
+
+
+
+
 Therefore we created likely scenarios simulating breeding conditions for male and female selection candidates to assess the effect of breeding conditions on response to selection for this case.
 
 The chosen scenarios differ in the number and relationship of relatives the selection candidates have and the proportion of selected male/female animals that will be parents of the beef cattle population in a generation.
@@ -370,7 +384,7 @@ Where
 #### Response to selection based on Pimentel
 
 In contrast to the approach of Phocas and Vonrohr, Pimentel does not assume a probable breeding scenario using records from relatives.
-Pimentel's approach is based on the selection index theory developed by Hazel.
+Pimentel's approach is based on the selection index theory developed by @Hazel1943.
 The selection index theory describes how an aggregate genotype can be computed.
 The term genotype is here used as synonym for breeding value.
 
