@@ -239,6 +239,10 @@ Therefore it is a useful tool to evaluate the effectiveness of the breeding valu
 
 The response to selection is highly dependent on the breeding conditions in a population.
 The response to selection achieved in one generation is the product of the intensity of selection ($i$), the square root of the accuracy of the breeding value ($r$) and the genetic variance ($\sigma_{g}$).
+\begin{equation}
+\label{Qgeneration}
+Q = ir\sigma_{g}
+\end{equation}
 $$Q = ir\sigma_{g}$$
 The intensity of selection describes, how big the proportion of animals chosen to be parents compared to the whole population is.
 For example the intensity of selection is higher when you choose two of 10 animals to be parents than if you choose 5 animals to be parents.
@@ -246,8 +250,62 @@ The accuracy of the breeding value tells, how big chances are that the best anim
 For example if you have no means to distinguish between the best parents because you do not have any information about them (no records of them or relatives) or you know that the characteristics of the parents will not be inherited to their progeny (heritability=0) it would be completeley random if you choose the best parents.
 The additive genetic variance in the population limits the potential for improvement using selection.
 For example if you have cows that have the additive genetic potential of daily milk yields in kg of 1, 5, 7, 20 respecteveley you have the potential to get a mean additive genetic potential in milk yield of almost 20 kg by selecting the best animals for parents. 
-If you have cows with an additive genetic potential in daily milk yields of 2, 3, 5, 6 respectiveley you will reach not more than an additive genetic potential of 6 kg even if you intensity and accuracy of selection is very high.
+If you have cows with an additive genetic potential in daily milk yields of 2, 3, 5, 6 respectiveley you will reach not more than an additive genetic potential of 6 kg even if your intensity and accuracy of selection is very high.
 The intensity of selection is a value usually based on the usual percentage of animals chosen as parents. In this value the assumption of normal distribution for all traits is assumed (Here formula).
+
+In \autoref{Qgeneration} I computed the response to selection per generation.
+However sometimes it occurs that different generations overlap.
+Therefore it is usually more suitable to compute the response to selection per year.
+To do so \autoref{Qgeneration} extends with the term mean generation interval ($L$) in years.
+
+\begin{equation}
+\label{Qyear}
+Q = \frac {ir\sigma_{g}}{L}
+\end{equation}
+$$Q = \frac {ir\sigma_{g}}{L}$$
+
+For example usually selection on beef sires occurs when about 6 years old.
+$L$ Would then be 7 y in this case to get the response to selection per year.
+In \autoref{Qyear} we make the assumption that we know the mean generation intervall, the intensity of selection and the accuracy of the breeding value for all selection paths.
+Or we know that there is no difference in these parameter in different selection paths.
+A selection path is defined as a possibility to select on a population.
+Different selection paths differ in the type of population on which selection occurs and on the type of selected animals.
+Usually we organize selection paths in four categories: Dam - dam, dam - sire, sire - dam, sire - sire. 
+There the first term indicates the type of population on which selection occurs and the second term indicates the type of the selected animals.
+In case you know only the parameters of each selection path you can transform the formula \autoref{Qyear} to
+\begin{equation}
+\label{Qselectionpath}
+Q = \frac {ir\sigma_{g}}{L}
+\end{equation}
+$$Q = \frac {\sum_{y=1}^{s} i_yr_y\sigma_g}{\sum_{y=1}^{s}L_y}$$
+where $y$ is a selection path and $s$ is the number of selection paths you choose to include in \autoref{Qselectionpath}.
+Some years ago @Bulmer1971 discovered that selection on a population reduces the genetic variance of the population over time to an asymptotic value.
+Considering the so called "Bulmer Effect" you should use the asymptotic genetic variance and the asymptotic accuracy of breeding values when computing the response to selection.
+\begin{equation}
+\label{Qasymptotic}
+Q^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
+\end{equation}
+$$Q^* = \frac {\sum_{y=1}^{s} i_yr_y^*\sigma_g^*}{\sum_{y=1}^{s}L_y}$$
+In a population already selected for a long time you may probably disregard the Bulmer effect.
+I would for sure facilitaty the computation of response to selection.
+For example, when you have the accuracy for a breeding value provided by the breeding value estimation, you can just insert its value in the \autoref{Qasymptotic}.
+Another approach to compute the accuracies of breeding values is to use the selection index theory developed by @Hazel1943.
+There you have to mimic breeding value estimation using linear regression of breeding values on phenotypes.
+Then you need to find the regression coefficients and compute the accuracy of a breeding value.
+An index in this context is a synonym for estimated breeding value.
+You can compute the index by summing phenotypic records $x$ on a selection candidate and weigh them with $b$ according to their significance for the breeding value.
+\begin{equation}
+\label{selectionindex}
+Â=\sum_{x=1}^{q}b_x*x_x
+\end{equation}
+$$Â=\sum_{x=1}^{q}b_x*x_x$$
+For example you would like to compute the breeding value or index of cattle sire.
+You have available the phenotypic observation of a full sib and a half sib in which is known as difference to the population mean.
+You should now choose $b$ for the half sib to be less than 0.25 and for the full sib less than 0.5. 
+$b$ can further decrease when heratibility is low.
+
+
+
 
 
 

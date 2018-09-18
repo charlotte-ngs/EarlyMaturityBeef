@@ -230,7 +230,9 @@ The absolute value of any EBV is not critical, but rather the differences in EBV
 
 * __DAGE__ Deviation (genetic difference) in age at slaughter of each animal relative to its contemporaries for constant carcass weight and constant subcutaneous carcass fatness. Animals with different subcutaneus carcass fatness then not comparable? Comes from concept residual feed intake Sitzung 23.8.17.
 
-* __Residual feed intake__ Found in the paper of Berry.
+* __Residual feed intake__ (RFI) is defined as the difference (i.e. residual) between measured and predicted feed intake across a regression of both. Found in the book section of @Berry2015
+
+* __Predicted feed intake__ is based on performance and various energy sinks (metabolic live weight, average daily gain, body composition) of the individual.
 
 * __Beef herdbook__ (FLHB) The FLHB a part of Mutterkuh Schweiz. Its goal is to achieve genetic and economic improvements in suckle cow husbandry by collecting and analysing data for breeding [@FLHB2017].
 

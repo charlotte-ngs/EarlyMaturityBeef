@@ -300,6 +300,24 @@ data.frame(Kalb =c(1,2,3,5,3),
     *
     
 * Can I compute the response to selection with different information sources within a trait? Is it possible to reproduce the results from Peter with Pimentel's approach?
+    * According to Urs it is not easily possible. You would need to produce very long vectors.
+    
+
+* Could I also compute the response to selection with provided mean accuracies for breeding values of selection candidates derived from the breeding value estimation?
+    *
+    
+* What does i.e. mean?
+
+* Should I use the term genetic gain or response to selection?
+
+*
+
+```{r}
+sqrt(30.82)
+```
+
+    
+
 
 \begin{equation}
 \label{eq-abc}
