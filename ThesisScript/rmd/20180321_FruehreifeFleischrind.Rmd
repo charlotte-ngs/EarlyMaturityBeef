@@ -195,9 +195,152 @@ Based on this theory the trait carcass fat corrected by age could tell us how ea
 There is a possibility to check this theory by the results of the breeding value estimation of the breeding values for the three traits.
 The following part belongs to results and discussion, no?
 
+
+
+```{r slaughtercategory, echo=FALSE, results='asis'}
+tbl_category <- tibble::data_frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
+                                   "slaughter category"=c("calves", "young cattle", "young bulls", "bulls or steers", 
+                                              "young steers", "young heifers", "heifers or young cows", "cows"), 
+                                   description=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
+                                              ">161 days old, no incissors", 
+                                              ">161 days old, >0 incissors for bulls, >4 incissors for steers", 
+                                              ">161 days old, <5 incissors", ">161 days old, <5 incissors", 
+                                              ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
+                                              ">161 days old"), "base price of carcass conformation class T in Sfr. / kg carcass (*live) weight" = c("14.2","*6.3", "8.8", "6.2", "8.8", "8.8", "7.7", "7.5"))
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_category)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- .8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .5)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:slaughtercategory)'
+} else {
+  stab_flag <- '(\\#tab:slaughtercategory)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Slaughter categories in CHTAX'))
+ht_prop_sel
+
+```
+
 # Genetic gain / Response to selection Pimentel
 
+```{r}
+pnumb=1+2
+x<-pedigree(sire=c(NA,NA,1), dam=c(NA,NA,2), label=1:pnumb)
+getA(x)
+```
+
+```{r slaughtercategory, echo=FALSE, results='asis'}
+x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
+                                   "slaughter category"=c("calves", "young cattle", "young bulls", "bulls or steers", 
+                                              "young steers", "young heifers", "heifers or young cows", "cows"), 
+                                   description=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
+                                              ">161 days old, no incissors", 
+                                              ">161 days old, >0 incissors for bulls, >4 incissors for steers", 
+                                              ">161 days old, <5 incissors", ">161 days old, <5 incissors", 
+                                              ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
+                                              ">161 days old"), price= c("14.2","*6.3", "8.8", "6.2", "8.8", "8.8", "7.7", "7.5"))
+
+kable(x, booktabs=T, caption="Description and carcass profile of carcass donformation classes") %>%
+kable_styling(full_width =T) %>%
+column_spec(3, width="8cm")
+
+```
+
+```{r fatclass, echo=FALSE}
+tbl_fatclass <- tibble::data_frame("carcass fat class" = c("1", "2", "3", "4", "5"), "carcass fat coverage"=c("uncovered", "partially covered", "evenly covered", "strongly covered", "excessiveley fatty"), "description"=c("no fat coverage; grips not developed","light fat coverage; muscels partially visible; all grips slightly tangible", "average even fat coverage; muscles generally covered; all grips tangible and robust", "strong fat coverage; excessive fat deposition; grips strongly developed", "fat coverage generally excessive; bulging fat formations; all grips very strongly developed"), "markdown for MT in Sfr. / kg carcass weight" = c("-0.9","-0.3","0","-0.3","-0.7"))
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_fatclass)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- .8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .5)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:fatclass)'
+} else {
+  stab_flag <- '(\\#tab:fatclass)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Carcass fat classes in CHTAX'))
+ht_prop_sel
+```
+```{r conformationclass, echo=FALSE}
+tbl_conformationclass <- tibble::data_frame("carcass conformation class" = c("C", "H", "T", "A", "X"), profile=c("very convex", "convex", "linear", "concave", "very concave"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"), "base price for MT in Sfr. / kg carcass weight"=c("5.55","5.3","4.65","4.2","3.85"))
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_conformationclass)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- 1.2
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .8)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:conformationclass)'
+} else {
+  stab_flag <- '(\\#tab:conformationclass)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Carcass conformation classes in CHTAX'))
+ht_prop_sel
+```
+```{r variancecomponents, echo=FALSE}
+tbl_variancecomponents <- tibble::data_frame(c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight"), c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14))
+colnames(tbl_variancecomponents) <- c("genetic correlations and heritabilities","Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight", "genetic standard deviations")
 
 
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_variancecomponents)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- 0.8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .8)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:variancecomponents)'
+} else {
+  stab_flag <- '(\\#tab:variancecomponents)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'variancecomponents'))
+ht_prop_sel
+```
 # References
 
