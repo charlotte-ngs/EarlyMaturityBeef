@@ -4,14 +4,17 @@ author: "Silvan"
 date: "9 8 2018"
 output: 
  pdf_document: default
-bibliography: /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
+bibliography: /Users/silvan/Documents/EarlyMaturityBeef/embc-thesis-bd/library.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+---
+nocite: | 
+  @Berry2017
+...
 # Formating rules
 
 * Questions That is how you format questions.
@@ -312,9 +315,11 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * How about completeley separate "Banktiere" and "Bankkälber"? Use separated variance covariance tables -> residuals only exist within each group.
 
-* Is the generation intervall and intensity of selection for calves and stitchs different?
+* Is the generation intervall and intensity of selection for calves and stirks different?
     
-   
+* How can I include references in a table caption?
+    * https://tex.stackexchange.com/questions/272475/citations-in-tabular-environment-not-working/290915#290915 As shown here it is very difficult to give a command. Just handwrite it and then use "nosite: | @reference" to make sure the reference is included in the reference list of the document in the end.
+    
     
 
 ```{r}
@@ -349,59 +354,11 @@ library(kableExtra)
 x<-data.frame(c("CC","CF", "CW"), c(0.5, -0.05, 0.52), c(-0.17, 0.73,-0.20), c(0.29,0.09,0.63))
 colnames(x) <- c("","CC","CF", "CW")
 kable(x, booktabs=T, caption="calves genetic variance-covariance matrix") %>%
-kable_styling(latex_options=c("hold_position"))
+kable_styling(latex_options=c("hold_position")) %>%
+  add_header_above(c("","w"=2,"d"= 1))
 ```
 
-\autoref{tab:calf gentic variance-covariance matrix}
-```{r variancecomponents, echo=FALSE}
-library(huxtable)
-tbl_variancecomponents <- tibble::data_frame(c("calf cc","stirk cc", "calf cf", "stirk cf", "calf cw", "stirk cw"), c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14))
-colnames(tbl_variancecomponents) <- c(NA,"calf cc","stirk cc", "calf cf", "stirk cf", "calf cw", "stirk cw", "gen sd")
 
-
-# convert data_frame into a hux
-ht_prop_sel <- huxtable::as_hux(tbl_variancecomponents)
-# specify total width of table compared to textwidth
-huxtable::width(ht_prop_sel) <- 1
-# specify width of each column
-huxtable::col_width(ht_prop_sel) <- c(.1, .1, .1, .1,.1,.1,.1,.1)
-# column content is wrapped
-huxtable::wrap(ht_prop_sel) <- FALSE
-# add column names
-ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
-# borders are added
-
-ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
-
-# cell content is aligned to the top
-huxtable::valign(ht_prop_sel) <- "top"
-# setting the caption
-caption(ht_prop_sel) <- 'genetic correlations and heritabilities'
-
-ht_prop_sel
-```
-
-```{r}
-ht <- huxtable(a = 1:3, b = 1:3)
-set_all_borders(ht, 1:3, 1:2, 1)
-# When cells span multiple rows:
-ht <- tribble_hux(
-  ~Col1,                   ~Col2,
-  "Cell 1,1 spans 2 rows", "Cell 1,2",
-  "Cell 2,1 is invisible", "Cell 2,2"
-)
-rowspan(ht)[1, 1] <- 2
-ht
-bottom_border(ht)[2, ] <- 1
-bottom_border_color(ht)[2, ] <- 'red'
-# Cell 1, 1 does not have a border set:
-ht
-# Fixed:
-bottom_border(ht)[1, 1] <- 1
-bottom_border_color(ht)[1, 1] <- 'red'
-ht
-
-```
 ```{r}
 x<-data.frame(class = c("C", "H", "T", "A", "X"), profile=c("very convex", "convex", "linear", "concave", "very concave"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
 kable(x, booktabs=T, caption="Description and carcass profile of carcass donformation classes") %>%
@@ -410,4 +367,4 @@ column_spec(3, width="8cm")
   
 ```
 
-
+#References

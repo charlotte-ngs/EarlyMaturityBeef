@@ -10,6 +10,8 @@ biblio-style: apalike
 link-citations: yes
 github-repo: charlotte-ngs/EarlyMaturityBeef
 description: "Master thesis on early maturity in Swiss Beef Cattle."
+lof: TRUE
+lot: TRUE
 ---
 
 ```{r setup-preq, echo=FALSE, results='hide'}
@@ -29,7 +31,6 @@ for (idx in seq_along(1:length(list_reqpkgs_github$package))){
     devtools::install_github(paste(list_reqpkgs_github$repo[idx], p, sep = "/"))
 }
 ```
-
 
 # Preface {-}
 If you want to write a preface, please write it here.
