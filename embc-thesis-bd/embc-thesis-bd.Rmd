@@ -1,3 +1,59 @@
+--- 
+title: "Early Maturity in Swiss Beef Cattle"
+author: "Silvan Wyss"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [library.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: charlotte-ngs/EarlyMaturityBeef
+description: "Master thesis on early maturity in Swiss Beef Cattle."
+---
+
+```{r setup-preq, echo=FALSE, results='hide'}
+### # required packages from CRAN
+vec_reqpkgs_cran <- c("knitr", "rmarkdown", "roxygen2", "bookdown", "caTools", "citr", "devtools", "tidyverse", "huxtable")
+vec_instpkgs <- installed.packages()
+for (p in vec_reqpkgs_cran){
+  if (!p %in% vec_instpkgs)
+    install.packages(pkgs = p, repos = "https://cran.rstudio.com")
+}
+
+### # required packages from github
+list_reqpkgs_github <- list(repo=c("charlotte-ngs"), package = c("rmddochelper"))
+for (idx in seq_along(1:length(list_reqpkgs_github$package))){
+  p <- list_reqpkgs_github$package[idx]
+  if (!p %in% vec_instpkgs)
+    devtools::install_github(paste(list_reqpkgs_github$repo[idx], p, sep = "/"))
+}
+```
+
+
+# Preface {-}
+If you want to write a preface, please write it here.
+
+
+# Summary {-}
+
+
+# Task Description {-}
+Here comes the description of the MSc task.
+
+<!--chapter:end:index.Rmd-->
+
+# Introduction {#intro}
+
+## Background
+
+Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations mainly on growth rate and carcass conformation. 
+Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds. The decrease of carcass fat leads to a price reduction of the carcass [@Hospenthal2016]. (Hier noch Graph zeigen mit Entwicklung carcass fat over years in switzerland, Sophie fragen)
+
+Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
+
+<!--chapter:end:01-intro.Rmd-->
+
 ---
 output:
   pdf_document: default
@@ -397,4 +453,19 @@ see \autoref{Qm}
 @Phocas1996
 
 
+
+
+<!--chapter:end:02-matandmeth.Rmd-->
+
+# Results {#results}
+
+<!--chapter:end:03-results.Rmd-->
+
+# Discussion {#discussion}
+
+<!--chapter:end:04-discussion.Rmd-->
+
+# Conclusions {#conc}
+
+<!--chapter:end:05-conculsions.Rmd-->
 
