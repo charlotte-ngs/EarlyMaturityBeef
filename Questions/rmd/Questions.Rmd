@@ -184,13 +184,13 @@ data.frame(Kalb =c(1,2,3,5,3),
     * 
 
 * How can I merge table rows? E.G. Distinction of T+/- in CHTAX?
-    *
+    * See
 
 * How do I shortcut in RStudio Zoom Source?
     * "Ctrl" "+" "1"
     
 * Do we have carcass or live weight as data for the breeding valuation for carcass traits?
-    *
+    * Only carcass weight according to Sophie.
 
 * How can I cite tables or figures in a text of bookdown?
     * Use \@ref(tab:conformationclass) for tables, \@ref(figure:conformationclass)
@@ -223,6 +223,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     \end{equation}
 
 * This only works for PDF, but not for HTML. Should I use the syntax working for both?
+    * I think, only PDF has to work properly. PDF is the formate I choose to print the thesis.
 
 * What is the difference between A bullet B and AB?
     * There is no difference. Both are meaning matrix multiplication.
@@ -240,19 +241,19 @@ data.frame(Kalb =c(1,2,3,5,3),
     * You can use as.numeric()
     
 * Why is G^* in combination with a and a^T negative, but G not?
-    *
+    * Because G was not positive defined and I used squareroots instead of inversion in one formula.
     
 * Which unit does $a$ have?
-    * 
+    * Sfr. / unit of stdv of the specific trait as in @Vonrohr1999.
 
 * Should I write in "we" or "I" when I write the material and methods part?
-    *
+    * According to Réka it is important to stick to one of them.
     
-* How do you compute the additive genetic variance of a traits values in a population? Do you subtract from the phenotypical variance the variance components of the fixed factors (known environmental factors?
+* How do you compute the additive genetic variance of the traits values in a population? Do you subtract from the phenotypical variance the variance components of the fixed factors (known environmental factors?
     *
     
 * How did you compute the heritablities, covariances and variances of the traits?
-    *
+    * See @Kunz2018.
     
 * How could I create a pedigree automatically just by knowing how many full siblings, half siblings and progeny there are?
 
@@ -261,7 +262,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How should I call "Bankkälber" and "Banktiere"?
     * calves and stirks http://beef2live.com/story-cattle-terminology-bulls-springers-freemartins-85-103895
 
-* How should I format abbreviations?
+* How should I format abbreviations? At the moment I use abbreviations in equations with latex layout and the non-equation abbreviations without latex layout.
 
 * How should I abbreviate carcass conformation, carcass fat and carcass weight?
     * See Sophie's presentation. There she uses CC, CF, CW respecteveley.
@@ -270,6 +271,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 
 * I do not like abbreviations, because the block text fluency, how can I avoid them? Especially in tables.
+    * According to Sophie I should not avoid them. They allow very compact and clear tables.
 
 * How can I compute the phenotypic correlations from the genetic correlations?
 
@@ -284,23 +286,26 @@ data.frame(Kalb =c(1,2,3,5,3),
     * According to Sophie it is not necessary.
     
 * How can I make the bibliography in bookdown work?
+    * I had duplicates in my .bib file, because I had some papers in my personal folder and in also in the group folder. Deleting the papers in the personal folder has fixed the problem.
 
 * Should I explain how we computed the intensity of selection?
 
-* May I refer to a presentation that I read and use it as a reference source?
+* May I refer to a presentation that I read and use it as a reference source? For example the presentation from Wageningen.
 
 * How can a single performance have a variance? It should be 0 shouldn't it? See presentation Wageningen 2017 p. 15.
+    * It is not a single performance, but the mean expected performance, which is the mean of the population. The variance is then the variance of the population. You can account for relationships among animal by reducing the covariance by the degree of relationship. Also in presentation Wageningen.
 
-* What do you mean with selection index theory? The method to calculate EBV or the method to calculate aggregate genotype?
+* What do you mean with selection index theory? The method to calculate EBV or the method to calculate aggregate genotypes?
+    * I think both, it is a model (simulation) of BLUP to predict the accuracies of future breeding values and a model to combine the breeding values of different traits according to their economical weights to an aggregate genotype.
 
 * How can I refer to a section, chapter?
     * Just label the section header with {#id} then you can refer to it by \@ref(id).
 
 * Shouldn't we compute the prediction error variance with a scenario of more known records? Usually you know the records of parents and grandparents as well, dont you?
-    *
+    * The additional records would not significantly increase the accuracy of the breeding values, but only the model we are computing (according to Urs).
     
 * Should I compute the response to selection for Banktier and Bankkalb separateley or together? Should the aggregate breeding value be separate for both groups? Yes I think so.
-    *
+    * Yes, according to Sophie.
     
 * Can I compute the response to selection with different information sources within a trait? Is it possible to reproduce the results from Peter with Pimentel's approach?
     * According to Urs it is not easily possible. You would need to produce very long vectors.
@@ -318,13 +323,26 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Is the generation intervall and intensity of selection for calves and stirks different?
     
 * How can I include references in a table caption?
-    * https://tex.stackexchange.com/questions/272475/citations-in-tabular-environment-not-working/290915#290915 As shown here it is very difficult to give a command. Just handwrite it and then use "nosite: | @reference" to make sure the reference is included in the reference list of the document in the end.
+    * https://tex.stackexchange.com/questions/272475/citations-in-tabular-environment-not-working/290915#290915 As shown here it is very difficult to give a command. Just handwrite it and then use "nosite: | @reference" to make sure the reference is included in the reference list of the document in the end. However this did not work yet.
     
+* Why are the heritabilities slightly different, when computed from the variance components?
+    *
+    
+* How do I need to choose the economical weights for the index?
+
+* How can I describe the selection index theory?
+
+* How exactly works the linear regression of Berry? How can I assess this approach? I need to try it out and compute the response to selection, no?
+
+* How can I find the mistake in my computations of the response to selection?
+
+* How do I choose the appropriate reference type in mendeley?
+    * Book, journals are clear, but web pages and laws and presentations not (I could use the type generic for those)
     
 
-```{r}
-sqrt(30.82)
-```
+    
+   
+
 
     
 
