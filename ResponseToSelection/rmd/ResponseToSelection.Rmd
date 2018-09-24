@@ -531,7 +531,7 @@ I call it $S1$.
 mCa<-Ca[1:8,]
 dim(mCa)
 sqrt(as.numeric(t(a)%*%mCa%*%a))
-S1<-mk*sqrt(as.numeric(t(a)%*%mCa%*%a))*mCa%*%a%*%t(a)%*%mCa
+S1<-mk*1/(as.numeric(t(a)%*%mCa%*%a))*mCa%*%a%*%t(a)%*%mCa
 dim(S1)
 ```
 
@@ -541,7 +541,7 @@ I call it $S2$.
 fCa<-Ca[9:16,]
 dim(fCa)
 sqrt(as.numeric(t(a)%*%fCa%*%a))
-S2<-fk*sqrt(as.numeric(t(a)%*%fCa%*%a))*fCa%*%a%*%t(a)%*%fCa
+S2<-fk*1/(as.numeric(t(a)%*%fCa%*%a))*fCa%*%a%*%t(a)%*%fCa
 dim(S2)
 ```
 
@@ -557,10 +557,19 @@ First I compute $r^*_1$
 as.numeric(t(a)%*%fCa%*%a)
 as.numeric(t(a)%*%Ga%*%a)
 as.numeric(t(a)%*%G%*%a)
-mr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
+mr<-sqrt(as.numeric(t(a)%*%mCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
+fr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
+sig<-as.numeric(t(a)%*%Ga%*%a)
 ```
 
-
+Response to selection
+$$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
+```{r}
+i1
+mCa[1,]
+Q1<- (i1*t(a)%*%mCa[1,]%*%sqrt(as.numeric(t(a)%*%mCa%*%a))+i2*t(a)%*%fCa[1,]%*%sqrt(as.numeric(t(a)%*%fCa%*%a)))/(L1+L2)
+Q1
+```
 
 
 

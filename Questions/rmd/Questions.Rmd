@@ -274,6 +274,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     * According to Sophie I should not avoid them. They allow very compact and clear tables.
 
 * How can I compute the phenotypic correlations from the genetic correlations?
+  I have the genetic covariances and the covariances of the residuals. The sum will be the phenotypic covariances. Phenotypic covariance dividing by phenotypic variances of the two involved traits I get the correlations.
 
 * Should I indicate a transpose with ' or ^T?
 
