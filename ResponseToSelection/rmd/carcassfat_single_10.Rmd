@@ -18,7 +18,7 @@ The genetic gain of a breeding value is possible to compute from:
 \label{Qyear}
 Q = \frac {ir\sigma_{g}}{L}
 \end{equation}
-$$Q = \frac {ir^*\sigma^*_{g}}{L}$$
+$$Q = \frac {ir^*\sigma^*}{L}$$
 
 ```{r}
 #intensity of selection (i) computed by proportian selected (p)
@@ -43,12 +43,21 @@ p<-0.4
 r<-p-g
 #design matrix (Z) connecting the records of observations with the breeding values
 Z<-cbind(matrix(0, nrow=pr,ncol=2),diag(pr))
-#variance-relationship matrix of the residuals for the recorded animals
+#variance-relationship matrix (R) of the residuals for the recorded animals
 R<-Z%*%(A%x%p)%*%t(Z)-Z%*%(A%x%g)%*%t(Z)
 #prediction error variance (PEV)
 PEV <- solve(t(Z)%*%solve(R)%*%Z+solve(A)%x%(1/g))[1,1]
-#covariance matrix between true and estimated breeding values
+#covariance matrix (C) between true and estimated breeding values
 C <-g-PEV
+#asymptotic covariance matrix (Ca) between true and estimated breeding values
+Ca <- C/(1+0.5*k)
+#variance of the breeding value (ga)
+ga <- g-k*Ca
+#asymptotic accuracy of the estimated aggregate genotype (ra) of the selection candidate
+ra <- sqrt(Ca/ga)
+#genetic gain of a breeding value (Q)
+Q<- i*ra*sqrt(ga)/L
+Q
 ```
 
 $i$ is the selection intensity and is available.
@@ -57,245 +66,47 @@ $L$ is the generation intervall in years and is available.
 
 $r^*$ is the accuracy of the estimated aggregate genotype of the selection candidate.
 
-$\sigma_g^*$ is the standard deviation of the breeding value.
+$\sigma^*$ is the standard deviation of the breeding value.
 
 $^*$ = indicates that reduction of variance during selection has been taken into account known as "Bulmer effect", values turn to asymptotic values [@Bulmer1971].
 
 The variable $r^*$ has to be computed first with
-$$r^*=\sqrt{\frac {C^*}{ \sigma_g^*}}$$
+$$r^*=\sqrt{\frac {C^*}{ (\sigma^*)^2}}$$
+
 $C_y^*$ is the asymptotic covariance between true and estimated breeding values of the selection candidate before the selection
 
-While $\sigma^*_g$ has to be computed with
-$$\sigma^*_g=\sigma_g-kC^*$$
+$\sigma^*$ has to be computed with
+$$(\sigma^*)^2=\sigma_g^2-kC^*$$
+
 $k$ = factor of variance reduction is available.
 
+$\sigma_g$ is the genetic standard deviation in the population and is available.
+
 However to solve these equations you need to first calculate the $C^*$ by the formula:
-$$C^*=\frac{1}{1+0.5k}C $$
+$$C^*=\frac{C}{1+0.5k} $$
 
 $C$ is defined by
-$$C=A \otimes \sigma_g-PEV$$
-$\otimes$ is a kronecker product
+$$C=\sigma_g^2-PEV$$
+
 $PEV$ is the prediction error variance
 
-I can compute $PEV$ with the formula derived from [@Phocas1996].
+I can compute $PEV$ with the formula derived from [@Phocas1996]. I take only the part of the PEV-matrix that belongs to the selection candidate, which is one element of the matrix.
 $$
-PEV=(Z^TR^{-1}Z+A^{-1} \otimes \sigma_g^{-1})^{-1}
+PEV=(Z^TR^{-1}Z+A^{-1} \otimes (\sigma_g^2)^{-1})^{-1}
 $$
 
 $A$ is relationship matrix and available
 
-$Z$ is a design matrix that connects the records of observations (does not include the breeding candidate and its parents) with the breeding values (includes the candidate and its parents).
+$\otimes$ is a kronecker product
+
+$Z$ is a design matrix that connects the records of observations (does not include the breeding candidate and its parents) with the breeding values (includes the candidate and its parents) and is available.
 
 $R$ is the variance-relationship matrix of the residuals for the traits and the recorded animals.
+
 I can compute $R_y$ with the following formula.
-$$R=Z(A\otimes \sigma_p)Z^T-Z(A\otimes \sigma_g)Z^T$$
+$$R=Z(A\otimes \sigma_p^2)Z^T-Z(A\otimes \sigma_g^2)Z^T$$
+
 $\sigma_p$ is the phenotypic variance and available.
-
-
-
-
-
-## Covariance matrix between true and estimated breeding values $C_y$
-Now I should be able to compute $C_y$ out of $PEV_y$ and $G$.
-First I compute $C_1$
-```{r}
-dim(mPEV)
-mC<-G-mPEV
-```
-
-Then $C_2$
-```{r}
-dim(fPEV)
-fC<-G-fPEV
-dim(fC)
-```
-
-## Asymptotic covariance $C_y^*$ between true and estimated breeding values
-$$
-\begin{bmatrix}
-C_1^* \\
-C_2^*
-\end{bmatrix}
-=
-\left( 
-\begin{bmatrix}
-1+1/2k_1  &  1/2k_2 \\
-1/2k_1    &  1+1/2k_2
-\end{bmatrix}^{-1}
-\otimes I_n
-\right)
-\bullet
-\begin{bmatrix}
-C_1 \\
-C_2
-\end{bmatrix}
-$$
-
-First I compute the inner matrix
-```{r}
-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2))
-Sinv<- 0.5%*% c(1+0.5*mk,0.5*mk)
-dim(Sinv)
-```
-Then the whole matrix
-```{r}
-dim(mC)
-dim(fC)
-dim(Sinv)
-dim(In)
-dim(Sinv%x%In)
-mC
-mCa <- (1+0.5*mk) *mC
-mCa
-```
-Now I have $C_y^*$.
-
-To get $r^*$ and $\sigma^*$ the variable $G^*$ is still missing.
-With the following formula I can compute $G^*$:
-$$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
-
-## Vector of economical weights $a$
-$a$ is the vector of economical weights in Swiss francs (Sfr.). I therefore have to divide the economic weights in genetic standard deviations by the genetic standard deviations of the trait
-```{r}
-ew <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
-a <-as.matrix(ew/sigg)
-a <- 1
-```
-
-## Asymptotic genetic variance-covariance $G^*$
-First I compute the part of the sum including $C_1^*$. 
-I call it $S1$.
-```{r}
-S1<-mk*(1/mCa)*mCa*mCa
-dim(S1)
-mCa
-```
-
-Then I compute the part of the sum including $C_2^*$. 
-
-
-Then I can compute $G^*$
-```{r}
-Ga<-G-S1
-```
-
-## Accuracy of the estimated overall breeding value of the selection candidate $r^*_y$
-Then I can compute $r^*_y$.
-First I compute $r^*_1$
-```{r}
-
-Q<-i1*mCa*sqrt(mCa)/L1
-Q
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Annex
-The diagonal values of $R_y$ are consisting of the repetition of residual variances of `r n` trait. 
-The environmental/residual variance $\sigma_e$ is the difference between $\sigma_g$ and $\sigma_p$ for each trait.
-$$\sigma_e=\sigma_p-\sigma_g$$
-For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
-$\sigma_g$ is available and $\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
-$$\sigma_p=\sigma_g^2/h^2$$
-$h^2$ for all traits is available.
-According to the model, the environomental or residual variances exist only for those animals that have a record.
-The candidate and the parents do not have a record.
-Therefore the candidate and the parents should not own an element in the matrix, but all other animals that have a record own an element of each trait.
-
-This leads to a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)` dimension for a male candidate.
-```{r}
-sige<-sigp-sigg
-mR <- diag(mfs+mhs)%x%diag(sige)
-mRinv <- solve(mR)
-dim(mRinv)
-```
-Now I have $R^{-1}_1$.
-
-Here I have to compute $R^{-1}_2$ aswell, which is
-```{r}
-fR <- diag(ffs+fhs)%x%diag(sige)
-fRinv <- solve(fR)
-dim(fRinv)
-```
-
-The following formula is not important yet.
-```{r, eval=FALSE}
-mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
-dim(mPEV)
-```
-
-The vector of the economical weights $a$ is the change in revenue [Sfr.] per genetic standard deviation and $a^T$ is the transpose of $a$.
-
-```{r}
-ewstd <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
-a
-```
-
-
-First I will compute the left top part of the matrix.
-$$X_y^TR^{-1}_yX_y$$
-which is
-```{r}
-
-mXX<-t(mX)%*%mRinv%*%mX
-dim(mXX)
-```
-
-Then I compute the right top part
-$$X_y^TR^{-1}_yZ_y$$
-which is
-```{r}
-mXZ <- t(mX)%*%mRinv%*%mZ
-dim(mXZ)
-```
-
-Then I compute the left bottom part
-$$Z^T_yR^{-1}_yX_y$$
-which is
-```{r}
-mZX <- t(mZ)%*%mRinv%*%mX
-dim(mZX)
-```
 
 
 # References
