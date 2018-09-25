@@ -32,6 +32,21 @@ for (idx in seq_along(1:length(list_reqpkgs_github$package))){
 }
 ```
 
+# Abbreviations {-}
+```{r, echo=FALSE, warning=FALSE, cache=FALSE, message=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+data_frame(
+Abbreviation = c("c", "s", "CW") , Term = c("calves: less or 180 d old animals", "stirks: more than 180 d but less than 700 d old animals", "carcass weight")
+  ) %>%
+  arrange(Abbreviation) %>% # i.e. alphabetical order by Term
+  kable(booktab = T) %>%
+kable_styling(full_width = T) %>%
+  column_spec(1, width="3cm")# booktab = T gives us a pretty APA-ish table
+```
+
 # Preface {-}
 If you want to write a preface, please write it here.
 
@@ -41,3 +56,7 @@ If you want to write a preface, please write it here.
 
 # Task Description {-}
 Here comes the description of the MSc task.
+
+
+
+
