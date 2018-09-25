@@ -47,6 +47,12 @@ kable_styling(full_width = T) %>%
   column_spec(1, width="3cm")# booktab = T gives us a pretty APA-ish table
 ```
 
+```{r}
+# R settings
+# set PDF as default for graphics
+options(knitr.graphics.auto_pdf = TRUE)
+```
+
 # Preface {-}
 If you want to write a preface, please write it here.
 

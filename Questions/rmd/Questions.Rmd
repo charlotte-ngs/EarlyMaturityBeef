@@ -3,8 +3,10 @@ title: "Questions"
 author: "Silvan"
 date: "9 8 2018"
 output: 
- pdf_document: default
+ pdf_document: 
+  fig_caption: true
 bibliography: /Users/silvan/Documents/EarlyMaturityBeef/embc-thesis-bd/library.bib
+
 ---
 
 ```{r setup, include=FALSE}
@@ -386,4 +388,11 @@ column_spec(3, width="8cm")
   
 ```
 
+```{r genetictrendCF, echo=FALSE, fig.cap="yey", out.width="50%"}
+
+library(knitr)
+
+include_graphics("juhu.pdf", auto_pdf = T)
+
+```
 #References
