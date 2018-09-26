@@ -13,51 +13,6 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-# Introduction derived from [@Falconer1996]
-The change produced by selection that chiefly interests us is the change of the population mean. This is is the response to selection, which will be symbolized by $Q$. 
-It is the difference of mean phenotypic value between the offspring of the selcted parents and the whole of the parental generation before selection. 
-The measure of the selection applied is the average superiority of the selected parents, which is called the selection differential, and will be symbolized by S.
-If you can assume that there is no natural selection (fertility and viability not correlated with trait), you can say the ratio of response to selection differential is equal to the heritability [@Falconer1996].
-$$Q = h^2S$$
-$$S = i\sigma_{P}$$
-$$Q = ih^2\sigma_{P}$$
-$$h = \sigma_{A}/\sigma_{P}$$
-$$Q = ih\sigma_{A}$$
-
-Assortative mating can be disregarded, because it has very little effect on the mid-parent regression. 
-The chief use of this equation is for predicting the response to selection. The knowledge of heritability can be obtained from previous generations. The selection differential can not be known, but its expected value can be predicted.
-
-In the following example you can see how the response to selection for abdominal bristle number in drosophila.
-
-```{r}
-x <- data.frame(c("Parents", "Offspring"), c(35.3, 37.9), c(40.6, "-"), c(5.3, "-"), c(2.8,"-"), c("-", 2.6))
-colnames(x) <- c("Generation", "Mean of all measured", "Mean of those selected", "Selection differential", "Experienced response", "Observed response")
-library(knitr)
-```
-
-```{r}
-h2 <- 0.52
-S <- 40.6 - 35.3
-Q <- h2 * S
-oQ <- 37.9 - 35.3
-```
-
-The heritability `r h2` of the bristle number was estimated in the previous generations. The selected parents had a mean superiority of `r S`. The predicted response is S * h2 = `r Q`. The observed response was `r oQ`.
-However this result is only valid for this generation, because heritability is expected to change in each generation.
-
-When a normal distribution of the values for a trait in a population can be assumed, which is usually the case you can derivate the intensity of selection of the proportion selected.
-
-The goal is of course to increase the response to selection when we are breeding. 
-Increasing intensity of selection seems at first sight to be a straightforward  way of improving the response.
-However there are two factors that limit increasing intensity of selection:
-1. The reproductive rate
-2. Inbreeding
-
-
-
-
-
-
 # Response to selection in index derived from [VonRohr1998]
 
 The response to selection of the total breeding value $Q$ is defined by the formula as shown on page 135 [@VonRohr1998]:
@@ -230,9 +185,6 @@ library(Matrix)
 G <-matD %*% matE %*% matD
 dim(G)
 G<-nearPD(G)$mat
-str(G)
-dim(G)
-eigen(G)
 ```
 Now we have $G$, it describes how the variances of different traits in the index are related to each other.
 Then I compute the inverse of $G$.
@@ -422,27 +374,34 @@ $$Cov(x,y)=r_{x,y}\sigma_x\sigma_y$$
 In the following table the necessary information to compute the covariances is listed: The diagonal values are the residual standard deviations $\sigma_r$ and the other values the residual correlations between the traits ($r_{x,y}$).
 
 $\sigma_r$ is possible to compute as the difference between phenotypic and the sum of permanent fixed effect and genetic effects:
-$$\sigma_r=\sigma_g/h^2$$
+$$\sigma_r=\sigma_p-\sigma_{pe}-\sigma_g$$
 
-$h^2$ and $\sigma_g$ for all traits is available.
+$\sigma_p$ is already computed
+
+$\sigma_{pe}$ is the standard deviation of permanent fixed effects and can be computed from
+
+$$\sigma_{pe}=\sigma_pe$$
+$e^2$ is the variance proportion of the permanent fixed effects of the phenotypic variance.
+
 ```{r}
-h2 <- c(0.32,0.469,0.6,0.51,0.29,0.16,0.22,0.42)
-sigg<- diag(as.matrix(corg))
-sigp<-sigg/h2
+e <- c(0.15,0.214,0.06,0.07,0,0.02,0.04,0)
+sigpe<- sigp*sqrt(e)
+sige<-sigp-sigpe-sigg
+sige
 ```
 
 ```{r}
-corp <-data.frame(c(1, -0.358, -0.22, 0.069, 0.031, -0.041, 0.111, -0.047), 
-                     c(-0.358, 1, -0.588, 0.201, -0.004, -0.048, -0.082, -0.082),
-                     c(-0.22, -0.588, 1, -0.253, -0.077, -0.031, 0.023, 0.462), 
-                     c(0.069, 0.201,  -0.253, 1, 0.133, 0.068, 0.012, -0.2), 
-                     c( 0.031, -0.004, -0.077, 0.133, 1, 0.177, -0.488, 0.146), 
-                     c(-0.041, -0.048, -0.031, 0.068, 0.177, 1, -0.301, -0.01), 
-                     c(0.111, -0.082, 0.023, 0.012, -0.488, -0.301, 1, 0.008), 
-                     c(-0.047, -0.082, 0.462, -0.2, 0.146, -0.01, 0.008,1))
-colnames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
-rownames(corp) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
-diag(corp)=sigp
+core <-data.frame(c(1, -0.53, -0.17, 0.02, 0.06, -0.07, 0.11, -0.074), 
+                     c(-0.53, 1, -0.66, 0.22, 0.1, 0.06, -0.05, -0.13),
+                     c(-0.17, -0.66, 1, -0.43, -0.08, -0.04, 0.01, 0.43), 
+                     c(0.02, 0.22,  -0.43, 1, -0.01, 0.01, 0.03, -0.099), 
+                     c( 0.06, 0.1, -0.08, -0.01, 1, 0.11, -0.43, 0.5), 
+                     c(-0.07, 0.06, -0.04, 0.01, 0.11, 1, -0.27, -0.12), 
+                     c(0.11, -0.05, 0.01, 0.03, -0.43, -0.27, 1, 0.05), 
+                     c(-0.074, -0.13, 0.43, -0.099, 0.5, -0.12, 0.05,1))
+colnames(core) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+rownames(core) <- c("MTZ", "FV", "AwF", "ImF", "pH1", "pH30", "H30", "FEZ")
+diag(core)=sige
 ```
 
 I can transform the data frame into a matrix.
@@ -454,23 +413,27 @@ I build a diagonal matrix with the standard deviations as diagonal elements $D$ 
 
 First $D$:
 ```{r}
-matD <- diag(diag(as.matrix(corp)), nrow = 8, ncol = 8)
+matD <- diag(diag(as.matrix(core)), nrow = 8, ncol = 8)
 ```
 
 Then $E$:
 ```{r}
-matE <- as.matrix(corp)
+matE <- as.matrix(core)
 diag(matE) <- 1
 ```
 
-Then I get the required matrix $V$ by using two times the matrix multiplication.
-$$V=DED$$
+Then I get the required matrix $R$ by using two times the matrix multiplication.
+$$R=DED$$
 It fortunateley works. Glückstreffer :)
 
 ```{r}
 42.31*-0.15*0.09
-V <-matD %*% matE %*% matD
-dim(V)
+R <-matD %*% matE %*% matD
+# also I need to do a kronecker with the unity matrix to get the R for males (mR) and the R for females (fR)
+mR<-R%x%diag(mhs+mfs)
+mRinv<-solve(mR)
+fR<-R%x%diag(fhs+ffs)
+fRinv<-solve(fR)
 ```
 
 ## Prediction error variance $PEV_y$
@@ -488,6 +451,7 @@ dim(t(mZ))
 dim(mAinv)
 dim(Ginv)
 mZZ <- t(mZ)%*%mRinv%*%mZ+mAinv%x%Ginv
+t(mZ)%*%mRinv%*%mZ
 ```
 
 Then I compute the right bottom part of $PEV_2$ for a female selection candidate.
@@ -564,10 +528,10 @@ With the following formula I can compute $G^*$:
 $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 
 ## Vector of economical weights $a$
-$a$ is the vector of economical weights in Swiss francs (Sfr.). I therefore have to divide the economic weights in genetic standard deviations by the genetic standard deviations of the trait
+$a$ is the vector of economical weights in Swiss francs (Sfr.) per standard deviation of the trait
 ```{r}
-ew <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
-a <-as.matrix(ew/sigg)
+ew <- as.matrix(c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0))
+a<-ew*sigg
 a
 ```
 
@@ -613,9 +577,9 @@ Response to selection
 $$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
 ```{r}
 i1
-mCa[1,]
-Q1<- (i1*t(a)%*%mCa[1,]%*%sqrt(as.numeric(t(a)%*%mCa%*%a))+i2*t(a)%*%fCa[1,]%*%sqrt(as.numeric(t(a)%*%fCa%*%a)))/(L1+L2)
-Q1
+fCa[1,]
+Q1<- i1*t(a)%*%mCa[1,]*sqrt(as.numeric(t(a)%*%mCa%*%a))+i2*t(a)%*%fCa[1,]*sqrt(as.numeric(t(a)%*%fCa%*%a))/(L1+L2)
+Q1/42.31
 ```
 
 
