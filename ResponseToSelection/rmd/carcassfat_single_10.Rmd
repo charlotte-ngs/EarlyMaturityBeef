@@ -54,7 +54,6 @@ ga <- g-k*Ca
 ra <- sqrt(Ca/ga)
 #genetic gain of a breeding value (Q)
 Q<- i*ra*sqrt(ga)/L
-Q
 ```
 
 $i$ is the selection intensity and is available.

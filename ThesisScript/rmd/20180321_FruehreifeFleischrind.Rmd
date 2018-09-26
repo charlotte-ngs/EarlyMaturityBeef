@@ -342,5 +342,70 @@ ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel,
                                      paste(stab_flag, 'variancecomponents'))
 ht_prop_sel
 ```
+The diagonal values of $R_y$ are consisting of the repetition of residual variances of `r n` trait. 
+The environmental/residual variance $\sigma_e$ is the difference between $\sigma_g$ and $\sigma_p$ for each trait.
+$$\sigma_e=\sigma_p-\sigma_g$$
+For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
+$\sigma_g$ is available and $\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
+$$\sigma_p=\sigma_g^2/h^2$$
+$h^2$ for all traits is available.
+According to the model, the environomental or residual variances exist only for those animals that have a record.
+The candidate and the parents do not have a record.
+Therefore the candidate and the parents should not own an element in the matrix, but all other animals that have a record own an element of each trait.
+
+This leads to a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)` dimension for a male candidate.
+```{r}
+sige<-sigp-sigg
+mR <- diag(mfs+mhs)%x%diag(sige)
+mRinv <- solve(mR)
+dim(mRinv)
+```
+Now I have $R^{-1}_1$.
+
+Here I have to compute $R^{-1}_2$ aswell, which is
+```{r}
+fR <- diag(ffs+fhs)%x%diag(sige)
+fRinv <- solve(fR)
+dim(fRinv)
+```
+
+The following formula is not important yet.
+```{r, eval=FALSE}
+mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
+dim(mPEV)
+```
+
+The vector of the economical weights $a$ is the change in revenue [Sfr.] per genetic standard deviation and $a^T$ is the transpose of $a$.
+
+```{r}
+ewstd <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
+a
+```
+
+
+First I will compute the left top part of the matrix.
+$$X_y^TR^{-1}_yX_y$$
+which is
+```{r}
+
+mXX<-t(mX)%*%mRinv%*%mX
+dim(mXX)
+```
+
+Then I compute the right top part
+$$X_y^TR^{-1}_yZ_y$$
+which is
+```{r}
+mXZ <- t(mX)%*%mRinv%*%mZ
+dim(mXZ)
+```
+
+Then I compute the left bottom part
+$$Z^T_yR^{-1}_yX_y$$
+which is
+```{r}
+mZX <- t(mZ)%*%mRinv%*%mX
+dim(mZX)
+```
 # References
 

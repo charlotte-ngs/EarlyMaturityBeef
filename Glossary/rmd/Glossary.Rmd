@@ -314,7 +314,7 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Breed invariable__ Tool to assess relative differences in traits across different breeds. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
 
-* __Genetic trend__ Is calculated by the mean breeding values of following years. https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
+* __Genetic trend__ Is calculated by the mean breeding values of following years. Does the basis in this time? (probably yes) https://qualitasag.ch/blick-hinter-die-kulissen-der-zuchtwertschaetzung-fuer-schlachtmerkmale-beim-rind/
 
 * __Sire__ Father animal.
 

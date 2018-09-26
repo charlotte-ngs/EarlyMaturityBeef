@@ -342,8 +342,11 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How do I choose the appropriate reference type in mendeley?
     * Book, journals are clear, but web pages and laws and presentations not (I could use the type generic for those)
     
+* Is the genetic trend positive if the mean of breeding values is constantly on a high level?
+  Would be a negative genetic trend on a high level just mean that the improvement reduces over time bus is still positive? Then many traits would probably show negative genetic trends.
+     *
 
-    
+
    
 
 
