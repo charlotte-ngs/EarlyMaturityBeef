@@ -1,0 +1,451 @@
+---
+title: "Junk Box"
+author: "Silvan Wyss"
+date: "16.8.2018"
+output: html_document
+bibliography: 
+- /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Background
+
+Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations mainly on growth rate and carcass conformation. 
+Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds, which leads to a price reduction of the carcass [@Hospenthal2016].
+
+```{r, echo=FALSE, fig.cap = "Vergleich der Fettklasse 2014 - 2017"}
+
+knitr::include_graphics("Trend_CarcassFat.png")
+```
+
+
+Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
+
+Protein deposition increases linearly with increasing body weight, but lipid deposition increases exponentially with increasing body weight (Figure 21.3 Thonney) [@Thonney2015].
+
+```{r, echo=FALSE, fig.cap = "Chemical components in the empty body (gut contents removed) of 49 beef steers. (From the data of Haecker, 1920.) [@Thonney2015]"}
+
+knitr::include_graphics("Bildschirmfoto.png")
+```
+
+
+Until 300 kg body weight the weight of protein is higher, then the weight of lipids is higher [@Thonney2015].
+The heavier the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
+Fat deposition is therefore usually the limiting factor for early maturity during growth [@Thonney2015].
+
+Early maturity is of high economical importance because a lower age at slaughter leads to less costs for the farmer and less negative impacts on the environment [@Berry2017] (decreased feed and environment efficiency).
+
+[@Strasser2017]
+
+```
+Bitte hier Begründung, weshalb die obige Beobachtung und somit die Frühreife wichtig sind
+```
+
+### Early maturity
+Terms rooting on the word mature can be confusing. 
+The "rate of maturation" describes the amount of time until the adult weight is reached and the "degree of maturity" describes the proportion of the current weight to the adult weight [@Thonney2015]. 
+This would lead to the definition used in trout breeding that early maturity is the amount of time until the adult weight is reached [@Kause2014].
+
+Early maturity ("Frühreife") in this context however is defined as the amount of time until an animal meets the necessary requirements (within its category?) to be slaughtered without any price reductions per kg of carcass weight. 
+
+```
+Referenz auf andere Defintionen ==> Literatur
+```
+
+### CHTAX
+
+Price reductions are dependent on the price formation process of the slaughterhouse.
+
+Since 1994 Swiss slaughterhouses value beef cattle based on the classification system CHTAX [Kaufmann1995]. 
+The first step of valuation is placing the animal in the correct category. The distinct categories differ in physiological age at slaughter, sex and weight. 
+Within each category the animal is visually classified in five classes of carcass fat (Tabelle) and carcass conformation (Bild).
+When the animal does not belong to the optimal class of carcass fat (3) or the maximal class of carcass conformation (C) the price per carcass weight is reduced.
+
+### Pricing
+```{r, echo=FALSE, results='hide'}
+Gewicht <- 200
+C3 <- 9.55
+H4 <- 7.9 - 0.9
+ErloesC3<-Gewicht * C3
+ErloesH4<- Gewicht * H4
+```
+
+
+For example the price of a young bull (MT) of `r Gewicht` kg carcass weight is `r ErloesC3`.- Swiss Francs (SFr) when in the most favoured classes of carcass conformation and carcass fat and `r ErloesH4`.- SFr when in the least favoured classes [@Proviande2018]. 
+
+
+### Meat quality indicators
+
+Carcass fat and carcass conformation have been introduced as price formation factors, because they coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
+Carcass fat when to low is related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse[@Kaufmann1995].
+
+A better carcass conformation in turn leads to a high exploitation of valuable meat pieces [@Proviande2015].
+
+### Breeding strategy
+
+In Summer 2018 carcass fat has joined carcass conformation and carcass weight to the existing multi-trait breeding valuation model carcass caracteristics.
+The first results of the routine breeding value estimation for carcass fat have been published in summer 2018.
+At the moment the trait carcass fat is used to derive the trait early maturity [@Kunz2018].
+
+
+
+
+
+
+# Annex
+
+Also there is the breed Limousin which underperforms in carcass fat. 
+Nevertheless offspring of Limousin sires are most prevalent in the favoured category of carcass conformation C3. 
+This shows that for breeding you should always combine the two traits carcass conformation and carcass fat [@Hospenthal2016]. 
+
+Commercial cattle are generally determined as ready for slaughter by visual inspection of the degree of fatness within the appropriate range of live weight [@VanGroningen2006].
+
+Carcass conformation correlates with carcass fat by about 0.31. 
+Age at slaughter correlates positiveley with carcass fat but not linear (concave with decreasing slope) [@Hospenthal2016].
+
+The proportion of weight to adult body weight (asymptotic weight) is degree of maturity [@Thonney2015].
+
+The older the animal the higher the proportion of fat tissue in comparison to muscle tissue and bone tissue [@Thonney2015].
+
+Most selection for growth changed the growth curve by decreasing or increasing adult size. 
+Selection rareley changed the shape of the growth curve or the underlying biological relationships between growth and body composition [@Thonney2015].
+
+Weights across different ages are highly correlated. Growth rates at given age are generally related to adult size [@Thonney2015].
+
+The higher the age at slaughter of an animal is the higher is the impact of genetics on the beef carcass traits [@Englishby2017].
+
+In Ireland the usually cross crossbred suckler cows to purebred beef sires. 
+Also they use an multi-trait across breed animal model. There they include 15 traits including carcass weight and carcass fat. 
+The heritability is 0.31 for carcass fat [@Evans2007].
+
+In Switzerland the "Bundesamt für Landwirtschaft" has to determine the methods to classify carcasses of ruminants. 
+The criteria are the age at slaughter, the carcass conformation and the carcass fat [@Bundesrat2002].
+
+In order to get no selling price reductions they have to feed their animals for a longer time, when their animals do not mature early. 
+However, in Switzerland the carcass should not weight too much. More than 290 kg carcass weight for MT will result in a price discount of at least 0.1.-/kg carcass weight [@Proviande2018].
+
+### CHTAX
+
+The beef meat market in Switzerland is controlled by the sector association "Proviande". Proviande employees classify beef carcasses in large-scale slaughterhouses to determine their price. 
+Their classification is based on the classification system CH-TAX [@Proviande2015] and is carried out as follows:
+
+1. The category of the carcass is defined by physiological age at slaughter, sex and carcass weight (Own table according to table on page 5, Proviande2015). 
+When weighted the carcass should be already trimmed as shown in this figure [@EDI2013, S.1].
+
+2. The carcass is visually classified for carcass conformation and carcass fat. 
+Carcass conformation describes how meaty the carcass is and carcass fat describes how fat the carcass is.
+
+3. The price of the carcass is estimated. For carcass conformation the price is maximal at the end of the scale (C) and for carcass fat at the center of the scale (3).
+
+In Switzerland beef carcasses are generally much smaller than abroad in order to fulfill the wishes of the market. 
+Therefore beef cattle in Switzerland has to mature earlier than abroad [@Hospenthal2016]. 
+
+## Rate of maturation derived from carcass fat (Noch nicht überarbeitet)
+
+Early maturity is a complex and not directly measurable trait which complicates breeding for it. 
+One possibility is to derive this trait from an already recorded closely correlated trait. 
+
+Carcass fat has been chosen because of two reasons. 
+First it is being routineley collected in slaughterhouses since 1994 [@Kaufmann1995]. 
+Second correlation is given by the fact that "cattle growth and body composition are inextricably linked" [@Thonney2015]. 
+Protein increases linearly with increasing body weight, but lipid deposition increases exponentially with increasing body weight (Figure 21.3 Thonney) [@Thonney2015].
+Until 300 kg body weight the deposition of protein is higher, then the deposition of lipids is higher [@Thonney2015].
+This shows that over time carcass fat is generally the limiting factor to meet the requirements to be slaughtered.
+
+Generally cattle gain weight as slightly sigmoid shaped curve (Fig. 21.1) which means that the weight gain is decreasing with increasing age. 
+The adult weight is defined as the asymptotic weight of the growth curve. 
+Cattle that is higher in carcass fat at a given carcass weight has higher adult weights (Figure 21.4) . 
+As the adult weight decreases the growth rate generally decreases aswell at a given weight [@Thonney2015].
+It has been tried to resolve the negative correlation between growth rate and rate of maturation, but often unsuccessful.
+
+## Rate of maturation as index trait
+
+To prevent that you can also choose to combine carcass weight, carcass conformation and carcass fat to one index which then is called early maturity. 
+To act at best reasons to improve the income of beef cattle producers you should weight the different traits in the index according to their economic value to the cattle producers [@Englishby2017].
+
+
+Why is fat coverage a good trait to describe early maturity? ... (Growth models give the answer)
+Does this part not belong to the part "discussion"? It is not actually describing where and how I get my data to evaluate it.
+Here I should just shortly describe how the breeding value for carcass fat has been created refering to Sophies documentation.
+Unfortunateley I do not know much about it.
+
+Actually I do not have to explain this when I know that early maturity is only dependent on age and carcass fat.
+
+Fortunateley carcass fat corrected by age may not only describe how early an animal begins to deposit fat, but also how early it deposits muscles and reaches a sufficient carcass weight.
+Carcass fat corrected by age at slaughter may describe the other two traits because they are closely linked by the way how beef cattle grows.
+
+First I will explain how carcass fat corrected by age is linked to carcass weight corrected by age:
+Cattle that is higher in carcass fat at a given carcass weight has higher adult weights.
+Cattle in turn that has higher adult weights has also higher growth rates.
+Considering that the growth rate means about the same as the carcass weight corrected by age at slaughter the following statement in theory is valid:
+High levels of carcass fat corrected by age at slaughter lead to high levels of carcass weight corrected by age at slaughter.
+
+Secondly I will explain how carcass fat corrected by age is linked to carcass conformation corrected by age:
+Carcass fat mainly consists of lipids while carcass meat mainly consists of proteins.
+The deposition of lipids in cattle beef bodies occurs later during growth than the deposition of protein.
+Protein deposition in beef cattle increases linearly with increasing body weight, but lipid deposition increases exponentially with increasing body weight (Figure 21.3 Thonney)
+Until 300 kg body weight the weight of protein is higher in a beef body, afterwards the weight of lipids is higher [@Thonney2015].
+This shows that over time carcass fat is generally the limiting factor to meet the requirements to be slaughtered compared to carcass conformation.
+
+Based on this theory the trait carcass fat corrected by age could tell us how early beef cattle reaches carcass maturity not only in terms of carcass fat but also in terms of carcass conformation or carcass weight.
+There is a possibility to check this theory by the results of the breeding value estimation of the breeding values for the three traits.
+The following part belongs to results and discussion, no?
+
+
+
+```{r slaughtercategory, echo=FALSE, results='asis'}
+tbl_category <- tibble::data_frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
+                                   "slaughter category"=c("calves", "young cattle", "young bulls", "bulls or steers", 
+                                              "young steers", "young heifers", "heifers or young cows", "cows"), 
+                                   description=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
+                                              ">161 days old, no incissors", 
+                                              ">161 days old, >0 incissors for bulls, >4 incissors for steers", 
+                                              ">161 days old, <5 incissors", ">161 days old, <5 incissors", 
+                                              ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
+                                              ">161 days old"), "base price of carcass conformation class T in Sfr. / kg carcass (*live) weight" = c("14.2","*6.3", "8.8", "6.2", "8.8", "8.8", "7.7", "7.5"))
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_category)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- .8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .5)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:slaughtercategory)'
+} else {
+  stab_flag <- '(\\#tab:slaughtercategory)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Slaughter categories in CHTAX'))
+ht_prop_sel
+
+```
+
+# Genetic gain / Response to selection Pimentel
+
+```{r}
+pnumb=1+2
+x<-pedigree(sire=c(NA,NA,1), dam=c(NA,NA,2), label=1:pnumb)
+getA(x)
+```
+
+```{r slaughtercategory, echo=FALSE, results='asis'}
+x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
+                                   "slaughter category"=c("calves", "young cattle", "young bulls", "bulls or steers", 
+                                              "young steers", "young heifers", "heifers or young cows", "cows"), 
+                                   description=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
+                                              ">161 days old, no incissors", 
+                                              ">161 days old, >0 incissors for bulls, >4 incissors for steers", 
+                                              ">161 days old, <5 incissors", ">161 days old, <5 incissors", 
+                                              ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
+                                              ">161 days old"), price= c("14.2","*6.3", "8.8", "6.2", "8.8", "8.8", "7.7", "7.5"))
+
+kable(x, booktabs=T, caption="Description and carcass profile of carcass donformation classes") %>%
+kable_styling(full_width =T) %>%
+column_spec(3, width="8cm")
+
+```
+
+```{r fatclass, echo=FALSE}
+tbl_fatclass <- tibble::data_frame("carcass fat class" = c("1", "2", "3", "4", "5"), "carcass fat coverage"=c("uncovered", "partially covered", "evenly covered", "strongly covered", "excessiveley fatty"), "description"=c("no fat coverage; grips not developed","light fat coverage; muscels partially visible; all grips slightly tangible", "average even fat coverage; muscles generally covered; all grips tangible and robust", "strong fat coverage; excessive fat deposition; grips strongly developed", "fat coverage generally excessive; bulging fat formations; all grips very strongly developed"), "markdown for MT in Sfr. / kg carcass weight" = c("-0.9","-0.3","0","-0.3","-0.7"))
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_fatclass)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- .8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .5)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:fatclass)'
+} else {
+  stab_flag <- '(\\#tab:fatclass)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Carcass fat classes in CHTAX'))
+ht_prop_sel
+```
+```{r conformationclass, echo=FALSE}
+tbl_conformationclass <- tibble::data_frame("carcass conformation class" = c("C", "H", "T", "A", "X"), profile=c("very convex", "convex", "linear", "concave", "very concave"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"), "base price for MT in Sfr. / kg carcass weight"=c("5.55","5.3","4.65","4.2","3.85"))
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_conformationclass)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- 1.2
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .8)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:conformationclass)'
+} else {
+  stab_flag <- '(\\#tab:conformationclass)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'Carcass conformation classes in CHTAX'))
+ht_prop_sel
+```
+```{r variancecomponents, echo=FALSE}
+tbl_variancecomponents <- tibble::data_frame(c("Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight"), c(0.5, 0.83, -0.05, -0.17, 0.52, 0.29), c(0.83, 0.56, -0.03,0.15, 0.36,0.38 ), c(-0.05, -0.03, 0.31,0.73,-0.03,0.09), c(-0.17, 0.15, 0.73, 0.36,-0.20,0.26), c( 0.52, 0.36, -0.03, -0.20, 0.22,0.63 ), c(0.29,0.38,0.09,0.26,0.63,0.3), c(0.63, 0.63, 0.35, 0.36, 0.06, 0.14))
+colnames(tbl_variancecomponents) <- c("genetic correlations and heritabilities","Bankkalb conformation class","Banktier conformation class", "Bankkalb fat class", "Banktier fat class", "Bankkalb carcass weight", "Banktier carcass weight", "genetic standard deviations")
+
+
+# convert data_frame into a hux
+ht_prop_sel <- huxtable::as_hux(tbl_variancecomponents)
+# specify total width of table compared to textwidth
+huxtable::width(ht_prop_sel) <- 0.8
+# specify width of each column
+huxtable::col_width(ht_prop_sel) <- c(.2, .3, .8)
+# column content is wrapped
+huxtable::wrap(ht_prop_sel) <- TRUE
+# add column names
+ht_prop_sel <- huxtable::add_colnames(ht_prop_sel)
+# borders are added
+ht_prop_sel <- huxtable::set_all_borders(ht_prop_sel, 1)
+# cell content is aligned to the top
+huxtable::valign(ht_prop_sel) <- "top"
+# setting the caption
+if (knitr::is_html_output()){
+  stab_flag <- '(#tab:variancecomponents)'
+} else {
+  stab_flag <- '(\\#tab:variancecomponents)'
+}
+ht_prop_sel <- huxtable::set_caption(ht=ht_prop_sel, 
+                                     paste(stab_flag, 'variancecomponents'))
+ht_prop_sel
+```
+The diagonal values of $R_y$ are consisting of the repetition of residual variances of `r n` trait. 
+The environmental/residual variance $\sigma_e$ is the difference between $\sigma_g$ and $\sigma_p$ for each trait.
+$$\sigma_e=\sigma_p-\sigma_g$$
+For we need to compute $\sigma_e$ for each trait, it will be a vector of `r n` values.
+$\sigma_g$ is available and $\sigma_p$ is possible to compute from the heritability $h^2$ and $\sigma_g$ for each trait:
+$$\sigma_p=\sigma_g^2/h^2$$
+$h^2$ for all traits is available.
+According to the model, the environomental or residual variances exist only for those animals that have a record.
+The candidate and the parents do not have a record.
+Therefore the candidate and the parents should not own an element in the matrix, but all other animals that have a record own an element of each trait.
+
+This leads to a diagonal matrix $R_1$ with a `r n*(mfs+mhs)` x `r n*(mfs+mhs)` dimension for a male candidate.
+```{r}
+sige<-sigp-sigg
+mR <- diag(mfs+mhs)%x%diag(sige)
+mRinv <- solve(mR)
+dim(mRinv)
+```
+Now I have $R^{-1}_1$.
+
+Here I have to compute $R^{-1}_2$ aswell, which is
+```{r}
+fR <- diag(ffs+fhs)%x%diag(sige)
+fRinv <- solve(fR)
+dim(fRinv)
+```
+
+The following formula is not important yet.
+```{r, eval=FALSE}
+mPEV <- rbind(cbind(mXX, mXZ), cbind(t(mXZ), mZZ))
+dim(mPEV)
+```
+
+The vector of the economical weights $a$ is the change in revenue [Sfr.] per genetic standard deviation and $a^T$ is the transpose of $a$.
+
+```{r}
+ewstd <- c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0)
+a
+```
+
+
+First I will compute the left top part of the matrix.
+$$X_y^TR^{-1}_yX_y$$
+which is
+```{r}
+
+mXX<-t(mX)%*%mRinv%*%mX
+dim(mXX)
+```
+
+Then I compute the right top part
+$$X_y^TR^{-1}_yZ_y$$
+which is
+```{r}
+mXZ <- t(mX)%*%mRinv%*%mZ
+dim(mXZ)
+```
+
+Then I compute the left bottom part
+$$Z^T_yR^{-1}_yX_y$$
+which is
+```{r}
+mZX <- t(mZ)%*%mRinv%*%mX
+dim(mZX)
+```
+
+# Introduction derived from [@Falconer1996]
+The change produced by selection that chiefly interests us is the change of the population mean. This is is the response to selection, which will be symbolized by $Q$. 
+It is the difference of mean phenotypic value between the offspring of the selcted parents and the whole of the parental generation before selection. 
+The measure of the selection applied is the average superiority of the selected parents, which is called the selection differential, and will be symbolized by S.
+If you can assume that there is no natural selection (fertility and viability not correlated with trait), you can say the ratio of response to selection differential is equal to the heritability [@Falconer1996].
+$$Q = h^2S$$
+$$S = i\sigma_{P}$$
+$$Q = ih^2\sigma_{P}$$
+$$h = \sigma_{A}/\sigma_{P}$$
+$$Q = ih\sigma_{A}$$
+
+Assortative mating can be disregarded, because it has very little effect on the mid-parent regression. 
+The chief use of this equation is for predicting the response to selection. The knowledge of heritability can be obtained from previous generations. The selection differential can not be known, but its expected value can be predicted.
+
+In the following example you can see how the response to selection for abdominal bristle number in drosophila.
+
+```{r}
+x <- data.frame(c("Parents", "Offspring"), c(35.3, 37.9), c(40.6, "-"), c(5.3, "-"), c(2.8,"-"), c("-", 2.6))
+colnames(x) <- c("Generation", "Mean of all measured", "Mean of those selected", "Selection differential", "Experienced response", "Observed response")
+library(knitr)
+```
+
+```{r}
+h2 <- 0.52
+S <- 40.6 - 35.3
+Q <- h2 * S
+oQ <- 37.9 - 35.3
+```
+
+The heritability `r h2` of the bristle number was estimated in the previous generations. The selected parents had a mean superiority of `r S`. The predicted response is S * h2 = `r Q`. The observed response was `r oQ`.
+However this result is only valid for this generation, because heritability is expected to change in each generation.
+
+When a normal distribution of the values for a trait in a population can be assumed, which is usually the case you can derivate the intensity of selection of the proportion selected.
+
+The goal is of course to increase the response to selection when we are breeding. 
+Increasing intensity of selection seems at first sight to be a straightforward  way of improving the response.
+However there are two factors that limit increasing intensity of selection:
+1. The reproductive rate
+2. Inbreeding
+# References
+
