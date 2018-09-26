@@ -315,13 +315,14 @@ data.frame(Kalb =c(1,2,3,5,3),
     
 
 * Could I also compute the response to selection with provided mean accuracies for breeding values of selection candidates derived from the breeding value estimation?
-    *
+    * No, it is not that easy. It could be difficult aswell and is not necessarily more accurate (Peter).
     
 * What does i.e. mean?
 
 * Should I use the term genetic gain or response to selection?
 
 * How about completeley separate "Banktiere" and "Bankkälber"? Use separated variance covariance tables -> residuals only exist within each group.
+    * Yes, this makes sense according to Sophie.
 
 * Is the generation intervall and intensity of selection for calves and stirks different?
     
@@ -329,7 +330,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     * https://tex.stackexchange.com/questions/272475/citations-in-tabular-environment-not-working/290915#290915 As shown here it is very difficult to give a command. Just handwrite it and then use "nosite: | @reference" to make sure the reference is included in the reference list of the document in the end. However this did not work yet.
     
 * Why are the heritabilities slightly different, when computed from the variance components?
-    *
+    * Because they are false when computed from the variance components.
     
 * How do I need to choose the economical weights for the index?
 
@@ -346,10 +347,24 @@ data.frame(Kalb =c(1,2,3,5,3),
   Would be a negative genetic trend on a high level just mean that the improvement reduces over time bus is still positive? Then many traits would probably show negative genetic trends.
      *
 
-
+* How should I save figures that should be included in R bookdown? Can I place them in the git_repository?
    
+* Should I use $\Delta$ or Q as abbreviation of genetic gain?
 
+* Can I use Thonney (Genetics of Meat Quality) to compare heritabilities of carcass fat with our heritabilities? (Discussion)
+    * Not my main task to discuss this.
 
+* Can I include the Sophies'results (variance components) to my results chapter or should I mention them in the discussion part?
+    *No
+* Is there any other instrument to assess breeding values beside the genetic gain?
+
+* Should I use the term genetic gain or response to selection?
+    *
+
+* How can I structure the M+M part of the thesis?
+    * Chunk text chunk, give results of in-between steps.
+    
+* 
     
 
 

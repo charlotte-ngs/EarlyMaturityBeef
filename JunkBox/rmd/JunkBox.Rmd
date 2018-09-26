@@ -1,5 +1,5 @@
 ---
-title: "Strategies to breed for early maturity in beef cattle"
+title: "Junk Box"
 author: "Silvan Wyss"
 date: "16.8.2018"
 output: html_document
@@ -407,5 +407,45 @@ which is
 mZX <- t(mZ)%*%mRinv%*%mX
 dim(mZX)
 ```
+
+# Introduction derived from [@Falconer1996]
+The change produced by selection that chiefly interests us is the change of the population mean. This is is the response to selection, which will be symbolized by $Q$. 
+It is the difference of mean phenotypic value between the offspring of the selcted parents and the whole of the parental generation before selection. 
+The measure of the selection applied is the average superiority of the selected parents, which is called the selection differential, and will be symbolized by S.
+If you can assume that there is no natural selection (fertility and viability not correlated with trait), you can say the ratio of response to selection differential is equal to the heritability [@Falconer1996].
+$$Q = h^2S$$
+$$S = i\sigma_{P}$$
+$$Q = ih^2\sigma_{P}$$
+$$h = \sigma_{A}/\sigma_{P}$$
+$$Q = ih\sigma_{A}$$
+
+Assortative mating can be disregarded, because it has very little effect on the mid-parent regression. 
+The chief use of this equation is for predicting the response to selection. The knowledge of heritability can be obtained from previous generations. The selection differential can not be known, but its expected value can be predicted.
+
+In the following example you can see how the response to selection for abdominal bristle number in drosophila.
+
+```{r}
+x <- data.frame(c("Parents", "Offspring"), c(35.3, 37.9), c(40.6, "-"), c(5.3, "-"), c(2.8,"-"), c("-", 2.6))
+colnames(x) <- c("Generation", "Mean of all measured", "Mean of those selected", "Selection differential", "Experienced response", "Observed response")
+library(knitr)
+```
+
+```{r}
+h2 <- 0.52
+S <- 40.6 - 35.3
+Q <- h2 * S
+oQ <- 37.9 - 35.3
+```
+
+The heritability `r h2` of the bristle number was estimated in the previous generations. The selected parents had a mean superiority of `r S`. The predicted response is S * h2 = `r Q`. The observed response was `r oQ`.
+However this result is only valid for this generation, because heritability is expected to change in each generation.
+
+When a normal distribution of the values for a trait in a population can be assumed, which is usually the case you can derivate the intensity of selection of the proportion selected.
+
+The goal is of course to increase the response to selection when we are breeding. 
+Increasing intensity of selection seems at first sight to be a straightforward  way of improving the response.
+However there are two factors that limit increasing intensity of selection:
+1. The reproductive rate
+2. Inbreeding
 # References
 

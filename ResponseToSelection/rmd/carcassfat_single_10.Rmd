@@ -16,6 +16,20 @@ aim: Compute genetic gain for carcass fat (CF) in an univariate case.
 The genetic gain of a breeding value is possible to compute from: 
 
 $$Q = \frac {ir^*\sigma^*}{L}$$
+We start by computing the selection intensity $i$ for a given proportion $p$
+
+```{r SelectionIntensity}
+#intensity of selection (i) computed by proportian selected (p)
+p <- 0.2
+(i <- dnorm(qnorm(1-p))/p)
+```
+
+The next step is to compute the variance reduction factor $k$
+
+```{r VarianceReductionFactor}
+#factor of variance reduction (k)
+(k <- i * (i - qnorm(p)))
+```
 
 ```{r}
 #intensity of selection (i) computed by proportian selected (p)
@@ -32,6 +46,8 @@ suppressPackageStartupMessages( library(pedigreemm))
 numb <- pr+2
 ped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,2,2,2,2,2), label = 1:numb)
 A <- getA(ped)
+Ainv <- as.matrix(getAInv(ped))
+
 #genetic variance (g) of the trait
 g<-0.3
 #phenotypic variance (p) of the trait
@@ -44,6 +60,9 @@ Z<-cbind(matrix(0, nrow=pr,ncol=2),diag(pr))
 R<-Z%*%(A%x%p)%*%t(Z)-Z%*%(A%x%g)%*%t(Z)
 #prediction error variance (PEV)
 PEV <- solve(t(Z)%*%solve(R)%*%Z+solve(A)%x%(1/g))[1,1]
+# no kronecker %x% for scalar multiplication
+PEV <- solve(t(Z)%*%solve(R)%*%Z+solve(A)*(1/g))[1,1]
+
 #covariance matrix (C) between true and estimated breeding values
 C <-g-PEV
 #asymptotic covariance matrix (Ca) between true and estimated breeding values

@@ -141,17 +141,24 @@ These environmental effects have been included in BLUP and used to separate addi
 Trait correlations, heritabilities and phenotypic/genetic variances have been computed by the method estimation of variance components using the Software VCE created by Groeneveld [@Kunz2018].
 The results shown as genetic and phenotypic variances/covariances are available at \@ref(tab:variancecomponents).
 
-```{r calvesvariancecomponents, echo=FALSE}
+```{r variancecomponents, echo=FALSE}
 library(knitr)
 library(kableExtra)
 x<-data.frame(c("cCC","cCF", "cCW"), c(0.4015, -0.00993, 0.01828), c( -0.00993, 0.12067,0.00050), c(0.01828,0.00050,0.00311))
 colnames(x) <- c(" ","cCC","cCF", "cCW")
+
+z<-y<-data.frame(c(0.35845, 0.13154, 0.02907), c( 0.35845, 0.23651,0.02463), c(0.02907,0.23651,0.00904))
+colnames(z) <- c("cCC","cCF", "cCW")
+
 y<-data.frame(c(0.79947, 0.14951, 0.05394), c( 0.14951, 0.39365,0.02979), c(0.05394,0.02979,0.06395), c(0.50221, 0.30654, 0.22078))
 colnames(y) <- c("cCC","cCF", "cCW", "heritability")
-x<-cbind(x,y)
+
+x<-cbind(x,z,y)
 kable(x, booktabs=T, caption="Genetic and phenotypic variances-covariances for calves (c) derived from Kunz (2018)") %>%
 kable_styling(latex_options=c("hold_position")) %>%
- add_header_above(c("","genetic"=3,"phenotypic"=3,""))
+ add_header_above(c("","genetic"=3,"residual"=3, "phenotypic"=3,"")) %>%
+  column_spec(c(1,4,7,10), border_right = T)
+
 
 ```
 ---
