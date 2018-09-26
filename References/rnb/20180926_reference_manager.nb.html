@@ -192,10 +192,129 @@ $(document).ready(function () {
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="the-plan" class="section level2">
+<h2>The Plan</h2>
+</div>
+<div id="examples-and-tests" class="section level2">
+<h2>Examples and Tests</h2>
+<p>Working through the examples in the vignette leads to</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc19iaWJfZmlsZSA8LSBzeXN0ZW0uZmlsZShcIkJpYlwiLCBcImJpYmxhdGV4RXhhbXBsZXMuYmliXCIsIHBhY2thZ2UgPSBcIlJlZk1hbmFnZVJcIilcbnN0b3BpZm5vdChmaWxlLmV4aXN0cyhzX2JpYl9maWxlKSlcbmJpYiA8LSBSZWZNYW5hZ2VSOjpSZWFkQmliKHNfYmliX2ZpbGUsIGNoZWNrID0gRkFMU0UpXG5wcmludChiaWJbYyhcImNtc1wiLCBcImpjZ1wiLCBcImN0YW5cIildLCAub3B0cyA9IGxpc3QoY2hlY2suZW50cmllcyA9IEZBTFNFKSlcbmBgYCJ9 -->
+<pre class="r"><code>s_bib_file &lt;- system.file(&quot;Bib&quot;, &quot;biblatexExamples.bib&quot;, package = &quot;RefManageR&quot;)
+stopifnot(file.exists(s_bib_file))
+bib &lt;- RefManageR::ReadBib(s_bib_file, check = FALSE)
+print(bib[c(&quot;cms&quot;, &quot;jcg&quot;, &quot;ctan&quot;)], .opts = list(check.entries = FALSE))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIF9UaGUgQ2hpY2FnbyBNYW51YWwgb2YgU3R5bGUuIFRoZSBFc3NlbnRpYWwgR3VpZGUgZm9yIFdyaXRlcnMsIEVkaXRvcnMsIGFuZCBQdWJsaXNoZXJzXy4gMTV0aCBlZC4gQ2hpY2FnbywgSWxsLjpcblVuaXZlcnNpdHkgb2YgQ2hpY2FnbyBQcmVzcywgMjAwMy4gSVNCTjogMC0yMjYtMTA0MDMtNi5cblxuWzJdIF9Db21wdXRlcnMgYW5kIEdyYXBoaWNzXy4gMzUuNCAoMjAxMSk6IF9TZW1hbnRpYyAzRCBNZWRpYSBhbmQgQ29udGVudF8uIElTU046IDAwOTctODQ5My5cblxuWzNdIF9DVEFOLiBUaGUgQ29tcHJlaGVuc2l2ZSBUZVggQXJjaGl2ZSBOZXR3b3JrXy4gMjAwNi4gPFVSTDogaHR0cHM6Ly93d3cuY3Rhbi5vcmc+ICh2aXNpdGVkIG9uIDEwLzAxLzIwMDYpLlxuIn0= -->
+<pre><code>[1] _The Chicago Manual of Style. The Essential Guide for Writers, Editors, and Publishers_. 15th ed. Chicago, Ill.:
+University of Chicago Press, 2003. ISBN: 0-226-10403-6.
+
+[2] _Computers and Graphics_. 35.4 (2011): _Semantic 3D Media and Content_. ISSN: 0097-8493.
+
+[3] _CTAN. The Comprehensive TeX Archive Network_. 2006. &lt;URL: https://www.ctan.org&gt; (visited on 10/01/2006).</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="output" class="section level2">
+<h2>Output</h2>
+<p>Writing some records to a bibfile</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuUmVmTWFuYWdlUjo6QmliT3B0aW9ucyhjaGVjay5lbnRyaWVzID0gRkFMU0UpXG5SZWZNYW5hZ2VSOjp0b0JpYmxhdGV4KGJpYltjKFwiY21zXCIsIFwiamNnXCIsIFwiY3RhblwiKV0pXG5gYGAifQ== -->
+<pre class="r"><code>RefManageR::BibOptions(check.entries = FALSE)
+RefManageR::toBiblatex(bib[c(&quot;cms&quot;, &quot;jcg&quot;, &quot;ctan&quot;)])</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQE1hbnVhbHtjbXMsXG4gIHRpdGxlID0ge1RoZSBDaGljYWdvIE1hbnVhbCBvZiBTdHlsZX0sXG4gIGRhdGUgPSB7MjAwM30sXG4gIHN1YnRpdGxlID0ge1RoZSBFc3NlbnRpYWwgR3VpZGUgZm9yIFdyaXRlcnMsIEVkaXRvcnMsIGFuZCBQdWJsaXNoZXJzfSxcbiAgZWRpdGlvbiA9IHsxNX0sXG4gIHB1Ymxpc2hlciA9IHtVbml2ZXJzaXR5IG9mIENoaWNhZ28gUHJlc3N9LFxuICBsb2NhdGlvbiA9IHtDaGljYWdvLCBJbGwufSxcbiAgaXNibiA9IHswLTIyNi0xMDQwMy02fSxcbiAgbGFiZWwgPSB7Q01TfSxcbiAgbGFuZ2lkID0ge2VuZ2xpc2h9LFxuICBsYW5naWRvcHRzID0ge3ZhcmlhbnQ9YW1lcmljYW59LFxuICBzb3J0dGl0bGUgPSB7Q2hpY2FnbyBNYW51YWwgb2YgU3R5bGV9LFxuICBpbmRleHRpdGxlID0ge0NoaWNhZ28gTWFudWFsIG9mIFN0eWxlLCBUaGV9LFxuICBzaG9ydHRpdGxlID0ge0NoaWNhZ28gTWFudWFsIG9mIFN0eWxlfSxcbiAgYW5ub3RhdGlvbiA9IHtUaGlzIGlzIGEgXFx0ZXh0dHR7bWFudWFsfSBlbnRyeSB3aXRob3V0IGFuIFxcdGV4dHR0e2F1dGhvcn0gb3JcbiAgICAgICAgICAgICAgICAgIFxcdGV4dHR0e2VkaXRvcn0uIE5vdGUgdGhlIFxcdGV4dHR0e2xhYmVsfSBmaWVsZCBpbiB0aGUgZGF0YWJhc2VcbiAgICAgICAgICAgICAgICAgIGZpbGUgd2hpY2ggaXMgcHJvdmlkZWQgZm9yIGF1dGhvci15ZWFyIGNpdGF0aW9uIHN0eWxlcy4gQWxzb1xuICAgICAgICAgICAgICAgICAgbm90ZSB0aGUgXFx0ZXh0dHR7c29ydHRpdGxlfSBhbmQgXFx0ZXh0dHR7aW5kZXh0aXRsZX0gZmllbGRzLiBCeVxuICAgICAgICAgICAgICAgICAgZGVmYXVsdCwgYWxsIGVudHJpZXMgd2l0aG91dCBhbiBcXHRleHR0dHthdXRob3J9IG9yXG4gICAgICAgICAgICAgICAgICBcXHRleHR0dHtlZGl0b3J9IGFyZSBhbHBoYWJldGl6ZWQgYnkgXFx0ZXh0dHR7dGl0bGV9IGJ1dCB3ZSB3YW50XG4gICAgICAgICAgICAgICAgICB0aGlzIGVudHJ5IHRvIGJlIGFscGhhYmV0aXplZCB1bmRlciBcXGVucXVvdGUqe0N9IHJhdGhlciB0aGFuXG4gICAgICAgICAgICAgICAgICBcXGVucXVvdGUqe1R9LiBUaGVyZSdzIGFsc28gYW4gXFx0ZXh0dHR7aXNibn0gZmllbGR9LFxufVxuXG5AUGVyaW9kaWNhbHtqY2csXG4gIHRpdGxlID0ge0NvbXB1dGVycyBhbmQgR3JhcGhpY3N9LFxuICB5ZWFyID0gezIwMTF9LFxuICBpc3N1ZXRpdGxlID0ge1NlbWFudGljIHszRH0gTWVkaWEgYW5kIENvbnRlbnR9LFxuICB2b2x1bWUgPSB7MzV9LFxuICBudW1iZXIgPSB7NH0sXG4gIGlzc24gPSB7MDA5Ny04NDkzfSxcbiAgYW5ub3RhdGlvbiA9IHtUaGlzIGlzIGEgXFx0ZXh0dHR7cGVyaW9kaWNhbH0gZW50cnkgd2l0aCBhbiBcXHRleHR0dHtpc3NufVxuICAgICAgICAgICAgICAgICAgZmllbGQufSxcbn1cblxuQE9ubGluZXtjdGFuLFxuICB0aXRsZSA9IHtDVEFOfSxcbiAgZGF0ZSA9IHsyMDA2fSxcbiAgdXJsID0ge2h0dHBzOi8vd3d3LmN0YW4ub3JnfSxcbiAgc3VidGl0bGUgPSB7VGhlIENvbXByZWhlbnNpdmUgVGVYIEFyY2hpdmUgTmV0d29ya30sXG4gIHVybGRhdGUgPSB7MjAwNi0xMC0wMX0sXG4gIGxhYmVsID0ge0NUQU59LFxuICBsYW5naWQgPSB7ZW5nbGlzaH0sXG4gIGxhbmdpZG9wdHMgPSB7dmFyaWFudD1hbWVyaWNhbn0sXG4gIGFubm90YXRpb24gPSB7VGhpcyBpcyBhbiBcXHRleHR0dHtvbmxpbmV9IGVudHJ5LiBUaGUgXFx0ZXh0c2N7dXJsfSwgd2hpY2ggaXNcbiAgICAgICAgICAgICAgICAgIGdpdmVuIGluIHRoZSBcXHRleHR0dHt1cmx9IGZpZWxkLCBpcyB0cmFuc2Zvcm1lZCBpbnRvIGFcbiAgICAgICAgICAgICAgICAgIGNsaWNrYWJsZSBsaW5rIGlmIFxcdGV4dHR0e2h5cGVycmVmfSBzdXBwb3J0IGhhcyBiZWVuXG4gICAgICAgICAgICAgICAgICBlbmFibGVkLiBOb3RlIHRoZSBmb3JtYXQgb2YgdGhlIFxcdGV4dHR0e3VybGRhdGV9IGZpZWxkXG4gICAgICAgICAgICAgICAgICAoXFx0ZXh0dHR7eXl5eS1tbS1kZH0pIGluIHRoZSBkYXRhYmFzZSBmaWxlLiBBbHNvIG5vdGUgdGhlXG4gICAgICAgICAgICAgICAgICBcXHRleHR0dHtsYWJlbH0gZmllbGQgd2hpY2ggbWF5IGJlIHVzZWQgYXMgYSBmYWxsYmFjayBieVxuICAgICAgICAgICAgICAgICAgY2l0YXRpb24gc3R5bGVzIHdoaWNoIG5lZWQgYW4gXFx0ZXh0dHR7YXV0aG9yfSBhbmRcXHNsYXNoIG9yIGFcbiAgICAgICAgICAgICAgICAgIFxcdGV4dHR0e3llYXJ9fSxcbn1cbiJ9 -->
+<pre><code>@Manual{cms,
+  title = {The Chicago Manual of Style},
+  date = {2003},
+  subtitle = {The Essential Guide for Writers, Editors, and Publishers},
+  edition = {15},
+  publisher = {University of Chicago Press},
+  location = {Chicago, Ill.},
+  isbn = {0-226-10403-6},
+  label = {CMS},
+  langid = {english},
+  langidopts = {variant=american},
+  sorttitle = {Chicago Manual of Style},
+  indextitle = {Chicago Manual of Style, The},
+  shorttitle = {Chicago Manual of Style},
+  annotation = {This is a \texttt{manual} entry without an \texttt{author} or
+                  \texttt{editor}. Note the \texttt{label} field in the database
+                  file which is provided for author-year citation styles. Also
+                  note the \texttt{sorttitle} and \texttt{indextitle} fields. By
+                  default, all entries without an \texttt{author} or
+                  \texttt{editor} are alphabetized by \texttt{title} but we want
+                  this entry to be alphabetized under \enquote*{C} rather than
+                  \enquote*{T}. There's also an \texttt{isbn} field},
+}
+
+@Periodical{jcg,
+  title = {Computers and Graphics},
+  year = {2011},
+  issuetitle = {Semantic {3D} Media and Content},
+  volume = {35},
+  number = {4},
+  issn = {0097-8493},
+  annotation = {This is a \texttt{periodical} entry with an \texttt{issn}
+                  field.},
+}
+
+@Online{ctan,
+  title = {CTAN},
+  date = {2006},
+  url = {https://www.ctan.org},
+  subtitle = {The Comprehensive TeX Archive Network},
+  urldate = {2006-10-01},
+  label = {CTAN},
+  langid = {english},
+  langidopts = {variant=american},
+  annotation = {This is an \texttt{online} entry. The \textsc{url}, which is
+                  given in the \texttt{url} field, is transformed into a
+                  clickable link if \texttt{hyperref} support has been
+                  enabled. Note the format of the \texttt{urldate} field
+                  (\texttt{yyyy-mm-dd}) in the database file. Also note the
+                  \texttt{label} field which may be used as a fallback by
+                  citation styles which need an \texttt{author} and\slash or a
+                  \texttt{year}},
+}</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>The whole thing is written to a file using <code>cat()</code>.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBjYXQoUmVmTWFuYWdlUjo6dG9CaWJsYXRleChiaWJbYyhcImNtc1wiLCBcImpjZ1wiLCBcImN0YW5cIildKSwgZmlsZSA9IFwicmVmZXJlbmNlcy5iaWJcIiwgc2VwID0gXCJcXG5cIilcblJlZk1hbmFnZVI6OldyaXRlQmliKGJpYiA9IGJpYltjKFwiY21zXCIsIFwiamNnXCIsIFwiY3RhblwiKV0pXG5gYGAifQ== -->
+<pre class="r"><code># cat(RefManageR::toBiblatex(bib[c(&quot;cms&quot;, &quot;jcg&quot;, &quot;ctan&quot;)]), file = &quot;references.bib&quot;, sep = &quot;\n&quot;)
+RefManageR::WriteBib(bib = bib[c(&quot;cms&quot;, &quot;jcg&quot;, &quot;ctan&quot;)])</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV3JpdGluZyAzIEJpYnRleCBlbnRyaWVzIC4uLiBPS1xuUmVzdWx0cyB3cml0dGVuIHRvIGZpbGUg4oCYcmVmZXJlbmNlcy5iaWLigJlcbiJ9 -->
+<pre><code>Writing 3 Bibtex entries ... OK
+Results written to file ‘references.bib’</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Then, we try to use the <code>citr</code>-package addin to include citations.</p>
+<p>The citations used with <code>citr</code> produces the following: <span class="citation">(“Semantic 3d Media and Content” 2011)</span>.</p>
+<p>Yet anoter citation in <span class="citation">(“CTAN: The Comprehensive Tex Archive Network” 2006)</span>.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<!-- rnb-text-end -->
+<div id="refs" class="references">
+<div id="ref-ctan">
+<p>“CTAN: The Comprehensive Tex Archive Network.” 2006. <a href="https://www.ctan.org" class="uri">https://www.ctan.org</a>.</p>
+</div>
+<div id="ref-jcg">
+<p>“Semantic 3d Media and Content.” 2011. <em>Computers and Graphics</em> 35 (4).</p>
+</div>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVmZXJlbmNlTWFuYWdlciBIb3ctVG8iCmF1dGhvcjogIlBldGVyIHZvbiBSb2hyIgpkYXRlOiAiMjAxOC0wOS0yNiIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKVGhpcyBub3RlYm9vayBwcm92aWRlcyBzb21lIGV4YW1wbGVzIG9uIGhvdyB0byB3b3JrIHdpdGggdGhlIHBhY2thZ2UgYFJlZmVyZW5jZU1hbmFnZXJgIGZyb20gcm9wZW5zY2llLgoKCiMjIERvY3VtZW50YXRpb24KVGhlIHZpZ25ldHRlIHNlYW1zIHRvIGJlIGF2YWlsYWJsZSBmcm9tIGh0dHBzOi8vYXJ4aXYub3JnL3BkZi8xNDAzLjIwMzZ2MS5wZGYKCgojIyBJbnN0YWxsYXRpb24KVGhlIHBhY2thZ2UgaXMgaW5zdGFsbGVkIHZpYQoKYGBge3IgZXZhbD1GQUxTRX0KZGV2dG9vbHM6Omluc3RhbGxfZ2l0aHViKCJyb3BlbnNjaS9SZWZNYW5hZ2VSIikKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVmZXJlbmNlTWFuYWdlciBIb3ctVG8iCmF1dGhvcjogIlBldGVyIHZvbiBSb2hyIgpkYXRlOiAiMjAxOC0wOS0yNiIKb3V0cHV0OiBodG1sX25vdGVib29rCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKLS0tCgpUaGlzIG5vdGVib29rIHByb3ZpZGVzIHNvbWUgZXhhbXBsZXMgb24gaG93IHRvIHdvcmsgd2l0aCB0aGUgcGFja2FnZSBgUmVmZXJlbmNlTWFuYWdlcmAgZnJvbSByb3BlbnNjaWUuCgoKIyMgRG9jdW1lbnRhdGlvbgpUaGUgdmlnbmV0dGUgc2VhbXMgdG8gYmUgYXZhaWxhYmxlIGZyb20gaHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE0MDMuMjAzNnYxLnBkZgoKCiMjIEluc3RhbGxhdGlvbgpUaGUgcGFja2FnZSBpcyBpbnN0YWxsZWQgdmlhCgpgYGB7ciBldmFsPUZBTFNFfQpkZXZ0b29sczo6aW5zdGFsbF9naXRodWIoInJvcGVuc2NpL1JlZk1hbmFnZVIiKQpgYGAKCiMjIFRoZSBQbGFuCgoKIyMgRXhhbXBsZXMgYW5kIFRlc3RzCldvcmtpbmcgdGhyb3VnaCB0aGUgZXhhbXBsZXMgaW4gdGhlIHZpZ25ldHRlIGxlYWRzIHRvCgpgYGB7cn0Kc19iaWJfZmlsZSA8LSBzeXN0ZW0uZmlsZSgiQmliIiwgImJpYmxhdGV4RXhhbXBsZXMuYmliIiwgcGFja2FnZSA9ICJSZWZNYW5hZ2VSIikKc3RvcGlmbm90KGZpbGUuZXhpc3RzKHNfYmliX2ZpbGUpKQpiaWIgPC0gUmVmTWFuYWdlUjo6UmVhZEJpYihzX2JpYl9maWxlLCBjaGVjayA9IEZBTFNFKQpwcmludChiaWJbYygiY21zIiwgImpjZyIsICJjdGFuIildLCAub3B0cyA9IGxpc3QoY2hlY2suZW50cmllcyA9IEZBTFNFKSkKYGBgCgoKIyMgT3V0cHV0CldyaXRpbmcgc29tZSByZWNvcmRzIHRvIGEgYmliZmlsZQoKYGBge3J9ClJlZk1hbmFnZVI6OkJpYk9wdGlvbnMoY2hlY2suZW50cmllcyA9IEZBTFNFKQpSZWZNYW5hZ2VSOjp0b0JpYmxhdGV4KGJpYltjKCJjbXMiLCAiamNnIiwgImN0YW4iKV0pCmBgYAoKVGhlIHdob2xlIHRoaW5nIGlzIHdyaXR0ZW4gdG8gYSBmaWxlIHVzaW5nIGBjYXQoKWAuIAoKYGBge3J9CiMgY2F0KFJlZk1hbmFnZVI6OnRvQmlibGF0ZXgoYmliW2MoImNtcyIsICJqY2ciLCAiY3RhbiIpXSksIGZpbGUgPSAicmVmZXJlbmNlcy5iaWIiLCBzZXAgPSAiXG4iKQpSZWZNYW5hZ2VSOjpXcml0ZUJpYihiaWIgPSBiaWJbYygiY21zIiwgImpjZyIsICJjdGFuIildKQpgYGAKClRoZW4sIHdlIHRyeSB0byB1c2UgdGhlIGBjaXRyYC1wYWNrYWdlIGFkZGluIHRvIGluY2x1ZGUgY2l0YXRpb25zLiAKClRoZSBjaXRhdGlvbnMgdXNlZCB3aXRoIGBjaXRyYCBwcm9kdWNlcyB0aGUgZm9sbG93aW5nOiBbQGpjZ10uCgpZZXQgYW5vdGVyIGNpdGF0aW9uIGluIFtAY3Rhbl0uCgojIyBSZWZlcmVuY2VzCg==</div>
 
 
 

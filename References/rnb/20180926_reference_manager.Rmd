@@ -3,6 +3,7 @@ title: "ReferenceManager How-To"
 author: "Peter von Rohr"
 date: "2018-09-26"
 output: html_notebook
+bibliography: references.bib
 ---
 
 This notebook provides some examples on how to work with the package `ReferenceManager` from ropenscie.
@@ -19,3 +20,39 @@ The package is installed via
 devtools::install_github("ropensci/RefManageR")
 ```
 
+## The Plan
+
+
+## Examples and Tests
+Working through the examples in the vignette leads to
+
+```{r}
+s_bib_file <- system.file("Bib", "biblatexExamples.bib", package = "RefManageR")
+stopifnot(file.exists(s_bib_file))
+bib <- RefManageR::ReadBib(s_bib_file, check = FALSE)
+print(bib[c("cms", "jcg", "ctan")], .opts = list(check.entries = FALSE))
+```
+
+
+## Output
+Writing some records to a bibfile
+
+```{r}
+RefManageR::BibOptions(check.entries = FALSE)
+RefManageR::toBiblatex(bib[c("cms", "jcg", "ctan")])
+```
+
+The whole thing is written to a file using `cat()`. 
+
+```{r}
+# cat(RefManageR::toBiblatex(bib[c("cms", "jcg", "ctan")]), file = "references.bib", sep = "\n")
+RefManageR::WriteBib(bib = bib[c("cms", "jcg", "ctan")])
+```
+
+Then, we try to use the `citr`-package addin to include citations. 
+
+The citations used with `citr` produces the following: [@jcg].
+
+Yet anoter citation in [@ctan].
+
+## References
