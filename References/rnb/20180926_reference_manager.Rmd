@@ -1,0 +1,21 @@
+---
+title: "ReferenceManager How-To"
+author: "Peter von Rohr"
+date: "2018-09-26"
+output: html_notebook
+---
+
+This notebook provides some examples on how to work with the package `ReferenceManager` from ropenscie.
+
+
+## Documentation
+The vignette seams to be available from https://arxiv.org/pdf/1403.2036v1.pdf
+
+
+## Installation
+The package is installed via
+
+```{r eval=FALSE}
+devtools::install_github("ropensci/RefManageR")
+```
+
