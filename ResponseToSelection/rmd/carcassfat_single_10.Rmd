@@ -13,9 +13,65 @@ aim: Compute genetic gain for carcass fat (CF) in an univariate case.
 
 # Response to selection
 
-The genetic gain of a breeding value is possible to compute from: 
+I compute the genetic gain of a breeding value using the formula derived from @Phocas1998: 
 
 $$Q = \frac {ir^*\sigma^*}{L}$$
+
+$i$ is the selection intensity
+
+$L$ is the generation intervall in years
+
+$r^*$ is the accuracy of the of the breeding value of the selection candidate
+
+$\sigma^*$ is the standard deviation of the breeding value.
+
+$^*$ = indicates that reduction of variance during selection has been taken into account known as "Bulmer effect", value turns to asymptotic value [@Bulmer1971].
+
+### Selection intensity
+
+I compute the selection intensity from the assumed proportion of selected animals.
+The proportion of selected animals is the share of animals born that will be parents of the next generation. 
+
+
+The variable $r^*$ has to be computed first with
+$$r^*=\sqrt{\frac {C^*}{ \sigma_g^2}}$$
+
+$C_y^*$ is the asymptotic covariance between true and estimated breeding values of the selection candidate before the selection
+
+$\sigma^*$ has to be computed with
+$$(\sigma^*)^2=\sigma_g^2-kC^*$$
+
+$k$ = factor of variance reduction is available.
+
+$\sigma_g$ is the genetic standard deviation in the population and is available.
+
+However to solve these equations you need to first calculate the $C^*$ by the formula:
+$$C^*=\frac{C}{1+0.5k} $$
+
+$C$ is defined by
+$$C=\sigma_g^2-PEV$$
+
+$PEV$ is the prediction error variance
+
+I can compute $PEV$ with the formula derived from [@Phocas1996]. I take only the part of the PEV-matrix that belongs to the selection candidate, which is one element of the matrix.
+$$
+PEV=(Z^TR^{-1}Z+A^{-1} \otimes (\sigma_g^2)^{-1})^{-1}
+$$
+
+$A$ is the relationship matrix of the selection candidate and is available
+
+$\otimes$ is a kronecker product
+
+$Z$ is a design matrix that connects the records of observations (does not include the breeding candidate and its parents) with the breeding values (includes the candidate and its parents) and is available.
+
+$R$ is the variance-relationship matrix of the residuals for the traits and the recorded animals.
+
+I can compute $R_y$ with the following formula.
+$$R=Z(A\otimes \sigma_p^2)Z^T-Z(A\otimes \sigma_g^2)Z^T$$
+
+$\sigma_p$ is the phenotypic variance and available.
+
+
 I start by computing the selection intensity $i$ for a given proportion $p$
 
 ```{r SelIntensity}
@@ -134,53 +190,6 @@ Q<- i*ra*sqrt(ga)/L
 Q
 ```
 
-$i$ is the selection intensity and is available.
-
-$L$ is the generation intervall in years and is available.
-
-$r^*$ is the accuracy of the estimated aggregate genotype of the selection candidate.
-
-$\sigma^*$ is the standard deviation of the breeding value.
-
-$^*$ = indicates that reduction of variance during selection has been taken into account known as "Bulmer effect", values turn to asymptotic values [@Bulmer1971].
-
-The variable $r^*$ has to be computed first with
-$$r^*=\sqrt{\frac {C^*}{ \sigma_g^2}}$$
-
-$C_y^*$ is the asymptotic covariance between true and estimated breeding values of the selection candidate before the selection
-
-$\sigma^*$ has to be computed with
-$$(\sigma^*)^2=\sigma_g^2-kC^*$$
-
-$k$ = factor of variance reduction is available.
-
-$\sigma_g$ is the genetic standard deviation in the population and is available.
-
-However to solve these equations you need to first calculate the $C^*$ by the formula:
-$$C^*=\frac{C}{1+0.5k} $$
-
-$C$ is defined by
-$$C=\sigma_g^2-PEV$$
-
-$PEV$ is the prediction error variance
-
-I can compute $PEV$ with the formula derived from [@Phocas1996]. I take only the part of the PEV-matrix that belongs to the selection candidate, which is one element of the matrix.
-$$
-PEV=(Z^TR^{-1}Z+A^{-1} \otimes (\sigma_g^2)^{-1})^{-1}
-$$
-
-$A$ is relationship matrix and available
-
-$\otimes$ is a kronecker product
-
-$Z$ is a design matrix that connects the records of observations (does not include the breeding candidate and its parents) with the breeding values (includes the candidate and its parents) and is available.
-
-$R$ is the variance-relationship matrix of the residuals for the traits and the recorded animals.
-
-I can compute $R_y$ with the following formula.
-$$R=Z(A\otimes \sigma_p^2)Z^T-Z(A\otimes \sigma_g^2)Z^T$$
-
-$\sigma_p$ is the phenotypic variance and available.
 
 
 # References

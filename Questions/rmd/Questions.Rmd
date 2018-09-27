@@ -368,7 +368,10 @@ data.frame(Kalb =c(1,2,3,5,3),
     * Introduction (short), M+M with subsections of approaches, Results also with subsections, Discussion without subsections, Conclusion that ties to Introduction.
     
 * How can I approximate the generation intervall?
-    *
+    * I can ask Sophie according to Peter. An approximation will do.
+
+* Should I go from bottom to top (how I computed it) or top to bottom (why I computed it like this) when explaining how to compute response to selection?
+    * I should go from top to bottom according to Peter to make clear the aim of the computations from the beginning. This also means that I will be forced to decouple the R chunks from the explanations. I will put the R chunk which are bottom to top into the annex of the paper.
     
 
 
