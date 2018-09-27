@@ -373,7 +373,13 @@ data.frame(Kalb =c(1,2,3,5,3),
 * Should I go from bottom to top (how I computed it) or top to bottom (why I computed it like this) when explaining how to compute response to selection?
     * I should go from top to bottom according to Peter to make clear the aim of the computations from the beginning. This also means that I will be forced to decouple the R chunks from the explanations. I will put the R chunk which are bottom to top into the annex of the paper.
     
+* Should I use tables to show all variable values in M+M? Then I could work with one big code chunk.
+    *
 
+* Should I use a single selection path model?
+    
+* Should I start with the method to assess the suitability of carcass fat for deriving early maturity and afterwards mention the material? Actually I just need to know the variance components of the breeding value estimation. I shouln't make it difficult for the reader to know what it all is about.
+    *
 
 \begin{equation}
 \label{eq-abc}

@@ -4,27 +4,118 @@ author: "Silvan"
 date: "27 9 2018"
 output: pdf_document
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo=FALSE}
+#intensity of selection (i) computed by proportian selected (p)
+p <- 0.2
+i <- dnorm(qnorm(1-p))/p
+#factor of variance reduction (k)
+k <- i * (i - qnorm(p))
+#generation intervall (L) in years
+L <- 2
+#number of progeny (pr) of the selection candidate
+pr<-10
+#relationshipmatrix (A) of the selection candidate
+suppressPackageStartupMessages( library(pedigreemm))
+numb <- pr+2
+ped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,2,2,2,2,2), label = 1:numb)
+A <- getA(ped)
+Ainv <- as.matrix(getAInv(ped))
+#genetic variance (g) of the trait
+g<-0.12067
+#phenotypic variance (ph) of the trait
+ph<-0.39365
+#residual variance (r) of the trait
+r<-0.23651
+#design matrix (Z) connecting the records of observations with the breeding values
+Z<-cbind(matrix(0, nrow=pr,ncol=2),diag(pr))
+#variance-relationship matrix (R) of the residuals for the recorded animals
+R<- r%x%diag(pr)
+#covariance (C) between true and estimated breeding value
+C <-g-PEV
+#asymptotic covariance (Ca) between true and estimated breeding value
+Ca <- C/(1+0.5*k)
+# asymptotic variance of the breeding value (ga)
+ga <- g-k*Ca
+#asymptotic accuracy of the estimated breeding value (ra) of the selection candidate
+ra <- sqrt(Ca/ga)
+#genetic gain of a breeding value (Q)
+Q<- i*ra*sqrt(ga)/L
 ```
 
-## R Markdown
+aim: To compute genetic gain for carcass fat (CF) in an univariate case.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Response to selection
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+I compute the genetic gain of a breeding value using the formula derived from @Phocas1998: 
 
-```{r cars}
-summary(cars)
-```
+$$Q = \frac {ir^*\sigma^*}{L}$$
 
-## Including Plots
+$i$ is the selection intensity.
 
-You can also embed plots, for example:
+$L$ is the generation intervall in years.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+$r^*$ is the asymptotic accuracy of the of the breeding value of the selection candidate.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+$\sigma^*$ is the asymptotic standard deviation of the breeding value.
+
+$^*$ = indicates that asymptotic reduction of variance during selection has been taken into account in the computations [@Bulmer1971].
+
+### Selection intensity
+
+I computed the selection intensity from the assumed proportion (p) of selected animals using the R-command `dnorm(qnorm(1-p))/p`.
+The proportion of selected animals is the share of animals born that will be parents of the next generation.
+
+I assumed normal distribution of phenotypes and genotypes in the population.
+Therefore I could use the characteristics of normal distributions to compute i with p as only input variable.
+
+### Generation intervall
+
+The generation intervall describes how often selection occurs.
+There are no genomic breeding values for carcass traits available yet in Switzerland.
+Progeny records are important to get sufficient accuracies of traditional breeding values.
+Therefore beef cattle breeders wait usually for progeny records until they select the parents of the next generation.
+This time also defines the generation intervall in this case. 
+Here the generation intervall is the mean age of selection candidates at which records of their progeny are available.
+I use Sophie's reference value.
+
+### Accuracy
+
+The variable $r^*$ has to be computed first with
+$$r^*=\sqrt{\frac {C^*}{(\sigma^*)^2}}$$
+
+$C_y^*$ is the asymptotic covariance between true and estimated breeding values of the selection candidate before the selection. Computation: see \ref(StdevUniv).
+
+### Standard deviation {@StdevUniv} 
+
+$\sigma^*$ has to be computed with
+$$\sigma^*=\sqrt{\sigma_g^2-kC^*}$$
+
+$k$ is the factor of variance reduction.
+
+$\sigma_g$ is the genetic standard deviation in the population.
+
+However to solve these equations you need to first calculate the $C^*$ by the formula:
+$$C^*=\frac{C}{1+0.5k} $$
+
+$C$ is defined by
+$$C=\sigma_g^2-PEV$$
+
+$PEV$ is the prediction error variance
+
+I can compute $PEV$ with the formula derived from [@Phocas1996]. I take only the part of the PEV-matrix that belongs to the selection candidate, which is one element of the matrix.
+$$
+PEV=(Z^TR^{-1}Z+A^{-1} \otimes (\sigma_g^2)^{-1})^{-1}
+$$
+
+$A$ is the relationship matrix of the selection candidate and is available
+
+$\otimes$ is a kronecker product
+
+$Z$ is a design matrix that connects the records of observations (does not include the breeding candidate and its parents) with the breeding values (includes the candidate and its parents) and is available.
+
+$R$ is the variance-relationship matrix of the residuals for the traits and the recorded animals.
+
+I can compute $R_y$ with the following formula.
+$$R=Z(A\otimes \sigma_p^2)Z^T-Z(A\otimes \sigma_g^2)Z^T$$
+
+$\sigma_p$ is the phenotypic variance and available.

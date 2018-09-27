@@ -92,37 +92,48 @@ Early maturity is only dependent on age at slaughter and carcass fat though.
 For there are two traits at once that influence early maturity, early maturity is not directly measurable.
 
 
-## Improvement of Early Maturity
-To breed for early maturity employees from Qualitas AG have proposed four strategies.
+## Strategies to improve Early Maturity
+To breed for early maturity employees from Qualitas AG have proposed four strategies, which I will evaluate.
 One of them is to derive the trait early maturity from the trait carcass fat.
-The derivation is based on the theoretical knowledge about growth and body composition in beef cattle.
 
-### Estimated Breeding Value (EBV) Carcass Fat
+### Deriving Early Maturity from Carcass Fat
+
+The derivation of one trait to another requires that the involved traits are closely correlated. 
+Carcass fat should be highly correlated with early maturity
+The derivation is based on the theoretical knowledge about growth and body composition in beef cattle.
 Usually muscles grow in an earlier stadium of growth than fat tissue indicating that carcass fat is usually the limiting factor for early maturity in beef cattle.
 This means that carcass fat should be highly correlated with early maturity.
 Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
 Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
-To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
+
+The characteristics of the breeding value carcass fat were the material to asses the suitability of carcass fat for deriving early maturity. 
+
+*To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
 I will use the results from the breeding value estimation as "material" to evaluate the efficiency of the breeding program.
-The explanations refering to the creation of the breeding value are based on the documentation of @Kunz2018.
+The explanations refering to the creation of the breeding value car are based on the documentation of @Kunz2018.*
+
+
 
 A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
 The breeding value is a widespread tool to rank animals in a breeding program.
 To compute the breeding values for carcass fat a best linear unbiased prediction (BLUP) model has been used.
-Multivariate BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variancec, trait covariances, environment factors and individual phenotypic observations.
-Multivariate means that BLUP accounts for the relationship between traits. 
-A Multivariariate BlUP always computes breeding values for all traits at once [@Mrode2003].
-Here we use phenotypic observations of three traits:
+Multivariate BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variancec, trait covariances, environment factors and individual phenotypic records.
+Multivariate means that BLUP accounts for the phenotypic, genetic and residual covariances between traits. 
+A Multivariariate BlUP computes breeding values synchronically for all involved traits [@Mrode2003].
+Phenotypic records of three carcass traits are used to estimate the breeding value for carcass fat, :
 
-* carcass fat class as described in \@ref(tab:fatclass) 
-* conformation class as described in \@ref(tab:conformationclass)
+* carcass fat as described in \@ref(tab:fatclass) 
+* carcass conformation as described in \@ref(tab:conformationclass)
 * carcass weight [dt]
 
-Proviande employees have recorded the phenotypical observations at slaughterhouses in Switzerland during classification CHTAX of beef carcasses. 
-The phenotypic observations have then been divided into two groups based on the animals age at slaughter.
-While calves (c) have been less or 180 d old at slaughter, stirks (s) have been more than 180 d but less than 700 d old at slaughter.
-The two groups formed separate breeding values for carcass fat.
+Proviande employees have recorded the phenotypical observations of these traits at slaughterhouses in Switzerland during classification CHTAX of beef carcasses as described in section \ref(CHTAX). 
+Each beef carcass delivers one 
+The phenotypic observations have then been divided into two groups based on age at slaughter of the animal which delivered the phenotypic observation.
+
+While the group "calves (c)" included animals which have been less or 180 d old at slaughter, the group "stirks (s)" included animals which have been more than 180 d but less than 700 d old at slaughter.
 Animals 700 d or older at slaughter have not been included in the model.
+
+The two groups c and s formed separate breeding values of the carcass traits.
 An animals phenotypical observation is beside the genetic effects dependent on the environmental conditions the animal lives in.
 In BLUP the environmental effects on a phenotypic observation are either known fixed effects or unnkown random effects.
 To compute the breeding value for carcass fat, carcass conformation and carcass weight the following parameters of the animals environment have been used as fixed effects:
