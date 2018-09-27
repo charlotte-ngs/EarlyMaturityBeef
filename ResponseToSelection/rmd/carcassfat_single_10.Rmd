@@ -16,9 +16,9 @@ aim: Compute genetic gain for carcass fat (CF) in an univariate case.
 The genetic gain of a breeding value is possible to compute from: 
 
 $$Q = \frac {ir^*\sigma^*}{L}$$
-We start by computing the selection intensity $i$ for a given proportion $p$
+I start by computing the selection intensity $i$ for a given proportion $p$
 
-```{r SelectionIntensity}
+```{r SelIntensity}
 #intensity of selection (i) computed by proportian selected (p)
 p <- 0.2
 (i <- dnorm(qnorm(1-p))/p)
@@ -26,19 +26,23 @@ p <- 0.2
 
 The next step is to compute the variance reduction factor $k$
 
-```{r VarianceReductionFactor}
+```{r VarReductionFactor}
 #factor of variance reduction (k)
 (k <- i * (i - qnorm(p)))
 ```
 
-```{r}
-#intensity of selection (i) computed by proportian selected (p)
-p <- 0.2
-i <- dnorm(qnorm(1-p))/p
-#factor of variance reduction (k)
-k <- i * (i - qnorm(p))
+The generation intervall is empirically approximated (rule of thumb).
+
+```{r GenerationIntervall}
 #generation intervall (L) in years
 L <- 2
+```
+
+Then I can compute the relationship matrix of the selection candidate.
+The relationship matrix is defined by the number and type of records I have at the moment of selection.
+Here I assume to have 10 records of progeny from the selection candidate.
+
+```{r RelMat}
 #number of progeny (pr) of the selection candidate
 pr<-10
 #relationshipmatrix (A) of the selection candidate
@@ -47,32 +51,87 @@ numb <- pr+2
 ped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,2,2,2,2,2), label = 1:numb)
 A <- getA(ped)
 Ainv <- as.matrix(getAInv(ped))
+Ainv
+```
 
+I know the variance components from the estimation of variance components of @Kunz2018.
+
+```{r VarComp}
 #genetic variance (g) of the trait
-g<-0.3
-#phenotypic variance (p) of the trait
-p<-0.4
+g<-0.12067
+#phenotypic variance (ph) of the trait
+ph<-0.39365
 #residual variance (r) of the trait
-r<-p-g
+r<-0.23651
+```
+
+Then I compute the design matrix Z from the knowledge of available records and number of animals with breeding values.
+
+```{r DesignMat}
 #design matrix (Z) connecting the records of observations with the breeding values
 Z<-cbind(matrix(0, nrow=pr,ncol=2),diag(pr))
-#variance-relationship matrix (R) of the residuals for the recorded animals
-R<-Z%*%(A%x%p)%*%t(Z)-Z%*%(A%x%g)%*%t(Z)
-#prediction error variance (PEV)
-PEV <- solve(t(Z)%*%solve(R)%*%Z+solve(A)%x%(1/g))[1,1]
-# no kronecker %x% for scalar multiplication
-PEV <- solve(t(Z)%*%solve(R)%*%Z+solve(A)*(1/g))[1,1]
+Z
+```
 
-#covariance matrix (C) between true and estimated breeding values
+Then I compute the variance matrix of residuals by the knowledge of residual variance in the population and the number of records.
+
+```{r VarMatRes}
+#variance-relationship matrix (R) of the residuals for the recorded animals
+R<- r%x%diag(pr)
+R
+```
+
+The prediction of variance is the next variable I need to compute.
+To compute it I use Z, R, A and g.
+After computing the matrix I cut out the part which belongs to the selection candidate (either animal number 1 or 2 in the relationship matrix).
+This is then called the prediction error variance of the selection candidate.
+
+```{r PredErrorVar}
+#prediction error variance (PEV)
+PEV <- solve(t(Z)%*%solve(R)%*%Z+Ainv*(1/g))[1,1]
+PEV
+```
+
+From the prediction error variance I can compute the covariance between true and estimated breeding value of the selection candidate.
+
+```{r CovTrueEstBV}
+#covariance (C) between true and estimated breeding value
 C <-g-PEV
-#asymptotic covariance matrix (Ca) between true and estimated breeding values
+C
+```
+
+Then I compute the asymptotic pendant incorporating the factor of variance reduction. 
+
+```{r AsymptCovTrueEstBV}
+#asymptotic covariance (Ca) between true and estimated breeding value
 Ca <- C/(1+0.5*k)
-#variance of the breeding value (ga)
+Ca
+```
+
+I compute the asymptotic variance of the breeding value from the asymptotic covariance.
+
+```{r AsymptVarBV}
+# asymptotic variance of the breeding value (ga)
 ga <- g-k*Ca
-#asymptotic accuracy of the estimated aggregate genotype (ra) of the selection candidate
+ga
+```
+
+
+The asymptotic accuracy of the breeding value is defined by Ca and ga.
+
+```{r AsymptAccuracy}
+#asymptotic accuracy of the estimated breeding value (ra) of the selection candidate
 ra <- sqrt(Ca/ga)
+ra
+```
+
+Then I can compute the genetic gain.
+
+```{r GeneticGain}
+
 #genetic gain of a breeding value (Q)
 Q<- i*ra*sqrt(ga)/L
+Q
 ```
 
 $i$ is the selection intensity and is available.

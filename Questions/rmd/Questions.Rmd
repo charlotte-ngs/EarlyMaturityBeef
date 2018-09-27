@@ -364,7 +364,11 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How can I structure the M+M part of the thesis?
     * Chunk text chunk, give results of in-between steps.
     
-* 
+* How should I structure my Master Thesis?
+    * Introduction (short), M+M with subsections of approaches, Results also with subsections, Discussion without subsections, Conclusion that ties to Introduction.
+    
+* How can I approximate the generation intervall?
+    *
     
 
 
