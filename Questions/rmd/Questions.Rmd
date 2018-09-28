@@ -320,6 +320,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 * What does i.e. mean?
 
 * Should I use the term genetic gain or response to selection?
+    * In literature the genetic gain is more often used, but gain is also the live weight increase. This could be confusing.
 
 * How about completeley separate "Banktiere" and "Bankkälber"? Use separated variance covariance tables -> residuals only exist within each group.
     * Yes, this makes sense according to Sophie.
@@ -383,7 +384,15 @@ data.frame(Kalb =c(1,2,3,5,3),
     
 * How can I make clear that I only use the part of the selection candidate of the PEV?
 
-* Could I also compute the relationship matrix without the other parent and just indicating NA for the second parent? It does not matter I guess
+* Could I also compute the relationship matrix without the other parent and just indicating NA for the second parent? It does not matter I guess.
+
+* How do I assume the proportion of selected animals?
+
+* How about the strategy: Adjusting the correction function of carcass traits of the covariable "age at slaughter"?
+
+* Do I assume mass selection when computing genetic gain like @Kause2014?
+
+* Should I state like @Kause2014 that carcass fat and carcass conformations are scores? Label (score) in the table.
 
 \begin{equation}
 \label{eq-abc}

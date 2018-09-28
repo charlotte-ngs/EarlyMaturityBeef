@@ -3,8 +3,9 @@ title: "GeneticGainUnivariateSingleSP"
 author: "Silvan"
 date: "27 9 2018"
 output: pdf_document
+bibliography: /Users/silvan/Documents/EarlyMaturityBeef/embc-thesis-bd/library.bib
 ---
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 #intensity of selection (i) computed by proportian selected (p)
 p <- 0.2
 i <- dnorm(qnorm(1-p))/p
@@ -42,16 +43,14 @@ ga <- g-k*Ca
 ra <- sqrt(Ca/ga)
 #genetic gain of a breeding value (Q)
 Q<- i*ra*sqrt(ga)/L
-Q
 ```
 
-aim: To compute genetic gain for carcass fat (CF) in an univariate case.
+Aim: To compute genetic gain for carcass fat (CF) in an univariate case.
 
 # Genetic gain
 
 I computed the genetic gain of the breeding value carcass fat using the formula derived from @Phocas1998. 
 
-$$Q = \frac {ir^*\sigma^*}{L}$$
 \begin{equation}
 \label{GeneticGain}
 Q = \frac {ir^*\sigma^*}{L}
@@ -61,74 +60,91 @@ $i$ is the selection intensity.
 
 $L$ is the generation intervall in years.
 
-$r^*$ is the asymptotic accuracy of the of the breeding value of the selection candidate.
+$r$ is the asymptotic accuracy of the of the breeding value of the selection candidate.
 
-$\sigma^*$ is the asymptotic standard deviation of the breeding value.
+$\sigma$ is the asymptotic standard deviation of the breeding value.
 
-$^*$ = indicates that asymptotic reduction of variance during selection has been taken into account in the computations [@Bulmer1971].
+$*$ indicates that asymptotic reduction of variance during selection has been taken into account in the computations [@Bulmer1971].
 
-In the following sections I will describe how I computed the variables to get the value of genetic gain in \autoref{GeneticGain}
+In the following sections I will describe how I computed the variables to get the value of genetic gain in \autoref{GeneticGain}.
+I used RStudio to perform all computations [@RStudio2015]. 
+My RStudio-script is available in the annex (reference??).
 
-## Selection intensity {#SelInt}
+## Selection intensity $i$ {#SelInt}
 
-I computed the selection intensity from the assumed proportion (p) of selected animals using the R-command `dnorm(qnorm(1-p))/p`.
+I computed the selection intensity from the proportion (p, table??) of selected animals using the R-command `dnorm(qnorm(1-p))/p`.
 The proportion of selected animals is the share of animals born that will be parents of the next generation.
 I could use this computation method, because I assumed normal distribution of phenotypes and genotypes in the population (Hier Peter als Quelle, oder Lehrbuch?).
 
 
-## Generation intervall
+## Generation intervall $L$
 
 The generation intervall describes how often selection occurs.
-There are no genomic breeding values for carcass traits available yet in Switzerland.
-Progeny records are important to get sufficient accuracies of traditional breeding values.
-Therefore beef cattle breeders usually wait for progeny records until they select the parents of the next generation.
-The waiting time from birth to selection determines the generation intervall. 
 Here the generation intervall is the mean age of selection candidates at which records of their progeny are available.
 I use Sophie's reference value.
+The referen value is based on the following considerations:
+Progeny records are important to get sufficient accuracies of traditional breeding values.
+Therefore beef cattle breeders usually wait for progeny records until they select the parents of the next generation.
+This waiting time from birth to selection determined the generation intervall. 
 
-## Accuracy
+## Accuracy $r$
 
 I computed the asymptotic accuracy $r^*$ with the equation derived from @Phocas1998.
+\begin{equation}
+\label{Accuracy}
+r^*=\sqrt{\frac {C^*}{(\sigma^*)^2}}
+\end{equation}
 $$r^*=\sqrt{\frac {C^*}{(\sigma^*)^2}}$$
 
-$C_y^*$ is the asymptotic covariance between true and estimated breeding value of the selection candidate before the selection. 
-The computations of $C_y^*$ and $\sigma^*$ are present in section \ref(StdevUniv).
+$C^*$ is the asymptotic covariance between true and estimated breeding value of the selection candidate before the selection. 
+The computations of $C^*$ and $\sigma^*$ are present in section \ref(StdevUniv).
 
-## Standard deviation {#StdevUniv} 
+## Standard deviation $\sigma$ {#StdevUniv} 
 
 I used the following formula derived from Phocas@1998 to compute the asymptotic standard deviation $\sigma^*$ of the breeding value.
-
+\begin{equation}
+\label{Stdev}
+\sigma^*=\sqrt{\sigma_g^2-kC^*}
+\end{equation}
 $$\sigma^*=\sqrt{\sigma_g^2-kC^*}$$
 
 $k$ is the factor of variance reduction.
 
-$\sigma_g$ is the genetic standard deviation of the trait in the population.
+$\sigma_g$ is the genetic standard deviation of the trait in the population (table??).
 
 I computed $k$ by the R-command `i * (i - qnorm(p))` using the selection intensity (i) \ref(SelInt) and the proportion selected (p) (Hier Peter als Quelle?).
 
-
-@Kunz2018 has computed $\sigma_g$ which is available in table ??.
-
-### Covariance between true and estimated breeding value
+### Covariance between true and estimated breeding value $C$
 
 The tedious part was to compute the asymptotic covariance between true and estimated breeding value $C^*$.
 Again I derived the necessary equations from @Phocas1998.
+\begin{equation}
+\label{AsCovBV}
+C^*=\frac{C}{1+0.5k}
+\end{equation}
 $$C^*=\frac{C}{1+0.5k} $$
 
 $C$ is the non-asymptotic covariance between true and estimated breeding value.
 
 I computed $C$ using the equation
+\begin{equation}
+\label{CovBV}
+C=\sigma_g^2-PEV
+\end{equation}
 $$C=\sigma_g^2-PEV$$
 
 $PEV$ is the prediction error variance of the breeding value.
 
-### Prediction error variance
+### Prediction error variance $PEV$
 
 I computed $PEV$ using the equation.
 The $PEV$ needs to be a number for the previous equations.
 In the following equation $PEV$ is a $j$ x $j$ matrix where $j$ is the number of breeding values.
 Therefore I take only the part of the PEV-matrix that belongs to the selection candidate, which is one element of the matrix.
-
+\begin{equation}
+\label{PEV}
+PEV=(Z^TR^{-1}Z+A^{-1}(\sigma_g^2)^{-1})^{-1}
+\end{equation}
 $$
 PEV=(Z^TR^{-1}Z+A^{-1}(\sigma_g^2)^{-1})^{-1}
 $$
@@ -139,28 +155,33 @@ $Z$ is a design matrix connecting the records with the breeding values.
 
 $R$ is the residual variance matrix for the recorded animals.
 
-### Relationship and design matrices
+### Relationship matrix $A$ 
 
 I computed the relationship matrix $A$ using the R-package `pedigreemm`.
 $A$ is dependent on the number and type of records available to compute the breeding value of the selection candidate.
 I assumed a scenario of $y$ progeny records for the selection candidate (based on?).
 The dimension of $A$ is $y+1$ x $y+1$, where $+1$ indicates the selection candidate. 
 
+### Design matrix $Z$
+
 $Z$ is a $y$ x $y+1$ dimensional matrix with values of 0 or 1.
 I computed $Z$ with the R command `cbind(matrix(0, nrow=pr,ncol=1),diag(pr))`.
 
-### Residual variance matrix
+### Residual variance matrix $R$
 
 $R$ is a diagonal matrix with the residual variance $\sigma_r^2$ as diagonal elements.
 I computed $R$ with the equation
-
+\begin{equation}
+\label{ResVar}
+R=\sigma_r^2I_n
+\end{equation}
 $$R=\sigma_r^2I_n$$
 
-$\sigma_r^2$ is the residual variance of the trait in the population.
+$\sigma_r^2$ is the residual variance of the trait in the population (table??).
 
 $I_n$ is an identity matrix of dimension $n$, where $n$ = number of records = number of progeny of the selection candidate (See table???).
 
-@Kunz2018 has computed $\sigma_r^2$ synchronically with $\sigma_g^2$ (see table??)
+
 
 
 
