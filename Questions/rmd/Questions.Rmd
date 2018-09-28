@@ -380,6 +380,10 @@ data.frame(Kalb =c(1,2,3,5,3),
     
 * Should I start with the method to assess the suitability of carcass fat for deriving early maturity and afterwards mention the material? Actually I just need to know the variance components of the breeding value estimation. I shouln't make it difficult for the reader to know what it all is about.
     *
+    
+* How can I make clear that I only use the part of the selection candidate of the PEV?
+
+* Could I also compute the relationship matrix without the other parent and just indicating NA for the second parent? It does not matter I guess
 
 \begin{equation}
 \label{eq-abc}
