@@ -158,21 +158,20 @@ The variance components divided into the two groups of breeding values "calves" 
 ```{r calvesvariancecomponents, echo=FALSE}
 library(knitr)
 library(kableExtra)
-x<-data.frame(c("cCC","cCF", "cCW"), c(0.4015, -0.00993, 0.01828), c( -0.00993, 0.12067,0.00050), c(0.01828,0.00050,0.00311))
+g<-data.frame(c("cCC","cCF", "cCW"), c(0.4015, -0.00993, 0.01828), c( -0.00993, 0.12067,0.00050), c(0.01828,0.00050,0.00311))
 colnames(x) <- c(" ","cCC","cCF", "cCW")
 
-z<-y<-data.frame(c(0.35845, 0.13154, 0.02907), c( 0.35845, 0.23651,0.02463), c(0.02907,0.23651,0.00904))
+r<-data.frame(c(0.35845, 0.13154, 0.02907), c( 0.35845, 0.23651,0.02463), c(0.02907,0.23651,0.00904))
 colnames(z) <- c("cCC","cCF", "cCW")
 
-y<-data.frame(c(0.79947, 0.14951, 0.05394), c( 0.14951, 0.39365,0.02979), c(0.05394,0.02979,0.06395), c(0.50221, 0.30654, 0.22078))
+p<-data.frame(c(0.79947, 0.14951, 0.05394), c( 0.14951, 0.39365,0.02979), c(0.05394,0.02979,0.06395), c(0.50221, 0.30654, 0.22078))
 colnames(y) <- c("cCC","cCF", "cCW", "heritability")
 
-x<-cbind(x,z,y)
+cvc<-cbind(g,r,p)
 kable(x, digits=3, booktabs=T, caption="Genetic and phenotypic variances-covariances for calves (c) derived from Kunz (2018)") %>%
 kable_styling(latex_options=c("hold_position")) %>%
  add_header_above(c("","genetic"=3,"residual"=3, "phenotypic"=3,"")) %>%
   column_spec(c(1,4,7,10), border_right = T)
-
 
 ```
 ---
@@ -183,17 +182,60 @@ nocite: |
 ```{r stirksvariancecomponents, echo=FALSE}
 library(knitr)
 library(kableExtra)
-x<-data.frame(c("sCC","sCF", "sCW"), c(0.4013, -0.00655, 0.03387), c( -0.00655, 0.13028,0.01322), c(0.03387,0.01322,0.01947))
+sg<-data.frame(name=c("sCC","sCF", "sCW"),sCC= c(0.4013, -0.00655, 0.03387), sCF=c( -0.00655, 0.13028,0.01322), sCW=c(0.03387,0.01322,0.01947))
 colnames(x) <- c(" ","sCC","sCF", "sCW")
-y<-data.frame(c(0.71754, 0.07159, 0.09911), c(0.07159, 0.36439,0.04989), c(0.09911,0.04989,0.06395), c(0.55928, 0.35752, 0.30447))
+
+sr<-data.frame(sCC=c(0.26631, 0.00931, 0.04903),sCF= c( 0.00931, 0.19451,0.02162),sCW= c( 0.04903,0.02162,0.03466))
+colnames(z) <- c("sCC","sCF", "sCW")
+
+sp<-data.frame(sCC=c(0.71754, 0.07159, 0.09911), sCF=c(0.07159, 0.36439,0.04989), sCW=c(0.09911,0.04989,0.06395), heritability=c(0.55928, 0.35752, 0.30447))
 colnames(y) <- c("sCC","sCF", "sCW", "heritability")
-x<-cbind(x,y)
-kable(x, digits=3, booktabs=T, caption="Genetic and phenotypic variances-covariances for stirks (s) derived from Kunz (2018)") %>%
+svc<-cbind(g,r,p)
+kable(svc, digits=3, booktabs=T, caption="Genetic, phenotypic and residual variances-covariances for stirks (s) derived from Kunz (2018)") %>%
 kable_styling(latex_options=c("hold_position")) %>%
- add_header_above(c("","genetic"=3,"phenotypic"=3,""))
+ add_header_above(c("","genetic"=3,"residual"=3, "phenotypic"=3,""))
 
 ```
-
+```{r GeneticGainUniv, echo=FALSE, eval=FALSE}
+#intensity of selection (i) computed by proportian selected (p)
+p <- 0.2
+i <- dnorm(qnorm(1-p))/p
+#factor of variance reduction (k)
+k <- i * (i - qnorm(p))
+#generation intervall (L) in years
+L <- 5
+#number of progeny (pr) of the selection candidate
+pr<-10
+#relationshipmatrix (A) of the selection candidate
+suppressPackageStartupMessages( library(pedigreemm))
+numb <- pr+1
+ped <- pedigree(sire = c(NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:numb)
+A <- getA(ped)
+Ainv <- as.matrix(getAInv(ped))
+#genetic variance (g) of the trait
+g<-sg$sCC
+#phenotypic variance (ph) of the trait
+ph<-sp$sCC
+#residual variance (r) of the trait
+r<-sr$sCC
+#design matrix (Z) connecting the records of observations with the breeding values
+Z<-cbind(matrix(0, nrow=pr,ncol=1),diag(pr))
+#variance-relationship matrix (R) of the residuals for the recorded animals
+R<- r%x%diag(pr)
+#prediction error variance (PEV)
+PEV <- solve(t(Z)%*%solve(R)%*%Z+Ainv*(1/g))[1,1]
+#covariance (C) between true and estimated breeding value
+C <-g-PEV
+#asymptotic covariance (Ca) between true and estimated breeding value
+Ca <- C/(1+0.5*k)
+# asymptotic variance of the breeding value (ga)
+ga <- g-k*Ca
+#asymptotic accuracy of the estimated breeding value (ra) of the selection candidate
+ra <- sqrt(Ca/ga)
+#genetic gain of a breeding value (Q)
+Q<- i*ra*sqrt(ga)/L
+Q
+```
 
 The estimated variance components have been used to predict the genetic gain (Q) for the breeding value carcass fat, carcass conformation and carcass weight in "calves" and "stirks".
 

@@ -441,4 +441,12 @@ library(knitr)
 include_graphics("juhu.pdf", auto_pdf = T)
 
 ```
+
+```{r}
+sg<-data.frame(p=c("sCC","sCF", "sCW"), sCC=c(0.4013, -0.00655, 0.03387), sCF=c( -0.00655, 0.13028,0.01322), sCW=c(0.03387,0.01322,0.01947))
+colnames(sg) <- c(" ","sCC","sCF", "sCW")
+kable(sg)
+```
+
 #References
+
