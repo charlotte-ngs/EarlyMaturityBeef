@@ -135,7 +135,6 @@ nocite: |
 * Should I always use the latech $$ writing when writing variables? I think it would be clearer.
     * Yes I should do so. It looks better because then it is clear that it is not just a common letter. But abbreviations not.
     
-    
 * Are character and trait synonyms?
     * Yes almost synonyms, trait is more suitable then character, when used in the aspect of breeding.
     
@@ -144,6 +143,9 @@ nocite: |
 
 * How do I write square roots?
     * You write it like this: $\sqrt{b^2 - 4ac}$
+    
+* How do I write division/fraction signs?
+    * You write $\frac{x}{y}$
     
 * How do I write matrices?
     * You write it like this: 
@@ -168,7 +170,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 ```
     
 * How should I call Gesamtzuchtwert? Overall breeding value probably.
-    * No, total genetic merit refering to Peter.
+    * No, total genetic merit refering to Peter. Or aggregate genotype.
     
 * Is the covariance (Zusammenhang) between the true and estimated breeding values defined by the heritability of each trait?
     * No, it is defined by the Prediction error variance ($PEV_y$) and the additive genetic variance-covariance matrix ($G$) before the selection.
@@ -195,7 +197,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     * Only carcass weight according to Sophie.
 
 * How can I cite tables or figures in a text of bookdown?
-    * Use \@ref(tab:conformationclass) for tables, \@ref(figure:conformationclass)
+    * Use \@ref(tab:conformationclass) for tables, \@ref(fig:genetictrendCF).
     
 * Do I have to compute the pedigree for each sex seperateley? I think I do.
     * Yes
@@ -432,7 +434,7 @@ column_spec(3, width="8cm")
   
 ```
 
-```{r genetictrendCF, echo=FALSE, fig.cap="yey", out.width="50%"}
+```{r genetictrendCF, echo=FALSE, fig.cap="yey", out.width="40%"}
 
 library(knitr)
 

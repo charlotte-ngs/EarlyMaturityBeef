@@ -49,7 +49,7 @@ Aim: To compute genetic gain for carcass fat (CF) in an univariate case.
 
 # Genetic gain
 
-I computed the genetic gain of the breeding value carcass fat using the formula derived from @Phocas1998. 
+I computed the asymptotic genetic gain of the breeding value carcass fat using the formula derived from @Phocas1998. 
 
 \begin{equation}
 \label{GeneticGain}
@@ -60,19 +60,19 @@ $i$ is the selection intensity.
 
 $L$ is the generation intervall in years.
 
-$r$ is the asymptotic accuracy of the of the breeding value of the selection candidate.
+$r$ is the accuracy of the of the breeding value of the selection candidate.
 
-$\sigma$ is the asymptotic standard deviation of the breeding value.
+$\sigma$ is the standard deviation of the breeding value.
 
 $*$ indicates that asymptotic reduction of variance during selection has been taken into account in the computations [@Bulmer1971].
 
-In the following sections I will describe how I computed the variables to get the value of genetic gain in \autoref{GeneticGain}.
-I used RStudio to perform all computations [@RStudio2015]. 
+In the following sections I will describe how I computed the variables to get the value of asymptotic genetic gain in \autoref{GeneticGain}.
+I used RStudio to perform all computations [@RStudio2016]. 
 My RStudio-script is available in the annex (reference??).
 
 ## Selection intensity $i$ {#SelInt}
 
-I computed the selection intensity from the proportion (p, table??) of selected animals using the R-command `dnorm(qnorm(1-p))/p`.
+I computed the selection intensity from the proportion of selected animals (p, table??) using the R-command `dnorm(qnorm(1-p))/p`.
 The proportion of selected animals is the share of animals born that will be parents of the next generation.
 I could use this computation method, because I assumed normal distribution of phenotypes and genotypes in the population (Hier Peter als Quelle, oder Lehrbuch?).
 
@@ -102,6 +102,7 @@ The computations of $C^*$ and $\sigma^*$ are present in section \ref(StdevUniv).
 ## Standard deviation $\sigma$ {#StdevUniv} 
 
 I used the following formula derived from Phocas@1998 to compute the asymptotic standard deviation $\sigma^*$ of the breeding value.
+
 \begin{equation}
 \label{Stdev}
 \sigma^*=\sqrt{\sigma_g^2-kC^*}
