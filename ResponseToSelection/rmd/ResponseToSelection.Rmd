@@ -185,6 +185,9 @@ library(Matrix)
 G <-matD %*% matE %*% matD
 dim(G)
 G<-nearPD(G)$mat
+# Gpd<-nearPD(G, keepDiag = FALSE, eig.tol = 1e-4, do2eigen = TRUE)$mat
+# eigen(Gpd)
+# Gpd-G
 ```
 Now we have $G$, it describes how the variances of different traits in the index are related to each other.
 Then I compute the inverse of $G$.
@@ -386,7 +389,9 @@ $e^2$ is the variance proportion of the permanent fixed effects of the phenotypi
 ```{r}
 e <- c(0.15,0.214,0.06,0.07,0,0.02,0.04,0)
 sigpe<- sigp*sqrt(e)
-sige<-sigp-sigpe-sigg
+### # standard deviations are not additive, but variances are 
+# sige<-sigp-sigpe-sigg
+sige <- sqrt(sigp^2 - sigpe^2 - sigg^2)
 sige
 ```
 
@@ -429,6 +434,7 @@ It fortunateley works. Glückstreffer :)
 ```{r}
 42.31*-0.15*0.09
 R <-matD %*% matE %*% matD
+# eigen(R)
 # also I need to do a kronecker with the unity matrix to get the R for males (mR) and the R for females (fR)
 mR<-R%x%diag(mhs+mfs)
 mRinv<-solve(mR)
@@ -507,9 +513,9 @@ C_2
 $$
 
 First I compute the inner matrix
+
 ```{r}
-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2))
-Sinv<-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2, byrow=TRUE))
+(Sinv<-solve(matrix(c(1+0.5*mk, 0.5*fk,0.5*mk, 1+0.5*fk),nrow = 2, ncol = 2, byrow=TRUE)))
 dim(Sinv)
 ```
 Then the whole matrix
@@ -531,8 +537,7 @@ $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 $a$ is the vector of economical weights in Swiss francs (Sfr.) per standard deviation of the trait
 ```{r}
 ew <- as.matrix(c(5.5, -7.56, 14.07, 8.32, 1.76, 0, -3.16,0))
-a<-ew*sigg
-a
+a<-ew/sigg
 ```
 
 ## Asymptotic genetic variance-covariance $G^*$
@@ -570,7 +575,7 @@ as.numeric(t(a)%*%Ga%*%a)
 as.numeric(t(a)%*%G%*%a)
 mr<-sqrt(as.numeric(t(a)%*%mCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
 fr<-sqrt(as.numeric(t(a)%*%fCa%*%a)/as.numeric(t(a)%*%Ga%*%a))
-sig<-as.numeric(t(a)%*%Ga%*%a)
+sig<-sqrt(as.numeric(t(a)%*%Ga%*%a))
 ```
 
 Response to selection
@@ -578,7 +583,7 @@ $$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L
 ```{r}
 i1
 fCa[1,]
-Q1<- i1*t(a)%*%mCa[1,]*sqrt(as.numeric(t(a)%*%mCa%*%a))+i2*t(a)%*%fCa[1,]*sqrt(as.numeric(t(a)%*%fCa%*%a))/(L1+L2)
+Q1<- i1*t(a)%*%mCa[,1]*sqrt(as.numeric(t(a)%*%mCa%*%a))+i2*t(a)%*%fCa[,1]*sqrt(as.numeric(t(a)%*%fCa%*%a))/(L1+L2)
 Q1/42.31
 ```
 
