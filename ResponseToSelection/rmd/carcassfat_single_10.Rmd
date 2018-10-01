@@ -39,8 +39,8 @@ Here I assume to have 10 records of progeny from the selection candidate.
 pr<-10
 #relationshipmatrix (A) of the selection candidate
 suppressPackageStartupMessages( library(pedigreemm))
-numb <- pr+2
-ped <- pedigree(sire = c(NA,NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,2,2,2,2,2,2,2,2,2,2), label = 1:numb)
+numb <- pr+1
+ped <- pedigree(sire = c(NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:numb)
 A <- getA(ped)
 Ainv <- as.matrix(getAInv(ped))
 Ainv
