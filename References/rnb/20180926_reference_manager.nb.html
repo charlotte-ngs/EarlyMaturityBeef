@@ -99,6 +99,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -195,6 +198,21 @@ $(document).ready(function () {
 </div>
 <div id="the-plan" class="section level2">
 <h2>The Plan</h2>
+<p>The set of tools and functionalities described here should allow for parallelized authoring of the same document by many people. Each author should have a separate working copy and a local git-repository. At any time it should be possible to build the whole document by all authors without changing the source code of the document manually.</p>
+<p>Based on these requirements the following properties must be satisfied.</p>
+<ul>
+<li>At least one author must have access to a reference manager database where all cited literature items are stored</li>
+<li>The reference manager allows to export a .bib-file containing a complete list of all cited literature items</li>
+<li>The bibliography file must have the same name for all authors</li>
+<li>The bibliography file must be versioned by git and must be pushed to the remote repository. This allows for a build of the complete document for anybody who does not have access to the central reference database</li>
+</ul>
+<p>The following parameters are different for all authors</p>
+<ul>
+<li>The path to the .bib-file that was exported from the reference manager.</li>
+</ul>
+</div>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
 </div>
 <div id="examples-and-tests" class="section level2">
 <h2>Examples and Tests</h2>
@@ -207,9 +225,9 @@ stopifnot(file.exists(s_bib_file))
 bib &lt;- RefManageR::ReadBib(s_bib_file, check = FALSE)
 print(bib[c(&quot;cms&quot;, &quot;jcg&quot;, &quot;ctan&quot;)], .opts = list(check.entries = FALSE))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIF9UaGUgQ2hpY2FnbyBNYW51YWwgb2YgU3R5bGUuIFRoZSBFc3NlbnRpYWwgR3VpZGUgZm9yIFdyaXRlcnMsIEVkaXRvcnMsIGFuZCBQdWJsaXNoZXJzXy4gMTV0aCBlZC4gQ2hpY2FnbywgSWxsLjpcblVuaXZlcnNpdHkgb2YgQ2hpY2FnbyBQcmVzcywgMjAwMy4gSVNCTjogMC0yMjYtMTA0MDMtNi5cblxuWzJdIF9Db21wdXRlcnMgYW5kIEdyYXBoaWNzXy4gMzUuNCAoMjAxMSk6IF9TZW1hbnRpYyAzRCBNZWRpYSBhbmQgQ29udGVudF8uIElTU046IDAwOTctODQ5My5cblxuWzNdIF9DVEFOLiBUaGUgQ29tcHJlaGVuc2l2ZSBUZVggQXJjaGl2ZSBOZXR3b3JrXy4gMjAwNi4gPFVSTDogaHR0cHM6Ly93d3cuY3Rhbi5vcmc+ICh2aXNpdGVkIG9uIDEwLzAxLzIwMDYpLlxuIn0= -->
-<pre><code>[1] _The Chicago Manual of Style. The Essential Guide for Writers, Editors, and Publishers_. 15th ed. Chicago, Ill.:
-University of Chicago Press, 2003. ISBN: 0-226-10403-6.
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIF9UaGUgQ2hpY2FnbyBNYW51YWwgb2YgU3R5bGUuIFRoZSBFc3NlbnRpYWwgR3VpZGUgZm9yIFdyaXRlcnMsIEVkaXRvcnMsIGFuZCBQdWJsaXNoZXJzXy4gMTV0aCBlZC4gQ2hpY2FnbywgSWxsLjogVW5pdmVyc2l0eSBvZiBDaGljYWdvIFByZXNzLCAyMDAzLiBJU0JOOlxuMC0yMjYtMTA0MDMtNi5cblxuWzJdIF9Db21wdXRlcnMgYW5kIEdyYXBoaWNzXy4gMzUuNCAoMjAxMSk6IF9TZW1hbnRpYyAzRCBNZWRpYSBhbmQgQ29udGVudF8uIElTU046IDAwOTctODQ5My5cblxuWzNdIF9DVEFOLiBUaGUgQ29tcHJlaGVuc2l2ZSBUZVggQXJjaGl2ZSBOZXR3b3JrXy4gMjAwNi4gPFVSTDogaHR0cHM6Ly93d3cuY3Rhbi5vcmc+ICh2aXNpdGVkIG9uIDEwLzAxLzIwMDYpLlxuIn0= -->
+<pre><code>[1] _The Chicago Manual of Style. The Essential Guide for Writers, Editors, and Publishers_. 15th ed. Chicago, Ill.: University of Chicago Press, 2003. ISBN:
+0-226-10403-6.
 
 [2] _Computers and Graphics_. 35.4 (2011): _Semantic 3D Media and Content_. ISSN: 0097-8493.
 
@@ -300,6 +318,7 @@ Results written to file ‘references.bib’</code></pre>
 <p>Then, we try to use the <code>citr</code>-package addin to include citations.</p>
 <p>The citations used with <code>citr</code> produces the following: <span class="citation">(“Semantic 3d Media and Content” 2011)</span>.</p>
 <p>Yet anoter citation in <span class="citation">(“CTAN: The Comprehensive Tex Archive Network” 2006)</span>.</p>
+<p>A citation with out brackets <span class="citation">(<em>The Chicago Manual of Style: The Essential Guide for Writers, Editors, and Publishers</em> 2003)</span>.</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
@@ -311,10 +330,13 @@ Results written to file ‘references.bib’</code></pre>
 <div id="ref-jcg">
 <p>“Semantic 3d Media and Content.” 2011. <em>Computers and Graphics</em> 35 (4).</p>
 </div>
+<div id="ref-cms">
+<p><em>The Chicago Manual of Style: The Essential Guide for Writers, Editors, and Publishers</em>. 2003. 15th ed. Chicago, Ill.: University of Chicago Press.</p>
+</div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVmZXJlbmNlTWFuYWdlciBIb3ctVG8iCmF1dGhvcjogIlBldGVyIHZvbiBSb2hyIgpkYXRlOiAiMjAxOC0wOS0yNiIKb3V0cHV0OiBodG1sX25vdGVib29rCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKLS0tCgpUaGlzIG5vdGVib29rIHByb3ZpZGVzIHNvbWUgZXhhbXBsZXMgb24gaG93IHRvIHdvcmsgd2l0aCB0aGUgcGFja2FnZSBgUmVmZXJlbmNlTWFuYWdlcmAgZnJvbSByb3BlbnNjaWUuCgoKIyMgRG9jdW1lbnRhdGlvbgpUaGUgdmlnbmV0dGUgc2VhbXMgdG8gYmUgYXZhaWxhYmxlIGZyb20gaHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE0MDMuMjAzNnYxLnBkZgoKCiMjIEluc3RhbGxhdGlvbgpUaGUgcGFja2FnZSBpcyBpbnN0YWxsZWQgdmlhCgpgYGB7ciBldmFsPUZBTFNFfQpkZXZ0b29sczo6aW5zdGFsbF9naXRodWIoInJvcGVuc2NpL1JlZk1hbmFnZVIiKQpgYGAKCiMjIFRoZSBQbGFuCgoKIyMgRXhhbXBsZXMgYW5kIFRlc3RzCldvcmtpbmcgdGhyb3VnaCB0aGUgZXhhbXBsZXMgaW4gdGhlIHZpZ25ldHRlIGxlYWRzIHRvCgpgYGB7cn0Kc19iaWJfZmlsZSA8LSBzeXN0ZW0uZmlsZSgiQmliIiwgImJpYmxhdGV4RXhhbXBsZXMuYmliIiwgcGFja2FnZSA9ICJSZWZNYW5hZ2VSIikKc3RvcGlmbm90KGZpbGUuZXhpc3RzKHNfYmliX2ZpbGUpKQpiaWIgPC0gUmVmTWFuYWdlUjo6UmVhZEJpYihzX2JpYl9maWxlLCBjaGVjayA9IEZBTFNFKQpwcmludChiaWJbYygiY21zIiwgImpjZyIsICJjdGFuIildLCAub3B0cyA9IGxpc3QoY2hlY2suZW50cmllcyA9IEZBTFNFKSkKYGBgCgoKIyMgT3V0cHV0CldyaXRpbmcgc29tZSByZWNvcmRzIHRvIGEgYmliZmlsZQoKYGBge3J9ClJlZk1hbmFnZVI6OkJpYk9wdGlvbnMoY2hlY2suZW50cmllcyA9IEZBTFNFKQpSZWZNYW5hZ2VSOjp0b0JpYmxhdGV4KGJpYltjKCJjbXMiLCAiamNnIiwgImN0YW4iKV0pCmBgYAoKVGhlIHdob2xlIHRoaW5nIGlzIHdyaXR0ZW4gdG8gYSBmaWxlIHVzaW5nIGBjYXQoKWAuIAoKYGBge3J9CiMgY2F0KFJlZk1hbmFnZVI6OnRvQmlibGF0ZXgoYmliW2MoImNtcyIsICJqY2ciLCAiY3RhbiIpXSksIGZpbGUgPSAicmVmZXJlbmNlcy5iaWIiLCBzZXAgPSAiXG4iKQpSZWZNYW5hZ2VSOjpXcml0ZUJpYihiaWIgPSBiaWJbYygiY21zIiwgImpjZyIsICJjdGFuIildKQpgYGAKClRoZW4sIHdlIHRyeSB0byB1c2UgdGhlIGBjaXRyYC1wYWNrYWdlIGFkZGluIHRvIGluY2x1ZGUgY2l0YXRpb25zLiAKClRoZSBjaXRhdGlvbnMgdXNlZCB3aXRoIGBjaXRyYCBwcm9kdWNlcyB0aGUgZm9sbG93aW5nOiBbQGpjZ10uCgpZZXQgYW5vdGVyIGNpdGF0aW9uIGluIFtAY3Rhbl0uCgojIyBSZWZlcmVuY2VzCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVmZXJlbmNlTWFuYWdlciBIb3ctVG8iCmF1dGhvcjogIlBldGVyIHZvbiBSb2hyIgpkYXRlOiAiMjAxOC0wOS0yNiIKb3V0cHV0OiBodG1sX25vdGVib29rCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKLS0tCgpUaGlzIG5vdGVib29rIHByb3ZpZGVzIHNvbWUgZXhhbXBsZXMgb24gaG93IHRvIHdvcmsgd2l0aCB0aGUgcGFja2FnZSBgUmVmZXJlbmNlTWFuYWdlcmAgZnJvbSByb3BlbnNjaWUuCgoKIyMgRG9jdW1lbnRhdGlvbgpUaGUgdmlnbmV0dGUgc2VhbXMgdG8gYmUgYXZhaWxhYmxlIGZyb20gaHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE0MDMuMjAzNnYxLnBkZgoKCiMjIEluc3RhbGxhdGlvbgpUaGUgcGFja2FnZSBpcyBpbnN0YWxsZWQgdmlhCgpgYGB7ciBldmFsPUZBTFNFfQpkZXZ0b29sczo6aW5zdGFsbF9naXRodWIoInJvcGVuc2NpL1JlZk1hbmFnZVIiKQpgYGAKCiMjIFRoZSBQbGFuClRoZSBzZXQgb2YgdG9vbHMgYW5kIGZ1bmN0aW9uYWxpdGllcyBkZXNjcmliZWQgaGVyZSBzaG91bGQgYWxsb3cgZm9yIHBhcmFsbGVsaXplZCBhdXRob3Jpbmcgb2YgdGhlIHNhbWUgZG9jdW1lbnQgYnkgbWFueSBwZW9wbGUuIEVhY2ggYXV0aG9yIHNob3VsZCBoYXZlIGEgc2VwYXJhdGUgd29ya2luZyBjb3B5IGFuZCBhIGxvY2FsIGdpdC1yZXBvc2l0b3J5LiBBdCBhbnkgdGltZSBpdCBzaG91bGQgYmUgcG9zc2libGUgdG8gYnVpbGQgdGhlIHdob2xlIGRvY3VtZW50IGJ5IGFsbCBhdXRob3JzIHdpdGhvdXQgY2hhbmdpbmcgdGhlIHNvdXJjZSBjb2RlIG9mIHRoZSBkb2N1bWVudCBtYW51YWxseS4gCgpCYXNlZCBvbiB0aGVzZSByZXF1aXJlbWVudHMgdGhlIGZvbGxvd2luZyBwcm9wZXJ0aWVzIG11c3QgYmUgc2F0aXNmaWVkLgoKKiBBdCBsZWFzdCBvbmUgYXV0aG9yIG11c3QgaGF2ZSBhY2Nlc3MgdG8gYSByZWZlcmVuY2UgbWFuYWdlciBkYXRhYmFzZSB3aGVyZSBhbGwgY2l0ZWQgbGl0ZXJhdHVyZSBpdGVtcyBhcmUgc3RvcmVkCiogVGhlIHJlZmVyZW5jZSBtYW5hZ2VyIGFsbG93cyB0byBleHBvcnQgYSAuYmliLWZpbGUgY29udGFpbmluZyBhIGNvbXBsZXRlIGxpc3Qgb2YgYWxsIGNpdGVkIGxpdGVyYXR1cmUgaXRlbXMKKiBUaGUgYmlibGlvZ3JhcGh5IGZpbGUgbXVzdCBoYXZlIHRoZSBzYW1lIG5hbWUgZm9yIGFsbCBhdXRob3JzCiogVGhlIGJpYmxpb2dyYXBoeSBmaWxlIG11c3QgYmUgdmVyc2lvbmVkIGJ5IGdpdCBhbmQgbXVzdCBiZSBwdXNoZWQgdG8gdGhlIHJlbW90ZSByZXBvc2l0b3J5LiBUaGlzIGFsbG93cyBmb3IgYSBidWlsZCBvZiB0aGUgY29tcGxldGUgZG9jdW1lbnQgZm9yIGFueWJvZHkgd2hvIGRvZXMgbm90IGhhdmUgYWNjZXNzIHRvIHRoZSBjZW50cmFsIHJlZmVyZW5jZSBkYXRhYmFzZQoKVGhlIGZvbGxvd2luZyBwYXJhbWV0ZXJzIGFyZSBkaWZmZXJlbnQgZm9yIGFsbCBhdXRob3JzCgoqIFRoZSBwYXRoIHRvIHRoZSAuYmliLWZpbGUgdGhhdCB3YXMgZXhwb3J0ZWQgZnJvbSB0aGUgcmVmZXJlbmNlIG1hbmFnZXIuCgoKIyMgV29ya2Zsb3cKCgoKCiMjIEV4YW1wbGVzIGFuZCBUZXN0cwpXb3JraW5nIHRocm91Z2ggdGhlIGV4YW1wbGVzIGluIHRoZSB2aWduZXR0ZSBsZWFkcyB0bwoKYGBge3J9CnNfYmliX2ZpbGUgPC0gc3lzdGVtLmZpbGUoIkJpYiIsICJiaWJsYXRleEV4YW1wbGVzLmJpYiIsIHBhY2thZ2UgPSAiUmVmTWFuYWdlUiIpCnN0b3BpZm5vdChmaWxlLmV4aXN0cyhzX2JpYl9maWxlKSkKYmliIDwtIFJlZk1hbmFnZVI6OlJlYWRCaWIoc19iaWJfZmlsZSwgY2hlY2sgPSBGQUxTRSkKcHJpbnQoYmliW2MoImNtcyIsICJqY2ciLCAiY3RhbiIpXSwgLm9wdHMgPSBsaXN0KGNoZWNrLmVudHJpZXMgPSBGQUxTRSkpCmBgYAoKCiMjIE91dHB1dApXcml0aW5nIHNvbWUgcmVjb3JkcyB0byBhIGJpYmZpbGUKCmBgYHtyfQpSZWZNYW5hZ2VSOjpCaWJPcHRpb25zKGNoZWNrLmVudHJpZXMgPSBGQUxTRSkKUmVmTWFuYWdlUjo6dG9CaWJsYXRleChiaWJbYygiY21zIiwgImpjZyIsICJjdGFuIildKQpgYGAKClRoZSB3aG9sZSB0aGluZyBpcyB3cml0dGVuIHRvIGEgZmlsZSB1c2luZyBgY2F0KClgLiAKCmBgYHtyfQojIGNhdChSZWZNYW5hZ2VSOjp0b0JpYmxhdGV4KGJpYltjKCJjbXMiLCAiamNnIiwgImN0YW4iKV0pLCBmaWxlID0gInJlZmVyZW5jZXMuYmliIiwgc2VwID0gIlxuIikKUmVmTWFuYWdlUjo6V3JpdGVCaWIoYmliID0gYmliW2MoImNtcyIsICJqY2ciLCAiY3RhbiIpXSkKYGBgCgpUaGVuLCB3ZSB0cnkgdG8gdXNlIHRoZSBgY2l0cmAtcGFja2FnZSBhZGRpbiB0byBpbmNsdWRlIGNpdGF0aW9ucy4gCgpUaGUgY2l0YXRpb25zIHVzZWQgd2l0aCBgY2l0cmAgcHJvZHVjZXMgdGhlIGZvbGxvd2luZzogW0BqY2ddLgoKWWV0IGFub3RlciBjaXRhdGlvbiBpbiBbQGN0YW5dLgoKQSBjaXRhdGlvbiB3aXRoIG91dCBicmFja2V0cyBAY21zLiAKCiMjIFJlZmVyZW5jZXMK</div>
 
 
 
