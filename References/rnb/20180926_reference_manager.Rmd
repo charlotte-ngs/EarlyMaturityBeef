@@ -1,8 +1,10 @@
 ---
 title: "ReferenceManager How-To"
 author: "Peter von Rohr"
-date: "2018-09-26"
-output: html_notebook
+date: '2018-09-26'
+output:
+  html_document:
+    df_print: paged
 bibliography: references.bib
 ---
 
@@ -73,5 +75,28 @@ The citations used with `citr` produces the following: [@jcg].
 Yet anoter citation in [@ctan].
 
 A citation with out brackets @cms. 
+
+
+## Working with current document
+The analysis of the literature citations requires to read the content of the currently used Rmd-document. One way to determine this is via 
+
+```{r}
+if (rstudioapi::isAvailable()){
+  (this_file <- rstudioapi::getSourceEditorContext()$path)
+} else {
+  (this_file <- rprojroot::thisfile())
+}
+```
+
+See https://stackoverflow.com/questions/47044068/get-the-path-of-current-script/47045368 for more details. But this works only for a notebook when running in preview-mode. It does not work when knitting the document. 
+
+
+## Figure and Tables
+References to figures and tables must not be listed as literature content.
+
+```{r cars-mpg-cyl, fig.cap="Cars Data MPG vs CYL"}
+plot(mtcars$mpg, mtcars$cyl)
+```
+
 
 ## References
