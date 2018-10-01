@@ -65,6 +65,15 @@ Z<-cbind(matrix(0, nrow=pr,ncol=2),diag(pr))
 Z
 ```
 
+
+__Comment PvR__: The number of columns in Z must be the same as the number of rows in A. This is not the case here, see code junks below. That is also the reason why the computation of PEV does not work.
+
+```{r}
+cat("Number of columns in Z: ", ncol(Z), "\n")
+cat("Number of rows in A:    ", nrow(A), "\n")
+```
+
+
 Then I compute the variance matrix of residuals by the knowledge of residual variance in the population and the number of records.
 
 ```{r VarMatRes}
