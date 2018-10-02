@@ -396,6 +396,10 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * Should I state like @Kause2014 that carcass fat and carcass conformations are scores? Label (score) in the table.
 
+* How do I compute the correlated genetic gain in an univariate case considering the bulmer effect?
+
+
+
 \begin{equation}
 \label{eq-abc}
 \end{equation}

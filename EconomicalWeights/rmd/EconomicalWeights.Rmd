@@ -1,0 +1,25 @@
+---
+title: "EconomicalWeigths"
+author: "Silvan"
+date: "2 10 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Economical Weights
+
+Economical weights are factors to produce an aggregate genotype from multiple traits.
+There is one economical weight per involved trait.
+The economical weight per trait is the change in profit (Sfr.) per additional unit of the trait.
+
+Here the aggregate genotype consists of the traits carcass fat, carcass conformation and carcass weight.
+Consequently the three traits need an economical weight each.
+
+### Carcass fat
+The trait carcass fat has the unit fat score (see table???).
+All scores directly influence the price of the carcass.
+The price of the carcass 
+To compute the economical weig
