@@ -213,11 +213,11 @@ ped <- pedigree(sire = c(NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,NA,NA,NA,NA,NA,N
 A <- getA(ped)
 Ainv <- as.matrix(getAInv(ped))
 #genetic variance (g) of the trait
-g<-sg$sCW[3]
+g<-sg$sCF[2]
 #phenotypic variance (ph) of the trait
-ph<-sp$sCW[3]
+ph<-sp$sCF[2]
 #residual variance (r) of the trait
-r<-sr$sCW[3]
+r<-sr$sCF[2]
 #design matrix (Z) connecting the records of observations with the breeding values
 Z<-cbind(matrix(0, nrow=pr,ncol=1),diag(pr))
 #variance-relationship matrix (R) of the residuals for the recorded animals
@@ -237,11 +237,10 @@ ga <- sqrt(g-k*Ca)
 ra <- sqrt(Ca/ga^2)
 #genetic gain of a breeding value (Q)
 Q<- i*ra*ga/L
-
+Q
 #correlated genetic gain.
-CQ<-i*sqrt(sp$heritability[1])*sqrt(sp$heritability[2])*sqrt(sp$sCC[1])*
-WQ
-
+i*CCa*sqrt(FCa)/L
+i*WCa*sqrt(FCa)/L
 ```
 
 The estimated variance components have been used to predict the genetic gain (Q) for the breeding value carcass fat, carcass conformation and carcass weight in "calves" and "stirks".

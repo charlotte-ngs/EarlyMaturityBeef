@@ -19,7 +19,63 @@ Here the aggregate genotype consists of the traits carcass fat, carcass conforma
 Consequently the three traits need an economical weight each.
 
 ### Carcass fat
-The trait carcass fat has the unit fat score (see table???).
-All scores directly influence the price of the carcass.
-The price of the carcass 
-To compute the economical weig
+The trait carcass fat has the unit carcass fat class (see table???).
+Therefore the economical weight for carcass fat is the additional revenue per unit of carcass fat class.
+I choose the unit Swiss Francs (Sfr.) per 0.1 carcass fat class.
+To get the mean plus or minus of Sfr. per 0.1 carcass fat class, I need to calculate it for two mean scenarios. 
+Thus, I need not assume a standard deviation of the carcass fat score in the population.
+A standard deviation is characterized by the mean and the standard deviation of a value in a population.
+Therefore I need the mean and the standard deviation of carcass fat scores in the population.
+Here I will do the whole game for Angus and Limousin, which have different means and standard deviations
+
+```{r StdvMeanCarcassFat, eval=FALSE}
+meanAng <- 3.08
+meanLim <- 2.71
+stdvAng <-
+stdvLim <-
+```
+
+
+This will be the first scenario.
+The second scenario is that I shift the standard deviation to the right, so that the mean will be +0.1.
+Then I just need to subtract the mean revenue from the first scenario from the mean revenue of the second scenario.
+The mean revenue is determined by the price plus or minus of a carcass fat class and by how many animals are classified in the specific class.
+
+I know the share of animals in the different carcass fat classes, but I do not know the mean price plus or minus for the different carcass fat classes.
+The group "stirks" consists of the carcass categories MT, OB and RG.
+Therefore I will take the mean for the price plus or minus of the three carcass categories.
+At the moment it will be sufficient to use the price of the week 33 in 2018 (13.8.18).
+
+```{r StirksMeanCarcassFat, echo=FALSE}
+library(knitr)
+z<-data.frame(class=c("1","2","3","4","5"))
+x<-data.frame(MT=c(-0.9,-0.3,0,-0.3,-0.7), OB=c(-0.9, -0.3,0,-0.4,-0.9), RG=c(-0.9,-0.3,0,-0.5,-1))
+y<-as.matrix(x)
+x$mean<-rowMeans(y)
+x<-cbind(z,x) 
+kable(x, digits=1)
+```
+
+### Carcass Conformation
+
+### Carcass weight
+The trait carcass weight has the unit kg.
+For carcass weight the price plus per kg is the same on the whole scale.
+Therefore I do not need to assume a standard deviation in the population.
+I just need the mean for the first scenario and the function that will tell me how much the profit will change when I change the carcass weight is one kg more.
+Important: Here I assume that the carcass weight changes, without a change of age at slaughter.
+The profit will be here defined as the revenue minus the fixed and variable costs.
+
+```{r ProfitCarcassWeight, eval=FALSE}
+VersProfitAnimal<- 438
+KontrProfitAnimal<- 384
+VersMeanCW<-
+KontrMeanCW<-
+pCW<- KontrProfitAnimal/
+```
+
+
+
+
+
+
