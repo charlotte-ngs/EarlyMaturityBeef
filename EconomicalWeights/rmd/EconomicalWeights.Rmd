@@ -22,22 +22,33 @@ Consequently the three traits need an economical weight each.
 The trait carcass fat has the unit carcass fat class (see table???).
 Therefore the economical weight for carcass fat is the additional revenue per unit of carcass fat class.
 I choose the unit Swiss Francs (Sfr.) per 0.1 carcass fat class.
-To get the mean plus or minus of Sfr. per 0.1 carcass fat class, I need to calculate it for two mean scenarios. 
-Thus, I need not assume a standard deviation of the carcass fat score in the population.
-A standard deviation is characterized by the mean and the standard deviation of a value in a population.
-Therefore I need the mean and the standard deviation of carcass fat scores in the population.
-Here I will do the whole game for Angus and Limousin, which have different means and standard deviations
+To get the mean plus or minus of Sfr. per 0.1 carcass fat class, I need to calculate it for two mean scenarios with the discrete distribution of the right shape
+.
+A discrete distribution is characterized by different areas of a scale and the share of records that belong to the different areas.
+The areas for carcass fat score are the different scores and the share of records are the share of carcasses that belonged to the different scores.
+Here I will do the whole game for Angus and Limousin, which have different shares in the fat scores.
 
 ```{r StdvMeanCarcassFat, eval=FALSE}
-meanAng <- 3.08
-meanLim <- 2.71
-stdvAng <-
-stdvLim <-
+# scores (phenotypic) in Limousin and Angus.
+#shares of carcasses in the different fat scores
+library(knitr)
+z<-data.frame(class=c(1,2,3,4,5))
+x1<-data.frame(class=c(1,2,3,4,5),Angus1=c(0.05,0.2,0.5,0.2,0.05), Limousin1=c(0.9, 0.3,0,0.4,0.9))
+#old means
+(meanAng1 <- mean(x1$Angus1*x2$class))
+(meanLim1 <- mean(x1$Limousin1*x2$class))
+#how much i take of 1 and 2 and how much I put to 4 and 5 (d)
+d<-0.01
+#new shares after transformation
+x2<-data.frame(class=c(1,2,3,4,5),Angus2=c(0.05-d,0.2-d,0.5,0.2+d,0.05+d), Limousin2=c(0.9-d, 0.3-d,0,0.4+d,0.9+d))
+#new means
+(meanAng2 <- mean(x2$Angus2*x2$class))
+(meanLim2 <- mean(x2$Limousin2*x2$class))
 ```
 
 
 This will be the first scenario.
-The second scenario is that I shift the standard deviation to the right, so that the mean will be +0.1.
+The second scenario is that I shift the deviation to the right, so that the mean will be a little above the mean of the first scenario.
 Then I just need to subtract the mean revenue from the first scenario from the mean revenue of the second scenario.
 The mean revenue is determined by the price plus or minus of a carcass fat class and by how many animals are classified in the specific class.
 
@@ -47,6 +58,7 @@ Therefore I will take the mean for the price plus or minus of the three carcass 
 At the moment it will be sufficient to use the price of the week 33 in 2018 (13.8.18).
 
 ```{r StirksMeanCarcassFat, echo=FALSE}
+# mean price plus or minus for different carcass fat classes.
 library(knitr)
 z<-data.frame(class=c("1","2","3","4","5"))
 x<-data.frame(MT=c(-0.9,-0.3,0,-0.3,-0.7), OB=c(-0.9, -0.3,0,-0.4,-0.9), RG=c(-0.9,-0.3,0,-0.5,-1))
@@ -55,6 +67,8 @@ x$mean<-rowMeans(y)
 x<-cbind(z,x) 
 kable(x, digits=1)
 ```
+
+Then I take the normal distribution and divide it into different parts
 
 ### Carcass Conformation
 
@@ -67,11 +81,16 @@ Important: Here I assume that the carcass weight changes, without a change of ag
 The profit will be here defined as the revenue minus the fixed and variable costs.
 
 ```{r ProfitCarcassWeight, eval=FALSE}
+#profit per animal in Sfr.
 VersProfitAnimal<- 438
 KontrProfitAnimal<- 384
+#mean carcass weight in kg
 VersMeanCW<-
 KontrMeanCW<-
-pCW<- KontrProfitAnimal/
+#profit per mean kg carcass weight in Sfr.
+pCW<- KontrProfitAnimal/VersMeanCW
+#economical weight for carcass weight
+ewCW<- (pCW+1) * VersMeanCW - pCW * VersMeanCW 
 ```
 
 

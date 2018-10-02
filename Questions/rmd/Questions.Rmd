@@ -400,6 +400,8 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * Do we need a breeding instrument to breed for early maturity in calves too? Or do we only need it for stirks?
 
+* How do I divide a normal distribution into different parts?
+
 
 
 \begin{equation}
