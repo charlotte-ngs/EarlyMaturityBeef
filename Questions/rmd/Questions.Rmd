@@ -402,6 +402,8 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * How do I divide a normal distribution into different parts?
 
+* Is it allowed that I use the revenue for CF and CC but that I use profit for CW? I do not have information about costs of CF and CC.
+
 
 
 \begin{equation}

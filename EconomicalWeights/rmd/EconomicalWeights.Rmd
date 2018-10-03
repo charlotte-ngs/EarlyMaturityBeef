@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(tidy = TRUE)
 ```
 
 ## Economical Weights
@@ -37,17 +37,23 @@ z<-data.frame(class=c(1,2,3,4,5))
 c(3,12.5,58,24,2.5)/100
 sum(c(5,26,60,9,0))
 c(5,26,60,9,0)/100
-x1<-data.frame(class=c(1,2,3,4,5),Angus1=c(0.030, 0.125, 0.580, 0.240, 0.025), Limousin1=c(0.05, 0.26, 0.60, 0.09, 0.00))
+x1<-data.frame(class=c(1,2,3,4,5),
+               Angus1=c(0.030, 0.125, 0.580, 0.240, 0.025), 
+               Limousin1=c(0.05, 0.26, 0.60, 0.09, 0.00))
 #old means
-(meanAng1 <- mean(x1$Angus1*x2$class))
-(meanLim1 <- mean(x1$Limousin1*x2$class))
+(meanAng1 <- sum(x1$Angus1*x1$class))
+(meanLim1 <- sum(x1$Limousin1*x1$class))
 #how much i take of 1 and 2 and how much I put to 4 and 5 (d)
-d<-0.1
+d<-0.01
 #new shares after transformation
-x2<-data.frame(class=c(1,2,3,4,5),Angus2=c(0.030, 0.125, 0.580+2*d, 0.240-d, 0.025-d), Limousin2=c(0.05-d, 0.26-d, 0.60+2*d, 0.09, 0.00))
+x2<-data.frame(class=c(1,2,3,4,5),
+               
+               Angus2=c(0.030, 0.125+0.5*d, 0.580+1.5*d, 0.240-2*d, 0.025),
+               Limousin2=c(0.05-d, 0.26-d, 0.60+2*d, 0.09, 0.00))
 #new means
-(meanAng2 <- mean(x2$Angus2*x2$class))
-(meanLim2 <- mean(x2$Limousin2*x2$class))
+(meanAng2 <- sum(x2$Angus2*x2$class))
+(meanLim2 <- sum(x2$Limousin2*x2$class))
+plot(x1$Angus1)
 
 ```
 
@@ -66,7 +72,8 @@ At the moment it will be sufficient to use the price of the week 33 in 2018 (13.
 # mean price plus or minus for different carcass fat classes from Proviande 2018, week 33.
 library(knitr)
 z<-data.frame(class=c("1","2","3","4","5"))
-x<-data.frame(MT=c(-0.9,-0.3,0,-0.3,-0.7), OB=c(-0.9, -0.3,0,-0.4,-0.9), RG=c(-0.9,-0.3,0,-0.5,-1))
+x<-data.frame(MT=c(-0.9,-0.3,0,-0.3,-0.7), 
+              OB=c(-0.9, -0.3,0,-0.4,-0.9), RG=c(-0.9,-0.3,0,-0.5,-1))
 y<-as.matrix(x)
 #compute mean over categories
 x$mean<-rowMeans(y)
@@ -82,12 +89,10 @@ LimPSc1<-t(x$mean)%*%x1$Limousin1
 #compute price second scenario for Angus and Limousin
 AnPSc2<-t(x$mean)%*%x2$Angus2
 LimPSc2<-t(x$mean)%*%x2$Limousin2
-AnPSc2
-LimPSc2
 #compute difference from second to first scenario
 AnDiff<-AnPSc2-AnPSc1
 LimDiff<-LimPSc2-LimPSc1
-#economical weights per additional score
+#economical weights in Sfr. per additional score
 ewAng<-AnDiff/(meanAng2-meanAng1)
 ewAng 
 ewLim<-LimDiff/(meanLim2-meanLim1)
@@ -115,12 +120,56 @@ To do so I multiply each part share of the normal distribution with the attribut
 Then I can do the same with the second mean.
 The difference of the two scenarios corrected by the difference of means will result in the economical weight per carcass fat score.
 
-```{r}
+```{r ScenariosNormDist}
+#shares scenarios Angus
+Ang1<-c(pnorm(1.5, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng1, sd=stdvAng,lower.tail = T),
+        
+        pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng1 ),
+        
+        (pnorm(3, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng1, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng1,sd=stdvAng, lower.tail = F)),
+        
+        pnorm(3.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng1,sd=stdvAng, lower.tail = F ),
+        
+        pnorm(4.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng1 ,sd=stdvAng, lower.tail = F))
 
+
+Ang2<-c(pnorm(1.5, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng2, sd=stdvAng,lower.tail = T),
+        
+        pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng2 ),
+        
+        (pnorm(3, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng2, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng2,sd=stdvAng, lower.tail = F)),
+        
+        pnorm(3.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng2,sd=stdvAng, lower.tail = F ),
+        
+        pnorm(4.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng2 ,sd=stdvAng, lower.tail = F))
+
+plot(Ang1)
+plot(Ang2)
+Ang1
+Ang2
+```
+
+
+
+
+
+```{r}
+# Compute Prices Scenarios Angus
+AngP1<-t(x$mean)%*%Ang1
+AngP2<-t(x$mean)%*%Ang2
+AngDiff<-AngP2-AngP1
+# Compute economical weights Angus in Sfr./class.
+ewAng<-AngDiff/(meanAng2-meanAng1)
+ewAng
 ```
 
 
 ### Carcass Conformation
+
+
+
+
+
 
 ### Carcass weight
 The trait carcass weight has the unit kg.
