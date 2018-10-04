@@ -31,9 +31,8 @@ The change should predict the possible change when breeding.
 
 I know the initial distribution of the population over the carcass fat scores from the data of Qualitas AG.
 The distribution is discrete, which means I know the share of the population within each carcass fat class.
-Changing the mean is difficult without changing the distribution shape for a discrete distribution.
 
-```{r DiscreteInitialCarcassFat}
+```{r DiscreteInitialcf}
 #Vectors of animal numbers Carcass fat 
 #Angus with a=stirks and c=calves.
 Ancfc <- c(189,706,935,125,2)
@@ -63,49 +62,74 @@ LmcfaM <- sum(Vcf*Lmcfa)
 
 #Standard deviations (S)
 #Angus
-AncfcS <- stdev(Vcf*Ancfc)
-AncfaS <- stdev(Vcf*Ancfa)
+AncfcS <- sd(Vcf*Ancfc)
+AncfaS <- sd(Vcf*Ancfa)
 #Limousin
-LmcfcM <- stdev(Vcf*Lmcfc)
-LmcfaM <- stdev(Vcf*Lmcfa)
+LmcfcS <- sd(Vcf*Lmcfc)
+LmcfaS <- sd(Vcf*Lmcfa)
 
 #New means (M2)
 #Angus
-AncfcM2 <- 
-AncfaM2 <- 
+ac<- 0.01
+aa<- 0.01
+AncfcM2 <- AncfcM+a
+AncfaM2 <- AncfaM-a
 #Limousin
-LmcfcM2 <- 
-LmcfaM2 <- 
+lc <- 0.01
+la <- 0.01
+LmcfcM2 <- LmcfcM+l
+LmcfaM2 <- LmcfaM+l
 
 
-# scores (phenotypic) in Limousin and Angus.
-#shares of carcasses in the different fat scores
-library(knitr)
-x1<-data.frame(class=c(1,2,3,4,5),
-               Angus=c(0.030, 0.125, 0.580, 0.240, 0.025), 
-  Limousin=c(0.05, 0.26, 0.60, 0.09, 0.00))
-#old means
-(meanAng1 <- sum(x1$Angus1*x1$class))
-(meanLim1 <- sum(x1$Limousin1*x1$class))
-#how much i take of 1 and 2 and how much I put to 4 and 5 (d)
-d<-0.01
-#new shares after transformation
-x2<-data.frame(class=c(1,2,3,4,5),
-               
-               Angus2=c(0.030, 0.125+0.5*d, 0.580+1.5*d, 0.240-1.5*d, 0.025-0.5*d),
-               Limousin2=c(0.05-0.5*d, 0.26-1.5*d, 0.60+1.5*d, 0.09+0.5*d, 0.00))
-#new means
-(meanAng2 <- sum(x2$Angus2*x2$class))
-(meanLim2 <- sum(x2$Limousin2*x2$class))
-plot(x1$Angus1)
-plot(x2$Angus2)
 ```
 
 Changing the mean is difficult without changing the distribution shape for a discrete distribution.
+Therefore I will use the assumption that the data is normally distributed.
+The initial normal distribution is defined by the mean and the standard deviation.
+I will change then the mean of the normal distribution to get the normal distribution after selection.
+I leave the standard deviation as it is, because it ensures that the shape of the normal distribution stays the same.
+Afterwards I need to transform the normal distribution back to a discrete distribution.
 
-This will be the first scenario.
-The second scenario is that I shift the deviation to the right, so that the mean will be a little above the mean of the first scenario.
-Then I just need to subtract the mean revenue from the first scenario from the mean revenue of the second scenario.
+#### Borders in the normal distribution to get shares in classes of second scenario.
+I get the borders of the discrete distribution by the R-command `qnorm()`. 
+This command gives me the quantil of the area under the normal distribution, when I know the area.
+The area is the share of animals which belong to specific carcass fat classes.
+
+```{r BordersNormDistcf}
+#Borders normal distribution carcass fat 
+#Angus with a=stirks and c=calves.
+AncfcB<- qnorm(cumsum(Ancfc),sd=AncfcS,mean=AncfcM, lower.tail = T)
+AncfaB<- qnorm(cumsum(Ancfa),sd=AncfaS,mean=AncfaM, lower.tail = T)
+#Limousin with a=stirks and c=calves.
+LmcfcB<- qnorm(cumsum(Lmcfc),sd=LmcfcS,mean=LmcfcM, lower.tail = T)
+LmcfaB<- qnorm(cumsum(Lmcfa),sd=LmcfaS,mean=LmcfaM, lower.tail = T)
+```
+
+Then I take the normal distribution and divide it into different parts according to the computed borders.
+Each part represents a fat score, the result is again a discrete distribution.
+I get the shares per fat score for the population of the second scenario, when I use the R-command `pnorm()`.
+
+```{r DiscreteSecondcf}
+#Shares second mean carcass fat 
+#Angus with a=stirks and c=calves.
+Ancfc2<- diff(c(0,pnorm(AncfcB,sd=AncfcS,mean=AncfcM2, lower.tail = T)))
+Ancfa2<- diff(c(0,pnorm(AncfaB,sd=AncfaS,mean=AncfaM2, lower.tail = T)))
+#Limousin with a=stirks and c=calves.
+Lmcfc2<- diff(c(0,pnorm(LmcfcB,sd=LmcfcS,mean=LmcfcM2, lower.tail = T)))
+Lmcfa2<- diff(c(0,pnorm(LmcfaB,sd=LmcfaS,mean=LmcfaM2, lower.tail = T)))
+Ancfa
+Ancfa2
+```
+
+
+Afterwards I can compute the mean price in scenario 2 with the second mean.
+To do so I multiply each part share of the normal distribution with the attributing price minus.
+Then I can do the same with the second mean.
+The difference of the two scenarios corrected by the difference of means will result in the economical weight per carcass fat score.
+
+
+#### Mean price minus per carcass fat class
+Then I just need to subtract the mean revenue from the initial scenario from the mean revenue of the second scenario.
 The mean revenue is determined by the price plus or minus of a carcass fat class and by how many animals are classified in the specific class.
 
 I know the share of animals in the different carcass fat classes, but I do not know the mean price plus or minus for the different carcass fat classes.
@@ -145,71 +169,8 @@ ewLim
 meanAng2-meanAng1
 ```
 
-#### Normal distribution
-I can do the same but assuming a normal distribution instead of the empiric discrete distribution.
-The normal distribution is determined by mean and standard deviation.
-```{r NormDistMeanStdv}
-#Angus mean
-meanAng1
-#Limousin mean
-meanLim1
-#Angus standard deviation
-stdvAng<-0.74
-#Limousin standard deviation
-stdvLim<-0.71
-```
-
-Then I take the normal distribution and divide it into different parts.
-Each part represents a fat score. 
-Afterwards I can compute the mean price in scenario 1 with the first mean.
-To do so I multiply each part share of the normal distribution with the attributing price minus.
-Then I can do the same with the second mean.
-The difference of the two scenarios corrected by the difference of means will result in the economical weight per carcass fat score.
-
-```{r ScenariosNormDist}
-#shares scenarios Angus
-Ang1<-c(pnorm(1.5, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng1, sd=stdvAng,lower.tail = T),
-        
-        pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng1 ),
-        
-        (pnorm(3, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng1, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng1,sd=stdvAng, lower.tail = F)),
-        
-        pnorm(3.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng1,sd=stdvAng, lower.tail = F ),
-        
-        pnorm(4.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng1 ,sd=stdvAng, lower.tail = F))
 
 
-Ang2<-c(pnorm(1.5, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng2, sd=stdvAng,lower.tail = T),
-        
-        pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng2 ),
-        
-        (pnorm(3, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng2, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng2,sd=stdvAng, lower.tail = F)),
-        
-        pnorm(3.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng2,sd=stdvAng, lower.tail = F ),
-        
-        pnorm(4.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng2 ,sd=stdvAng, lower.tail = F))
-
-plot(Ang1)
-plot(Ang2)
-Ang1
-Ang2
-qnorm(0.03, mean=meanAng1, sd=stdvAng, lower.tail = T)
-pnorm(1.71, mean=meanAng1, sd=stdvAng, lower.tail = T)
-```
-
-
-
-
-
-```{r}
-# Compute Prices Scenarios Angus
-AngP1<-t(x$mean)%*%Ang1
-AngP2<-t(x$mean)%*%Ang2
-AngDiff<-AngP2-AngP1
-# Compute economical weights Angus in Sfr./class.
-ewAng<-AngDiff/(meanAng2-meanAng1)
-ewAng
-```
 
 
 ### Carcass Conformation
@@ -242,6 +203,36 @@ pCW
 ```
 
 
+#Annex/Jnk
+
+```{r}
+cumsum(c(1,2,3,4,5))
+x <- cumsum(cumsum(1:10))
+x
+diff(x, lag = 2)
+diff(x, differences = 2)
+#shares scenarios Angus
+Ang1<-c(pnorm(1.5, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng1, sd=stdvAng,lower.tail = T),
+        
+        pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng1 ),
+        
+        (pnorm(3, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng1, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng1,sd=stdvAng, lower.tail = F)),
+        
+        pnorm(3.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng1,sd=stdvAng, lower.tail = F ),
+        
+        pnorm(4.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng1 ,sd=stdvAng, lower.tail = F))
+
+
+Ang2<-c(pnorm(1.5, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng2, sd=stdvAng,lower.tail = T),
+        
+        pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng2 ),
+        
+        (pnorm(3, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng2, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng2,sd=stdvAng, lower.tail = F)),
+        
+        pnorm(3.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng2,sd=stdvAng, lower.tail = F ),
+        
+        pnorm(4.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng2 ,sd=stdvAng, lower.tail = F))
+```
 
 
 
