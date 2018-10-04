@@ -24,7 +24,7 @@ The trait carcass fat has the unit carcass fat class (see table???).
 Therefore the economical weight for carcass fat is the additional revenue per unit of carcass fat class.
 I choose the unit Swiss Francs (Sfr.) per 1 carcass fat class.
 
-#### Model
+#### Initial Situation
 To get the minus of Sfr. per 1 carcass fat class, I need to calculate the mean price difference in a population when I change the mean carcass fat score in the population.
 To do so I change the population slightly, but try to conserve the intial distribution shape.
 The change should predict the possible change when breeding.
@@ -50,7 +50,7 @@ Lmcfc <- c(735,1504,1419,72,0)/sum(Lmcfc)
 Lmcfa <- c(5102,21958,50705,7169,148)/sum(Lmcfa)
 
 #Values Carcass fat classes
-Vcf <- c(1,2,3,4,5)
+Vcf <- c(1:5)
 
 #Means (M)
 #Angus
@@ -62,25 +62,23 @@ LmcfaM <- sum(Vcf*Lmcfa)
 
 #Standard deviations (S)
 #Angus
-AncfcS <- sd(Vcf*Ancfc)
-AncfaS <- sd(Vcf*Ancfa)
+AncfcS <- 0.76
+AncfaS <- 0.74
 #Limousin
-LmcfcS <- sd(Vcf*Lmcfc)
-LmcfaS <- sd(Vcf*Lmcfa)
+LmcfcS <- 0.78
+LmcfaS <- 0.71
 
 #New means (M2)
 #Angus
 ac<- 0.01
 aa<- 0.01
 AncfcM2 <- AncfcM+a
-AncfaM2 <- AncfaM-a
+AncfaM2 <- AncfaM+a
 #Limousin
 lc <- 0.01
 la <- 0.01
 LmcfcM2 <- LmcfcM+l
 LmcfaM2 <- LmcfaM+l
-
-
 ```
 
 Changing the mean is difficult without changing the distribution shape for a discrete distribution.
@@ -121,23 +119,18 @@ Ancfa
 Ancfa2
 ```
 
-
-Afterwards I can compute the mean price in scenario 2 with the second mean.
-To do so I multiply each part share of the normal distribution with the attributing price minus.
-Then I can do the same with the second mean.
-The difference of the two scenarios corrected by the difference of means will result in the economical weight per carcass fat score.
-
-
-#### Mean price minus per carcass fat class
 Then I just need to subtract the mean revenue from the initial scenario from the mean revenue of the second scenario.
 The mean revenue is determined by the price plus or minus of a carcass fat class and by how many animals are classified in the specific class.
+
+#### Mean price minus per carcass fat class
 
 I know the share of animals in the different carcass fat classes, but I do not know the mean price plus or minus for the different carcass fat classes.
 The group "stirks" consists of the carcass categories MT, OB and RG.
 Therefore I will take the mean for the price plus or minus of the three carcass categories.
 At the moment it will be sufficient to use the price of the week 33 in 2018 (13.8.18).
 
-```{r PriceMeanMinusCarcassFat}
+```{r PriceMeanMinuscf}
+# Mean price minus stirks / kg carcass weight
 # mean price plus or minus for different carcass fat classes from Proviande 2018, week 33.
 library(knitr)
 z<-data.frame(class=c("1","2","3","4","5"))
@@ -147,38 +140,175 @@ y<-as.matrix(x)
 #compute mean over categories
 x$mean<-rowMeans(y)
 x<-cbind(z,x) 
-kable(x, digits=1)
+#defintion of variable
+cfap <- x$mean
+
+#Mean price minus calves / kg carcass weight
+cfcp <- c(-1.5,-0.6,0,-0.4,1)
+
+
 
 ```
 
-```{r ewdiscrete}
-#compute price first scenario for Angus and Limousin
-AnPSc1<-t(x$mean)%*%x1$Angus1
-LimPSc1<-t(x$mean)%*%x1$Limousin1
-#compute price second scenario for Angus and Limousin
-AnPSc2<-t(jx$mean)%*%x2$Angus2
-LimPSc2<-t(x$mean)%*%x2$Limousin2
-#compute difference from second to first scenario
-AnDiff<-AnPSc2-AnPSc1
-LimDiff<-LimPSc2-LimPSc1
-#economical weights in Sfr. per additional score
-ewAng<-AnDiff/(meanAng2-meanAng1)
-ewAng 
-ewLim<-LimDiff/(meanLim2-meanLim1)
-ewLim
-meanAng2-meanAng1
+#### Economical weight
+
+First I multiply each part share of the discrete distribution with the attributing price minus.
+Then I can do the same with the second discrete distribution with the different mean.
+The difference of the two scenarios corrected by the difference of means will result in the economical weight per carcass fat score.
+
+
+```{r ewcf}
+#Economic weights
+#Angus with a=stirks and c=calves.
+AncfcEW<- t(cfcp)%*%Ancfc2-t(cp)%*%Ancfc
+AncfaEW<- t(cfap)%*%Ancfa2-t(ap)%*%Ancfa
+#Limousin with a=stirks and c=calves.
+LmcfcEW<- t(cfcp)%*%Lmcfc2-t(cp)%*%Lmcfc
+LmcfaEW<- t(cfap)%*%Lmcfa2-t(ap)%*%Lmcfa
+
+AncfcEW
+AncfaEW
+LmcfcEW
+LmcfaEW
+plot(Lmcfa)
+plot(Lmcfa2)
 ```
-
-
-
 
 
 ### Carcass Conformation
 
+The method is about the same to compute economical weights for carcass conformation and carcass fat.
+However there are different shares and different price differences in the carcass conformation classes.
+Also, it is not possible to get a negative value for the economical value for carcass conformation.
+
+First I will define the initial situation, whith data from Sophie.
+Again I have different economic weights for the groups stirks and calves and for the breeds Angus and Limousin.
+
+#### Initial Situation
+
+```{r DiscreteInitialcc}
+#Vectors of animal numbers Carcass conformation (cc) 
+#Angus (An) with a=stirks and c=calves.
+Anccc <- c(2,2,35,278,634,708,298)
+Ancca <- c(0,17,247,3459,8308,8857,5797)
+#Limousin (Lm) with a=stirks and c=calves.
+Lmccc <- c(3,2,17,88,300,838,2482)
+Lmcca <- c(2,11,57,1041,6652,21092,56227)
+
+#Shares Carcass conformation
+#Angus with a=stirks and c=calves.
+Anccc <- Anccc/sum(Anccc)
+Ancca <- Ancca/sum(Ancca)
+#Limousin with a=stirks and c=calves.
+Lmccc <- Lmccc/sum(Lmccc)
+Lmcca <- Lmcca/sum(Lmcca)
+
+#Values Carcass conformation classes
+Vcc <- c(1:7)
+
+#Means (M)
+#Angus
+AncccM <- sum(Vcc*Anccc)
+AnccaM <- sum(Vcc*Ancca)
+#Limousin
+LmcccM <- sum(Vcc*Lmccc)
+LmccaM <- sum(Vcc*Lmcca)
+
+#Standard deviations (S)
+#Angus
+AncccS <- 0.99
+AnccaS <- 1
+#Limousin
+LmcccS <- 0.8
+LmccaS <- 0.7
+
+#New means (M2)
+#Angus
+ac<- 0.01
+aa<- 0.01
+AncccM2 <- AncccM+a
+AnccaM2 <- AnccaM+a
+#Limousin
+lc <- 0.01
+la <- 0.01
+LmcccM2 <- LmcccM+l
+LmccaM2 <- LmccaM+l
+```
+
+Then I define the situation after predicted change in mean (shift of the distribution).
+
+#### Second scenario
+
+First I define the borders of the normal distribution which I will shift.
+```{r BordersNormDistcc}
+#Borders normal distribution carcass conformation 
+#Angus with a=stirks and c=calves.
+AncccB<- qnorm(cumsum(Anccc),sd=AncccS,mean=AncccM, lower.tail = T)
+AnccaB<- qnorm(cumsum(Ancca),sd=AnccaS,mean=AnccaM, lower.tail = T)
+#Limousin with a=stirks and c=calves.
+LmcccB<- qnorm(cumsum(Lmccc),sd=LmcccS,mean=LmcccM, lower.tail = T)
+LmccaB<- qnorm(cumsum(Lmcca),sd=LmccaS,mean=LmccaM, lower.tail = T)
+```
+
+Then I define the shares with the changed mean.
+
+```{r DiscreteSecondcc}
+#Shares second mean carcass conformation 
+#Angus with a=stirks and c=calves.
+Anccc2<- diff(c(0,pnorm(AncccB,sd=AncccS,mean=AncccM2, lower.tail = T)))
+Ancca2<- diff(c(0,pnorm(AnccaB,sd=AnccaS,mean=AnccaM2, lower.tail = T)))
+#Limousin with a=stirks and c=calves.
+Lmccc2<- diff(c(0,pnorm(LmcccB,sd=LmcccS,mean=LmcccM2, lower.tail = T)))
+Lmcca2<- diff(c(0,pnorm(LmccaB,sd=LmccaS,mean=LmccaM2, lower.tail = T)))
+Ancca
+Ancca2
+```
+
+To compute the mean difference in revenue with the shift of population mean, I need the price differences of the carcass conformation classes
+
+#### Prices
+
+The stirks prices will be a mean of three different carcass categories, but calves prices come from a single category, CV.
+Stirks can be MT, OB or RG.
+```{r PriceMeanMinuscc}
+# Mean price minus stirks / kg carcass weight
+# mean price plus or minus for different carcass fat classes from Proviande 2018, week 33.
+z <- data.frame(class=c("X","A","T-","T","T+","H","C"))
+x<-data.frame(MT=c(7.9,8.2,8.6,8.8,9.1,9.3,9.55), 
+              OB=c(7.9,8.2,8.6,8.8,9.1,9.4,9.65), RG=c(6.9,7.5,8.2,8.8,9.2,9.5,9.75))
+y<-as.matrix(x)
+#compute mean over categories
+x$mean<-rowMeans(y)
+x<-cbind(z,x) 
+#defintion of variable
+ccap <- x$mean
+
+#Mean price minus calves / kg carcass weight
+cccp <- c(11.2,12.7,13.6,14.2,14.7,15.2,15.7)
+
+```
+
+The combination of shares and price will result in the economical weights per change of mean in the population.
+
+#### Economical weights
+
+```{r ewcc}
+#Economic weights
+#Angus with a=stirks and c=calves.
+AncccEW<- t(cccp)%*%Anccc2-t(cccp)%*%Anccc
+AnccaEW<- t(ccap)%*%Ancca2-t(ccap)%*%Ancca
+#Limousin with a=stirks and c=calves.
+LmcccEW<- t(cccp)%*%Lmccc2-t(cccp)%*%Lmccc
+LmccaEW<- t(ccap)%*%Lmcca2-t(ccap)%*%Lmcca
 
 
-
-
+AncccEW
+AnccaEW
+LmcccEW
+LmccaEW
+plot(Lmcca)
+plot(Lmcca2)
+```
 
 ### Carcass weight
 The trait carcass weight has the unit kg.
@@ -205,34 +335,7 @@ pCW
 
 #Annex/Jnk
 
-```{r}
-cumsum(c(1,2,3,4,5))
-x <- cumsum(cumsum(1:10))
-x
-diff(x, lag = 2)
-diff(x, differences = 2)
-#shares scenarios Angus
-Ang1<-c(pnorm(1.5, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng1, sd=stdvAng,lower.tail = T),
-        
-        pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng1 ),
-        
-        (pnorm(3, mean=meanAng1, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng1, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng1, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng1,sd=stdvAng, lower.tail = F)),
-        
-        pnorm(3.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng1,sd=stdvAng, lower.tail = F ),
-        
-        pnorm(4.5, mean=meanAng1, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng1 ,sd=stdvAng, lower.tail = F))
 
-
-Ang2<-c(pnorm(1.5, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(0.5, mean=meanAng2, sd=stdvAng,lower.tail = T),
-        
-        pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T) -pnorm(1.5, mean=meanAng2 ),
-        
-        (pnorm(3, mean=meanAng2, sd=stdvAng, lower.tail = T) -pnorm(2.5, mean=meanAng2, sd=stdvAng,lower.tail = T)) + (pnorm(3, mean=meanAng2, sd=stdvAng,lower.tail = F) -pnorm(3.5, mean=meanAng2,sd=stdvAng, lower.tail = F)),
-        
-        pnorm(3.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(4.5, mean=meanAng2,sd=stdvAng, lower.tail = F ),
-        
-        pnorm(4.5, mean=meanAng2, sd=stdvAng, lower.tail = F ) -pnorm(5.5, mean=meanAng2 ,sd=stdvAng, lower.tail = F))
-```
 
 
 
