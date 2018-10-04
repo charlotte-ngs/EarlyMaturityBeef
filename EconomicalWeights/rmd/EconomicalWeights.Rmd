@@ -5,10 +5,6 @@ date: "2 10 2018"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(tidy = TRUE)
-```
-
 ## Economical Weights
 
 Economical weights are factors to produce an aggregate genotype from multiple traits.
@@ -72,13 +68,13 @@ LmcfaS <- 0.71
 #Angus
 ac<- 0.01
 aa<- 0.01
-AncfcM2 <- AncfcM+a
-AncfaM2 <- AncfaM+a
+AncfcM2 <- AncfcM+ac
+AncfaM2 <- AncfaM+aa
 #Limousin
 lc <- 0.01
 la <- 0.01
-LmcfcM2 <- LmcfcM+l
-LmcfaM2 <- LmcfaM+l
+LmcfcM2 <- LmcfcM+lc
+LmcfaM2 <- LmcfaM+la
 ```
 
 Changing the mean is difficult without changing the distribution shape for a discrete distribution.
@@ -115,8 +111,7 @@ Ancfa2<- diff(c(0,pnorm(AncfaB,sd=AncfaS,mean=AncfaM2, lower.tail = T)))
 #Limousin with a=stirks and c=calves.
 Lmcfc2<- diff(c(0,pnorm(LmcfcB,sd=LmcfcS,mean=LmcfcM2, lower.tail = T)))
 Lmcfa2<- diff(c(0,pnorm(LmcfaB,sd=LmcfaS,mean=LmcfaM2, lower.tail = T)))
-Ancfa
-Ancfa2
+
 ```
 
 Then I just need to subtract the mean revenue from the initial scenario from the mean revenue of the second scenario.
@@ -145,9 +140,6 @@ cfap <- x$mean
 
 #Mean price minus calves / kg carcass weight
 cfcp <- c(-1.5,-0.6,0,-0.4,1)
-
-
-
 ```
 
 #### Economical weight
@@ -160,18 +152,16 @@ The difference of the two scenarios corrected by the difference of means will re
 ```{r ewcf}
 #Economic weights
 #Angus with a=stirks and c=calves.
-AncfcEW<- t(cfcp)%*%Ancfc2-t(cp)%*%Ancfc
-AncfaEW<- t(cfap)%*%Ancfa2-t(ap)%*%Ancfa
+AncfcEW<- t(cfcp)%*%Ancfc2-t(cfcp)%*%Ancfc
+AncfaEW<- t(cfap)%*%Ancfa2-t(cfap)%*%Ancfa
 #Limousin with a=stirks and c=calves.
-LmcfcEW<- t(cfcp)%*%Lmcfc2-t(cp)%*%Lmcfc
-LmcfaEW<- t(cfap)%*%Lmcfa2-t(ap)%*%Lmcfa
-
+LmcfcEW<- t(cfcp)%*%Lmcfc2-t(cfcp)%*%Lmcfc
+LmcfaEW<- t(cfap)%*%Lmcfa2-t(cfap)%*%Lmcfa
 AncfcEW
 AncfaEW
 LmcfcEW
 LmcfaEW
-plot(Lmcfa)
-plot(Lmcfa2)
+
 ```
 
 
@@ -226,13 +216,13 @@ LmccaS <- 0.7
 #Angus
 ac<- 0.01
 aa<- 0.01
-AncccM2 <- AncccM+a
-AnccaM2 <- AnccaM+a
+AncccM2 <- AncccM+ac
+AnccaM2 <- AnccaM+aa
 #Limousin
 lc <- 0.01
 la <- 0.01
-LmcccM2 <- LmcccM+l
-LmccaM2 <- LmccaM+l
+LmcccM2 <- LmcccM+lc
+LmccaM2 <- LmccaM+la
 ```
 
 Then I define the situation after predicted change in mean (shift of the distribution).
@@ -260,8 +250,6 @@ Ancca2<- diff(c(0,pnorm(AnccaB,sd=AnccaS,mean=AnccaM2, lower.tail = T)))
 #Limousin with a=stirks and c=calves.
 Lmccc2<- diff(c(0,pnorm(LmcccB,sd=LmcccS,mean=LmcccM2, lower.tail = T)))
 Lmcca2<- diff(c(0,pnorm(LmccaB,sd=LmccaS,mean=LmccaM2, lower.tail = T)))
-Ancca
-Ancca2
 ```
 
 To compute the mean difference in revenue with the shift of population mean, I need the price differences of the carcass conformation classes
@@ -300,14 +288,10 @@ AnccaEW<- t(ccap)%*%Ancca2-t(ccap)%*%Ancca
 #Limousin with a=stirks and c=calves.
 LmcccEW<- t(cccp)%*%Lmccc2-t(cccp)%*%Lmccc
 LmccaEW<- t(ccap)%*%Lmcca2-t(ccap)%*%Lmcca
-
-
 AncccEW
 AnccaEW
 LmcccEW
 LmccaEW
-plot(Lmcca)
-plot(Lmcca2)
 ```
 
 ### Carcass weight
@@ -325,10 +309,10 @@ KontrProfitAnimal<- 384
 #mean carcass weight in kg as mean September of categories Stiere, Ochsen and Rinder of Agristat S.33.
 k<-mean(c(298,256,260))
 k
-VersMeanCW<- k
-KontrMeanCW<- k
+VersMeancw<- k
+KontrMeancw<- k
 #profit per mean kg carcass weight in Sfr.
-pCW<- KontrProfitAnimal/VersMeanCW
+cwEW<- KontrProfitAnimal/VersMeancw
 pCW
 ```
 

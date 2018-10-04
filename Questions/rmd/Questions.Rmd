@@ -404,6 +404,8 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * Is it allowed that I use the revenue for CF and CC but that I use profit for CW? I do not have information about costs of CF and CC.
 
+* Isn't the term adults more intuitive than stirks? Everyone has to look for the term first until he can imagine it.
+
 
 
 \begin{equation}
