@@ -179,7 +179,7 @@ data.frame(Kalb =c(1,2,3,5,3),
     *
 
 * How works the shortcut to produce <- at once?
-    * 
+    * Do "alt" and "-" together!
 
 * How do I give figures and tables numbers and labels, so that I can refer to them?
     * By including the name in the top header of the r chunk. Then I can do \@table:name of table and reference it in the text.
