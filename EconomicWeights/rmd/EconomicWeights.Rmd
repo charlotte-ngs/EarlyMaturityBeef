@@ -17,11 +17,11 @@ As an example the economic values will appear for the most distinct breeds, Angu
 
 ### Carcass fat
 The trait carcass fat has the unit carcass fat class (see table???).
-Therefore the economical weight for carcass fat is the additional revenue per unit of carcass fat class.
+Therefore the economical weight for carcass fat is the additional profit per unit of carcass fat class.
 I choose the unit Swiss Francs (Sfr.) per 1 carcass fat class.
 
 #### Initial Situation
-To get the minus of Sfr. per 1 carcass fat class, I need to calculate the mean price difference in a population when I change the mean carcass fat score in the population.
+To get the difference in Sfr. per 1 carcass fat class, I need to calculate the mean price difference in a population when I change the mean carcass fat score in the population.
 To do so I change the population slightly, but try to conserve the intial distribution shape.
 The change should predict the possible change when breeding.
 
