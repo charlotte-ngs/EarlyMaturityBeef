@@ -447,5 +447,25 @@ Increasing intensity of selection seems at first sight to be a straightforward  
 However there are two factors that limit increasing intensity of selection:
 1. The reproductive rate
 2. Inbreeding
+
+```{r}
+#set loop to get all fill names at once
+#define variable parts of file names as vectors
+breed <- c("AN","AU","CH","LM","OB","SF","SI")
+group <- c("a","c")
+trait <- c("cf","cc","cw")
+#define loop to get all possible combinations
+for(i in 1:length(breed)){
+  for(j in 1:length(trait)){
+    for(k in 1:length(group)){
+      paste("Merge_",breed[i],"_",trait[j],group[k],".txt")
+    }}}
+
+
+a <- data.frame(t(1:4))
+b <- matrix(data=2, nrow=3, ncol=4)
+a[,lapply(.SD,function(x)(x*b[,x]))]
+```
+
 # References
 

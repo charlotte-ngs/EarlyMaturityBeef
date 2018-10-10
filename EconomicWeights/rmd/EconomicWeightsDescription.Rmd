@@ -49,9 +49,9 @@ $1$ indicates the population after the change in population mean of 0.1.
 
 
 I know the initial distribution $r_0$ of the population over the carcass fat scores from the data of Qualitas AG.
-The distribution is discrete, which means I know the share of the population within each carcass fat class (see table \@ref(tab:InitialSharesCF)).
+The distribution is discrete, which means I know the share of the population within each carcass fat class (see figure \@ref(fig:InitialSharesCF)).
 
-```{r InitialSharesCF, echo=FALSE}
+```{r InitialSharesCF, echo=FALSE, fig.cap="Population shares for each carcass fat class in Angus and Limousin calves and stirks (Kunz, 2018)"}
 library(knitr)
 library(kableExtra)
 #Vectors of animal numbers Carcass fat 
@@ -71,11 +71,40 @@ Lmcfa <- c(5102,21958,50705,7169,148)/sum(Lmcfa)
 
 #Values Carcass fat classes
 Vcf <- c(1:5)
+#Means (M)
+#Angus
+AncfcM <- sum(Vcf*Ancfc)
+AncfaM <- sum(Vcf*Ancfa)
+#Limousin
+LmcfcM <- sum(Vcf*Lmcfc)
+LmcfaM <- sum(Vcf*Lmcfa)
 
-x <- cbind(Vcf,Ancfc,Ancfa,Lmcfc,Lmcfa)
-colnames(x) <- c("class", "calves", "stirks", "calves", "stirks")
-kable(x, booktabs=T, caption="Population shares for each carcass fat class in Angus and Limousin calves and stirks (Kunz, 2018)")%>%
-add_header_above(c("", "Angus"=2,"Limousin"=2))
+#Standard deviations (S)
+#Angus
+AncfcS <- 0.76
+AncfaS <- 0.74
+#Limousin
+LmcfcS <- 0.78
+LmcfaS <- 0.71
+
+
+#define number of rows
+#x <- cbind(Vcf,Ancfc,Ancfa,Lmcfc,Lmcfa)
+#colnames(x) <- c("class", "ANcalves", "ANstirks", "LMcalves", "LMstirks")
+#kable(x, booktabs=T, caption="Population shares for each carcass fat class in Angus and Limousin calves and stirks (Kunz, 2018)")
+#x <- as.data.frame(x)
+# settings barplot
+library(ggplot2)
+theme_set(theme_classic())
+#set dataframe
+x <-data.frame(Class=rep(c(1:5),times=2*2),Category=rep(c("AN", "LM"),each=10), Share=c(Ancfc,Ancfa,Lmcfc,Lmcfa))
+x$Group <- rep(rep(c("Calves","Adults"),each=5),times=2)
+# Plot
+g <- ggplot(x,aes(Class,Share))
+g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
+# To specify a different mean or sd, use the args parameter to supply new values
+  stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
+  theme_classic()
 ```
 
 ```{r PriceCF, echo=F}
@@ -106,17 +135,14 @@ Changing the mean is difficult without changing the distribution shape for a dis
 Therefore I will use the assumption that carcass fat class is normally distributed in the population.
 
 However the borders of the normal distribution are not clear.
-For example, should you set the borders of class 1 at 0.5 and 1.5 or at 0 and 1?
-I used a trick to get the borders of the normal distribution.
-I knew the shares of the initial population and derived from the shares, which borders would be necessary in a normal distribution to get the right shares per class.
+For example, should you set the thresholds of class 1 at 0.5 and 1.5 or at 0 and 1?
+I used a trick to get the thresholds of the normal distribution.
+I knew the shares of the initial population and derived from the shares, which thresholds would be necessary in a normal distribution to get the right shares per class.
 
-I got the borders of the initial distribution by the R-command `qnorm()`. 
+I got the thresholds of the initial distribution by the R-command `qnorm()`. 
 This command gave me the quantil of the area under the normal distribution.
 The area is the share of animals which belong to specific carcass fat classes.
 
-The initial normal distribution is defined by the mean and the standard deviation.
-I will change then the mean of the normal distribution to get the normal distribution after the change of mean.
-I leave the standard deviation as it is, because it ensures that the shape of the normal distribution stays the same.
 Afterwards I need to get the shares of the normal distribution after the change of mean.
-I used the command `pnorm()` to get back the shares, which is $r_1$
+I used the command `pnorm()` using the values of the t to get back the shares, which is $r_1$.
 

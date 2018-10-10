@@ -412,6 +412,23 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * Why do the references for table not work for R markdown?
 
+* How do I plot the normal distribution?
+    *    # Plot a normal curve
+ggplot(data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm)
+
+# To specify a different mean or sd, use the args parameter to supply new values
+ggplot(data.frame(x = c(-5, 5)), aes(x)) +
+  stat_function(fun = dnorm, args = list(mean = 2, sd = .5))
+
+```{r}
+library(ggplot2)
+# Plot a normal curve
+ggplot(data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm)
+
+# To specify a different mean or sd, use the args parameter to supply new values
+ggplot(data.frame(x = c(-5, 5)), aes(x)) +
+  stat_function(fun = dnorm, args = list(mean = 2, sd = .5))
+```
 
 
 \begin{equation}
