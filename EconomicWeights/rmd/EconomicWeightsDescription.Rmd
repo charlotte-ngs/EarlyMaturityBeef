@@ -102,10 +102,11 @@ x$Group <- rep(rep(c("Calves","Adults"),each=5),times=2)
 # Plot
 g <- ggplot(x,aes(Class,Share))
 g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
-# To specify a different mean or sd, use the args parameter to supply new values
-  stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
   theme_classic()
 ```
+
+The price change $p$ for calves comes from the pricing system CHTAX for the slaughter category KV and the one from stirks is the mean of the slaughter categories MT, OB and RG (see table \@ref(tab:PriceCF)).
+
 
 ```{r PriceCF, echo=F}
 # Mean price minus stirks / kg carcass weight
@@ -128,11 +129,20 @@ kable(x, digits=1, caption="Price change in Sfr. per kg carcass weight for each 
 ```
 @Proviande2018
 
-The price change $p$ for calves comes from the pricing system CHTAX for the slaughter category KV and the one from stirks is the mean of the slaughter categories MT, OB and RG (see table \@ref(tab:PriceCF)).
-
 $r_1$ could be computed in shifting the distribution until the mean increased by 0.1.
 Changing the mean is difficult without changing the distribution shape for a discrete distribution.
 Therefore I will use the assumption that carcass fat class is normally distributed in the population.
+Then I approximate the normal distribution to the discrete distribution (see figure??)
+
+```{r NormDistApprox}
+library(ggplot2)
+x <- data.frame(Class=Vcf,Share=Ancfa)
+g <- ggplot(x,aes(Class,Share))
+g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
+  stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
+  theme_classic()
+```
+
 
 However the borders of the normal distribution are not clear.
 For example, should you set the thresholds of class 1 at 0.5 and 1.5 or at 0 and 1?
@@ -143,6 +153,21 @@ I got the thresholds of the initial distribution by the R-command `qnorm()`.
 This command gave me the quantil of the area under the normal distribution.
 The area is the share of animals which belong to specific carcass fat classes.
 
-Afterwards I need to get the shares of the normal distribution after the change of mean.
+Afterwards I need to get the shares of the normal distribution after the change of mean (see figure ??).
+
+```{r ShiftMean}
+library(ggplot2)
+x <- data.frame(Class=Vcf,Share=Ancfa)
+g <- ggplot(x,aes(Class,Share))
+g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
+  theme_classic()+
+  stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),linetype="dotted")
+  
+```
+
+
+
+
+
 I used the command `pnorm()` using the values of the t to get back the shares, which is $r_1$.
 

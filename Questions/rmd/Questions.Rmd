@@ -10,7 +10,7 @@ bibliography: /Users/silvan/Documents/EarlyMaturityBeef/embc-thesis-bd/library.b
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```
 
 ---
@@ -414,13 +414,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * How do I plot the normal distribution?
     *    # Plot a normal curve
-ggplot(data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm)
-
-# To specify a different mean or sd, use the args parameter to supply new values
-ggplot(data.frame(x = c(-5, 5)), aes(x)) +
-  stat_function(fun = dnorm, args = list(mean = 2, sd = .5))
-
-```{r}
+```{r, eval=FALSE}
 library(ggplot2)
 # Plot a normal curve
 ggplot(data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm)
@@ -429,6 +423,35 @@ ggplot(data.frame(x = c(-5, 5)), aes(x)) + stat_function(fun = dnorm)
 ggplot(data.frame(x = c(-5, 5)), aes(x)) +
   stat_function(fun = dnorm, args = list(mean = 2, sd = .5))
 ```
+
+* How do I construct a loop?
+```{r, eval=FALSE}
+#set loop to get all fill names at once
+#define variable parts of file names as vectors
+breed <- c("AN","AU","CH","LM","OB","SF","SI")
+group <- c("a","c")
+trait <- c("cf","cc","cw")
+#define loop to get all possible combinations
+for(i in 1:length(breed)){
+  for(j in 1:length(trait)){
+    for(k in 1:length(group)){
+      paste("Merge_",breed[i],"_",trait[j],group[k],".txt")
+    }}}
+```
+* How do I construct a conditioned function?
+```{r, eval=FALSE}
+if (is.null(tbl_result)){
+  tbl_result <- tbl_current
+} else {
+  tbl_result <- dplyr::inner_join(tbl_result, tbl_current, by="idaTvd")
+}
+```
+
+* How can I efficiently produce a vector of economic weights
+
+
+
+
 
 
 \begin{equation}

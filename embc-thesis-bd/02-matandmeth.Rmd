@@ -8,18 +8,17 @@ library(kableExtra)
 ```
 
 # Material and Methods {#matandmeth}
-Based on the earlier made observation in chapter \@ref(intro), it is important to improve __early maturity__ in Swiss beef cattle. 
-One possibility for improving a certain trait is to use this trait in a breeding program. 
-To include a certain trait in a breeding program it is important that the trait is preciseley defined and efficiently measurable.
+It is important to improve __early maturity__ in Swiss beef cattle, based on the earlier made observation in chapter \@ref(intro). 
+One possibility is to use early maturity in a breeding program. 
+Early maturity must be preciseley defined and efficiently measurable to include it in a breeding program.
 
 ## Definition of Early Maturity {#defem}
-In the context of this project we use the following definition of "early maturity". Animals are earlier mature if they reach the state of carcass maturity faster than others. 
-Animals reach carcass maturity when their carcass does not get any markdowns due to insufficient or excessive carcass fat. 
+The following definition of "early maturity" is valid in the context of this project : Animals are earlier mature if they reach the state of carcass maturity faster than others. 
+Animals reach carcass maturity when their carcass does not get any price reductions due to insufficient or excessive carcass fat. 
+Carcass price reductions are dependent on the payment system of the slaughterhouse.
+Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX (see \@ref(CHTAX)) [Kaufmann1995].
 
-Carcass price markdowns are dependent on the payment system of the slaughterhouse.
-Since 1994 the payment system of Swiss slaughterhouses for beef cattle is based on the classification system called CHTAX [Kaufmann1995]. 
-
-## Beef carcass classification system CHTAX {#CHTAX}
+### Beef carcass classification system CHTAX {#CHTAX}
 The Swiss meat industry association "Proviande" is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
 In slaughterhouses Proviande employees classify beef carcasses to determine their price.
 The first step in the classification system CHTAX is to assign the carcass to a slaughter category. 
@@ -92,12 +91,12 @@ In conclusion age, number of incissors, sex, carcass conformation, carcass weigh
 While age in days, number of incissors, carcass conformation and carcass weight are traits that should be maximal or minimal, sex and carcass fat should be optimal in the range.
 
 Early maturity is only dependent on age at slaughter and carcass fat though.
-For there are two traits at once that influence early maturity, early maturity is not directly measurable.
+There are two traits at once that influence early maturity, consequently early maturity is not directly measurable.
 There is no straightforward solution for breeding directed for a not directly measurable trait.
 
 
 ## Strategies to improve Early Maturity
-To breed for early maturity employees from Qualitas AG have proposed four strategies, which I will evaluate.
+To breed for early maturity employees from Qualitas AG have proposed four strategies, which will be evaluated in this thesis.
 One of them is to derive the trait early maturity from the trait carcass fat.
 
 ### Deriving Early Maturity from Carcass Fat
