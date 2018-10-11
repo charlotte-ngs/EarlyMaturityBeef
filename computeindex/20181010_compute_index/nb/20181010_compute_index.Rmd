@@ -7,6 +7,43 @@ output: html_notebook
 ## Disclaimer
 
 
+## General Function
+The general function can be designed as follows
+
+```{r funceconomicvalue, eval=FALSE}
+#' @title
+#'
+#' @description
+#'
+#' @param pvec_class_freq  discrete empirical distribution of population for given trait
+#' @param pvec_threshold   thresholds under continuous distribution given by pricing system
+#' @param pvec_price       vector of prices for given categories
+#' @param pn_mean          current population phenotypic mean
+#' @param pn_sd            current population phenotypic standard deviation
+#' @param pn_delta_mean    small change of current phenotypic population mean
+#' @return vector of economic values
+compute_economic_value <- function( pvec_class_freq = NULL,
+                                    pvec_threshold  = NULL,
+                                    pvec_price,
+                                    pn_mean,
+                                    pn_sd,
+                                    pn_delta_mean ){
+  
+  if(is.null(pvec_class_freq)) {
+    # case of carcass weight
+    
+  } else if (is.null(pvec_threshold)){
+    # case of cf* and cc*
+    
+  }
+  
+  return(vec_ev_result)
+  
+}
+```
+
+
+
 ## Carcass Weight
 The following function computes the economic value of the trait age-adjusted __carcass weight__. The economic value is defined as the change in profit for a small change in the population mean of the trait.
 

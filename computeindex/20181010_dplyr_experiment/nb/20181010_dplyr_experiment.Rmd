@@ -1,11 +1,130 @@
 ---
 title: "Compute Index Values"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
+
+```{r setup, include=FALSE}
+knitr::knit_hooks$set(hook_convert_odg = rmddochelper::hook_convert_odg)
+```
+
 
 ## Disclaimer
 This notebook contains a few tests about how to compute an index for a set of animals.
 
+
+## Small Example Dataset
+Given are a dataframe of animals with their breeding values. A small example data frame would look as follows. We start by reading the small dataset with estimated breeding values.
+
+```{r}
+s_lm_sfa_fn <- "first100_LM_cfa.txt"
+df_lm_cfa <- read.table(file = s_lm_sfa_fn, header = TRUE, stringsAsFactors = FALSE)
+str(df_lm_cfa)
+```
+
+Conversion to `tibble`
+
+```{r}
+tbl_lm_cfa <- dplyr::as_tibble(df_lm_cfa)
+tbl_lm_cfa
+```
+
+## Convert File Names To Trait Names
+We define the following function to extract trait names from input file names.
+
+```{r}
+get_trait_name <- function(ps_file_name){
+  # split input file name with "_" and keep the last element
+  s_trait_result <- unlist(strsplit(ps_file_name, split = "_", fixed = TRUE))
+  s_trait_result <- s_trait_result[length(s_trait_result)]
+  # split result with "." and keep the first element
+  s_trait_result <- unlist(strsplit(s_trait_result, split = ".", fixed = TRUE))
+  s_trait_result <- s_trait_result[1]
+  return(s_trait_result)
+}
+get_trait_name(ps_file_name = s_lm_sfa_fn)
+```
+
+Reading more breeding values
+
+```{r}
+library(dplyr)
+
+s_lm_pat <- "first100_LM"
+vec_lm_fn <- list.files(pattern = s_lm_pat)
+
+tbl_result <- NULL
+### # loop and aggregate
+for (f in seq_along(vec_lm_fn)){
+  # f <- 1
+  s_current_fn <- vec_lm_fn[f]
+  cat("Reading file: ", s_current_fn, "\n")
+  s_trait_name <- get_trait_name(ps_file_name = s_current_fn)
+    
+  # reading the predicted breeding values for the current file
+  tbl_current <- readr::read_delim(file = vec_lm_fn[f], delim = " ")
+  # select columns tvd-nr and estimate
+  tbl_current <- tbl_current %>% select(idaTvd, estimate)
+  if(is.null(tbl_result)){
+    tbl_result <- tbl_current
+    names(tbl_result) <- c("idaTvd", s_trait_name)
+  } else {
+    tbl_result <- tbl_result %>% inner_join(tbl_current, by = "idaTvd")
+    names(tbl_result) <- c(names(tbl_result)[1:(ncol(tbl_result)-1)], s_trait_name)
+  }
+
+}
+tbl_result
+```
+
+## Re-arrange Data using `gather()`
+We use the gather function to re-arrange the data. What `gather()` does is shown in the following figure
+
+```{r gatherfunction, echo=FALSE, hook_convert_odg=TRUE, fig_path="odg"}
+#rmddochelper::use_odg_graphic(ps_path = "odg/gatherfunction.odg")
+knitr::include_graphics(path = "odg/gatherfunction.png")
+```
+
+The above shown call does the following
+
+```{r}
+library(tidyr)
+gatbl_result <- tbl_result %>%
+  gather(trait, estimate, -idaTvd)
+gatbl_result
+```
+
+
+## Economic Values
+Vectors of economic values are computed elsewhere and are taken as given here. To begin with we have a vector with those values as input. 
+
+```{r}
+vec_ev <- c(0.002097717, 0.001566957, 1.415233)
+```
+
+The vector is augmented with the trait names and is integrated into a new `tibble`
+
+```{r}
+tbl_ev <- tibble(trait = c("cca", "cfa", "cwa"), ev=vec_ev)
+tbl_ev
+```
+
+Now we are joining the economic values to the gathered tibble. 
+
+```{r}
+tbl_idx_comp <- gatbl_result %>%
+  inner_join(tbl_ev, by="trait") %>%
+  mutate(idx_comp = estimate * ev)
+tbl_idx_comp
+```
+
+
+```{r}
+ tbl_idx_comp %>%
+  group_by(idaTvd) %>%
+  summarise(ca_index = sum(idx_comp))
+```
 
 ## Resources
 We start with a few experiments from https://stackoverflow.com/questions/41247487/product-of-several-columns-on-a-data-frame-by-a-vector-using-dplyr
@@ -70,8 +189,7 @@ tmp <- tbl %>%
   group_by(letters) %>%
   mutate(value = value * vec_weigth) %>%
   spread(variable, value)
-tmp # %>%
-#   select(- letters)
+tmp 
 ```
 
 How can we compute the sum of the numeric columns
@@ -79,7 +197,6 @@ How can we compute the sum of the numeric columns
 ```{r}
 tmp %>%
   as.matrix()
-
 ```
 
 ```{r}
@@ -98,3 +215,37 @@ library(purrr)
 (medians <- map_dbl(mtcars, median))
 ```
 
+
+
+## `gather`-Function
+Based on https://www.rdocumentation.org/packages/tidyr/versions/0.8.1/topics/gather an example that shows the gather function
+
+```{r}
+n_nr_stocks <- 4
+library(dplyr)
+# From http://stackoverflow.com/questions/1181060
+stocks <- tibble(
+  time = as.Date('2009-01-01') + 0:(n_nr_stocks-1),
+  X = rnorm(n_nr_stocks, 0, 1),
+  Y = rnorm(n_nr_stocks, 0, 2),
+  Z = rnorm(n_nr_stocks, 0, 4)
+)
+stocks
+```
+
+Using the `gather()`-function
+
+```{r}
+stocks %>% gather(stock, price, -time)
+```
+
+The `gather()`-function does a special sort of un-folding a dataframe. The result of the `gather()`-function is a new dataframe. The first argument to the `gather()`-function is the column that contains the names of the original dataframe. The second arugment is the values of the original dataframe. All arguments with a minus in front of them are not unfolded. 
+
+
+
+
+
+
+
+
+ 
