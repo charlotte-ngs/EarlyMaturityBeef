@@ -414,6 +414,11 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * How do I plot the normal distribution?
     *    # Plot a normal curve
+    
+* How can I add an additional element to an existing vector?
+    *a <- c(a, 5) if a is a vector.
+    
+
 ```{r, eval=FALSE}
 library(ggplot2)
 # Plot a normal curve

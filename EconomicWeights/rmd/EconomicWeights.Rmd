@@ -293,25 +293,57 @@ LmccaEW
 ```
 
 ### Carcass weight
-The trait carcass weight has the unit kg.
-For carcass weight the price plus per kg is the same on the whole scale.
-Therefore I do not need to assume a standard deviation in the population.
-I just need the mean for the first scenario and the function that will tell me how much the profit will change when I change the carcass weight is one kg more.
-Important: Here I assume that the carcass weight changes, without a change of age at slaughter.
-The profit will be here defined as the revenue minus the fixed and variable costs.
 
-```{r ProfitCarcassWeight}
-#profit per animal in Sfr. from @Burkard2013
-VersProfitAnimal<- 438
-KontrProfitAnimal<- 384
-#mean carcass weight in kg as mean September of categories Stiere, Ochsen and Rinder of Agristat S.33.
-k<-mean(c(298,256,260))
-k
-VersMeancw<- k
-KontrMeancw<- k
-#profit per mean kg carcass weight in Sfr.
-cwEW<- KontrProfitAnimal/VersMeancw
+Carcass weight has the unit kg.
+Therefore the economic weight has the unit Sfr. / kg.
+Constant profit per kg carcass weight is assumed over the range accepted carcass weights.
+The profit is reduced for carcass weights which are either higher or lower than a certain treshold defined by CHTAX.
+Tresholds are different for calves and for adults.
+In a population which has high shares of carcass weights lower than the bottom treshold but no shares higher than the top treshold, the economic weight for carcass weight in this population would probably be positive.
+The population is assumed to be normally distributed for carcass weight.
+
+The initial distribution is defined by the mean and the standard deviation of the population.
+The economic weight is computed by the difference in profit when increasing the mean of this distribution by 1 kg.
+
+```{r}
+# define vector for price reductions in Sfr./kg for carcass weight extremes
+# for calves
+pcwc <- c(-0.2,0,-0.5)
+# for adults
+pcwa <- c(-0.2,0,-0.5)
+# define vector for tresholds
+# for calves
+tcwc<- c(130,220,Inf)
+# for adults
+tcwa <- c(130,220,Inf)
+# define mean
+# for calves
+cwcM <- 
+# for adults
+cwaM <- 
+  
+# define change of mean
+d<-0.1
+# define new mean
+cwcM2 <- cwcM+d
+# define standard deviation
+# for calves
+cwcS <- 
+# for adults
+cwaS <- 
+# define shares for initial mean.
+cwc <- diff(c(0,pnorm(tcwc,sd=cwcS,mean=cwcM, lower.tail = T)))
+# define shares for new mean
+cwc2 <- diff(c(0,pnorm(tcwc,sd=cwcS,mean=cwcM2, lower.tail = T)))
+# define economic weight
+cwcEW <- t(pcwc)%*%cwc2-t(pcwc)%*%cwc
+
 ```
+
+
+
+
+
 
 
 # Table of economic weights

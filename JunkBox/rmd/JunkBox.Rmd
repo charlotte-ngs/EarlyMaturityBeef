@@ -467,5 +467,24 @@ b <- matrix(data=2, nrow=3, ncol=4)
 a[,lapply(.SD,function(x)(x*b[,x]))]
 ```
 
+The trait carcass weight has the unit kg.
+For carcass weight the price plus per kg is the same on the whole scale.
+Therefore I do not need to assume a standard deviation in the population.
+I just need the mean for the first scenario and the function that will tell me how much the profit will change when I change the carcass weight is one kg more.
+Important: Here I assume that the carcass weight changes, without a change of age at slaughter.
+The profit will be here defined as the revenue minus the fixed and variable costs.
+```{r ProfitCarcassWeight}
+#profit per animal in Sfr. from @Burkard2013
+VersProfitAnimal<- 438
+KontrProfitAnimal<- 384
+#mean carcass weight in kg as mean September of categories Stiere, Ochsen and Rinder of Agristat S.33.
+k<-mean(c(298,256,260))
+k
+VersMeancw<- k
+KontrMeancw<- k
+#profit per mean kg carcass weight in Sfr.
+cwEW<- KontrProfitAnimal/VersMeancw
+```
+
 # References
 
