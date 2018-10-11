@@ -356,6 +356,7 @@ y <- select(filter(x,breed=="An"),-breed)
 y                
 y+c(1:5)    
 
+select(filter(x,breed=="Lm"),-breed)  
 
 ```
 
