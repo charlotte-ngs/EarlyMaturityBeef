@@ -1,7 +1,0 @@
----
-title: "F(EcW)"
-author: "Silvan"
-date: "10 10 2018"
-output: pdf_document
----
-

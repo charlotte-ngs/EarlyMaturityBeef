@@ -328,7 +328,7 @@ crossbred calves exceeds the average performance of the two or more purebreds th
 
 * __Random regression modell__ 
 
-* __Economic weight__ Provide indications as to how much genetic improvement in a specific trait would be worth paying for.
+* __Economic value__ Provide indications as to how much genetic improvement in a specific trait would be worth paying for.
 
 * __String variable__ Vector? (Stricker 2004)
 
@@ -382,7 +382,7 @@ accuracy of prediction.
 
 * __Prediction error variance__ (PEV) is the inverse of the mixed model equations. A diagonal element of PEV is var(u-û). The PEV is considered to be constant in a deterministic breeding plan [@Phocas1996].
 
-* __Economical weights__ (a) Determine the importance of a breeding value for a trait in an aggregate genotype. Unit?
+* __Economical value__ (a) Determine the importance of a breeding value for a trait in an aggregate genotype. Unit?
 
 * __Factor of variance reduction__ (k) Factor that estimates the variance reduction due to selection. Defined by the intensity of selection and the value of truncation (defined by the proportion selected).
 

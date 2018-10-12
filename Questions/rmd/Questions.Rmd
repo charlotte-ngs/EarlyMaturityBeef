@@ -418,6 +418,18 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How can I add an additional element to an existing vector?
     *a <- c(a, 5) if a is a vector.
     
+* Should I avoid colors in the master thesis?
+    *
+    
+* Should I include mean and standard deviation in the legend, how?
+    *
+    
+    (ref:foo) Defined by @Agristat2018
+    
+```{r foo, fig.cap=`ref:foo`}
+plot(cars)
+```
+    
 
 ```{r, eval=FALSE}
 library(ggplot2)

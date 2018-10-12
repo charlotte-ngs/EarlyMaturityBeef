@@ -15,9 +15,9 @@ The general function can be designed as follows
 #'
 #' @description
 #'
-#' @param pvec_class_freq  discrete empirical distribution of population for given trait
+#' @param pvec_class_freq  discrete empirical distribution of population for given trait over different classes
 #' @param pvec_threshold   thresholds under continuous distribution given by pricing system
-#' @param pvec_price       vector of prices for given categories
+#' @param pvec_price       vector of prices for given classes
 #' @param pn_mean          current population phenotypic mean
 #' @param pn_sd            current population phenotypic standard deviation
 #' @param pn_delta_mean    small change of current phenotypic population mean
@@ -31,13 +31,47 @@ compute_economic_value <- function( pvec_class_freq = NULL,
   
   if(is.null(pvec_class_freq)) {
     # case of carcass weight
-    
-  } else if (is.null(pvec_threshold)){
+    if(length(pvec_threshold)!=length(pvec_price)||pn_sd<0||is.vector(pn_mean)||is.vector(pn_sd)){
+      # case that variables have wrong format or values.
+      paste("Variables do not fit to function")
+    }
+    # computation of economic value for carcass weight
+      else{
+        # fit threshold vector by adding infinity to its tail
+        pvec_threshold <- c(pvec_threshold,Inf)
+        # define new mean
+        pn_mean_new <- pn_mean+pn_delta_mean
+        # define frequencies for initial mean
+        freq_pn_mean <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean, lower.tail = T)))
+        # define frequencies for new mean
+        freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
+        # compute economic weight
+        ev_result <- t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean
+        
+      }
+        
+  } else if(is.null(pvec_threshold)){
     # case of cf* and cc*
-    
+    if(length(pvec_class_freq)!=length(pvec_price)||pn_sd<0||is.vector(pn_mean)||is.vector(pn_sd)){
+      # case that variables have wrong format or values
+      paste("Variables do not fit to function")
+    }
+    else{
+      # define new mean
+        pn_mean_new <- pn_mean+pn_delta_mean
+      # define thresholds within normal distribution
+        pvec_threshold<- qnorm(cumsum(pvec_class_freq),sd=pn_sd,mean=pn_mean, lower.tail = T)
+        # define frequencies for initial mean
+        freq_pn_mean <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean, lower.tail = T)))
+        # define frequencies for new mean
+        freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
+        # compute economic weight
+        ev_result <- t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean
+    }
+      
   }
   
-  return(vec_ev_result)
+  return(ev_result)
   
 }
 ```
