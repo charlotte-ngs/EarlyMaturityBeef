@@ -7,7 +7,7 @@ output: html_notebook
 ## Disclaimer
 
 ### Function Inputs
-#### carcass conformation carcass fat
+#### frequencies and thresholds
 ```{r conformationfreq}
 #Vectors of animal numbers Carcass conformation (cc) 
 #Angus (An) with a=stirks and c=calves.
@@ -52,12 +52,39 @@ x <- data.frame(class = Vcf, Ancfc=Ancfc,Ancfa=Ancfa,Lmcfc=Lmcfc,Lmcfa=Lmcfa)
 kable(x,booktabs=T,digits=2, caption="Population frequencies accross carcass conformation classes (Kunz,2018)")
 ```
 
-#### carcass weight
 ```{r weightthresh}
 cwc <- 1.4
-cwa <- 
+cwa <- c(2.9,3,3.1,3.2,3.3,3.4,3.5,3.6,3.7,3.8)
+
 ```
 
+#### Prices
+
+```{r}
+# average carcass numbers per month of categories MT, OB and RG in 2017 from Agristat S. 35.
+MT <- 8535
+OB <- 3460
+RG <- 7137
+MTfr <- MT/sum(MT,OB,RG)
+OBfr <- OB/sum(MT,OB,RG)
+RGfr <- RG/sum(MT,OB,RG)
+# prices for categories KV, MT, OB and RG from Proviande 2018, week 33.
+MTcc <- c(7.9,8.2,8.6,8.8,9.1,9.3,9.55)
+OBcc <- c(7.9,8.2,8.6,8.8,9.1,9.4,9.65)
+RGcc <- c(6.9,7.5,8.2,8.8,9.2,9.5,9.75)
+ccc <- c(11.2,12.7,13.6,14.2,14.7,15.2,15.7)
+cca <- MTcc*MTfr+OBcc*OBfr+RGcc*RGfr
+# prices for categories KV, MT, OB and RG from Proviande 2018, week 33.
+MTcf <- c(-0.9,-0.3,0,-0.3,-0.7)
+OBcf <- c(-0.9, -0.3,0,-0.4,-0.9)
+RGcf <- c(-0.9,-0.3,0,-0.5,-1)
+cfc <- c(-1.5,-0.6,0,-0.4,-1)
+cfa <- MTcf*MTfr+OBcf*OBfr+RGcf*RGfr
+# prices for category KV from Proviande 2018, week 33.
+cwc <- c(0,1.4)
+# # prices for categories MT, OB and RG from Proviande 2016.
+cwa <- c(0.1,0.2,0.3,0.5,0.7,0.9,1.2,1.4,1.6,1.8)
+```
 
 
 

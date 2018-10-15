@@ -135,9 +135,9 @@ x$mean<-rowMeans(y)
 x<-cbind(z,x) 
 #defintion of variable
 cfap <- x$mean
-
+cfap
 #Mean price minus calves / kg carcass weight
-cfcp <- c(-1.5,-0.6,0,-0.4,1)
+cfcp <- c(-1.5,-0.6,0,-0.4,-1)
 ```
 
 #### Economic weight
@@ -268,7 +268,7 @@ x$mean<-rowMeans(y)
 x<-cbind(z,x) 
 #defintion of variable
 ccap <- x$mean
-
+ccap
 #Mean price minus calves / kg carcass weight
 cccp <- c(11.2,12.7,13.6,14.2,14.7,15.2,15.7)
 
@@ -366,6 +366,11 @@ select(filter(x,breed=="Lm"),-breed)
 
 
 
+```{r inputTblEw}
+cf <- data.frame(breed=c("An","Lm", "An","Lm"), group=c("c","c","a","a"), "1"=c(), "")
+cc
+cw
+```
 
 
 

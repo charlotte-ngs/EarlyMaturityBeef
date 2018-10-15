@@ -188,7 +188,6 @@ sp<-data.frame(sCC=c(0.71754, 0.07159, 0.09911), sCF=c(0.07159, 0.36439,0.04989)
 colnames(sp) <- c("sCC","sCF", "sCW", "heritability")
 svc<-cbind(sg,sr,sp)
 kable(svc, digits=3, booktabs=T, caption="Genetic, phenotypic and residual variances-covariances for stirks (s) derived from Kunz (2018)") %>%
-kable_styling(latex_options=c("hold_position")) %>%
  add_header_above(c("","genetic"=3,"residual"=3, "phenotypic"=3,""))
 
 ```
