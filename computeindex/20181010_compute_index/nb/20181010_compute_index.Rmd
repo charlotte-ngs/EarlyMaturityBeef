@@ -27,6 +27,10 @@ Lmcca <- Lmcca/sum(Lmcca)
 
 x <- data.frame(class = c("C", "H","T+","T","T-","A","X"), Anccc=Anccc,Ancca=Ancca,Lmccc=Lmccc,Lmcca=Lmcca)
 kable(x,booktabs=T,digits=2, caption="Population frequencies accross carcass conformation classes (Kunz,2018)")
+Anccc 
+Ancca 
+Lmccc 
+Lmcca 
 ```
 
 ```{r fatfreq}
@@ -50,12 +54,12 @@ Lmcfa <- c(5102,21958,50705,7169,148)/sum(Lmcfa)
 Vcf <- c(1:5)
 x <- data.frame(class = Vcf, Ancfc=Ancfc,Ancfa=Ancfa,Lmcfc=Lmcfc,Lmcfa=Lmcfa)
 kable(x,booktabs=T,digits=2, caption="Population frequencies accross carcass conformation classes (Kunz,2018)")
+
 ```
 
 ```{r weightthresh}
 cwc <- 1.4
 cwa <- c(2.9,3,3.1,3.2,3.3,3.4,3.5,3.6,3.7,3.8)
-
 ```
 
 #### Prices
@@ -86,41 +90,23 @@ cwc <- c(0,1.4)
 cwa <- c(0.1,0.2,0.3,0.5,0.7,0.9,1.2,1.4,1.6,1.8)
 ```
 
-
-
-## General Function
-The general function can be designed as follows
-
-```{r funceconomicvalue, eval=FALSE}
+## Internal Function
+```{r intfunceconomicvalue, eval=FALSE}
 #' @title
 #'
 #' @description
 #'
-#' @param pvec_class_freq  discrete empirical distribution of population for given trait over different classes
 #' @param pvec_threshold   thresholds under continuous distribution given by pricing system
 #' @param pvec_price       vector of prices for given classes
 #' @param pn_mean          current population phenotypic mean
 #' @param pn_sd            current population phenotypic standard deviation
 #' @param pn_delta_mean    small change of current phenotypic population mean
-#' @return vector of economic values
-compute_economic_value <- function( pvec_class_freq = NULL,
-                                    pvec_threshold  = NULL,
-                                    pvec_price,
-                                    pn_mean,
-                                    pn_sd,
-                                    pn_delta_mean ){
-  
-  if(is.null(pvec_class_freq)) {
-    # case of carcass weight
-    # computation of economic value for carcass weight
-      if(length(pvec_threshold)!=length(pvec_price)-1||length(pn_mean)>1||length(pn_sd)>1||length(pn_delta_mean)>1||pn_sd<0){
-        cat("input variables do not fit to function\n")
-        # improvement ==> tell the user which parameter is not ok
-        return()
-        }
-      
-        # fit threshold vector by adding infinity to its tail
-        pvec_threshold <- c(pvec_threshold,Inf)
+#' @return economic value
+compute_internal_economic_value <- function(pvec_threshold
+                                            pvec_price,
+                                            pn_mean,
+                                            pn_sd,
+                                            pn_delta_mean){
         # define new mean
         pn_mean_new <- pn_mean+pn_delta_mean
         # define frequencies for initial mean
@@ -128,32 +114,91 @@ compute_economic_value <- function( pvec_class_freq = NULL,
         # define frequencies for new mean
         freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
         # compute economic weight
-        ev_result <- t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean
+        ev_result <- (t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean)/pn_delta_mean
+        return(ev_result)
+      }
+```
+
+
+## General Function
+The general function can be designed as follows
+
+```{r funceconomicvalue, eval=FALSE}
+#' @title
+#'General function to compute an economic value for carcass fat, carcass conformation or carcass weight.
+#' @description
+#'This function 
+#' @param pvec_class_freq  discrete empirical distribution of population for given trait over different classes
+#' @param pvec_threshold   thresholds under continuous distribution given by pricing system
+#' @param pvec_price       vector of prices for given classes
+#' @param pn_mean          current population phenotypic mean
+#' @param pn_sd            current population phenotypic standard deviation
+#' @param pn_delta_mean    small change of current phenotypic population mean
+#' @return economic value
+compute_economic_value <- function( pvec_class_freq = NULL,
+                                    pvec_threshold  = NULL,
+                                    pvec_price,
+                                    pn_mean,
+                                    pn_sd,
+                                    pn_delta_mean ){
+  # general format requirements for input variables
+  if(length(pn_mean)>1){
+        cat("pn_mean must be one number")
+         return()
+      }
+      if(length(pn_sd)>1){
+        cat("pn_sd must be one number")
+         return()
+      }
+      if(length(pn_delta_mean)>1){
+        cat("pn_delta_mean must be one number")
+         return()
+      }
+      if(pn_sd<0){
+        cat("pn_sd must be positive")
+         return()
+      }
+  if(is.null(pvec_class_freq)) {
+    # case of carcass weight
+    # computation of economic value for carcass weight
+    # special format requirements for input variables
+      if(length(pvec_threshold)!=length(pvec_price)-1){
+        cat("pvec_threshold must be one vector element shorter than pvec_price ")
+         return()
+      }
+      
+        # fit threshold vector by adding infinity to its tail
+        pvec_threshold <- c(pvec_threshold,Inf)
+        # compute economic value 
+        ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
+                                                     pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
+                                                     pn_delta_mean = pn_delta_mean)
         return(ev_result)
         
       
         
   }else if(is.null(pvec_threshold)){
     # case of cf* and cc*
-      # define new mean
-        pn_mean_new <- pn_mean+pn_delta_mean
-      # define frequencies from numbers
-        pvec_class_freq <- pvec_class_freq/sum(pvec_class_freq)
+    # special format requirements for input variables
+    if(length(pvec_class_freq)!=length(pvec_price)){
+        cat("pvec_class_freq must be the same length as pvec_price. ")
+         return()
+      }
       # define thresholds within normal distribution
         pvec_threshold<- qnorm(cumsum(pvec_class_freq),sd=pn_sd,mean=pn_mean, lower.tail = T)
-        # define frequencies for initial mean
-        freq_pn_mean <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean, lower.tail = T)))
-        # define frequencies for new mean
-        freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
-        # compute economic weight
-        ev_result <- t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean
-        return(ev_result)
+          # compute economic value
+        ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
+                                                     pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
+                                                     pn_delta_mean = pn_delta_mean)
     
       
   }
   
 }
 
+```
+
+```{r computeev}
 ## read input
 s_lm_cfc_freq_fname <- "lm_cfc_freq.csv"
 tbl_lm_cfc_freq <- readr::read_table(s_lm_cfc_freq_fname)
@@ -172,9 +217,7 @@ tbl_mean_sd %>% filter(Trait == "cfc") %>% filter(Breed == "lm") %>% select(Mean
 compute_economic_value(pvec_class_freq = tbl_lm_cfc_freq$freq, pn_sd = 0.99, pn_mean = 5.48, pvec_price = c(11.2,12.7,13.6,14.2,14.7,15.2,15.7), pn_delta_mean = 0.01)
 
 compute_economic_value(pvec_threshold = c(120,300), pn_sd = 45, pn_mean = 242, pvec_price = c(-10,0,-20), pn_delta_mean = 0.01)
-
 ```
-
 
 
 ## Carcass Weight

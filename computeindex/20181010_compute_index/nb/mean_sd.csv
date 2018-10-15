@@ -1,5 +1,13 @@
 Trait;Breed;Mean;Sd
-cfc;an;3.08;1.4
-cfa;an;3.2;1.5
-cfc;lm;2.6;1.1
-cfa;lm;2.7;1.2
+cfa;lm;2.71;0.71
+cfc;lm;2.22;0.78
+cca;lm;6.56;0.7
+ccc;lm;6.52;0.8
+cwa;lm;2.42;0.45
+cwc;lm;1.3;0.13
+cfa;an;3.08;0.74
+cfc;an;2.51;0.76
+cca;an;5.62;1
+ccc;an;5.48;0.99
+cwa;an;2.32;0.53
+cwc;an;1.23;0.14
