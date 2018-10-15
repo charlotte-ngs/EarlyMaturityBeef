@@ -87,7 +87,8 @@ compute_economic_value <- function( pvec_class_freq = NULL,
     # case of carcass weight
     # computation of economic value for carcass weight
       if(length(pvec_threshold)!=length(pvec_price)-1||length(pn_mean)>1||length(pn_sd)>1||length(pn_delta_mean)>1||pn_sd<0){
-        paste("input variables do not fit to function")
+        cat("input variables do not fit to function\n")
+        # improvement ==> tell the user which parameter is not ok
         return()
         }
       
@@ -125,7 +126,23 @@ compute_economic_value <- function( pvec_class_freq = NULL,
   }
   
 }
-compute_economic_value(pvec_class_freq = c(2,2,35,278,634,708,298), pn_sd = 0.99, pn_mean = 5.48, pvec_price = c(11.2,12.7,13.6,14.2,14.7,15.2,15.7), pn_delta_mean = 0.01)
+
+## read input
+s_lm_cfc_freq_fname <- "lm_cfc_freq.csv"
+tbl_lm_cfc_freq <- readr::read_table(s_lm_cfc_freq_fname)
+tbl_lm_cfc_freq
+
+### # mean and sd
+s_mean_sd_fn <- "mean_sd.csv"
+tbl_mean_sd <- readr::read_csv2(file = s_mean_sd_fn)
+tbl_mean_sd
+
+library(dplyr)
+tbl_mean_sd %>% filter(Trait == "cfc") %>% filter(Breed == "lm") %>% select(Mean)
+
+
+## specify frequencies instead of numbers in pvec_class_freq
+compute_economic_value(pvec_class_freq = tbl_lm_cfc_freq$freq, pn_sd = 0.99, pn_mean = 5.48, pvec_price = c(11.2,12.7,13.6,14.2,14.7,15.2,15.7), pn_delta_mean = 0.01)
 
 compute_economic_value(pvec_threshold = c(120,300), pn_sd = 45, pn_mean = 242, pvec_price = c(-10,0,-20), pn_delta_mean = 0.01)
 
