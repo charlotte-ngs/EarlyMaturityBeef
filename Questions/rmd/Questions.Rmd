@@ -466,6 +466,16 @@ if (is.null(tbl_result)){
 
 * How can I efficiently produce a vector of economic weights
 
+* Should I use graphics to show the material? In other papers the author only use tables in the material and methods part.
+
+* Should I rename the carcass conformation class so that the classes are numbers?
+    *
+
+
+
+
+
+
 
 
 

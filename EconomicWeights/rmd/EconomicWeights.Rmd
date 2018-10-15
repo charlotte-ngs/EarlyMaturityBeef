@@ -196,7 +196,7 @@ Vcc <- c(1:7)
 
 #Means (M)
 #Angus
-AncccM <- sum(Vcc*Anccc)
+AncccM <- 5.48
 AnccaM <- sum(Vcc*Ancca)
 #Limousin
 LmcccM <- sum(Vcc*Lmccc)

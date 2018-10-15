@@ -49,9 +49,9 @@ $1$ indicates the population after the change in population mean of 0.1.
 
 
 I know the initial distribution $r_0$ of the population over the carcass fat scores from the data of Qualitas AG.
-The distribution is discrete, which means I know the share of the population within each carcass fat class (see figure \@ref(fig:InitialSharesCF)).
+The distribution is discrete, which means I know the share of the population within each carcass fat class (see figure \@ref(fig:InitialSharesCF_barplot)).
 
-```{r InitialSharesCF, echo=FALSE, fig.cap="Population shares for each carcass fat class in Angus and Limousin calves and stirks (Kunz, 2018)"}
+```{r InitialSharesCF_barplot, echo=FALSE, fig.cap="Population shares for each carcass fat class in Angus and Limousin calves and stirks (Kunz, 2018)"}
 library(knitr)
 library(kableExtra)
 #Vectors of animal numbers Carcass fat 
@@ -63,30 +63,14 @@ Lmcfc <- c(735,1504,1419,72,0)
 Lmcfa <- c(5102,21958,50705,7169,148)
 #Shares Carcass fat
 #Angus with a=stirks and c=calves.
-Ancfc <- c(189,706,935,125,2)/sum(Ancfc)
-Ancfa <- c(802,3415,15673,6314,481)/sum(Ancfa)
+Ancfc <- Ancfc/sum(Ancfc)
+Ancfa <- Ancfa/sum(Ancfa)
 #Limousin with a=stirks and c=calves.
-Lmcfc <- c(735,1504,1419,72,0)/sum(Lmcfc)
-Lmcfa <- c(5102,21958,50705,7169,148)/sum(Lmcfa)
+Lmcfc <- Lmcfc/sum(Lmcfc)
+Lmcfa <- Lmcfa/sum(Lmcfa)
 
 #Values Carcass fat classes
 Vcf <- c(1:5)
-#Means (M)
-#Angus
-AncfcM <- sum(Vcf*Ancfc)
-AncfaM <- sum(Vcf*Ancfa)
-#Limousin
-LmcfcM <- sum(Vcf*Lmcfc)
-LmcfaM <- sum(Vcf*Lmcfa)
-
-#Standard deviations (S)
-#Angus
-AncfcS <- 0.76
-AncfaS <- 0.74
-#Limousin
-LmcfcS <- 0.78
-LmcfaS <- 0.71
-
 
 #define number of rows
 #x <- cbind(Vcf,Ancfc,Ancfa,Lmcfc,Lmcfa)
@@ -108,7 +92,14 @@ g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category),
 The price change $p$ for calves comes from the pricing system CHTAX for the slaughter category KV and the one from stirks is the mean of the slaughter categories MT, OB and RG (see table \@ref(tab:PriceCF)).
 
 
-```{r PriceCF, echo=F}
+```{r IntitialFreq_cf_Table}
+#define number of rows
+x <- cbind(Vcf,Ancfc,Ancfa,Lmcfc,Lmcfa)
+colnames(x) <- c("class", "ANcalves", "ANstirks", "LMcalves", "LMstirks")
+kable(x, booktabs=T, caption="Population shares for each carcass fat class in Angus and Limousin calves and stirks (Kunz, 2018)", digits =3)
+```
+
+```{r Price_cf, echo=F}
 # Mean price minus stirks / kg carcass weight
 # mean price plus or minus for different carcass fat classes from Proviande 2018, week 33.
 library(knitr)
@@ -134,8 +125,10 @@ Changing the mean is difficult without changing the distribution shape for a dis
 Therefore I will use the assumption that carcass fat class is normally distributed in the population.
 Then I approximate the normal distribution to the discrete distribution (see figure??)
 
-```{r NormDistApprox}
+```{r NormDistApprox, fig.cap="Approximation of normal distribution to discrete distribution."}
 library(ggplot2)
+AncfaS <- 0.74
+AncfaM <- 3.1
 x <- data.frame(Class=Vcf,Share=Ancfa)
 g <- ggplot(x,aes(Class,Share))
 g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
@@ -155,19 +148,24 @@ The area is the share of animals which belong to specific carcass fat classes.
 
 Afterwards I need to get the shares of the normal distribution after the change of mean (see figure ??).
 
-```{r ShiftMean}
+```{r ShiftMean, fig.cap="Initial and new distribution"}
 library(ggplot2)
 x <- data.frame(Class=Vcf,Share=Ancfa)
-g <- ggplot(x,aes(Class,Share))
-g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
-  theme_classic()+
-  stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),linetype="dotted")
+g <- ggplot(x,aes(Class,Share,linetype="Mean"))
+g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
+  stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),aes(linetype="New distribution"))+
+    scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
+  theme_classic()
   
 ```
 
 
-
-
-
 I used the command `pnorm()` using the values of the t to get back the shares, which is $r_1$.
+
+
+
+
+
+
+
 

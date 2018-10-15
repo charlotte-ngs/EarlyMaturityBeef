@@ -8,25 +8,26 @@ library(kableExtra)
 ```
 
 # Material and Methods {#matandmeth}
-It is important to improve __early maturity__ in Swiss beef cattle, based on the earlier made observation in chapter \@ref(intro). 
-One possibility is to use early maturity in a breeding program. 
+It is important to improve __early maturity__ in Swiss beef cattle as explained in section \@ref(intro). 
+One possibility to improve early maturity is to use early maturity in a breeding program. 
 Early maturity must be preciseley defined and efficiently measurable to include it in a breeding program.
 
 ## Definition of Early Maturity {#defem}
 The following definition of "early maturity" is valid in the context of this project : Animals are earlier mature if they reach the state of carcass maturity faster than others. 
-Animals reach carcass maturity when their carcass does not get any price reductions due to insufficient or excessive carcass fat. 
+Animals reach carcass maturity when their carcass does not get any price reductions per kg carcass weight (CW) when sold at the slaughterhouse. 
 Carcass price reductions are dependent on the payment system of the slaughterhouse.
-Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX (see \@ref(CHTAX)) [Kaufmann1995].
+Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX [Kaufmann1995].
 
 ### Beef carcass classification system CHTAX {#CHTAX}
+ 
 The Swiss meat industry association "Proviande" is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
 In slaughterhouses Proviande employees classify beef carcasses to determine their price.
+
 The first step in the classification system CHTAX is to assign the carcass to a slaughter category. 
-The distinct carcass categories differ in age at slaughter, anatomical maturity, sex and weight.
+Carcass categories differ in the animals age at slaughter, anatomical maturity, sex and carcass weight (see table  \@ref(tab:slaughtercategory).
+Whereas the farmer provides information about age at slaughter and sex, Proviande employees determine anatomical maturity and carcass weight.
 Proviande employees determine anatomical maturity based on the number of incissors (front teeth) the animal has developed until slaughter.
 The more incissors the more anatomically mature is the animal. 
-Table \@ref(tab:slaughtercategory) contains the list of carcass categories and their description used in CHTAX.
-
 Slaughterhouses have to determine the carcass weight by weighing the trimmed carcass. 
 Consequently not included in the carcass weight are head, tail, guts, surface fat and lower legs [@EDI2013].
 
@@ -41,32 +42,25 @@ x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"),
                                               ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
                                               ">161 days old"))
 
-kable(x, booktabs=T, caption="Description of slaughter categories") %>%
+kable(x, booktabs=T, caption="Description of slaughter categories (Proviande, 2015)") %>%
 kable_styling(full_width =T) %>%
 column_spec(3, width="8cm")
 ```
 
-The second step in the classification system CHTAX is to assign the carcass to a carcass conformation class (CC) and a carcass fat class (CF) within its slaughter category.
-In this step Proviande employees visually classify the carcass into five classes of carcass fat and into five classes of carcass conformation.
-These classifications are important factors for the determination of the price of the carcass.
-
-Carcass fat and carcass conformation have been introduced as price formation factors in Swiss slaughterhouses, because they suppose to coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
-Carcass fat when too low has been related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse [@Kaufmann1995].
-A better carcass conformation in turn has been related to a higher yield of valuable meat pieces [@Proviande2015].
-
+The second step in the classification system CHTAX is assigning the carcass to a carcass conformation class (CC) within its slaughter category.
+In this step Proviande employees visually classify the carcass into seven classes of carcass conformation (see table  \@ref(tab:conformationclass)).
 The assigned carcass conformation class depends on the accentuation of certain muscles the carcass shows.
 The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
 Carcass conformation class C is the most favoured class and will result in the highest price of the carcass.
-A detailed description of the distinct carcass conformation classes is available at table \@ref(tab:conformationclass).
-In combination with the slaughter category the carcass conformation class determines the basis price of an animal per kilogram carcass weight (CW).
-Slaughterhouses have to determine the carcass weight by weighing the trimmed carcass. 
-Consequently not included in the carcass weight are head, tail, guts, surface fat and lower legs [@EDI2013].
+In combination with the slaughter category the carcass conformation class determines the basis price of an animal per kilogram carcass weight.
 
-The determination of carcass fat class can further decrease the base price per kilogramm carcass weight.
-When a carcass does not belong to class 3, the carcass gets a markdown in Swiss Francs (Sfr.) per kilogramm carcass weight.
+The third step in CHTAX is assigning the carcass to one of five carcass fat classes.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see table \@ref(tab:fatclass)).
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
+The determination of carcass fat class can further decrease the base price per kilogramm carcass weight.
+
+When a carcass does not belong to class 3, the carcass gets a markdown in Swiss Francs (Sfr.) per kilogramm carcass weight.
 
 ```{r fatclass, echo=FALSE}
 x<-data.frame(class = c("1", "2", "3", "4", "5"), description=c("no fat coverage","light fat coverage; muscels partially visible", "average even fat coverage; muscles generally covered", "strong fat coverage; excessive fat deposition", "fat coverage generally excessive; bulging fat formations"))
@@ -80,7 +74,7 @@ nocite: |
   @Proviande2015
 ...
 ```{r conformationclass, echo=FALSE}
-x<-data.frame(class = c("C", "H", "T", "A", "X"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
+x<-data.frame(class = c("C", "H","T+","T","T-","A","X"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced"," ", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced"," ", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
 
 kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)") %>%
 kable_styling(full_width =T) %>%
@@ -109,10 +103,13 @@ This indicates that carcass fat is usually the limiting factor for early maturit
 Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
 Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
 
+**Here the text interrupts its flow. I need to go on with, what this thesis has to do with the description of the breeding value estimation. Somehow like: My task is to find out how high the genetic gain in carcass fat can be over several years.**
+
 *The characteristics of the breeding value carcass fat were the material to asses the suitability of carcass fat for deriving early maturity. 
 To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
 I will use the results from the breeding value estimation as "material" to evaluate the efficiency of the breeding program.
 The explanations refering to the creation of the breeding value car are based on the documentation of @Kunz2018.*
+
 
 
 
@@ -121,15 +118,15 @@ The breeding value is a widespread tool to rank animals in a breeding program.
 To compute the breeding values for carcass fat a multivariate best linear unbiased prediction (BLUP) model is used [@Kunz2018].
 BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variances/covariances, environment factors and individual phenotypic records.
 Multivariate means that BLUP accounts for the phenotypic, genetic and residual covariances between the involved traits. 
-A Multivariariate BlUP computes breeding values synchronically for all involved traits [@Mrode2003].
+A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
 Phenotypic records of three carcass traits are used to estimate the breeding value for carcass fat:
 
-* carcass fat [score] (table \@ref(tab:fatclass) 
-* carcass conformation [score] (table \@ref(tab:conformationclass))
-* carcass weight [dt]
+* carcass fat [class] (table \@ref(tab:fatclass) 
+* carcass conformation [class] (table \@ref(tab:conformationclass))
+* carcass weight [dt] (section \@ref(CHTAX))
 
 Each beef carcass delivers one record per carcass trait.
-Proviande employees make the records of the traits at slaughterhouses in Switzerland routeneley according to CHTAX (see table \ref(CHTAX)).
+Proviande employees record the traits at slaughterhouses in Switzerland routeneley according to CHTAX (see section \ref(CHTAX)).
 
 An animals record is dependent on the environmental conditions the animal lives in beside the genetic effects.
 The environmental effects of the different conditions have been included in BLUP and used to separate additive genetic effects from environmental effects on the phenotypic observations.
@@ -141,7 +138,7 @@ To compute the breeding value for carcass fat, carcass conformation and carcass 
 * age and squared age at slaughter (as covariable)
 * slaughterhouse
 
-Beside the random animal effect which is the breeding value, there is only one known random effect used in the model:
+Beside the random animal effect which is the breeding value, there is only one random effect used in the model:
 
 * farm x year
 

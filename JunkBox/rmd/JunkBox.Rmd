@@ -485,6 +485,10 @@ KontrMeancw<- k
 #profit per mean kg carcass weight in Sfr.
 cwEW<- KontrProfitAnimal/VersMeancw
 ```
+*These classifications are important factors for the determination of the price of the carcass.
+Carcass fat and carcass conformation have been introduced as price formation factors in Swiss slaughterhouses, because Proviande supposes that they coincide with important price-determining characteristics of beef meat [@Kaufmann1995]. 
+Carcass fat when too low has been related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse [@Kaufmann1995].
+A better carcass conformation in turn has been related to a higher yield of valuable meat pieces [@Proviande2015].*
 
 # References
 

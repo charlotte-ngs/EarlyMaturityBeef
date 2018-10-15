@@ -6,6 +6,60 @@ output: html_notebook
 
 ## Disclaimer
 
+### Function Inputs
+#### carcass conformation carcass fat
+```{r conformationfreq}
+#Vectors of animal numbers Carcass conformation (cc) 
+#Angus (An) with a=stirks and c=calves.
+Anccc <- c(2,2,35,278,634,708,298)
+Ancca <- c(0,17,247,3459,8308,8857,5797)
+#Limousin (Lm) with a=stirks and c=calves.
+Lmccc <- c(3,2,17,88,300,838,2482)
+Lmcca <- c(2,11,57,1041,6652,21092,56227)
+
+#Shares Carcass conformation
+#Angus with a=stirks and c=calves.
+Anccc <- Anccc/sum(Anccc)
+Ancca <- Ancca/sum(Ancca)
+#Limousin with a=stirks and c=calves.
+Lmccc <- Lmccc/sum(Lmccc)
+Lmcca <- Lmcca/sum(Lmcca)
+
+x <- data.frame(class = c("C", "H","T+","T","T-","A","X"), Anccc=Anccc,Ancca=Ancca,Lmccc=Lmccc,Lmcca=Lmcca)
+kable(x,booktabs=T,digits=2, caption="Population frequencies accross carcass conformation classes (Kunz,2018)")
+```
+
+```{r fatfreq}
+#Vectors of animal numbers Carcass fat 
+#Angus with a=stirks and c=calves.
+Ancfc <- c(189,706,935,125,2)
+Ancfa <- c(802,3415,15673,6314,481)
+#Limousin with a=stirks and c=calves.
+Lmcfc <- c(735,1504,1419,72,0)
+Lmcfa <- c(5102,21958,50705,7169,148)
+
+#Shares Carcass fat
+#Angus with a=stirks and c=calves.
+Ancfc <- c(189,706,935,125,2)/sum(Ancfc)
+Ancfa <- c(802,3415,15673,6314,481)/sum(Ancfa)
+#Limousin with a=stirks and c=calves.
+Lmcfc <- c(735,1504,1419,72,0)/sum(Lmcfc)
+Lmcfa <- c(5102,21958,50705,7169,148)/sum(Lmcfa)
+
+#Values Carcass fat classes
+Vcf <- c(1:5)
+x <- data.frame(class = Vcf, Ancfc=Ancfc,Ancfa=Ancfa,Lmcfc=Lmcfc,Lmcfa=Lmcfa)
+kable(x,booktabs=T,digits=2, caption="Population frequencies accross carcass conformation classes (Kunz,2018)")
+```
+
+#### carcass weight
+```{r weightthresh}
+cwc <- 1.4
+cwa <- 
+```
+
+
+
 
 ## General Function
 The general function can be designed as follows
@@ -31,12 +85,12 @@ compute_economic_value <- function( pvec_class_freq = NULL,
   
   if(is.null(pvec_class_freq)) {
     # case of carcass weight
-    if(length(pvec_threshold)!=length(pvec_price)||pn_sd<0||is.vector(pn_mean)||is.vector(pn_sd)){
-      # case that variables have wrong format or values.
-      paste("Variables do not fit to function")
-    }
     # computation of economic value for carcass weight
-      else{
+      if(length(pvec_threshold)!=length(pvec_price)-1||length(pn_mean)>1||length(pn_sd)>1||length(pn_delta_mean)>1||pn_sd<0){
+        paste("input variables do not fit to function")
+        return()
+        }
+      
         # fit threshold vector by adding infinity to its tail
         pvec_threshold <- c(pvec_threshold,Inf)
         # define new mean
@@ -47,18 +101,16 @@ compute_economic_value <- function( pvec_class_freq = NULL,
         freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
         # compute economic weight
         ev_result <- t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean
+        return(ev_result)
         
-      }
+      
         
-  } else if(is.null(pvec_threshold)){
+  }else if(is.null(pvec_threshold)){
     # case of cf* and cc*
-    if(length(pvec_class_freq)!=length(pvec_price)||pn_sd<0||is.vector(pn_mean)||is.vector(pn_sd)){
-      # case that variables have wrong format or values
-      paste("Variables do not fit to function")
-    }
-    else{
       # define new mean
         pn_mean_new <- pn_mean+pn_delta_mean
+      # define frequencies from numbers
+        pvec_class_freq <- pvec_class_freq/sum(pvec_class_freq)
       # define thresholds within normal distribution
         pvec_threshold<- qnorm(cumsum(pvec_class_freq),sd=pn_sd,mean=pn_mean, lower.tail = T)
         # define frequencies for initial mean
@@ -67,13 +119,16 @@ compute_economic_value <- function( pvec_class_freq = NULL,
         freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
         # compute economic weight
         ev_result <- t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean
-    }
+        return(ev_result)
+    
       
   }
   
-  return(ev_result)
-  
 }
+compute_economic_value(pvec_class_freq = c(2,2,35,278,634,708,298), pn_sd = 0.99, pn_mean = 5.48, pvec_price = c(11.2,12.7,13.6,14.2,14.7,15.2,15.7), pn_delta_mean = 0.01)
+
+compute_economic_value(pvec_threshold = c(120,300), pn_sd = 45, pn_mean = 242, pvec_price = c(-10,0,-20), pn_delta_mean = 0.01)
+
 ```
 
 
