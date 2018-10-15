@@ -101,8 +101,8 @@ cwa <- c(0.1,0.2,0.3,0.5,0.7,0.9,1.2,1.4,1.6,1.8)
 #' @param pn_mean          current population phenotypic mean
 #' @param pn_sd            current population phenotypic standard deviation
 #' @param pn_delta_mean    small change of current phenotypic population mean
-#' @return economic value
-compute_internal_economic_value <- function(pvec_threshold
+#' @return                 economic value
+compute_internal_economic_value <- function(pvec_threshold,
                                             pvec_price,
                                             pn_mean,
                                             pn_sd,
@@ -199,25 +199,44 @@ compute_economic_value <- function( pvec_class_freq = NULL,
 ```
 
 ```{r computeev}
-## read input
-s_lm_cfc_freq_fname <- "lm_cfc_freq.csv"
-tbl_lm_cfc_freq <- readr::read_table(s_lm_cfc_freq_fname)
-tbl_lm_cfc_freq
-
-### # mean and sd
-s_mean_sd_fn <- "mean_sd.csv"
-tbl_mean_sd <- readr::read_csv2(file = s_mean_sd_fn)
-tbl_mean_sd
-
 library(dplyr)
-tbl_mean_sd %>% filter(Trait == "cfc") %>% filter(Breed == "lm") %>% select(Mean)
+# Define mean
+s_mean_sd_fn <- "mean_sd.csv"
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "cfc") %>% filter(Breed == "lm") %>% select(Mean)
+# Define standard deviation
+s_mean_sd_fn <- "mean_sd.csv"
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "cfc") %>% filter(Breed == "lm") %>% select(Sd)
+# Define delta mean
+delta_mean_fn <- "delta_mean.csv"
+pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cfc")%>%select(Delta)
+# Define price vector
+price_fname <- "cfc_price.csv"
+pvec_price <- readr::read_table(price_fname)
+# Define frequency vector
+freq_fname <- "lm_cfc_freq.csv"
+pvec_class_freq <- readr::read_table(freq_fname)
+# Define threshold vector
+thresh_fname <- "cwa_threshold.csv"
+pvec_threshold <- readr::read_table(thresh_fname)
 
-
-## specify frequencies instead of numbers in pvec_class_freq
-compute_economic_value(pvec_class_freq = tbl_lm_cfc_freq$freq, pn_sd = 0.99, pn_mean = 5.48, pvec_price = c(11.2,12.7,13.6,14.2,14.7,15.2,15.7), pn_delta_mean = 0.01)
+# Compute economic value
+compute_economic_value(pvec_class_freq = pvec_class_freq, pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, pn_delta_mean = pn_delta_mean)
 
 compute_economic_value(pvec_threshold = c(120,300), pn_sd = 45, pn_mean = 242, pvec_price = c(-10,0,-20), pn_delta_mean = 0.01)
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Carcass Weight
