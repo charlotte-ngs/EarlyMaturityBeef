@@ -93,21 +93,25 @@ compute_economic_value <- function( pvec_class_freq = NULL,
         
       
         
-  }else if(is.null(pvec_threshold)){
+  } else if(is.null(pvec_threshold)){
     # case of cf* and cc*
     # special format requirements for input variables
     if(length(pvec_class_freq)!=length(pvec_price)){
-        cat("pvec_class_freq must be the same length as pvec_price. ")
-         return()
-      }
-      # define thresholds within normal distribution
-        pvec_threshold<- qnorm(cumsum(pvec_class_freq),sd=pn_sd,mean=pn_mean, lower.tail = T)
-          # compute economic value
-        ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
-                                                     pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
-                                                     pn_delta_mean = pn_delta_mean)
+      cat("pvec_class_freq must be the same length as pvec_price. ")
+      return()
+    }
+    # define thresholds within normal distribution
+    vec_cumsum <- cumsum(pvec_class_freq)
+    if (vec_cumsum[length(vec_cumsum)] > 1) {
+      vec_cumsum[length(vec_cumsum)] <- 1
+    }
+    pvec_threshold<- qnorm(vec_cumsum,sd=pn_sd,mean=pn_mean, lower.tail = T)
+    # compute economic value
+    ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
+                                                 pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
+                                                 pn_delta_mean = pn_delta_mean)
     
-      return(ev_result)
+    return(ev_result)
   }
   
 }
@@ -142,7 +146,102 @@ pvec_threshold <- NULL #readr::read_csv2(thresh_fname)
 pvec_threshold
 
 # Compute economic value
-compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+# compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+
+# unrolling the function compute_economic_value
+pvec_class_freq = pvec_class_freq$freq
+pn_sd = pn_sd$Sd
+pn_mean = pn_mean$Mean
+pvec_price = pvec_price$price
+pn_delta_mean = pn_delta_mean$Delta
+pvec_threshold = pvec_threshold$threshold
+
+# function step-by-step
+if(length(pn_mean)>1){
+  cat("pn_mean must be one number")
+  return()
+}
+if(length(pn_sd)>1){
+  cat("pn_sd must be one number")
+  return()
+}
+if(length(pn_delta_mean)>1){
+  cat("pn_delta_mean must be one number")
+  return()
+}
+if(pn_sd<0){
+  cat("pn_sd must be positive")
+  return()
+}
+
+  vec_cumsum <- cumsum(pvec_class_freq)
+  if (vec_cumsum[length(vec_cumsum)] > 1) {
+    vec_cumsum[length(vec_cumsum)] <- 1
+  }
+  pvec_threshold<- qnorm(vec_cumsum,sd=pn_sd,mean=pn_mean, lower.tail = T)
+ pvec_threshold
+ 
+
+ 
+if(is.null(pvec_threshold)){
+  # case of cf* and cc*
+  # special format requirements for input variables
+  if(length(pvec_class_freq)!=length(pvec_price)){
+    cat("pvec_class_freq must be the same length as pvec_price. ")
+    return()
+  }
+  # define thresholds within normal distribution
+  vec_cumsum <- cumsum(pvec_class_freq)
+  if (vec_cumsum[length(vec_cumsum)] > 1) {
+    vec_cumsum[length(vec_cumsum)] <- 1
+  }
+  pvec_threshold<- qnorm(vec_cumsum,sd=pn_sd,mean=pn_mean, lower.tail = T)
+  # compute economic value
+  ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold,
+                                               pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price,
+                                               pn_delta_mean = pn_delta_mean)
+  
+  return(ev_result)
+}
+  
+  # if(is.null(pvec_class_freq)) {
+  #   # case of carcass weight
+  #   # computation of economic value for carcass weight
+  #   # special format requirements for input variables
+  #     if(length(pvec_threshold)!=length(pvec_price)-1){
+  #       cat("pvec_threshold must be one vector element shorter than pvec_price ")
+  #        return()
+  #     }
+  #     
+  #       # fit threshold vector by adding infinity to its tail
+  #       pvec_threshold <- c(pvec_threshold,Inf)
+  #       # compute economic value 
+  #       ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
+  #                                                    pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
+  #                                                    pn_delta_mean = pn_delta_mean)
+  #       return(ev_result)
+  #       
+  #     
+  #       
+  # }else if(is.null(pvec_threshold)){
+  #   # case of cf* and cc*
+  #   # special format requirements for input variables
+  #   if(length(pvec_class_freq)!=length(pvec_price)){
+  #       cat("pvec_class_freq must be the same length as pvec_price. ")
+  #        return()
+  #     }
+  #     # define thresholds within normal distribution
+  #       pvec_threshold<- qnorm(cumsum(pvec_class_freq),sd=pn_sd,mean=pn_mean, lower.tail = T)
+  #         # compute economic value
+  #       ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
+  #                                                    pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
+  #                                                    pn_delta_mean = pn_delta_mean)
+  #   
+  #     return(ev_result)
+  # }
+  # 
+
+
 
 ```
 
