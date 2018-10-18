@@ -14,24 +14,22 @@ Early maturity must be preciseley defined and efficiently measurable to include 
 
 ## Definition of Early Maturity {#defem}
 The following definition of "early maturity" is valid in the context of this project : Animals are earlier mature if they reach the state of carcass maturity faster than others. 
-Animals reach carcass maturity when their carcass does not get any price reductions per kg carcass weight (CW) when sold at the slaughterhouse. 
+Animals reach carcass maturity when their carcass does not get any price reductions per kg carcass weight when sold at the slaughterhouse. 
 Carcass price reductions are dependent on the payment system of the slaughterhouse.
 Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX [Kaufmann1995].
+Consequently, CHTAX mainly determines the definition of early maturity. 
 
 ### Beef carcass classification system CHTAX {#CHTAX}
  
-The Swiss meat industry association "Proviande" is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
-In slaughterhouses Proviande employees classify beef carcasses to determine their price.
+The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
+There, Proviande employees classify beef carcasses to determine their price.
+They carry out the same procedure for each beef carcass.
 
-The first step in the classification system CHTAX is to assign the carcass to a slaughter category. 
-Carcass categories differ in the animals age at slaughter, anatomical maturity, sex and carcass weight (see table  \@ref(tab:slaughtercategory).
-Whereas the farmer provides information about age at slaughter and sex, Proviande employees determine anatomical maturity and carcass weight.
-Proviande employees determine anatomical maturity based on the number of incissors (front teeth) the animal has developed until slaughter.
-The more incissors the more anatomically mature is the animal. 
-Slaughterhouses have to determine the carcass weight by weighing the trimmed carcass. 
-Consequently not included in the carcass weight are head, tail, guts, surface fat and lower legs [@EDI2013].
+Firstly, Proviande employees assign the carcass to a carcass category. 
+Carcass categories differ in the animals age at slaughter, number of incissors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)).
+Carcass weight does not include the weight of the animals head, tail, guts and lower legs [@EDI2013].
 
-```{r slaughtercategory, echo=FALSE}
+```{r carcasscategory, echo=FALSE}
 x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
                                    category=c("calves", "young cattle", "young bulls", "bulls or steers", 
                                               "young steers", "young heifers", "heifers or young cows", "cows"), 
@@ -42,30 +40,27 @@ x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"),
                                               ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
                                               ">161 days old"))
 
-kable(x, booktabs=T, caption="Description of slaughter categories (Proviande, 2015)") %>%
-kable_styling(full_width =T) %>%
+kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015)") %>%
 column_spec(3, width="8cm")
 ```
 
-The second step in the classification system CHTAX is assigning the carcass to a carcass conformation class (CC) within its slaughter category.
-In this step Proviande employees visually classify the carcass into seven classes of carcass conformation (see table  \@ref(tab:conformationclass)).
-The assigned carcass conformation class depends on the accentuation of certain muscles the carcass shows.
+
+Secondly Proviande employees assign the carcass to a carcass conformation class.
+The assigned carcass conformation class depends on the accentuation of certain muscels (see table \@ref(tab:conformationclass)).
 The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
 Carcass conformation class C is the most favoured class and will result in the highest price of the carcass.
-In combination with the slaughter category the carcass conformation class determines the basis price of an animal per kilogram carcass weight.
+In combination with the slaughter category the carcass conformation class determines the basis price per kilogram carcass weight.
 
-The third step in CHTAX is assigning the carcass to one of five carcass fat classes.
+Thirdly Proviande employees assign the carcass to a carcass fat class.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see table \@ref(tab:fatclass)).
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
 The determination of carcass fat class can further decrease the base price per kilogramm carcass weight.
-
-When a carcass does not belong to class 3, the carcass gets a markdown in Swiss Francs (Sfr.) per kilogramm carcass weight.
+When a carcass does not belong to class 3, the carcass gets a price reduction in Swiss Francs (Sfr.) per kilogramm carcass weight.
 
 ```{r fatclass, echo=FALSE}
 x<-data.frame(class = c("1", "2", "3", "4", "5"), description=c("no fat coverage","light fat coverage; muscels partially visible", "average even fat coverage; muscles generally covered", "strong fat coverage; excessive fat deposition", "fat coverage generally excessive; bulging fat formations"))
 kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015)") %>%
-kable_styling(full_width =T) %>%
 column_spec(1, width="0.5cm")
 
 ```
@@ -75,9 +70,7 @@ nocite: |
 ...
 ```{r conformationclass, echo=FALSE}
 x<-data.frame(class = c("C", "H","T+","T","T-","A","X"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced"," ", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced"," ", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
-
 kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)") %>%
-kable_styling(full_width =T) %>%
 column_spec(1, width="0.5cm")
 ```
 
