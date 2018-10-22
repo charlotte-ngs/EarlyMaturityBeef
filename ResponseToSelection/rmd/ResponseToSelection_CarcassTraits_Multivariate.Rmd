@@ -33,8 +33,9 @@ Synchronically I adjust the input parameters to get the variables of the followi
 
 ## Input parameters
 
-#### Variances/Covariances
+### Variances/Covariances
 
+With CC,CF,CW.
 ```{r VariancesCovariances}
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
@@ -53,20 +54,20 @@ phenotypic_var_cov <- read.table(file = phenotypic_var_cov, sep=";", header=TRUE
 phenotypic_var_cov <- as.matrix(phenotypic_var_cov)
 ```
 
-#### Pedigree
+### Number of Relatives
 
 First the number of relatives is imported.
 ```{r NumberofRelatives}
 library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
-# number of siblings, half siblings and offspring
-## siblings
-siblings <- "number_of_relatives"
-siblings <- read.table(file = siblings, sep=";", header=TRUE) %>%
-  select(siblings)
-siblings <- as.numeric(siblings)
-siblings
+# number of fullsiblings, half siblings and offspring
+## fullsiblings
+fullsiblings <- "number_of_relatives"
+fullsiblings <- read.table(file = fullsiblings, sep=";", header=TRUE) %>%
+  select(fullsiblings)
+fullsiblings <- as.numeric(fullsiblings)
+fullsiblings
 ## half siblings
 halfsiblings <- "number_of_relatives"
 halfsiblings <- read.table(file = halfsiblings, sep=";", header=TRUE) %>%
@@ -81,13 +82,81 @@ offspring <- as.numeric(offspring)
 offspring
 ```
 
-Then I use these numbers to compute a relationsship matrix.
 
-```{r RelationshipMatrix}
+### Generation intervall and proportion selected
 
+```{r GenerationIntervall}
+library(dplyr)
+# Set working directory
+setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
+generationintervall <- "proportion_selected_generation_intervall"
+generationintervall <- read.table(file = generationintervall, sep=";", header=TRUE) %>%
+  select(generationintervall)
+generationintervall <- as.numeric(generationintervall)
+generationintervall
 ```
 
+```{r ProportionSelected}
+library(dplyr)
+# Set working directory
+setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
+proportionselected <- "proportion_selected_generation_intervall"
+proportionselected <- read.table(file = proportionselected, sep=";", header=TRUE) %>%
+  select(proportionselected)
+proportionselected <- as.numeric(proportionselected)
+proportionselected
+```
 
+### Economic values a
+
+```{r}
+library(dplyr)
+# Set working directory
+setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
+# always calves first and CC,CF,CW
+# for Angus breeds
+aAN <- "AN_economic_values"
+aAN <- read.table(file = aAN, sep=";", header=TRUE)
+aAN <- as.numeric(aAN)
+aAN
+# for Limousin breeds
+aLM <- "LM_economic_values"
+aLM <- read.table(file = aLM, sep=";", header=TRUE)
+aLM <- as.numeric(aLM)
+aLM
+```
+
+## Computations without equations
+
+### Number of traits n
+
+```{r}
+n <- as.numeric(nrow(phenotypic_var_cov))
+```
+
+### Relationship Matrix RM and Inverse RM
+
+```{r RelationshipMatrix}
+# Compute the relationsship matrix dependent on the number of offspring of the selection candidate. The selection candidate is the first animal.
+suppressPackageStartupMessages(library(pedigreemm))
+mnumb <- offspring+1
+A <- pedigree(sire = c(NA,rep(1,times = offspring)), dam =c(NA,rep(NA,times = offspring)), label = 1:mnumb)
+# Compute inverse of relationsship matrix.
+Ainv <- getAInv(A)
+```
+
+### Design matrix Z
+
+
+
+### Selection intensity (i) and value of trunctation (x)
+
+```{r}
+i <- dnorm(qnorm(1-proportionselected))/proportionselected
+x <- qnorm(proportionselected, lower.tail = FALSE)
+```
+
+###
 
 
 
