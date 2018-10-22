@@ -22,13 +22,14 @@ Thirdly, create R chunks that read the input parameters and solve the equations.
 # Material
 
 * Residual, phenotypic and genetic variances and covariances of and between all traits.
-* Breeding scenario (number of records of offspring/itself/half siblings/full siblings per selection candidate).
+* Breeding scenario (number of records of offspring/itself/half siblings/full siblings per selection candidate). The scenario will result in a pedigree.
 * Generation intervall and proportion selected of the population.
 * Economic value for each trait.
 
 # Implementation
 
-First I import the input parameters using read.table
+First I import the input parameters using read.table(). 
+Synchronically I adjust the input parameters to get the variables of the following computations.
 
 ## Input parameters
 
@@ -37,23 +38,55 @@ First I import the input parameters using read.table
 ```{r VariancesCovariances}
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
-# define file name
+# import variance covariance dataframes and compute matrix
 ## genetic
 genetic_var_cov <- "adults_calves_genetic_variances_covariances"
 genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
-genetic_var_cov
+genetic_var_cov <- as.matrix(genetic_var_cov)
 ## residual
 residual_var_cov <- "adults_calves_residual_variances_covariances"
 residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
-residual_var_cov
+residual_var_cov <- as.matrix(residual_var_cov)
 ## phenotypic
 phenotypic_var_cov <- "adults_calves_phenotypic_variances_covariances"
 phenotypic_var_cov <- read.table(file = phenotypic_var_cov, sep=";", header=TRUE)
-phenotypic_var_cov
+phenotypic_var_cov <- as.matrix(phenotypic_var_cov)
+```
+
+#### Pedigree
+
+First the number of relatives is imported.
+```{r NumberofRelatives}
+library(dplyr)
+# Set working directory
+setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
+# number of siblings, half siblings and offspring
+## siblings
+siblings <- "number_of_relatives"
+siblings <- read.table(file = siblings, sep=";", header=TRUE) %>%
+  select(siblings)
+siblings <- as.numeric(siblings)
+siblings
+## half siblings
+halfsiblings <- "number_of_relatives"
+halfsiblings <- read.table(file = halfsiblings, sep=";", header=TRUE) %>%
+  select(halfsiblings)
+halfsiblings <- as.numeric(halfsiblings)
+halfsiblings
+## offspring
+offspring <- "number_of_relatives"
+offspring <- read.table(file = offspring, sep=";", header=TRUE) %>%
+  select(offspring)
+offspring <- as.numeric(offspring)
+offspring
+```
+
+Then I use these numbers to compute a relationsship matrix.
+
+```{r RelationshipMatrix}
 
 ```
 
-#### 
 
 
 
