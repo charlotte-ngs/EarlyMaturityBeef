@@ -351,7 +351,7 @@ Where:
 * $L$ = generation intervall [years]
 
 
-We have computed the response to selection $Q^*$ of the aggregate genotype  based on the following formula derived from [@Phocas1996]:
+We have computed the response to selection $Q^*$ of the aggregate genotype based on the following formula derived from [@Phocas1996]:
 
 \begin{equation}
 \label{Qagr}

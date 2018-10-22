@@ -470,6 +470,10 @@ if (is.null(tbl_result)){
 
 * Should I rename the carcass conformation class so that the classes are numbers?
     *
+    
+* Should I cite R ore R Studio?
+    * According to Peter I should cite R.
+    
 
 
 
