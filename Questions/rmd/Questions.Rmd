@@ -338,6 +338,7 @@ data.frame(Kalb =c(1,2,3,5,3),
 * How do I need to choose the economical weights for the index?
 
 * How can I describe the selection index theory?
+    * See how Peter did it.
 
 * How exactly works the linear regression of Berry? How can I assess this approach? I need to try it out and compute the response to selection, no?
 
@@ -359,10 +360,11 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * Can I include the Sophies'results (variance components) to my results chapter or should I mention them in the discussion part?
     *No
+    
 * Is there any other instrument to assess breeding values beside the genetic gain?
 
 * Should I use the term genetic gain or response to selection?
-    *
+    * According to Peter it does not matter. I prefer genetic gain.
 
 * How can I structure the M+M part of the thesis?
     * Chunk text chunk, give results of in-between steps.
@@ -473,6 +475,8 @@ if (is.null(tbl_result)){
     
 * Should I cite R ore R Studio?
     * According to Peter I should cite R.
+    
+* Should I use the term offspring or progeny?
     
 
 
