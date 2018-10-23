@@ -216,26 +216,44 @@ $$G^*=G-1/2(k(a^TC^*a)^{-1}C^*aa^TC^*)$$
 Ga<-k*1/sqrt(as.numeric(t(a)%*%Ca%*%a))*Ca%*%a%*%t(a)%*%Ca
 ```
 
-### Accuracy of the estimated overall breeding value of the selection candidate $r^*$
+### Accuracy of the estimated overall breeding value $r^*$
 
 $$r^*=\sqrt{\frac {a^TC^*a}{a^TG^*a}}$$
 
 ```{r AccuracyOverall}
-ra <- sqrt((t(a)*Ca*a)/(t(a)*Ga*a))
+ra <- sqrt(as.numeric((t(a)%*%Ca%*%a)/as.numeric(t(a)%*%Ga%*%a)))
+dim(Ca)
+dim(Ga)
+ra
 ```
 
-### Standard deviation of the estimated overall breeding value of the selection candidate $\sigma^*$
+### Standard deviation of the estimated overall breeding value $\sigma^*$
 
 $$\sigma^*=\sqrt{a^TG^*a}$$
 
 ```{r StandardDeviationOverall}
 StdevOverall<-sqrt(as.numeric(t(a)%*%Ga%*%a))
+StdevOverall
 ```
 
+### Asymptotic genetic gain of the estimated overall breeding value
 
+$$Q= \frac {ir^*\sigma^*}{L}$$
 
+```{r GeneticGainOverall}
+Qoverall <- i*ra*StdevOverall/generationintervall
+Qoverall
+```
 
+### Asymptotic genetic gain of a trait (here carcass fat)
 
+$$Q_m^*= \frac { ia^T(C^*)_m \sqrt{a^TC^*a}}{L}$$
+
+```{r GeneticGainTrait}
+Qtrait<- i*as.numeric(t(a)%*%Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%Ca%*%a))/generationintervall
+Qtrait
+
+```
 
 
 
