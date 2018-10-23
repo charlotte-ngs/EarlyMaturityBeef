@@ -1,0 +1,85 @@
+---
+title: "Breeding strategies for early maturity in beef cattle"
+author: "Silvan Wyss"
+date: "11/22/2018"
+output: beamer_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+## What
+
+Assessing strategies to breed for early maturity in beef cattle.
+Early Maturity here defined as age slaughter of an animal with minimal carcass price reductions.
+Price reductions are dependent on the pricing system CHTAX.
+
+## CHTAX
+
+Whithin carcass categories price reductions if:
+Carcass fat class $\neq$ 3 (optimum)
+Carcass conformation $\neq$ C (maximum)
+Carcass weight above certain limit (dependent on carcass category)
+
+?? Graphics describing areas of price reduction along range of traits.
+
+## Why
+
+Long-term assignment of Mutterkuh Schweiz for Qualitas AG:
+?? Labels of Mutterkuh Schweiz and Qualitas AG
+Developing breeding value estimation for beef cattle in Switzerland.
+
+Until summer 2018 breeding focused on the traits daily gain and carcass conformation.
+During this time: 
+Prooved: The trait carcass fat has decreased to far below class 3 in most beef cattle breeds.
+?? Graphic with mean performance carcass fat along range of breeds as barplot
+Assumed: Performance in early maturity decreased as well.
+
+Assumed negative effects for breeders and producers:
+Higher carcass price reductions for poor carcass fat performances.
+Combination of high costs and high price reductions.
+
+Mutterkuh Schweiz: "This trend must stop."
+
+Issue with low carcass fat classes already solved:
+Introduction of breeding value for carcass fat in summer 2018.
+
+However, breeding strategy for early maturity not clear yet.
+
+## How
+
+Evaluation of 4 proposed approaches:
+
+1. 
+
+
+
+
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
+

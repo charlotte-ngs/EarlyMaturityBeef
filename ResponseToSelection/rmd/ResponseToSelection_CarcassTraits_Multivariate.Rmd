@@ -114,7 +114,7 @@ library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 # always calves first and CC,CF,CW
-a <- "AN_economic_values"
+a <- "economic_values_breeding_for_aCF"
 a <- read.table(file = a, sep=";", header=TRUE)
 a <- as.numeric(a)
 a
@@ -252,7 +252,6 @@ $$Q_m^*= \frac { ia^T(C^*)_m \sqrt{a^TC^*a}}{L}$$
 ```{r GeneticGainTrait}
 Qtrait<- i*as.numeric(t(a)%*%Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%Ca%*%a))/generationintervall
 Qtrait
-
 ```
 
 
