@@ -33,7 +33,7 @@ Synchronically I adjust the input parameters to get the variables of the followi
 
 ## Input parameters
 
-### Variances/Covariances
+### Genetic, Residual and Phenotypic Variances/Covariances
 
 With CC,CF,CW.
 ```{r VariancesCovariances}
@@ -114,16 +114,10 @@ library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 # always calves first and CC,CF,CW
-# for Angus breeds
-aAN <- "AN_economic_values"
-aAN <- read.table(file = aAN, sep=";", header=TRUE)
-aAN <- as.numeric(aAN)
-aAN
-# for Limousin breeds
-aLM <- "LM_economic_values"
-aLM <- read.table(file = aLM, sep=";", header=TRUE)
-aLM <- as.numeric(aLM)
-aLM
+a <- "AN_economic_values"
+a <- read.table(file = a, sep=";", header=TRUE)
+a <- as.numeric(a)
+a
 ```
 
 ## Computations without equations
@@ -133,6 +127,14 @@ aLM
 ```{r}
 n <- as.numeric(nrow(phenotypic_var_cov))
 ```
+
+### Variance Covariance Matrices G (genetic) and R (residual)
+
+```{r}
+G <- genetic_var_cov
+R <- residual_var_cov %x% diag(offspring)
+```
+
 
 ### Relationship Matrix RM and Inverse RM
 
@@ -147,6 +149,10 @@ Ainv <- getAInv(A)
 
 ### Design matrix Z
 
+```{r DesignMatrix}
+Z<-cbind(matrix(0, nrow=offspring*n,ncol=n),diag(offspring*n))
+dim(Z)
+```
 
 
 ### Selection intensity (i) and value of trunctation (x)
@@ -156,7 +162,82 @@ i <- dnorm(qnorm(1-proportionselected))/proportionselected
 x <- qnorm(proportionselected, lower.tail = FALSE)
 ```
 
-###
+## Computations with Equations
+
+### Factor of variance reduction $k$
+
+$$k=i(i-x)$$
+
+```{r}
+k <- i*(i-x)
+```
+
+
+### Prediction error variance PEV
+
+$$PEV_{mat}=\sqrt{Z^TR^{-1}Z+A^{-1} \otimes G^{-1}}$$
+
+```{r PEVmat}
+# Proove that G and R are positive definite
+#eigen(G)
+#eigen(R)
+# Produce PEV matrix
+PEVmat <- solve(t(Z)%*%solve(R)%*%Z+Ainv%x%solve(G))
+```
+
+$$PEV=PEV_{mat}[1:n,1:n]$$
+
+```{r PEV}
+PEV <- PEVmat[1:n,1:n]
+PEV
+```
+
+### Covariance matrix between true and estimated breeding values $C$
+
+$$C=G-PEV $$
+
+```{r CovarianceMatrix}
+C <- G-PEV
+```
+
+### Asymptotic covariance matrix $C^*$ between true and estimated breeding values
+
+$$C^*=\frac{C}{1+0.5*k} $$
+
+```{r AsymptoticCovarianceMatrix}
+Ca <- C/(1+0.5*k)
+```
+
+### Asymptotic genetic variance/covariance matrix $G^*$
+
+$$G^*=G-1/2(k(a^TC^*a)^{-1}C^*aa^TC^*)$$
+
+```{r AsymptoticGeneticMatrix}
+Ga<-k*1/sqrt(as.numeric(t(a)%*%Ca%*%a))*Ca%*%a%*%t(a)%*%Ca
+```
+
+### Accuracy of the estimated overall breeding value of the selection candidate $r^*$
+
+$$r^*=\sqrt{\frac {a^TC^*a}{a^TG^*a}}$$
+
+```{r AccuracyOverall}
+ra <- sqrt((t(a)*Ca*a)/(t(a)*Ga*a))
+```
+
+### Standard deviation of the estimated overall breeding value of the selection candidate $\sigma^*$
+
+$$\sigma^*=\sqrt{a^TG^*a}$$
+
+```{r StandardDeviationOverall}
+StdevOverall<-sqrt(as.numeric(t(a)%*%Ga%*%a))
+```
+
+
+
+
+
+
+
 
 
 
