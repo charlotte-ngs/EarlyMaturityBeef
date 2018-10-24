@@ -15,21 +15,27 @@ To compute genetic gains of the traits carcass fatt, carcass conformation and ca
 
 # Plan
 
-Firstly, to record and name all input parameters either as tables or as variables in separate files.
-Secondly, show all necessary equations/descriptions from bottom to top.
-Thirdly, create R chunks that read the input parameters and solve the equations.
+* Firstly, to record and name all input parameters either as tables or as variables in separate files.
+
+* Secondly, show all necessary equations/descriptions from bottom to top.
+
+* Thirdly, create R chunks that read the input parameters and solve the equations.
 
 # Material
 
 * Residual, phenotypic and genetic variances and covariances of and between all traits.
-* Breeding scenario (number of records of offspring/itself/half siblings/full siblings per selection candidate). The scenario will result in a pedigree.
-* Generation intervall and proportion selected of the population.
+
+* Breeding scenario (number of records of offspring per selection candidate). The scenario will result in a relationsship matrix. For male and female selection paths each a separate relationsship matrix.
+
+* Generation intervall and proportion selected of the population for male and female selection paths.
+
 * Economic value for each trait.
 
 # Implementation
 
 First I import the input parameters using read.table(). 
-Synchronically I adjust the input parameters to get the variables of the following computations.
+Then I compute paramteres that do not require equations.
+Then I compute all necessary steps using equations (derived from @Phocas1998).
 
 ## Input parameters
 
@@ -54,60 +60,71 @@ phenotypic_var_cov <- read.table(file = phenotypic_var_cov, sep=";", header=TRUE
 phenotypic_var_cov <- as.matrix(phenotypic_var_cov)
 ```
 
-### Number of Relatives
+### Number of Offspring
 
 First the number of relatives is imported.
 ```{r NumberofRelatives}
 library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
-# number of fullsiblings, half siblings and offspring
-## fullsiblings
-fullsiblings <- "number_of_relatives"
-fullsiblings <- read.table(file = fullsiblings, sep=";", header=TRUE) %>%
-  select(fullsiblings)
-fullsiblings <- as.numeric(fullsiblings)
-fullsiblings
-## half siblings
-halfsiblings <- "number_of_relatives"
-halfsiblings <- read.table(file = halfsiblings, sep=";", header=TRUE) %>%
-  select(halfsiblings)
-halfsiblings <- as.numeric(halfsiblings)
-halfsiblings
-## offspring
-offspring <- "number_of_relatives"
-offspring <- read.table(file = offspring, sep=";", header=TRUE) %>%
-  select(offspring)
-offspring <- as.numeric(offspring)
-offspring
+## male
+male_offspring <- "number_of_offspring"
+male_offspring <- read.table(file = male_offspring, sep=";", header=TRUE) %>%
+  select(male)
+male_offspring <- as.numeric(male_offspring)
+male_offspring
+## female
+female_offspring <- "number_of_offspring"
+female_offspring <- read.table(file = female_offspring, sep=";", header=TRUE) %>%
+  select(female)
+female_offspring <- as.numeric(female_offspring)
+female_offspring
 ```
 
 
-### Generation intervall and proportion selected
+### Generation intervall $L$
 
 ```{r GenerationIntervall}
 library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
-generationintervall <- "proportion_selected_generation_intervall"
-generationintervall <- read.table(file = generationintervall, sep=";", header=TRUE) %>%
-  select(generationintervall)
-generationintervall <- as.numeric(generationintervall)
-generationintervall
+## male
+male_generationintervall <- "generation_intervall"
+male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
+  select(male)
+male_generationintervall <- as.numeric(male_generationintervall)
+male_generationintervall
+## female
+female_generationintervall <- "generation_intervall"
+female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
+  select(female)
+female_generationintervall <- as.numeric(female_generationintervall)
+female_generationintervall
 ```
+
+
+
+### Proportion selected
 
 ```{r ProportionSelected}
 library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
-proportionselected <- "proportion_selected_generation_intervall"
-proportionselected <- read.table(file = proportionselected, sep=";", header=TRUE) %>%
-  select(proportionselected)
-proportionselected <- as.numeric(proportionselected)
-proportionselected
+## male
+male_proportionselected <- "proportion_selected"
+male_proportionselected <- read.table(file = male_proportionselected, sep=";", header=TRUE) %>%
+  select(male)
+male_proportionselected <- as.numeric(male_proportionselected)
+male_proportionselected
+## female
+female_proportionselected <- "proportion_selected"
+female_proportionselected <- read.table(file = female_proportionselected, sep=";", header=TRUE) %>%
+  select(female)
+female_proportionselected <- as.numeric(female_proportionselected)
+female_proportionselected
 ```
 
-### Economic values a
+### Economic values $a$
 
 ```{r}
 library(dplyr)
@@ -122,109 +139,148 @@ a
 
 ## Computations without equations
 
-### Number of traits n
+### Number of traits $n$
 
 ```{r}
 n <- as.numeric(nrow(phenotypic_var_cov))
 ```
 
-### Variance Covariance Matrices G (genetic) and R (residual)
+### Variance Covariance Matrices $G$ (genetic) and $R_y$ (residual)
 
 ```{r}
 G <- genetic_var_cov
-R <- residual_var_cov %x% diag(offspring)
+male_R <- residual_var_cov %x% diag(male_offspring)
+female_R <- residual_var_cov %x% diag(female_offspring)
 ```
 
 
-### Relationship Matrix RM and Inverse RM
+### Relationship Matrix $A_y$ and Inverse $A_y^{-1}$
 
 ```{r RelationshipMatrix}
+## male
 # Compute the relationsship matrix dependent on the number of offspring of the selection candidate. The selection candidate is the first animal.
 suppressPackageStartupMessages(library(pedigreemm))
-mnumb <- offspring+1
-A <- pedigree(sire = c(NA,rep(1,times = offspring)), dam =c(NA,rep(NA,times = offspring)), label = 1:mnumb)
+mnumb <- male_offspring+1
+male_A <- pedigree(sire = c(NA,rep(1,times = male_offspring)), dam =c(NA,rep(NA,times = male_offspring)), label = 1:mnumb)
 # Compute inverse of relationsship matrix.
-Ainv <- getAInv(A)
+male_Ainv <- getAInv(male_A)
+##  female
+# Compute the relationsship matrix dependent on the number of offspring of the selection candidate. The selection candidate is the first animal.
+suppressPackageStartupMessages(library(pedigreemm))
+mnumb <- female_offspring+1
+female_A <- pedigree(sire = c(NA,rep(1,times = female_offspring)), dam =c(NA,rep(NA,times = female_offspring)), label = 1:mnumb)
+# Compute inverse of relationsship matrix.
+female_Ainv <- getAInv(female_A)
 ```
 
-### Design matrix Z
+### Design matrix $Z_y$
 
 ```{r DesignMatrix}
-Z<-cbind(matrix(0, nrow=offspring*n,ncol=n),diag(offspring*n))
-dim(Z)
+# male
+male_Z<-cbind(matrix(0, nrow=male_offspring*n,ncol=n),diag(male_offspring*n))
+dim(male_Z)
+# female
+female_Z<-cbind(matrix(0, nrow=female_offspring*n,ncol=n),diag(female_offspring*n))
+dim(female_Z)
 ```
 
 
-### Selection intensity (i) and value of trunctation (x)
+### Selection intensity $i_y$ and value of trunctation $x_y$
 
 ```{r}
-i <- dnorm(qnorm(1-proportionselected))/proportionselected
-x <- qnorm(proportionselected, lower.tail = FALSE)
+# male
+male_i <- dnorm(qnorm(1-male_proportionselected))/male_proportionselected
+male_x <- qnorm(male_proportionselected, lower.tail = FALSE)
+# female
+female_i <- dnorm(qnorm(1-female_proportionselected))/female_proportionselected
+female_x <- qnorm(female_proportionselected, lower.tail = FALSE)
 ```
 
 ## Computations with Equations
 
-### Factor of variance reduction $k$
+### Factor of variance reduction $k_y$
 
-$$k=i(i-x)$$
+$$k_y=i_y(i_y-x_y)$$
 
 ```{r}
-k <- i*(i-x)
+# male
+male_k <- male_i*(male_i-male_x)
+# female
+female_k <- female_i*(female_i-female_x)
 ```
 
 
-### Prediction error variance PEV
+### Prediction error variance $PEV_y$
 
-$$PEV_{mat}=\sqrt{Z^TR^{-1}Z+A^{-1} \otimes G^{-1}}$$
-
-```{r PEVmat}
-# Proove that G and R are positive definite
-#eigen(G)
-#eigen(R)
-# Produce PEV matrix
-PEVmat <- solve(t(Z)%*%solve(R)%*%Z+Ainv%x%solve(G))
-```
-
-$$PEV=PEV_{mat}[1:n,1:n]$$
+$$PEV_y=(Z_y^TR_y^{-1}Z_y+A_y^{-1} \otimes G^{-1})^{-1}[1:n,1:n]$$
 
 ```{r PEV}
-PEV <- PEVmat[1:n,1:n]
-PEV
+# male
+male_PEV <- solve(t(male_Z)%*%solve(male_R)%*%male_Z+male_Ainv%x%solve(G))[1:n,1:n]
+# female
+female_PEV <- solve(t(female_Z)%*%solve(female_R)%*%female_Z+female_Ainv%x%solve(G))[1:n,1:n]
 ```
 
-### Covariance matrix between true and estimated breeding values $C$
+### Covariance matrix between true and estimated breeding values $C_y$
 
-$$C=G-PEV $$
+$$C_y=G-PEV_y $$
 
 ```{r CovarianceMatrix}
-C <- G-PEV
+# male
+male_C <- G-male_PEV
+# female
+female_C <- G-female_PEV
 ```
 
-### Asymptotic covariance matrix $C^*$ between true and estimated breeding values
+### Asymptotic covariance matrix $C_y^*$ between true and estimated breeding values
 
-$$C^*=\frac{C}{1+0.5*k} $$
+$$
+\begin{bmatrix}
+C_1^* \\
+C_2^*
+\end{bmatrix}
+=
+\left( 
+\begin{bmatrix}
+1+1/2k_1  &  1/2k_2 \\
+1/2k_1    &  1+1/2k_2
+\end{bmatrix}^{-1}
+\otimes I_n
+\right)
+\bullet
+\begin{bmatrix}
+C_1 \\
+C_2
+\end{bmatrix}
+$$
 
 ```{r AsymptoticCovarianceMatrix}
-Ca <- C/(1+0.5*k)
+Ca <- (solve(matrix(c(1+0.5*male_k, 0.5*female_k,0.5*male_k, 1+0.5*female_k),nrow = 2, ncol = 2, byrow=TRUE))%x%diag(n))%*%rbind(male_C,female_C)
+# male
+male_Ca <- Ca[1:n,]
+# female
+female_Ca <- Ca[(1+n):(2*n),]
 ```
 
 ### Asymptotic genetic variance/covariance matrix $G^*$
 
-$$G^*=G-1/2(k(a^TC^*a)^{-1}C^*aa^TC^*)$$
+$$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 
 ```{r AsymptoticGeneticMatrix}
-Ga<-k*1/sqrt(as.numeric(t(a)%*%Ca%*%a))*Ca%*%a%*%t(a)%*%Ca
+Ga<-G-0.5*((solve(as.numeric(male_k*(t(a)%*%male_Ca%*%a)))*as.numeric(male_Ca%*%a%*%t(a)%*%male_Ca))+(solve(as.numeric(male_k*(t(a)%*%male_Ca%*%a)))*as.numeric(male_Ca%*%a%*%t(a)%*%male_Ca)))
 ```
 
-### Accuracy of the estimated overall breeding value $r^*$
+### Accuracy of the estimated overall breeding value $r_y^*$
 
-$$r^*=\sqrt{\frac {a^TC^*a}{a^TG^*a}}$$
+$$r_y^*=\sqrt{\frac {a^TC_y^*a}{a^TG^*a}}$$
 
 ```{r AccuracyOverall}
-ra <- sqrt(as.numeric((t(a)%*%Ca%*%a)/as.numeric(t(a)%*%Ga%*%a)))
-dim(Ca)
-dim(Ga)
-ra
+# male
+male_ra <- sqrt(as.numeric((t(a)%*%male_Ca%*%a)/as.numeric(t(a)%*%Ga%*%a)))
+# female
+female_ra <- sqrt(as.numeric((t(a)%*%female_Ca%*%a)/as.numeric(t(a)%*%Ga%*%a)))
+male_ra
+female_ra
 ```
 
 ### Standard deviation of the estimated overall breeding value $\sigma^*$
@@ -232,25 +288,25 @@ ra
 $$\sigma^*=\sqrt{a^TG^*a}$$
 
 ```{r StandardDeviationOverall}
-StdevOverall<-sqrt(as.numeric(t(a)%*%Ga%*%a))
-StdevOverall
+stdev_overall<-sqrt(as.numeric(t(a)%*%Ga%*%a))
+stdev_overall
 ```
 
 ### Asymptotic genetic gain of the estimated overall breeding value
 
-$$Q= \frac {ir^*\sigma^*}{L}$$
+$$Q= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
 
 ```{r GeneticGainOverall}
-Qoverall <- i*ra*StdevOverall/generationintervall
+Qoverall <- (male_i*male_ra*stdev_overall+female_i*female_ra*stdev_overall)/(male_generationintervall+female_generationintervall)
 Qoverall
 ```
 
 ### Asymptotic genetic gain of a trait (here carcass fat)
 
-$$Q_m^*= \frac { ia^T(C^*)_m \sqrt{a^TC^*a}}{L}$$
+$$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
 
 ```{r GeneticGainTrait}
-Qtrait<- i*as.numeric(t(a)%*%Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%Ca%*%a))/generationintervall
+Qtrait<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
 Qtrait
 ```
 

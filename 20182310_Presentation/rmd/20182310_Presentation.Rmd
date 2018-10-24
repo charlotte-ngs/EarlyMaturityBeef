@@ -11,42 +11,60 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 ## What
+* Assessing strategies to breed for early maturity in beef cattle.
 
-Assessing strategies to breed for early maturity in beef cattle.
-Early Maturity here defined as age slaughter of an animal with minimal carcass price reductions.
-Price reductions are dependent on the pricing system CHTAX.
+* Early Maturity here defined as age slaughter of an animal with minimal carcass price reductions.
 
-## CHTAX
+* Price reductions are dependent on the pricing system CHTAX.
+
+## What
 
 Whithin carcass categories price reductions if:
-Carcass fat class $\neq$ 3 (optimum)
-Carcass conformation $\neq$ C (maximum)
-Carcass weight above certain limit (dependent on carcass category)
+
+- Carcass fat class $\neq$ 3 (optimum)
+
+- Carcass conformation $\neq$ C (maximum)
+
+- Carcass weight above certain limit (dependent on carcass category)
 
 ?? Graphics describing areas of price reduction along range of traits.
 
 ## Why
-
 Long-term assignment of Mutterkuh Schweiz for Qualitas AG:
-?? Labels of Mutterkuh Schweiz and Qualitas AG
+
+?? Labels of Mutterkuh Schweiz and Qualitas AG + Image of beef cattle.
+
 Developing breeding value estimation for beef cattle in Switzerland.
 
+## Why
 Until summer 2018 breeding focused on the traits daily gain and carcass conformation.
+
 During this time: 
-Prooved: The trait carcass fat has decreased to far below class 3 in most beef cattle breeds.
+
+- Prooved: The trait carcass fat has decreased to significantly below class 3 in most beef cattle breeds.
+
 ?? Graphic with mean performance carcass fat along range of breeds as barplot
-Assumed: Performance in early maturity decreased as well.
+
+- Assumed: Performance in early maturity decreased as well.
+
+## Why
 
 Assumed negative effects for breeders and producers:
-Higher carcass price reductions for poor carcass fat performances.
-Combination of high costs and high price reductions.
+
+- Higher carcass price reductions for poor carcass fat performances.
+
+- Combination of high costs and high price reductions.
 
 Mutterkuh Schweiz: "This trend must stop."
 
+## Why
 Issue with low carcass fat classes already solved:
-Introduction of breeding value for carcass fat in summer 2018.
+
+- Introduction of breeding value for carcass fat in summer 2018.
 
 However, breeding strategy for early maturity not clear yet.
+
+- Decision for a strategy is planned for 2019.
 
 ## How
 
