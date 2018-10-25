@@ -9,15 +9,15 @@ output: beamer_presentation
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Target
 
-## What
 * Assessing strategies to breed for early maturity in beef cattle.
 
 * Early Maturity here defined as age slaughter of an animal with minimal carcass price reductions.
 
 * Price reductions are dependent on the pricing system CHTAX.
 
-## What
+## CHTAX
 
 Whithin carcass categories price reductions if:
 
@@ -27,9 +27,10 @@ Whithin carcass categories price reductions if:
 
 - Carcass weight above certain limit (dependent on carcass category)
 
-?? Graphics describing areas of price reduction along range of traits.
+?? Graphics describing areas of price reduction along range of traits. Use Open Office.
 
 ## Why
+
 Long-term assignment of Mutterkuh Schweiz for Qualitas AG:
 
 ?? Labels of Mutterkuh Schweiz and Qualitas AG + Image of beef cattle.
@@ -37,6 +38,7 @@ Long-term assignment of Mutterkuh Schweiz for Qualitas AG:
 Developing breeding value estimation for beef cattle in Switzerland.
 
 ## Why
+
 Until summer 2018 breeding focused on the traits daily gain and carcass conformation.
 
 During this time: 
@@ -70,11 +72,33 @@ However, breeding strategy for early maturity not clear yet.
 
 Evaluation of 4 proposed approaches:
 
-1. 
+**1. Derivation from carcass fat**
+
+**2. Index over carcass traits**
+
+3. Derivation in age at slaughter (Berry)
+
+4. Derivation over growth models
+
+## How
+
+Different results with 1. and 2.?
+
+Comparison of 
+
+- Animal ranks
+
+- Genetic gains per trait
+
+## How
+
+- Breeding value carcass fat available
+
+- Index computed using economic values from simple profit equations. (Show Equation with $H=a*w+a*w$)
 
 
 
-
+## 
 
 ## R Markdown
 

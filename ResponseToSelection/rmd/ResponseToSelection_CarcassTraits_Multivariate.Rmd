@@ -301,13 +301,34 @@ Qoverall <- (male_i*male_ra*stdev_overall+female_i*female_ra*stdev_overall)/(mal
 Qoverall
 ```
 
-### Asymptotic genetic gain of a trait (here carcass fat)
+### Asymptotic genetic gain of a trait with aggregate breeding value involving all traits (here carcass fat)
 
 $$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
 
 ```{r GeneticGainTrait}
 Qtrait<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
 Qtrait
+```
+
+### Asymptotic genetic gain of a trait in the aggregate breeding value involving not all traits
+
+$$b=G^{-1}G_fa$$
+Where $f$ is all rows of traits which are involved in the 
+```{r}
+b <- solve(G)%*%G[,"aCF"]
+b
+```
+
+
+$$Q_m^*= \frac {\sum_{y=1}^{2} i_yb^T(C_y^*)_m \sqrt{b^TC_y^*b}}{\sum_{y=1}^{2}L_y}$$
+
+```{r GeneticGainTrait}
+Qtrait<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+Qtrait
+4.1/9.9
+1.3/2.6
+5.7/9.2
+1.2/1.7
 ```
 
 
