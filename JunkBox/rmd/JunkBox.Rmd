@@ -490,5 +490,188 @@ Carcass fat and carcass conformation have been introduced as price formation fac
 Carcass fat when too low has been related to poor tenderness, juiciness and palatability, when too high with increased trimming effort for the slaughterhouse [@Kaufmann1995].
 A better carcass conformation in turn has been related to a higher yield of valuable meat pieces [@Proviande2015].*
 
+
+
+
+```{r}
+# unrolling the function compute_economic_value
+# pvec_class_freq = pvec_class_freq$freq
+# pn_sd = pn_sd$Sd
+# pn_mean = pn_mean$Mean
+# pvec_price = pvec_price$price
+# pn_delta_mean = pn_delta_mean$Delta
+# pvec_threshold = pvec_threshold$threshold
+
+# function step-by-step
+# if(length(pn_mean)>1){
+#   cat("pn_mean must be one number")
+#   return()
+# }
+# if(length(pn_sd)>1){
+#   cat("pn_sd must be one number")
+#   return()
+# }
+# if(length(pn_delta_mean)>1){
+#   cat("pn_delta_mean must be one number")
+#   return()
+# }
+# if(pn_sd<0){
+#   cat("pn_sd must be positive")
+#   return()
+# }
+# 
+#   vec_cumsum <- cumsum(pvec_class_freq)
+#   if (vec_cumsum[length(vec_cumsum)] > 1) {
+#     vec_cumsum[length(vec_cumsum)] <- 1
+#   }
+#   pvec_threshold<- qnorm(vec_cumsum,sd=pn_sd,mean=pn_mean, lower.tail = T)
+#  pvec_threshold
+#  
+# 
+#  
+# if(is.null(pvec_threshold)){
+#   # case of cf* and cc*
+#   # special format requirements for input variables
+#   if(length(pvec_class_freq)!=length(pvec_price)){
+#     cat("pvec_class_freq must be the same length as pvec_price. ")
+#     return()
+#   }
+#   # define thresholds within normal distribution
+#   vec_cumsum <- cumsum(pvec_class_freq)
+#   if (vec_cumsum[length(vec_cumsum)] > 1) {
+#     vec_cumsum[length(vec_cumsum)] <- 1
+#   }
+#   pvec_threshold<- qnorm(vec_cumsum,sd=pn_sd,mean=pn_mean, lower.tail = T)
+#   # compute economic value
+#   ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold,
+#                                                pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price,
+#                                                pn_delta_mean = pn_delta_mean)
+#   
+#   return(ev_result)
+# }
+#   
+  # if(is.null(pvec_class_freq)) {
+  #   # case of carcass weight
+  #   # computation of economic value for carcass weight
+  #   # special format requirements for input variables
+  #     if(length(pvec_threshold)!=length(pvec_price)-1){
+  #       cat("pvec_threshold must be one vector element shorter than pvec_price ")
+  #        return()
+  #     }
+  #     
+  #       # fit threshold vector by adding infinity to its tail
+  #       pvec_threshold <- c(pvec_threshold,Inf)
+  #       # compute economic value 
+  #       ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
+  #                                                    pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
+  #                                                    pn_delta_mean = pn_delta_mean)
+  #       return(ev_result)
+  #       
+  #     
+  #       
+  # }else if(is.null(pvec_threshold)){
+  #   # case of cf* and cc*
+  #   # special format requirements for input variables
+  #   if(length(pvec_class_freq)!=length(pvec_price)){
+  #       cat("pvec_class_freq must be the same length as pvec_price. ")
+  #        return()
+  #     }
+  #     # define thresholds within normal distribution
+  #       pvec_threshold<- qnorm(cumsum(pvec_class_freq),sd=pn_sd,mean=pn_mean, lower.tail = T)
+  #         # compute economic value
+  #       ev_result <- compute_internal_economic_value(pvec_threshold = pvec_threshold, 
+  #                                                    pn_sd = pn_sd, pn_mean = pn_mean, pvec_price = pvec_price, 
+  #                                                    pn_delta_mean = pn_delta_mean)
+  #   
+  #     return(ev_result)
+  # }
+  # 
+## Carcass Weight
+```
+
+The following function computes the economic value of the trait age-adjusted __carcass weight__. The economic value is defined as the change in profit for a small change in the population mean of the trait.
+
+
+```{r}
+#' @title Compute Economic Value
+#'
+#' @description
+#' The economic value of the trait is computed as profit per carcass weight.
+#'
+#' @param pn_profit the current value of the profit
+#' @param pn_carcass_weight  the current population mean for caracass weight
+#' @return pn_economic_value result of economic value
+compute_economic_value <- function(pn_profit, pn_carcass_weight){
+  # compute economic value
+  pn_economic_value <- pn_profit / pn_carcass_weight
+  return(pn_economic_value)
+}
+```
+
+Now we are ready to test the defined function
+
+```{r}
+my_ev_result <- compute_economic_value(pn_profit = 384, pn_carcass_weight = 271.3)
+my_ev_result
+```
+
+
+### Extended Version
+```{r}
+economic_value_profit <- function(pn_revenue = NA, pn_cost = NA, pn_carcass_weight){
+  if (is.na(pn_cost)){
+    pn_economic_value <- pn_revenue / pn_carcass_weight
+  } else if (is.na(pn_revenue)) {
+    pn_economic_value <- pn_cost / pn_carcass_weight
+  }
+}
+```
+
+
+In the current population, we have the following economic parameters.
+
+$$G = E - K$$
+where $G$ is profit, $E$ is revenue and $K$ is costs all per slaughter animal, respectively
+
+
+$$E = p * SG$$
+
+where $p$ is the price per kg carcass weight and $SG$ is the cracass weight. Hence
+
+$$G = p * SG - K$$
+
+
+Assume carcass weight is increased by $\Delta_{SG}=1$ kg and hence $SG^* = SG + \Delta_{SG}$
+
+$$E^* = p * SG^*$$
+
+The new profit corresponds to $G^*$
+$$G^* = E^* - K = p * SG^* - K$$
+
+The economic value $EV$ is defined as
+
+$$EV = \frac{G^* - G}{\Delta_{SG}} = \frac{E^* - K - (E - K)}{\Delta_{SG}} = \frac{E^* - E}{\Delta_{SG}} = \frac{p * SG^* - p * SG}{\Delta_{SG}} = p$$
+
+
+Our computation
+
+$$\rho = \frac{G}{SG}$$
+
+$$G^* = G + \rho * \Delta_{SG}$$
+
+
+
+
+
+## Carcass Fat
+
+```{r}
+categorical_economic_value <- function(pvec_trait_distribution, pvec_trait_price){
+  
+}
+```
+```
+
+
 # References
 
