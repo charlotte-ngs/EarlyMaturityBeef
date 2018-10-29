@@ -1,13 +1,16 @@
 ---
 title: "Design Function For Computations Of Economic Values and Index"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 
 ## Disclaimer
 
+
 ## Internal Function using thresholds
-```{r intfunceconomicvalue, eval=FALSE}
+```{r intfunceconomicvalue}
 #' @title
 #' Internal Function using distribution thresholds.
 #' @description
@@ -40,7 +43,7 @@ compute_internal_economic_value <- function(pvec_threshold,
 
 The external function can be designed as follows.
 
-```{r funceconomicvalue, eval=FALSE}
+```{r funceconomicvalue}
 #' @title
 #'General function to compute an economic value for carcass fat, carcass conformation or carcass weight.
 #' @description
