@@ -322,10 +322,8 @@ QaCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"aCW"])*sqrt(as.numeric(t(a)%*%male_C
 
 QcCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
 
-Sfr <- c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW)*a
-
-data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=Sfr)
-sum(Sfr)
+index <- data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
+sum(c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
 ```
 
 ### Asymptotic genetic gain of a trait in the aggregate breeding value involving not all traits
@@ -357,10 +355,17 @@ CWaQ <- (male_i*as.numeric(t(CWaB)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(CWaB)%*%
 
 CWcQ <- (male_i*as.numeric(t(CWcB)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(CWcB)%*%male_Ca%*%CWcB))+female_i*as.numeric(t(CWcB)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(CWcB)%*%female_Ca%*%CWcB)))/(male_generationintervall+female_generationintervall)
 
-data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ))
+single_trait <- data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ))
 sum(c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ))
 ```
 
+```{r}
+library(ggplot2)
+dataframe <- data.frame(names = rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2), Sfr = c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=rep(rep(c("CFa","index"),each=6),times=2))
+
+barplot <- ggplot(dataframe,aes(x=names,y=Sfr,fill=Strategy))
+barplot + geom_bar(stat="identity",position="dodge")
+```
 
 
 
