@@ -1,13 +1,12 @@
 ---
 title: "Design Function For Computations Of Economic Values and Index"
-output: html_notebook
 ---
 
 
 ## Disclaimer
 
 ## Internal Function using thresholds
-```{r intfunceconomicvalue, eval=FALSE}
+```{r intfunceconomicvalue}
 #' @title
 #' Internal Function using distribution thresholds.
 #' @description
@@ -40,7 +39,7 @@ compute_internal_economic_value <- function(pvec_threshold,
 
 The external function can be designed as follows.
 
-```{r funceconomicvalue, eval=FALSE}
+```{r funceconomicvalue}
 #' @title
 #'General function to compute an economic value for carcass fat, carcass conformation or carcass weight.
 #' @description
@@ -126,31 +125,31 @@ compute_economic_value <- function( pvec_class_freq = NULL,
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "cca") %>% filter(Breed == "an") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CCa") %>% filter(Breed == "AN") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "cca") %>% filter(Breed == "an") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CCa") %>% filter(Breed == "AN") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
 pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
 pn_delta_mean
 # Define price vector
-price_fname <- "cca_price.csv"
+price_fname <- "CCa_price.csv"
 pvec_price <- readr::read_csv2(price_fname)
 pvec_price
 # Define frequency vector
-freq_fname <- "an_cca_freq.csv"
+freq_fname <- "AN_CCa_freq.csv"
 pvec_class_freq <- readr::read_csv2(freq_fname)
 pvec_class_freq
 # Define threshold vector
-thresh_fname <- "cwc_threshold.csv"
+thresh_fname <- "CWc_threshold.csv"
 pvec_threshold <- NULL #readr::read_csv2(thresh_fname)
 pvec_threshold
 
 #Compute economic value
-cca <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+CCa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
 ```
 
 ### CCc
@@ -159,31 +158,31 @@ cca <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "ccc") %>% filter(Breed == "an") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CCc") %>% filter(Breed == "AN") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "ccc") %>% filter(Breed == "an") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CCc") %>% filter(Breed == "AN") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
 pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
 pn_delta_mean
 # Define price vector
-price_fname <- "ccc_price.csv"
+price_fname <- "CCc_price.csv"
 pvec_price <- readr::read_csv2(price_fname)
 pvec_price
 # Define frequency vector
-freq_fname <- "an_ccc_freq.csv"
+freq_fname <- "AN_CCc_freq.csv"
 pvec_class_freq <- readr::read_csv2(freq_fname)
 pvec_class_freq
 # Define threshold vector
-thresh_fname <- "cwc_threshold.csv"
+thresh_fname <- "CWc_threshold.csv"
 pvec_threshold <- NULL #readr::read_csv2(thresh_fname)
 pvec_threshold
 
 #Compute economic value
-ccc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+CCc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
 ```
 
 ### CFa
@@ -192,31 +191,31 @@ ccc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "cfa") %>% filter(Breed == "an") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CFa") %>% filter(Breed == "AN") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "cfa") %>% filter(Breed == "an") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CFa") %>% filter(Breed == "AN") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
 pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
 pn_delta_mean
 # Define price vector
-price_fname <- "cfa_price.csv"
+price_fname <- "CFa_price.csv"
 pvec_price <- readr::read_csv2(price_fname)
 pvec_price
 # Define frequency vector
-freq_fname <- "an_cfa_freq.csv"
+freq_fname <- "AN_CFa_freq.csv"
 pvec_class_freq <- readr::read_csv2(freq_fname)
 pvec_class_freq
 # Define threshold vector
-thresh_fname <- "cwc_threshold.csv"
+thresh_fname <- "CWc_threshold.csv"
 pvec_threshold <- NULL #readr::read_csv2(thresh_fname)
 pvec_threshold
 
 #Compute economic value
-cfa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+CFa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
 ```
 
 ### CFc
@@ -225,31 +224,31 @@ cfa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "cfc") %>% filter(Breed == "an") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CFc") %>% filter(Breed == "AN") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "cfc") %>% filter(Breed == "an") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CFc") %>% filter(Breed == "AN") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
 pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
 pn_delta_mean
 # Define price vector
-price_fname <- "cfc_price.csv"
+price_fname <- "CFc_price.csv"
 pvec_price <- readr::read_csv2(price_fname)
 pvec_price
 # Define frequency vector
-freq_fname <- "an_cfc_freq.csv"
+freq_fname <- "AN_CFc_freq.csv"
 pvec_class_freq <- readr::read_csv2(freq_fname)
 pvec_class_freq
 # Define threshold vector
-thresh_fname <- "cwc_threshold.csv"
+thresh_fname <- "CWc_threshold.csv"
 pvec_threshold <- NULL #readr::read_csv2(thresh_fname)
 pvec_threshold
 
 #Compute economic value
-cfc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+CFc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
 ```
 
 ### CWa
@@ -258,31 +257,31 @@ cfc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "cwa") %>% filter(Breed == "an") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CWa") %>% filter(Breed == "AN") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "cwa") %>% filter(Breed == "an") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CWa") %>% filter(Breed == "AN") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
 pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
 pn_delta_mean
 # Define price vector
-price_fname <- "cwa_price.csv"
+price_fname <- "CWa_price.csv"
 pvec_price <- readr::read_csv2(price_fname)
 pvec_price
 # Define frequency vector
-freq_fname <- "an_cfa_freq.csv"
+freq_fname <- "AN_CFa_freq.csv"
 pvec_class_freq <- NULL #readr::read_csv2(freq_fname)
 pvec_class_freq
 # Define threshold vector
-thresh_fname <- "cwa_threshold.csv"
+thresh_fname <- "CWa_threshold.csv"
 pvec_threshold <- readr::read_csv2(thresh_fname)
 pvec_threshold
 
 #Compute economic value
-cwa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+CWa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
 ```
 
 ### CWc
@@ -291,37 +290,37 @@ cwa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "cwc") %>% filter(Breed == "an") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CWc") %>% filter(Breed == "AN") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "cwc") %>% filter(Breed == "an") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CWc") %>% filter(Breed == "AN") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
 pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
 pn_delta_mean
 # Define price vector
-price_fname <- "cwc_price.csv"
+price_fname <- "CWc_price.csv"
 pvec_price <- readr::read_csv2(price_fname)
 pvec_price
 # Define frequency vector
-freq_fname <- "an_cfa_freq.csv"
+freq_fname <- "AN_CFa_freq.csv"
 pvec_class_freq <- NULL #readr::read_csv2(freq_fname)
 pvec_class_freq
 # Define threshold vector
-thresh_fname <- "cwc_threshold.csv"
+thresh_fname <- "CWc_threshold.csv"
 pvec_threshold <- readr::read_csv2(thresh_fname)
 pvec_threshold
 
 #Compute economic value
-cwc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
+CWc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn_sd$Sd, pn_mean = pn_mean$Mean, pvec_price = pvec_price$price, pn_delta_mean = pn_delta_mean$Delta, pvec_threshold = pvec_threshold$threshold)
 ```
 
 ## Creating Dataframe with economic values
 
 ```{r Dataframe}
-tbl_ev <- data.frame(trait = c("cca","ccc", "cfa","cfc", "cwa","cwc"), ev=c(cca,ccc,cfa,cfc,cwa,cwc))
+tbl_ev <- data.frame(trait = c("CCa","CCc", "CFa","CFc", "CWa","CWc"), ev=c(CCa,CCc,CFa,CFc,CWa,CWc))
 tbl_ev
 
 ```
