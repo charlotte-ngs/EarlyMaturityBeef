@@ -5,6 +5,7 @@ title: "Design Function For Computations Of Economic Values and Index"
 
 ## Disclaimer
 
+
 ## Internal Function using thresholds
 ```{r intfunceconomicvalue}
 #' @title
@@ -324,19 +325,6 @@ tbl_ev <- data.frame(trait = c("CCa","CCc", "CFa","CFc", "CWa","CWc"), ev=c(CCa,
 tbl_ev
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
