@@ -1,0 +1,49 @@
+---
+title: "Geneticgain_Multivariate_Description"
+author: "Silvan"
+date: "30 10 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Target / Zweck
+
+Informing how the genetic gain for carcass traits has been computed.
+
+# Plan / Principle
+
+Start from the result of the computations. Tell why the result is important and what the basic thoughts behind the computations are. Then explain the main equations.
+
+# Material
+
+* Skript "Geneticgain_CarcassTraits_Multivariate"
+
+* Skript "ResponseToSelection"
+
+* Skript "02-matandmeth"
+
+# Implementation
+
+In this project breeding strategies should be evaluated in their effectiveness to improve early maturity.
+This evaluation requires certain tools, which help to rank the breeding strategies.
+A particularly powerful tool is the value of genetic gain.
+This value provides information about a trait's mean improvement over a period of time in a population.
+Thus it allows to rank different breeding strategies in their effectiveness.
+
+The genetic gain should predict the future as precise as possible.
+Its value dependends on the breeding conditions in a population and the type of its computation.
+The breeding conditions are defined by the generation intervall $L$, the accuracy of the breeding value $r$, the genetic standard deviation of the trait $\sigma_{g}$ and the selection intensity $i$.
+They are derived from the past breeding situation.
+The type of computation is derived from the approach of @Phocas1996.
+
+There, the so-called Bulmer-Effect [@Bulmer??] is considered.
+
+
+
+
+
+
+

@@ -142,7 +142,7 @@ Animals 700 d or older at slaughter are not included in the model and do not get
 The computation of multivariate BLUP breeding values enabled the estimation of variance components in the population.
 Variance components consist of phenotypical, genetic, fixed effects and residual variances/covariances.
 They have been computed by the method "estimation of variance components" using the Software VCE created by Groeneveld [@Kunz2018].
-The variance components divided into the two groups of breeding values "calves" (see table \@ref(tab:calvesvariancecomponents)) and "stirks" (see table \@ref(tab:stirksvariancecomponents)).
+The variance components are divided into the two groups of breeding values "calves" (see table \@ref(tab:calvesvariancecomponents)) and "stirks" (see table \@ref(tab:stirksvariancecomponents)).
 
 ```{r calvesvariancecomponents, echo=FALSE}
 library(knitr)
@@ -184,52 +184,7 @@ kable(svc, digits=3, booktabs=T, caption="Genetic, phenotypic and residual varia
  add_header_above(c("","genetic"=3,"residual"=3, "phenotypic"=3,""))
 
 ```
-```{r GeneticGainUniv, echo=FALSE, eval=FALSE}
-#intensity of selection (i) computed by proportian selected (p)
-p <- 0.2
-i <- dnorm(qnorm(1-p))/p
-#factor of variance reduction (k)
-k <- i * (i - qnorm(p))
-#generation intervall (L) in years
-L <- 5
-#number of progeny (pr) of the selection candidate
-pr<-10
-#relationshipmatrix (A) of the selection candidate
-suppressPackageStartupMessages( library(pedigreemm))
-numb <- pr+1
-ped <- pedigree(sire = c(NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:numb)
-A <- getA(ped)
-Ainv <- as.matrix(getAInv(ped))
-#genetic variance (g) of the trait
-g<-sg$sCF[2]
-#phenotypic variance (ph) of the trait
-ph<-sp$sCF[2]
-#residual variance (r) of the trait
-r<-sr$sCF[2]
-#design matrix (Z) connecting the records of observations with the breeding values
-Z<-cbind(matrix(0, nrow=pr,ncol=1),diag(pr))
-#variance-relationship matrix (R) of the residuals for the recorded animals
-R<- r%x%diag(pr)
-#prediction error variance (PEV)
-PEV <- solve(t(Z)%*%solve(R)%*%Z+Ainv*(1/g))[1,1]
-#covariance (C) between true and estimated breeding value
-C <-g-PEV
-#asymptotic covariance (Ca) between true and estimated breeding value
-Ca <- C/(1+0.5*k)
-CCa
-FCa
-WCa
-# asymptotic variance of the breeding value (ga)
-ga <- sqrt(g-k*Ca)
-#asymptotic accuracy of the estimated breeding value (ra) of the selection candidate
-ra <- sqrt(Ca/ga^2)
-#genetic gain of a breeding value (Q)
-Q<- i*ra*ga/L
-Q
-#correlated genetic gain.
-i*CCa*sqrt(FCa)/L
-i*WCa*sqrt(FCa)/L
-```
+
 
 The estimated variance components have been used to predict the genetic gain (Q) for the breeding value carcass fat, carcass conformation and carcass weight in "calves" and "stirks".
 
