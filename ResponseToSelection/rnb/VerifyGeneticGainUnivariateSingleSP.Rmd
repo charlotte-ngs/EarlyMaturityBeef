@@ -1,0 +1,73 @@
+---
+title: "Verify GeneticGainUnivariateSingleSP"
+output: html_notebook
+---
+
+This notebook is used to verify the computations that are done in GeneticGainUnivariateSingleSP.Rmd
+
+The selection intensity based on the proportion of $p$ 
+
+```{r, echo=FALSE}
+#intensity of selection (i) computed by proportian selected (p)
+p <- 0.2
+(i <- dnorm(qnorm(1-p))/p)
+```
+
+The factor for the variance reduction
+
+```{r}
+#generation intervall (L) in years
+L <- 2
+#number of progeny (pr) of the selection candidate
+pr<-10
+#factor of variance reduction (k)
+(k <- i * (i - qnorm(p)))
+```
+
+The relationship matrix
+
+```{r}
+#relationshipmatrix (A) of the selection candidate
+suppressPackageStartupMessages( library(pedigreemm))
+numb <- pr+1
+ped <- pedigree(sire = c(NA,1,1,1,1,1,1,1,1,1,1), dam = c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA), label = 1:numb)
+# A <- getA(ped)
+(Ainv <- as.matrix(getAInv(ped)))
+```
+
+
+The univariate parameters (phenotypic, genetic and residual variances)
+
+```{r}
+#genetic variance (g) of the trait
+g<-0.12067
+#phenotypic variance (ph) of the trait
+ph<-0.39365
+#residual variance (r) of the trait
+r<-0.23651
+```
+
+
+The prerequisites for the PEV. Start with design matrix $Z$
+
+```{r}
+#design matrix (Z) connecting the records of observations with the breeding values
+(Z<-cbind(matrix(0, nrow=pr,ncol=1),diag(pr)))
+```
+
+The residual variance matrix
+
+```{r}
+#variance-relationship matrix (R) of the residuals for the recorded animals
+# R<- r%x%diag(pr)
+(Rinv <- (1/r) %x% diag(pr))
+```
+
+
+```{r}
+#prediction error variance (PEV)
+(PEV1 <- solve( t(Z) %*% Rinv %*% Z + Ainv * (1/g)))
+(PEV2 <- solve( crossprod(Z) * 1/r + Ainv * (1/g)))
+PEV1-PEV2
+```
+

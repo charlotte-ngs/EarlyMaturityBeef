@@ -14,7 +14,7 @@ output:
 #' @title
 #' Internal Function using distribution thresholds.
 #' @description
-#' #'This function creates an economic value for a trait using the distribution thresholds of the traits records over the population. These thresholds are defined by price differences in a specific range of trait values. Price changes per kg carcass weight have been fitted to these thresholds. The difference of price changes between the initial distribution and the distribution with an increased mean divided by the differences in means is the economic value.
+#' This function creates an economic value for a trait using the distribution thresholds of the traits records over the population. These thresholds are defined by price differences in a specific range of trait values. Price changes per kg carcass weight have been fitted to these thresholds. The difference of price changes between the initial distribution and the distribution with an increased mean divided by the differences in means is the economic value.
 #' @param pvec_threshold   thresholds under continuous distribution given by pricing system
 #' @param pvec_price       vector of prices for given classes
 #' @param pn_mean          current population phenotypic mean
@@ -45,9 +45,9 @@ The external function can be designed as follows.
 
 ```{r funceconomicvalue}
 #' @title
-#'General function to compute an economic value for carcass fat, carcass conformation or carcass weight.
+#' General function to compute an economic value for carcass fat, carcass conformation or carcass weight.
 #' @description
-#'This function creates an economic value for either carcass fat and carcass conformation or carcass weight. It uses the "internal finction using thresholds". First it distinguishes between carcass conformation/carcass fat and carcass weight. Carcass weight has thresholds as input parameter, but carcass conformation and carcass fat have population frequencies per class as input parameters. There the thresholds are computed first from the frequencies using the characteristics of normal distributions.
+#' This function creates an economic value for either carcass fat and carcass conformation or carcass weight. It uses the "internal finction using thresholds". First it distinguishes between carcass conformation/carcass fat and carcass weight. Carcass weight has thresholds as input parameter, but carcass conformation and carcass fat have population frequencies per class as input parameters. There the thresholds are computed first from the frequencies using the characteristics of normal distributions.
 #' @param pvec_class_freq  discrete empirical distribution of population for given trait over different classes
 #' @param pvec_threshold   thresholds under continuous distribution given by pricing system
 #' @param pvec_price       vector of prices for given classes
