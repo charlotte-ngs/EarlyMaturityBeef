@@ -61,7 +61,7 @@ Then I compute the design matrix Z from the knowledge of available records and n
 
 ```{r DesignMat}
 #design matrix (Z) connecting the records of observations with the breeding values
-Z<-cbind(matrix(0, nrow=pr,ncol=2),diag(pr))
+Z<-cbind(matrix(0, nrow=pr,ncol=1),diag(pr))
 Z
 ```
 
@@ -89,6 +89,10 @@ This is then called the prediction error variance of the selection candidate.
 
 ```{r PredErrorVar}
 #prediction error variance (PEV)
+dim(Z)
+dim(R)
+t(Z)%*%solve(R)%*%Z
+dim(Ainv)
 PEV <- solve(t(Z)%*%solve(R)%*%Z+Ainv*(1/g))[1,1]
 PEV
 ```

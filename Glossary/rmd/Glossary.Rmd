@@ -356,7 +356,7 @@ accuracy of prediction.
 
 * __Additive genetic variance__ Square of the standard deviation of breeding values. Describe how much the phenotypical variance of a trait in a population can be explained by the relationship of the animals.
 
-* __Standard deviation of breeding values__ ($\sigma_{A})
+* __Standard deviation of breeding values__
 
 * __Siblings__ Animals that share the same parents. Half siblings only share half of the parents.
 

@@ -68,13 +68,13 @@ library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 ## male
-male_offspring <- "number_of_offspring"
+male_offspring <- "AN_number_of_offspring"
 male_offspring <- read.table(file = male_offspring, sep=";", header=TRUE) %>%
   select(male)
 male_offspring <- as.numeric(male_offspring)
 male_offspring
 ## female
-female_offspring <- "number_of_offspring"
+female_offspring <- "AN_number_of_offspring"
 female_offspring <- read.table(file = female_offspring, sep=";", header=TRUE) %>%
   select(female)
 female_offspring <- as.numeric(female_offspring)
@@ -89,13 +89,13 @@ library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 ## male
-male_generationintervall <- "generation_intervall"
+male_generationintervall <- "AN_generation_intervall"
 male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
   select(male)
 male_generationintervall <- as.numeric(male_generationintervall)
 male_generationintervall
 ## female
-female_generationintervall <- "generation_intervall"
+female_generationintervall <- "AN_generation_intervall"
 female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
   select(female)
 female_generationintervall <- as.numeric(female_generationintervall)
@@ -111,13 +111,13 @@ library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 ## male
-male_proportionselected <- "proportion_selected"
+male_proportionselected <- "AN_proportion_selected"
 male_proportionselected <- read.table(file = male_proportionselected, sep=";", header=TRUE) %>%
   select(male)
 male_proportionselected <- as.numeric(male_proportionselected)
 male_proportionselected
 ## female
-female_proportionselected <- "proportion_selected"
+female_proportionselected <- "AN_proportion_selected"
 female_proportionselected <- read.table(file = female_proportionselected, sep=";", header=TRUE) %>%
   select(female)
 female_proportionselected <- as.numeric(female_proportionselected)
@@ -131,7 +131,7 @@ library(dplyr)
 # Set working directory
 setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 # always calves first and CC,CF,CW
-a <- "economic_values_breeding_for_aCF"
+a <- "AN_economic_values"
 a <- read.table(file = a, sep=";", header=TRUE)
 a <- as.numeric(a)
 a
@@ -182,6 +182,7 @@ dim(male_Z)
 # female
 female_Z<-cbind(matrix(0, nrow=female_offspring*n,ncol=n),diag(female_offspring*n))
 dim(female_Z)
+male_offspring*n
 ```
 
 
@@ -215,6 +216,9 @@ female_k <- female_i*(female_i-female_x)
 $$PEV_y=(Z_y^TR_y^{-1}Z_y+A_y^{-1} \otimes G^{-1})^{-1}[1:n,1:n]$$
 
 ```{r PEV}
+dim(male_Z)
+dim(male_Ainv)
+dim(male_R)
 # male
 male_PEV <- solve(t(male_Z)%*%solve(male_R)%*%male_Z+male_Ainv%x%solve(G))[1:n,1:n]
 # female
@@ -306,29 +310,61 @@ Qoverall
 $$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
 
 ```{r GeneticGainTrait}
-Qtrait<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
-Qtrait
+QaCF<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+
+QcCF <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+
+QaCC <- (male_i*as.numeric(t(a)%*%male_Ca[,"aCC"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCC"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+
+QcCC <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCC"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCC"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+
+QaCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"aCW"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCW"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+
+QcCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+
+index <- data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
+sum(c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
 ```
 
 ### Asymptotic genetic gain of a trait in the aggregate breeding value involving not all traits
 
-$$b=G^{-1}G_fa$$
-Where $f$ is all rows of traits which are involved in the 
+$$b=\sigma_n^{-1}(G_n)^Ta$$
+Where $n$ indicates the trait. Here aCF.
 ```{r}
-b <- solve(G)%*%G[,"aCF"]
-b
+CFaB <- (1/G[which( colnames(G)=="aCF" ),"aCF"])*(G[,"aCF"]*a)
+CFcB <- (1/G[which( colnames(G)=="cCF" ),"aCF"])*(G[,"cCF"]*a)
+CCaB <- (1/G[which( colnames(G)=="aCC" ),"aCF"])*(G[,"aCC"]*a)
+CCcB <- (1/G[which( colnames(G)=="cCC" ),"aCF"])*(G[,"cCC"]*a)
+CWaB <- (1/G[which( colnames(G)=="aCW" ),"aCF"])*(G[,"aCW"]*a)
+CWcB <- (1/G[which( colnames(G)=="cCW" ),"aCF"])*(G[,"cCW"]*a)
+
 ```
 
 
 $$Q_m^*= \frac {\sum_{y=1}^{2} i_yb^T(C_y^*)_m \sqrt{b^TC_y^*b}}{\sum_{y=1}^{2}L_y}$$
-
 ```{r GeneticGainTrait}
-Qtrait<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
-Qtrait
-4.1/9.9
-1.3/2.6
-5.7/9.2
-1.2/1.7
+CFaQ <- (male_i*as.numeric(t(CFaB)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(CFaB)%*%male_Ca%*%CFaB))+female_i*as.numeric(t(CFaB)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(CFaB)%*%female_Ca%*%CFaB)))/(male_generationintervall+female_generationintervall)
+
+CFcQ <- (male_i*as.numeric(t(CFcB)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(CFcB)%*%male_Ca%*%CFcB))+female_i*as.numeric(t(CFcB)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(CFcB)%*%female_Ca%*%CFcB)))/(male_generationintervall+female_generationintervall)
+
+CCaQ <- (male_i*as.numeric(t(CCaB)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(CCaB)%*%male_Ca%*%CCaB))+female_i*as.numeric(t(CCaB)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(CCaB)%*%female_Ca%*%CCaB)))/(male_generationintervall+female_generationintervall)
+
+CCcQ <- (male_i*as.numeric(t(CCcB)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(CCcB)%*%male_Ca%*%CCcB))+female_i*as.numeric(t(CCcB)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(CCcB)%*%female_Ca%*%CCcB)))/(male_generationintervall+female_generationintervall)
+
+CWaQ <- (male_i*as.numeric(t(CWaB)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(CWaB)%*%male_Ca%*%CWaB))+female_i*as.numeric(t(CWaB)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(CWaB)%*%female_Ca%*%CWaB)))/(male_generationintervall+female_generationintervall)
+
+CWcQ <- (male_i*as.numeric(t(CWcB)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(CWcB)%*%male_Ca%*%CWcB))+female_i*as.numeric(t(CWcB)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(CWcB)%*%female_Ca%*%CWcB)))/(male_generationintervall+female_generationintervall)
+
+single_trait <- data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ))
+sum(c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ))
+```
+
+```{r}
+library(ggplot2)
+dataframe <- data.frame(names = rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2), Sfr = c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=rep(rep(c("CFa","index"),each=6),times=2))
+
+barplot <- ggplot(dataframe,aes(x=names,y=Sfr,fill=Strategy))
+barplot + geom_bar(stat="identity",position="dodge")
 ```
 
 

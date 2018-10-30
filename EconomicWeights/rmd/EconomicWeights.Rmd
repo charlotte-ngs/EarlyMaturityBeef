@@ -309,36 +309,63 @@ The economic weight is computed by the difference in profit when increasing the 
 ```{r}
 # define vector for price reductions in Sfr./kg for carcass weight extremes
 # for calves
-pcwc <- c(-0.2,0,-0.5)
+pcwc <- c(0,-0.1)
 # for adults
-pcwa <- c(-0.2,0,-0.5)
+pcwa <- c(0,-0.1 ,-0.2 ,-0.3 ,-0.5 ,-0.7 ,-0.9 ,-1.2 ,-1.4 ,-1.6 ,-1.8)
 # define vector for tresholds
 # for calves
-tcwc<- c(130,220,Inf)
+tcwc<- c(1.4,Inf)
 # for adults
-tcwa <- c(130,220,Inf)
-# define mean
+tcwa <- c(2.9 ,3.0 ,3.1 ,3.2 ,3.3 ,3.4 ,3.5 ,3.6 ,3.7 ,3.8, Inf)
+
+# define mean Angus
 # for calves
-cwcM <- 
+AncwcM <- 1.23
 # for adults
-cwaM <- 
-  
+AncwaM <- 2.32
+# Limousin
+# for calves
+LmcwcM <- 1.23
+# for adults
+LmcwaM <- 2.32
 # define change of mean
 d<-0.1
-# define new mean
-cwcM2 <- cwcM+d
-# define standard deviation
+# define new means
+AncwcM2 <- AncwcM+d
+AncwaM2 <- AncwaM+d
+LmcwcM2 <- LmcwcM+d
+LmcwaM2 <- LmcwaM+d
+# define standard deviation Angus
 # for calves
-cwcS <- 
+AncwcS <- 0.14
 # for adults
-cwaS <- 
-# define shares for initial mean.
-cwc <- diff(c(0,pnorm(tcwc,sd=cwcS,mean=cwcM, lower.tail = T)))
-# define shares for new mean
-cwc2 <- diff(c(0,pnorm(tcwc,sd=cwcS,mean=cwcM2, lower.tail = T)))
-# define economic weight
-cwcEW <- t(pcwc)%*%cwc2-t(pcwc)%*%cwc
+AncwaS <- 0.53
+# define standard deviation Angus
+# for calves
+LmcwcS <- 0.13
+# for adults
+LmcwaS <- 0.45
 
+#
+# define shares for initial mean.
+Ancwc <- diff(c(0,pnorm(tcwc,sd=AncwcS,mean=AncwcM, lower.tail = T)))
+Ancwa <- diff(c(0,pnorm(tcwa,sd=AncwaS,mean=AncwaM, lower.tail = T)))
+
+Lmcwc <- diff(c(0,pnorm(tcwc,sd=LmcwcS,mean=LmcwcM, lower.tail = T)))
+Lmcwa <- diff(c(0,pnorm(tcwa,sd=LmcwaS,mean=LmcwaM, lower.tail = T)))
+# define shares for new mean
+Ancwc2 <- diff(c(0,pnorm(tcwc,sd=AncwcS,mean=AncwcM2, lower.tail = T)))
+Ancwa2 <- diff(c(0,pnorm(tcwa,sd=AncwaS,mean=AncwaM2, lower.tail = T)))
+
+Lmcwc2 <- diff(c(0,pnorm(tcwc,sd=LmcwcS,mean=LmcwcM2, lower.tail = T)))
+Lmcwa2 <- diff(c(0,pnorm(tcwa,sd=LmcwaS,mean=LmcwaM2, lower.tail = T)))
+
+# define economic weight
+AncwcEW <- t(pcwc)%*%Ancwc2-t(pcwc)%*%Ancwc
+AncwaEW <- t(pcwa)%*%Ancwa2-t(pcwa)%*%Ancwa
+
+LmcwcEW <- t(pcwc)%*%Lmcwc2-t(pcwc)%*%Lmcwc
+LmcwaEW <- t(pcwa)%*%Lmcwa2-t(pcwa)%*%Lmcwa
 ```
 
 
@@ -351,7 +378,7 @@ cwcEW <- t(pcwc)%*%cwc2-t(pcwc)%*%cwc
 
 ```{r TblEw}
 library(dplyr)
-x <- data.frame(breed=c("An","Lm"), cca=c(AnccaEW,LmccaEW), ccc=c(AncccEW,LmcccEW),cfa=c(AncfaEW,LmcfaEW),cfc=c(AncfcEW,LmcfcEW),cwa=c(cwEW,cwEW),cwc=c(cwEW,cwEW))
+x <- data.frame(breed=c("An","Lm"), cca=c(AnccaEW,LmccaEW), ccc=c(AncccEW,LmcccEW),cfa=c(AncfaEW,LmcfaEW),cfc=c(AncfcEW,LmcfcEW),cwa=c(AncwaEW,LmcwaEW),cwc=c(AncwcEW,LmcwcEW))
 
 y <- select(filter(x,breed=="An"),-breed)
 y                
@@ -363,97 +390,7 @@ select(filter(x,breed=="Lm"),-breed)
 
 
 
-#Annex/Jnk
-### Function Inputs
-#### frequencies and thresholds
-```{r conformationfreq}
-#Vectors of animal numbers Carcass conformation (cc) 
-#Angus (An) with a=stirks and c=calves.
-Anccc <- c(2,2,35,278,634,708,298)
-Ancca <- c(0,17,247,3459,8308,8857,5797)
-#Limousin (Lm) with a=stirks and c=calves.
-Lmccc <- c(3,2,17,88,300,838,2482)
-Lmcca <- c(2,11,57,1041,6652,21092,56227)
 
-#Shares Carcass conformation
-#Angus with a=stirks and c=calves.
-Anccc <- Anccc/sum(Anccc)
-Ancca <- Ancca/sum(Ancca)
-#Limousin with a=stirks and c=calves.
-Lmccc <- Lmccc/sum(Lmccc)
-Lmcca <- Lmcca/sum(Lmcca)
-
-x <- data.frame(class = c("C", "H","T+","T","T-","A","X"), Anccc=Anccc,Ancca=Ancca,Lmccc=Lmccc,Lmcca=Lmcca)
-kable(x,booktabs=T,digits=2, caption="Population frequencies accross carcass conformation classes (Kunz,2018)")
-Anccc 
-Ancca 
-Lmccc 
-Lmcca 
-```
-
-```{r fatfreq}
-#Vectors of animal numbers Carcass fat 
-#Angus with a=stirks and c=calves.
-Ancfc <- c(189,706,935,125,2)
-Ancfa <- c(802,3415,15673,6314,481)
-#Limousin with a=stirks and c=calves.
-Lmcfc <- c(735,1504,1419,72,0)
-Lmcfa <- c(5102,21958,50705,7169,148)
-
-#Shares Carcass fat
-#Angus with a=stirks and c=calves.
-Ancfc <- c(189,706,935,125,2)/sum(Ancfc)
-Ancfa <- c(802,3415,15673,6314,481)/sum(Ancfa)
-#Limousin with a=stirks and c=calves.
-Lmcfc <- c(735,1504,1419,72,0)/sum(Lmcfc)
-Lmcfa <- c(5102,21958,50705,7169,148)/sum(Lmcfa)
-
-#Values Carcass fat classes
-Vcf <- c(1:5)
-x <- data.frame(class = Vcf, Ancfc=Ancfc,Ancfa=Ancfa,Lmcfc=Lmcfc,Lmcfa=Lmcfa)
-kable(x,booktabs=T,digits=2, caption="Population frequencies accross carcass conformation classes (Kunz,2018)")
-
-```
-
-```{r weightthresh}
-cwc <- 1.4
-cwa <- c(2.9,3,3.1,3.2,3.3,3.4,3.5,3.6,3.7,3.8)
-```
-
-#### Prices
-
-```{r}
-# average carcass numbers per month of categories MT, OB and RG in 2017 from Agristat S. 35.
-MT <- 8535
-OB <- 3460
-RG <- 7137
-MTfr <- MT/sum(MT,OB,RG)
-OBfr <- OB/sum(MT,OB,RG)
-RGfr <- RG/sum(MT,OB,RG)
-# prices for categories KV, MT, OB and RG from Proviande 2018, week 33.
-MTcc <- c(7.9,8.2,8.6,8.8,9.1,9.3,9.55)
-OBcc <- c(7.9,8.2,8.6,8.8,9.1,9.4,9.65)
-RGcc <- c(6.9,7.5,8.2,8.8,9.2,9.5,9.75)
-ccc <- c(11.2,12.7,13.6,14.2,14.7,15.2,15.7)
-cca <- MTcc*MTfr+OBcc*OBfr+RGcc*RGfr
-# prices for categories KV, MT, OB and RG from Proviande 2018, week 33.
-MTcf <- c(-0.9,-0.3,0,-0.3,-0.7)
-OBcf <- c(-0.9, -0.3,0,-0.4,-0.9)
-RGcf <- c(-0.9,-0.3,0,-0.5,-1)
-cfc <- c(-1.5,-0.6,0,-0.4,-1)
-cfa <- MTcf*MTfr+OBcf*OBfr+RGcf*RGfr
-# prices for category KV from Proviande 2018, week 33.
-cwc <- c(0,1.4)
-# # prices for categories MT, OB and RG from Proviande 2016.
-cwa <- c(0.1,0.2,0.3,0.5,0.7,0.9,1.2,1.4,1.6,1.8)
-```
-
-
-```{r inputTblEw}
-cf <- data.frame(breed=c("An","Lm", "An","Lm"), group=c("c","c","a","a"), "1"=c(), "")
-cc
-cw
-```
 
 
 
