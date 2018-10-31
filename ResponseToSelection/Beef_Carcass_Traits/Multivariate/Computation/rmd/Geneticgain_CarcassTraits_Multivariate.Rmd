@@ -43,8 +43,6 @@ Then I compute all necessary steps using equations (derived from @Phocas1998).
 
 With CC,CF,CW.
 ```{r VariancesCovariances}
-# Set working directory
-setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 # import variance covariance dataframes and compute matrix
 ## genetic
 genetic_var_cov <- "adults_calves_genetic_variances_covariances"
@@ -65,8 +63,6 @@ phenotypic_var_cov <- as.matrix(phenotypic_var_cov)
 First the number of relatives is imported.
 ```{r NumberofRelatives}
 library(dplyr)
-# Set working directory
-setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 ## male
 male_offspring <- "AN_number_of_offspring"
 male_offspring <- read.table(file = male_offspring, sep=";", header=TRUE) %>%
@@ -86,8 +82,6 @@ female_offspring
 
 ```{r GenerationIntervall}
 library(dplyr)
-# Set working directory
-setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 ## male
 male_generationintervall <- "AN_generation_intervall"
 male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
@@ -108,8 +102,6 @@ female_generationintervall
 
 ```{r ProportionSelected}
 library(dplyr)
-# Set working directory
-setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 ## male
 male_proportionselected <- "AN_proportion_selected"
 male_proportionselected <- read.table(file = male_proportionselected, sep=";", header=TRUE) %>%
@@ -128,13 +120,13 @@ female_proportionselected
 
 ```{r}
 library(dplyr)
-# Set working directory
-setwd("~/Documents/EarlyMaturityBeef/ResponseToSelection/rmd")
 # always calves first and CC,CF,CW
-a <- "AN_economic_values"
+a <- "LM_economic_values"
 a <- read.table(file = a, sep=";", header=TRUE)
-a <- as.numeric(a)
+aMat <- as.matrix(a)
+a <- as.numeric(aMat)
 a
+aMat
 ```
 
 ## Computations without equations
@@ -305,7 +297,7 @@ Qoverall <- (male_i*male_ra*stdev_overall+female_i*female_ra*stdev_overall)/(mal
 Qoverall
 ```
 
-### Asymptotic genetic gain of a trait with aggregate breeding value involving all traits (here carcass fat)
+### Correlated asymptotic genetic gain of traits when selecting for the aggregate genotype.
 
 $$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
 
@@ -326,26 +318,36 @@ index <- data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(QaCF,QcC
 sum(c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
 ```
 
-### Asymptotic genetic gain of a trait in the aggregate breeding value involving not all traits
+### Correlated asymptotic genetic gain of a trait in the aggregate breeding value involving not all traits
 
 $$b=\sigma_n^{-1}(G_n)^Ta$$
 Where $n$ indicates the trait. Here aCF.
 ```{r}
-CFaB <- (1/G[which( colnames(G)=="aCF" ),"aCF"])*(G[,"aCF"]*a)
-CFcB <- (1/G[which( colnames(G)=="cCF" ),"aCF"])*(G[,"cCF"]*a)
-CCaB <- (1/G[which( colnames(G)=="aCC" ),"aCF"])*(G[,"aCC"]*a)
-CCcB <- (1/G[which( colnames(G)=="cCC" ),"aCF"])*(G[,"cCC"]*a)
-CWaB <- (1/G[which( colnames(G)=="aCW" ),"aCF"])*(G[,"aCW"]*a)
-CWcB <- (1/G[which( colnames(G)=="cCW" ),"aCF"])*(G[,"cCW"]*a)
-
+B <- (1/G[which( colnames(G)=="aCF" ),"aCF"])*t(G[,"aCF"])*a
+B
+t(G[,"aCF"])*a
+aMat
+G[which( colnames(G)=="cCC" ),"aCF"]
 ```
 
 
 $$Q_m^*= \frac {\sum_{y=1}^{2} i_yb^T(C_y^*)_m \sqrt{b^TC_y^*b}}{\sum_{y=1}^{2}L_y}$$
 ```{r GeneticGainTrait}
-CFaQ <- (male_i*as.numeric(t(CFaB)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(CFaB)%*%male_Ca%*%CFaB))+female_i*as.numeric(t(CFaB)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(CFaB)%*%female_Ca%*%CFaB)))/(male_generationintervall+female_generationintervall)
+aCFQ <- male_i*B[which(colnames(G)=="aCF")]*male_Ca[which( colnames(G)=="aCF" ),"aCF"]*sqrt(as.numeric(B[which(colnames(G)=="aCF")]^2*male_Ca[which( colnames(G)=="aCF" ),"aCF"]))
 
-CFcQ <- (male_i*as.numeric(t(CFcB)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(CFcB)%*%male_Ca%*%CFcB))+female_i*as.numeric(t(CFcB)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(CFcB)%*%female_Ca%*%CFcB)))/(male_generationintervall+female_generationintervall)
+aCFQ
+
+cCFQ <- male_i*B[which(colnames(G)=="cCF")]*male_Ca[which( colnames(G)=="cCF" ),"aCF"]*sqrt(as.numeric(B[which(colnames(G)=="cCF")]^2*male_Ca[which( colnames(G)=="cCF" ),"aCF"]))
+
+cCFQ
+
+aCCQ <- male_i*B[which(colnames(G)=="aCC")]*male_Ca[which( colnames(G)=="aCC" ),"aCF"]*sqrt(as.numeric(B[which(colnames(G)=="aCC")]^2*male_Ca[which( colnames(G)=="aCC" ),"aCF"]))
+
+aCCQ
+
+cCCQ <- male_i*B[which(colnames(G)=="cCC")]*male_Ca[which( colnames(G)=="cCC" ),"aCF"]*sqrt(as.numeric(B[which(colnames(G)=="cCC")]^2*male_Ca[which( colnames(G)=="cCC" ),"aCF"]))
+
+cCCQ
 
 CCaQ <- (male_i*as.numeric(t(CCaB)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(CCaB)%*%male_Ca%*%CCaB))+female_i*as.numeric(t(CCaB)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(CCaB)%*%female_Ca%*%CCaB)))/(male_generationintervall+female_generationintervall)
 
@@ -361,10 +363,11 @@ sum(c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ))
 
 ```{r}
 library(ggplot2)
-dataframe <- data.frame(names = rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2), Sfr = c(CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=rep(rep(c("CFa","index"),each=6),times=2))
+dataframe <- data.frame(names = c("Overall",rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2)), Sfr = c(Qoverall,CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=c("index",rep(c("CFa","index"),each=6)))
 
 barplot <- ggplot(dataframe,aes(x=names,y=Sfr,fill=Strategy))
 barplot + geom_bar(stat="identity",position="dodge")
+rep(rep(c("CFa","index"),each=6),times=2)
 ```
 
 
