@@ -484,6 +484,8 @@ if (is.null(tbl_result)){
 * How can I order rows that they begin at the same column?
     * cmd i
     
+* Should I say economic weight or economic value?
+    
 
 
 

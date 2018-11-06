@@ -420,4 +420,152 @@ see \autoref{Qm}
 @Phocas1996
 
 
+# Economic weights
+
+Economic weights are weighing factors to produce an aggregate genotype $H$
+
+\begin{equation}
+\label{AggregateGenotype}
+H=\sum{a_iu_i}
+\end{equation}
+
+where
+
+$a$ is an economic weight,
+
+$u$ is a true breeding value and
+
+$i$ is a trait.
+
+In this thesis the aggregate genotype consists of the traits carcass fat, carcass conformation and carcass weight.
+Consequently the three traits needed an economical weight each.
+The economical weight for a trait is the change in profit in Swiss Francs (Sfr.) per additional unit of the trait.
+It is given by the equation
+
+\begin{equation}
+\label{EconomicWeight}
+a=\frac{\Delta_p}{\Delta_{\mu}}
+\end{equation}
+
+where
+
+$a$ is the economic weight of a trait,
+
+$\Delta_p$ is the change in revenue in Sfr and
+
+$\Delta_{\mu}$ is the increase in population mean by one unit of a trait.
+
+
+However, there is no information available about the true change in profit per unit carcass fat, carcass conformation and carcass weight.
+This change is therefore approximated by only using the difference in revenue which is caused by price differences per kg carcass weight in the slaughterhouse.
+The change in revenue $\Delta_p$ has been computed by the equation
+
+\begin{equation}
+\label{DeltaP}
+\Delta_p=\frac{r_1^Tp-r_0^Tp}{0.1}
+\end{equation}
+
+where
+
+$r$ is the vector of population frequencies belonging to each price class,
+
+$p$ is the vector of price change per kg carcass weight,
+
+$T$ means, it is the transpose,
+
+$0$ indicates the initial population and
+
+$1$ indicates the population after the change in population mean by 0.1.
+
+The price changes per unit of a carcass trait $p$ are based on CHTAX.
+There the price differences do not have the same value over the whole scale of the carcass traits.
+For example the change in revenue from carcass fat class 1 to 2 is not the same as from 2 to 3.
+The changes in revenue are different for "adults" and "calves".
+It is assumed that the group "calves" are all classified to the carcass category KV while the group "adults" are classified to MT, OB or RG.
+For the group "adults" the changes in revenue have been taken from a weighed mean of MT, OB and RG.
+Its weights have been chosen from the relative number of slaughtered carcasses classified to MT, OB and RG.
+Due to the non-linear changes in revenue for the carcass traits, the economic weight depends on the initial distribution of the population over the scale of a carcass trait.
+The initial distribution is different for each beef cattle breed, which also results in different economic weights for each breed.
+In this thesis the economic weights have been computed for the breeds Angus and Limousin.
+
+While the revenue changes from class to class in carcass fat and carcass conformation, it changes at thresholds in carcass weight.
+In a continous normal distribution thresholds are needed to get the frequencies of population $r$ for each price class.
+The price class indicates a range of a carcass trait at which the price per kg carcass weight stays the same.
+For carcass fat and carcass conformation the thresholds have been difficult to set, because they are discreteley distributed (see Figure \@ref(fig:BarplotInitialfrequenciesCF)).
+There the thresholds have been set after the creation of the initial normal distribution approximated to the discrete distribution (see Figure \@ref(fig:NormDistApprox)).
+The tresholds have been set in a way that the population frequencies known by the discrete distribution have fitted to the frequencies in the normal distribution.
+After this step the procedure to compute the economic weight was again basically the same for all carcass traits:
+The initial normal distribution conserved its shape (standard deviation constant), but has been shifted by increasing the mean by 0.1 (see Figure \@ref(fig:ShiftMean)).
+Then the population frequencies within each price class have been computed again using the characteristics of the normal distribution and using the computed thresholds.
+The population frequencies from the initial distribution $0$ and the changed distribution $1$ enabled the computation of the change in revenue for a change in population mean by $\Delta_{\mu}$.
+
+```{r BarplotInitialfrequenciesCF, echo=FALSE, fig.cap="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)"}
+library(knitr)
+library(kableExtra)
+#Vectors of animal numbers Carcass fat 
+#Angus with a=adults and c=calves.
+Ancfc <- c(189,706,935,125,2)
+Ancfa <- c(802,3415,15673,6314,481)
+#Limousin with a=adults and c=calves.
+Lmcfc <- c(735,1504,1419,72,0)
+Lmcfa <- c(5102,21958,50705,7169,148)
+#frequencies Carcass fat
+#Angus with a=adults and c=calves.
+Ancfc <- Ancfc/sum(Ancfc)
+Ancfa <- Ancfa/sum(Ancfa)
+#Limousin with a=adults and c=calves.
+Lmcfc <- Lmcfc/sum(Lmcfc)
+Lmcfa <- Lmcfa/sum(Lmcfa)
+
+#Values Carcass fat classes
+Vcf <- c(1:5)
+
+#define number of rows
+#x <- cbind(Vcf,Ancfc,Ancfa,Lmcfc,Lmcfa)
+#colnames(x) <- c("class", "ANcalves", "ANadults", "LMcalves", "LMadults")
+#kable(x, booktabs=T, caption="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)")
+#x <- as.data.frame(x)
+# settings barplot
+library(ggplot2)
+theme_set(theme_classic())
+#set dataframe
+x <-data.frame(Class=rep(c(1:5),times=2*2),Category=rep(c("Angus", "Limousin"),each=10), frequency=c(Ancfc,Ancfa,Lmcfc,Lmcfa))
+x$Group <- rep(rep(c("Calves","Adults"),each=5),times=2)
+# Plot
+g <- ggplot(x,aes(Class,frequency))
+g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
+  theme_classic()
+```
+
+
+```{r NormDistApprox, fig.cap="Exemplary approximation of a normal distribution to a discrete distribution.", echo=FALSE}
+library(ggplot2)
+AncfaS <- 0.74
+AncfaM <- 3.1
+x <- data.frame(Class=Vcf,frequency=Ancfa)
+g <- ggplot(x,aes(Class,frequency))
+g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
+  stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
+  theme_classic()
+```
+
+
+```{r ShiftMean, fig.cap="Exemplary shift from initial to new distribution by increasing the mean of the initial normal distribution by 0.1", echo=FALSE}
+library(ggplot2)
+x <- data.frame(Class=Vcf,frequency=Ancfa)
+g <- ggplot(x,aes(Class,frequency,linetype="Mean"))
+g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
+  stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),aes(linetype="New distribution"))+
+    scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
+  theme_classic()
+  
+```
+
+
+
+
+
+
+
+
 
