@@ -105,7 +105,7 @@ To compute the breeding values for carcass fat a multivariate best linear unbias
 BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variances/covariances, environment factors and individual phenotypic records.
 Multivariate means that BLUP accounts for the phenotypic, genetic and residual covariances between the involved traits. 
 A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
-Phenotypic records of three carcass traits are used to estimate the breeding value for carcass fat:
+Phenotypic records of three carcass traits are used to estimate a breeding value for carcass fat:
 
 * carcass fat [class] (table \@ref(tab:fatclass) 
 * carcass conformation [class] (table \@ref(tab:conformationclass))
@@ -117,7 +117,7 @@ Proviande employees record the traits at slaughterhouses in Switzerland routenel
 An animals record is dependent on the environmental conditions the animal lives in beside the genetic effects.
 The environmental effects of the different conditions have been included in BLUP and used to separate additive genetic effects from environmental effects on the phenotypic observations.
 In BLUP the environmental effects on a phenotypic observation are either known fixed effects or unnkown random effects.
-To compute the breeding value for carcass fat, carcass conformation and carcass weight the following parameters of the animals environment have been used as fixed effects:
+To compute a breeding value for carcass fat, carcass conformation and carcass weight the following parameters of the animals environment have been used as fixed effects:
 
 * Proviande carcass classifier for carcass fat and carcass conformation
 * sex
@@ -135,7 +135,7 @@ Animals 700 d or older at slaughter are not included in the model and do not get
 The computation of multivariate BLUP breeding values enabled the estimation of variance components in the population.
 Variance components consist of phenotypical, genetic, fixed effects and residual variances/covariances.
 They have been computed by the method "estimation of variance components" using the Software VCE created by Groeneveld [@Kunz2018].
-The variance components are divided into the two groups of breeding values "calves" (see table \@ref(tab:calvesvariancecomponents)) and "stirks" (see table \@ref(tab:stirksvariancecomponents)).
+The variance components distinguish as well between the two groups of breeding values "calves" (see table \@ref(tab:calvesvariancecomponents)) and "stirks" (see table \@ref(tab:stirksvariancecomponents)).
 
 ```{r calvesvariancecomponents, echo=FALSE}
 library(knitr)
@@ -179,12 +179,55 @@ kable(svc, digits=3, booktabs=T, caption="Genetic, phenotypic and residual varia
 ```
 
 
-The estimated variance components have been used to predict the genetic gain (Q) for the breeding value carcass fat, carcass conformation and carcass weight in "calves" and "stirks".
+The estimated variance components have been used to predict the genetic gain (Q) for two breeding scenarios where both "calves" and "stirks" breeding values have been included.
+The first scenarium assuming a selection for only carcass fat and the second scenarium assuming a selection for an economically weighed combination of carcass fat, carcass conformation and carcass weight.
+
+
 
 ### Genetic gain (Q)
 
-The value of genetic gain predicts the traits improvement in a population over a period of time, on which the selection occurs.
-Therefore it is a useful tool to evaluate the effectiveness of the breeding value carcass fat in improving the desired trait early maturity.
+The estimated variance components have been used to predict the genetic gain (Q).
+In this thesis the genetic gain has been used to compare two breeding strategies for early maturity.
+In both scenarios the breeding values of "calves" and "stirks" have been included.
+The first scenarium assumes a selection for only carcass fat and the second scenarium assumes a selection for an economically weighed combination of carcass fat, carcass conformation and carcass weight.
+The value of genetic gain predicts a trait's or aggregate genotype's improvement in a population over a period of time.
+For both scenarios this improvement is defined by an increase in the aggregate genotype $H$
+
+$$H=\sum{a_mu_m}$$
+
+where 
+
+$a$ is an economic weight,
+
+$u$ is a true breeding value and
+
+$m$ indicates the breeding values CFa, CFc, CCa, CCc, CWa and CWc.
+
+The aggregate genotype is designed to show the economic value of an animal when considering the carcass traits CFa, CFc, CCa, CCc, CWa and CWc.
+Therefore it is a useful tool to evaluate the effectiveness of the two breeding strategies in improving the desired trait early maturity.
+However, the true breeding value is impossible to compute, which also makes it impossible to compute $H$ for an animal.
+Therefore $H$ must be approximated using multiple regression with information sources which estimate the true breeding values.
+Here, the information sources are estimated breeding values $û$ and do not have the same number for the two scenarios.
+
+In the first scenario it is assumed that selection will base only on the estimated breeding values for carcass fat $û_{aCF}$ and $û_{cCF}$.
+This results in the index $I_1$
+
+$$I_1= b_{aCF}û_{aCF}+b_{cCF}û_{cCF}$$
+where
+
+$b$ is a multiple regression coefficient chosen so as to make the correlation between $H$ and $I$ as large as possible.
+
+$b$ has been computed using the equation
+
+$$b=P^{-1}Ga$$
+
+where
+
+$P$ is the variance/covariance matrix of the estimated breeding values,
+
+$G$ is the covariance matrix between estimated breeding values and true breeding values.
+
+From the assumption that BLUP-based estimated breeding values will be used in both scenarios
 
 #### Genetic gain equation derivation
 
