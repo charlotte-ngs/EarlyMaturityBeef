@@ -477,6 +477,12 @@ if (is.null(tbl_result)){
     * According to Peter I should cite R.
     
 * Should I use the term offspring or progeny?
+
+* How can I put multiple hashtags at once to rows in R?
+    * shift cmd c
+
+* How can I order rows that they begin at the same column?
+    * cmd i
     
 
 
