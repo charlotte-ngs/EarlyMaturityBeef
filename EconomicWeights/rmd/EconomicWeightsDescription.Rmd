@@ -9,24 +9,68 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Economic weights are factors to produce an aggregate genotype from multiple traits.
-There is one economical weight per involved trait.
-The economical weight per trait is the change in profit (Sfr.) per additional unit of the trait as mean in the population.
+# Purpose
+
+To show how economic weights have been computed for carcass fat (CF), carcass conformation (CC) and carcass weight (CW).
+
+# Principle
+
+For each trait: CF, CC, CW.
+To present the current beef population as normal distribution over the trait.
+Then to shift the normal distribution by increasing the mean by a tiny positive value.
+Scale on the whole unit of the trait, result is a value with unit **Sfr. / trait unit**.
+
+# Material
+
+* "EconomicWeights" File
+
+# Implementation
+
+Economic weights are weighing factors to produce an aggregate genotype $H$
+
+$$H=\sum{a_iu_i}$$
+
+where
+
+$a$ is an economic weight,
+
+$u$ is a true breeding value and
+
+$i$ is a trait.
+
+In this thesis the aggregate genotype consists of the traits carcass fat, carcass conformation and carcass weight.
+Consequently the three traits need an economical weight each.
+The economical weight for a trait is the change in profit (Sfr.) per additional unit of the trait.
+It is given by the equation
 
 $$a=\frac{\Delta_p}{\Delta_{\mu}}$$
 
-$a$ is the economic value.
+where
 
-$\Delta$ is the difference of the underscore variable.
+$a$ is the economic value of a trait,
 
-$p$ is the profit in Sfr.
+$\Delta$ indicates a difference in the underscore variable,
 
-$\mu$ is the population mean in unit of trait.
+$p$ is the profit in Sfr and
 
-Here the aggregate genotype consists of the traits carcass fat, carcass conformation and carcass weight.
-Consequently the three traits need an economical weight each.
-Also aggregate genotypes have to be computed for each breed and animal group separateley.
-As an example the economic values will appear for the most distinct breeds, Angus and Limousin and the group stirks.
+$\mu$ is the population mean in unit of a trait.
+
+However, there is no information available about the true change in profit per unit carcass fat, carcass conformation and carcass weight.
+This change is therefore approximated by only using the difference in revenue which is caused by price differences per kg carcass weight in the slaughterhouse.
+These price differences per unit of a carcass trait are based on CHTAX. 
+There the price differences do not have the same value over the whole scale of the carcass traits.
+For example the change in revenue from carcass fat class 1 to 2 is not the same as from 2 to 3.
+Consequently, the economic weight depends on the initial distribution of the population over the scale of a carcass trait.
+Here the distribution is approximated to a normal distribution using the mean and the standard deviation of a carcass trait in the population.
+
+
+
+
+
+are different for "adults" and "calves" (See Table ??).
+
+
+
 
 ## Carcass fat
 The trait carcass fat has the unit carcass fat class (see table???).

@@ -13,7 +13,7 @@ One possibility to improve early maturity is to use early maturity in a breeding
 Early maturity must be preciseley defined and efficiently measurable to include it in a breeding program.
 
 ## Definition of Early Maturity {#defem}
-The following definition of "early maturity" is valid in the context of this project : Animals are earlier mature if they reach the state of carcass maturity faster than others. 
+This thesis builds on the following definition: Animals mature early if they reach the state of carcass maturity faster than others. 
 Animals reach carcass maturity when their carcass does not get any price reductions per kg carcass weight when sold at the slaughterhouse. 
 Carcass price reductions are dependent on the payment system of the slaughterhouse.
 Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX [Kaufmann1995].
@@ -24,11 +24,9 @@ Consequently, CHTAX mainly determines the definition of early maturity.
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
 There, Proviande employees classify beef carcasses to determine their price.
 They carry out the same procedure for each beef carcass.
-
 Firstly, Proviande employees assign the carcass to a carcass category. 
 Carcass categories differ in the animals age at slaughter, number of incissors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)).
 Carcass weight does not include the weight of the animals head, tail, guts and lower legs [@EDI2013].
-
 ```{r carcasscategory, echo=FALSE}
 x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
                                    category=c("calves", "young cattle", "young bulls", "bulls or steers", 
@@ -43,21 +41,17 @@ x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"),
 kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015)") %>%
 column_spec(3, width="8cm")
 ```
-
-
 Secondly Proviande employees assign the carcass to a carcass conformation class.
 The assigned carcass conformation class depends on the accentuation of certain muscels (see table \@ref(tab:conformationclass)).
 The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
 Carcass conformation class C is the most favoured class and will result in the highest price of the carcass.
 In combination with the slaughter category the carcass conformation class determines the basis price per kilogram carcass weight.
-
 Thirdly Proviande employees assign the carcass to a carcass fat class.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see table \@ref(tab:fatclass)).
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
 The determination of carcass fat class can further decrease the base price per kilogramm carcass weight.
 When a carcass does not belong to class 3, the carcass gets a price reduction in Swiss Francs (Sfr.) per kilogramm carcass weight.
-
 ```{r fatclass, echo=FALSE}
 x<-data.frame(class = c("1", "2", "3", "4", "5"), description=c("no fat coverage","light fat coverage; muscels partially visible", "average even fat coverage; muscles generally covered", "strong fat coverage; excessive fat deposition", "fat coverage generally excessive; bulging fat formations"))
 kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015)") %>%
@@ -73,7 +67,6 @@ x<-data.frame(class = c("C", "H","T+","T","T-","A","X"), description=c("leg: acc
 kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)") %>%
 column_spec(1, width="0.5cm")
 ```
-
 In conclusion age, number of incissors, sex, carcass conformation, carcass weight and carcass fat all influence the price of a beef carcass in Switzerland.
 While age in days, number of incissors, carcass conformation and carcass weight are traits that should be maximal or minimal, sex and carcass fat should be optimal in the range.
 

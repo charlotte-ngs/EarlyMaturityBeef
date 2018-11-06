@@ -27,14 +27,25 @@ Start from the result of the computations. Tell why the result is important and 
 
 # Implementation
 
+## Target
 In this project breeding strategies should be evaluated in their effectiveness to improve early maturity.
-This evaluation requires certain tools, which help to rank the breeding strategies.
+This evaluation requires certain tools, which help to characterize the breeding strategies.
 A particularly powerful tool is the value of genetic gain.
-This value provides information about a trait's mean improvement over a period of time in a population.
-Thus it allows to rank different breeding strategies in their effectiveness.
+This value provides information about a trait's or index's mean genetic improvement over a period of time in a population.
+Here, the genetic gain of the trait carcass fat and the index over carcass traits has been computed.
 
-The genetic gain should predict the future as precise as possible.
-Its value dependends on the breeding conditions in a population and the type of its computation.
+# Principle
+
+The genetic gain ($Q$) achieved in one generation is the product of the intensity of selection ($i$), the square root of the accuracy of the breeding value ($r$) and the genetic variance ($\sigma_{g}$).
+This can be written as
+
+\begin{equation}
+\label{Qgeneration}
+Q = ir\sigma_{g}
+\end{equation}
+$$Q = ir\sigma_{g}$$
+
+
 The breeding conditions are defined by the generation intervall $L$, the accuracy of the breeding value $r$, the genetic standard deviation of the trait $\sigma_{g}$ and the selection intensity $i$.
 They are derived from the past breeding situation.
 The type of computation is derived from the approach of @Phocas1996.
