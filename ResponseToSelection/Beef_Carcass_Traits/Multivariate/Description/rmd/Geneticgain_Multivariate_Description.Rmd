@@ -11,11 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Target / Zweck
 
-Informing how the genetic gain for carcass traits has been computed.
+Informing how the genetic gain for carcass traits has been computed for two breeding scenarios.
 
 # Plan / Principle
 
-Start from the result of the computations. Tell why the result is important and what the basic thoughts behind the computations are. Then explain the main equations.
+Define the scenarios. Start from the result of the computations. Tell why the result is important and what the basic thoughts behind the computations are. Then explain the main equations.
 
 # Material
 
@@ -32,19 +32,113 @@ In this project breeding strategies should be evaluated in their effectiveness t
 This evaluation requires certain tools, which help to characterize the breeding strategies.
 A particularly powerful tool is the value of genetic gain.
 This value provides information about a trait's or index's mean genetic improvement over a period of time in a population.
-Here, the genetic gain of the trait carcass fat and the index over carcass traits has been computed.
 
-# Principle
+## Two breeding strategies characterized by selection index theory
 
-The genetic gain ($Q$) achieved in one generation is the product of the intensity of selection ($i$), the square root of the accuracy of the breeding value ($r$) and the genetic variance ($\sigma_{g}$).
-This can be written as
+The estimated variance components have been used to predict the genetic gain (Q).
+In this thesis the genetic gain has been used to compare two breeding strategies for early maturity.
+Subsequently the strategies will be called scenarios to show that they are based on predictions.
+In both scenarios the breeding values of "calves" and "stirks" have been included.
+The first scenarium assumes a selection for only carcass fat and the second scenarium assumes a selection for an economically weighed combination of carcass fat, carcass conformation and carcass weight.
+The value of genetic gain predicts a trait's or aggregate genotype's improvement in a population over a period of time.
+For both scenarios this improvement is defined by an increase in the aggregate genotype $H$
+
+$$H=\sum{a_mu_m}$$
+
+where 
+
+$a$ is an economic weight,
+
+$u$ is a true breeding value and
+
+$m$ indicates the breeding values CFa, CFc, CCa, CCc, CWa and CWc.
+
+The aggregate genotype is designed to show the economic value of an animal when considering the carcass traits CFa, CFc, CCa, CCc, CWa and CWc.
+Therefore it is a useful tool to evaluate the effectiveness of the two breeding strategies in improving the desired trait early maturity.
+However, the true breeding value is impossible to compute, which also makes it impossible to compute $H$ for an animal.
+Therefore $H$ must be approximated using multiple regression with information sources which estimate the true breeding values.
+Here, the information sources are estimated breeding values $û$ and do not have the same number for the two scenarios.
+
+In the first scenario it is assumed that selection will base only on the estimated breeding values for carcass fat $û_{aCF}$ and $û_{cCF}$.
+This results in the index $I_1$
+
+$$I_1= b_{aCF}û_{aCF}+b_{cCF}û_{cCF}$$
+where
+
+$b$ is a multiple regression coefficient chosen so as to make the correlation between $H$ and $I$ as large as possible.
+
+$b$ has been computed using the equation
+
+$$b=P^{-1}Ga$$
+
+where
+
+$P$ is the variance/covariance matrix of the estimated breeding values,
+
+$a$ is the vector of economic weights from the true breeding values in the aggregate genotype and
+
+$G$ is the covariance matrix between estimated breeding values and true breeding values.
+
+The variances and covariances of $P$ have been approximated through the values of the covariance matrix between true and estimated breeding values $C$.
+$G$ was computed under the assumption, that BLUP-based estimated breeding values will be used by the breeders.
+This assumption allows the relationship
+
+$$Cov(u,û)=Var(û)$$
+
+which results the approximation using $C$ as well.
+Nevertheless $P$ and $G$ do not have the same shape in this scenarium, because the information sources are not the same as the true breeding values in the aggregate genotype.
+They are expressed as
+$$P=C_{aCF,cCF}$$
+$$G=C[aCF,cCF]$$
+where
+
+$C_{aCF,cCF}$ is C only involving the traits aCF and cCF, which makes it a 2 x 2 matrix and
+
+$C[aCF,cCF]$ are the columns of aCF and cCF of C, which makes them a 2 x 6 matrix.
+
+In the second scenarium that selection will be based on all the economically weighed breeding values existing in the aggregate genotype.
+This results in the index
+
+$$I_2=\sum{b_mû_m}$$
+
+where 
+
+$m$ are again all carcass breeding values.
+
+Here all breeding values in the index are also present in the aggregate genotype.
+Recalling the definition of $P$ and $G$, both result in the same matrix $C$ in this scenarium.
+When 
+$$P=G=C$$
+then
+
+$$b=a$$
+
+
+## Genetic gain of the Index
+
+For both scenarios the Genetic gain $Q^*_I$ of their index has been computed by the equation
 
 \begin{equation}
-\label{Qgeneration}
-Q = ir\sigma_{g}
+\label{Qasymptotic}
+Q_I^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
 \end{equation}
-$$Q = ir\sigma_{g}$$
 
+$$Q_I^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma_H^*}{\sum_{y=1}^{2}L_y}$$
+where
+
+$i$ is the selection intensity,
+
+$r^*$ is the asymptotic accuracy of the index $I$,
+
+$\sigma$ is the standard deviation of the aggregate genotype $H$,
+
+$L$ is the generation intervall and
+
+$y$ is the selection path.
+
+For both scenarios $L$, $i$ and $\sigma$ have the same values, but $r^*$ differs.
+
+The generation intervall and selection intensity has b
 
 The breeding conditions are defined by the generation intervall $L$, the accuracy of the breeding value $r$, the genetic standard deviation of the trait $\sigma_{g}$ and the selection intensity $i$.
 They are derived from the past breeding situation.
