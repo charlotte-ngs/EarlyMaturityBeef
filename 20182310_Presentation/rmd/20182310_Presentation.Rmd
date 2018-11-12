@@ -10,12 +10,69 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 ## Target
+* Image of two beef carcasses that look exactly the same (e.g. from EDI), but once with 250 d and once with 230 d of life.
 
-* Assessing strategies to breed for early maturity in beef cattle.
+* Question to be answered: How can we breed for early maturity in beef cattle.
 
-* Early Maturity here defined as age slaughter of an animal with minimal carcass price reductions.
+* Here maturity is readiness for slaughter.
 
-* Price reductions are dependent on the pricing system CHTAX.
+* Less beef husbandry costs and emissions [@Berry].
+
+(The question I want to answer in my master thesis is how we could breed for early maturity, in German "Frühreife", in beef cattle. With early maturity I mean the readiness for slaughter. For example, imagine two beef carcasses which are exactly the same and get exatly the same price. For one carcass an animal has lived 250 d and for the other 230 d. Then the one that only lived for 230 d is the one which earlier mature than the other.
+Animals which are better in early maturity lead to less husbandry costs and emissions [@Berry] which makes it a very relevant trait.
+However it is not an easily measurable trait, which makes breeding for it difficult.
+Probably due this reason breeding for early maturity is not established in any major breeding program.
+Even the word early maturity has not been present in any scientific paper I read about beef breeding.)
+
+## Strategies
+
+* Approaches:
+
+**1. Derivation of early maturity from carcass fat**
+
+**2. Index over carcass traits to breed for early maturity**
+
+(Nevertheless my supervisors have proposed 4 strategies to breed for early maturity.
+I have evaluated the two most feasible and promising strategies. The first strategy is already implemented. It uses the trait carcass fat which is corrected by age at slaughter to derive from it early maturity. The second strategy is new and tries to use an index to breed for early maturity.I have evaluated the two most feasible and promising strategies. Both are very promising because the data which they use is already available. Since 1992 Proviande routenely records data from beef carcass traits.)
+
+## Carcass fat
+
+* Carcass fat probably correlated with early maturity 
+
+* Tool for evaluation: Genetic gain.
+
+* Genetic gain predicts the progress of traits under a selection scenarium.
+
+* Selection for Carcass fat is called Scenarium 1.
+
+
+(Carcass fat is could be used to derive early maturity because these traits are assumed to be closely correlated. *This assumption is based on practical experience from beef breeders and on the theoretical knowledge of beef cattle growth.* The amount of fat tissue during growth is usually the limiting factor for carcass maturity (Image). To evaluate this strategy, I have used a well-established tool: The genetic gain. The genetic is predicts the development of traits under a modelled selection scenarium. Usually it is expressed in trait unit per year. Here the scenarium is that beef cattle breeders will only select for increased carcass fat. Furthermore I assume that breeding occurs only within breeds. To get the best overview on all beef breeds I chose to do the evaluations on Angus and Limousin. Two important breeds which are very different in terms of early maturity. While Angus is assumed to mature early, Limousin is known to mature late. Therefore I have computed the genetic gain separateley for these breeds)
+
+## Scenarium 1
+
+
+
+(However the genetic gain of the trait carcass fat alone is not very meaningful if I like to find out if this strategy is effective in breeding for early maturity. Therefore I computed the genetic gain not only of carcass fat, but also of the economic value of an animal in terms of carcass traits. This economic value is called aggregate genotype. I computed by the weighed sum of the breeding values for the three carcass traits. The creation of this aggregate genotype was quite tedious, but not directly relevant to the results. Therefore I will not explain it in detail. Anyway, this aggregate genotype has the unit Swiss Francs which make the unit of its genetic gain Swiss Francs per year. The higher its genetic gain the more efficient may be this strategy in breeding for early maturity. )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## CHTAX
 
