@@ -484,6 +484,12 @@ if (is.null(tbl_result)){
 * How can I order rows that they begin at the same column?
     * cmd i
     
+* Should I say economic weight or economic value?
+
+* Why do we think that breeders have more than the breeding value of CF available to breed for early maturity? Here we assume that they can rank their animals using the correlations between the carcass traits and the accuracy of the breeding values.
+
+* $W^*$ is different for scenarium 1 and 2? It is Var(H) and H is for both scenarios the same, why should Var(H) be different?
+    
 
 
 
