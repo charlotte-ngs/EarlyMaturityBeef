@@ -83,7 +83,7 @@ The variances and covariances of $P$ have been approximated through the values o
 $G$ was computed under the assumption, that BLUP-based estimated breeding values will be used by the breeders.
 This assumption allows the relationship
 
-$$Cov(u,û)=Var(û)$$
+$$Cov(u,û)=Var(û)=Var(I)$$
 
 which results the approximation using $C$ as well.
 Nevertheless $P$ and $G$ do not have the same shape in this scenarium, because the information sources are not the same as the true breeding values in the aggregate genotype.
@@ -114,38 +114,52 @@ then
 $$b=a$$
 
 
-## Genetic gain of the Index
+## Genetic gain of the Aggregate genotype
 
-For both scenarios the Genetic gain $Q^*_I$ of their index has been computed by the equation
+For both scenarios the Genetic gain $Q^*_H$ of their aggregate genotype has been computed by the equation
 
 \begin{equation}
 \label{Qasymptotic}
 Q_I^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
 \end{equation}
 
-$$Q_I^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma_H^*}{\sum_{y=1}^{2}L_y}$$
+$$Q_H^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma_H^*}{\sum_{y=1}^{2}L_y}$$
 where
 
 $i$ is the selection intensity,
 
 $r^*$ is the asymptotic accuracy of the index $I$,
 
-$\sigma$ is the standard deviation of the aggregate genotype $H$,
+$\sigma^*$ is the standard deviation of the aggregate genotype $H$,
 
-$L$ is the generation intervall and
+$L$ is the generation intervall,
 
-$y$ is the selection path.
+$y$ is the selection path and
 
-For both scenarios $L$, $i$ and $\sigma$ have the same values, but $r^*$ differs.
+$*$ indicates, that the value is corrected for the "Bulmer effect" [@Bulmer??].
 
-The generation intervall and selection intensity has b
+For both scenarios $L$ and $i$ have the same values, but $r^*$ and $\sigma^*$ differ.
+The generation intervall and selection intensity have been derivated from the mean values of 1956 - 2014 in the populations of Swiss Limousin (LM) and Swiss Angus (AN) each [@Kunz2016].
+$\sigma^*$ and $r^*$ have been computed using the equations
 
-The breeding conditions are defined by the generation intervall $L$, the accuracy of the breeding value $r$, the genetic standard deviation of the trait $\sigma_{g}$ and the selection intensity $i$.
-They are derived from the past breeding situation.
-The type of computation is derived from the approach of @Phocas1996.
+$$\sigma^*=\sqrt{Var(H)}=\sqrt{a^TW^*a}$$
+where
 
-There, the so-called Bulmer-Effect [@Bulmer??] is considered.
+$W^*$ is the asymptotic genetic variance-covariance matrix with dimension m x m.
 
+and
+
+$$r^*=\sqrt{\frac{Cov(I,H)}{Var(H)}}=\sqrt{\frac{b^TP^*b}{a^TW^*a}}$$
+where
+
+$P^*$ is the covariance matrix between estimated and true breeding values across all breeding values present in the selection index.
+
+
+## Genetic gain of correlated traits of the aggregate genotype
+
+In both scenarios the traits in the aggregate genotype are the same and their correlation in genetic gain to the aggregate genotype can be computed in the same way using the equation
+
+$$R_m=R_HCov(H,I)(Var(I))^{-1}$$
 
 
 
