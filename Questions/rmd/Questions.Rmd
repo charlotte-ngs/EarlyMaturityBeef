@@ -489,6 +489,14 @@ if (is.null(tbl_result)){
 * Why do we think that breeders have more than the breeding value of CF available to breed for early maturity? Here we assume that they can rank their animals using the correlations between the carcass traits and the accuracy of the breeding values.
 
 * $W^*$ is different for scenarium 1 and 2? It is Var(H) and H is for both scenarios the same, why should Var(H) be different?
+
+* How can I insert the labels of Qualitas and Mutterkuh Schweiz to the title slide?
+
+* May I use equations in the presentation?
+    * No, you would lose the people
+    
+* Should I explain terms like breeding value, generation intervall, selection intensity and accuracy?
+
     
 
 
