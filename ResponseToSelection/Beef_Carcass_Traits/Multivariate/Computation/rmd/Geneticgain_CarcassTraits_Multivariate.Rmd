@@ -5,10 +5,6 @@ date: "18 10 2018"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning = FALSE)
-```
-
 # Goal
 
 To compute genetic gains of the traits carcass fatt, carcass conformation and carcass weight. Each trait for adults and calves. (6 traits in total).
@@ -64,13 +60,13 @@ First the number of relatives is imported.
 ```{r NumberofRelatives}
 library(dplyr)
 ## male
-male_offspring <- "AN_number_of_offspring"
+male_offspring <- "LM_number_of_offspring"
 male_offspring <- read.table(file = male_offspring, sep=";", header=TRUE) %>%
   select(male)
 male_offspring <- as.numeric(male_offspring)
 male_offspring
 ## female
-female_offspring <- "AN_number_of_offspring"
+female_offspring <- "LM_number_of_offspring"
 female_offspring <- read.table(file = female_offspring, sep=";", header=TRUE) %>%
   select(female)
 female_offspring <- as.numeric(female_offspring)
@@ -83,13 +79,13 @@ female_offspring
 ```{r GenerationIntervall}
 library(dplyr)
 ## male
-male_generationintervall <- "AN_generation_intervall"
+male_generationintervall <- "LM_generation_intervall"
 male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
   select(male)
 male_generationintervall <- as.numeric(male_generationintervall)
 male_generationintervall
 ## female
-female_generationintervall <- "AN_generation_intervall"
+female_generationintervall <- "LM_generation_intervall"
 female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
   select(female)
 female_generationintervall <- as.numeric(female_generationintervall)
@@ -103,13 +99,13 @@ female_generationintervall
 ```{r ProportionSelected}
 library(dplyr)
 ## male
-male_proportionselected <- "AN_proportion_selected"
+male_proportionselected <- "LM_proportion_selected"
 male_proportionselected <- read.table(file = male_proportionselected, sep=";", header=TRUE) %>%
   select(male)
 male_proportionselected <- as.numeric(male_proportionselected)
 male_proportionselected
 ## female
-female_proportionselected <- "AN_proportion_selected"
+female_proportionselected <- "LM_proportion_selected"
 female_proportionselected <- read.table(file = female_proportionselected, sep=";", header=TRUE) %>%
   select(female)
 female_proportionselected <- as.numeric(female_proportionselected)
@@ -121,12 +117,13 @@ female_proportionselected
 ```{r}
 library(dplyr)
 # always calves first and CC,CF,CW
-a <- "selection_on_CF_economic_values"
+a <- "LM_economic_values"
 a <- read.table(file = a, sep=";", header=TRUE)
 aMat <- as.matrix(a)
-a <- as.numeric(aMat)
-a
-aMat
+a <- as.vector(aMat)
+dim(t(a))
+is.vector(a)
+dim(aMat)
 ```
 
 ## Computations without equations
@@ -175,6 +172,7 @@ dim(male_Z)
 female_Z<-cbind(matrix(0, nrow=female_offspring*n,ncol=n),diag(female_offspring*n))
 dim(female_Z)
 male_offspring*n
+male_offspring
 ```
 
 
@@ -256,6 +254,9 @@ Ca <- (solve(matrix(c(1+0.5*male_k, 0.5*female_k,0.5*male_k, 1+0.5*female_k),nro
 male_Ca <- Ca[1:n,]
 # female
 female_Ca <- Ca[(1+n):(2*n),]
+
+male_Ca
+aMat
 ```
 
 ### Asymptotic genetic variance/covariance matrix $G^*$
@@ -263,7 +264,7 @@ female_Ca <- Ca[(1+n):(2*n),]
 $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 
 ```{r AsymptoticGeneticMatrix}
-Ga<-G-0.5*((solve(as.numeric(male_k*(t(a)%*%male_Ca%*%a)))*as.numeric(male_Ca%*%a%*%t(a)%*%male_Ca))+(solve(as.numeric(male_k*(t(a)%*%male_Ca%*%a)))*as.numeric(male_Ca%*%a%*%t(a)%*%male_Ca)))
+Ga<-G-0.5*(as.numeric(solve(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca+as.numeric(solve(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca)
 ```
 
 ### Accuracy of the estimated overall breeding value $r_y^*$
@@ -272,9 +273,9 @@ $$r_y^*=\sqrt{\frac {a^TC_y^*a}{a^TG^*a}}$$
 
 ```{r AccuracyOverall}
 # male
-male_ra <- sqrt(as.numeric((t(a)%*%male_Ca%*%a)/as.numeric(t(a)%*%Ga%*%a)))
+male_ra <- sqrt(as.numeric(t(a)%*%male_Ca%*%a)/as.numeric(t(a)%*%Ga%*%a))
 # female
-female_ra <- sqrt(as.numeric((t(a)%*%female_Ca%*%a)/as.numeric(t(a)%*%Ga%*%a)))
+female_ra <- sqrt(as.numeric(t(a)%*%female_Ca%*%a)/as.numeric(t(a)%*%Ga%*%a))
 male_ra
 female_ra
 ```
@@ -293,8 +294,8 @@ stdev_overall
 $$Q= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
 
 ```{r GeneticGainOverall}
-Qoverall <- (male_i*male_ra*stdev_overall+female_i*female_ra*stdev_overall)/(male_generationintervall+female_generationintervall)
-Qoverall
+LM_Qoverall_index <- (male_i*male_ra*stdev_overall+female_i*female_ra*stdev_overall)/(male_generationintervall+female_generationintervall)
+LM_Qoverall_index
 ```
 
 ### Correlated asymptotic genetic gain of traits when selecting for the aggregate genotype.
@@ -303,8 +304,6 @@ $$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L
 
 ```{r GeneticGainTrait}
 QaCF<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
-
-QaCF
 
 jQcCF <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
 
@@ -316,20 +315,9 @@ QaCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"aCW"])*sqrt(as.numeric(t(a)%*%male_C
 
 QcCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
 
-#AN_index <- data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
-
-AN_CFA <- data.frame(trait=c("CFa","CFc","CCa","CCc","CWa","CWc"), Sfr=c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
-
-AN <- ggplot(AN_index,aes(trait,Sfr))
-AN + geom_bar(stat="identity")
-sum(c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
-
-AN <- ggplot(AN_CFA,aes(trait,Sfr))
-AN + geom_bar(stat="identity")
-sum(c(QaCF,QcCF,QaCC,QcCC,QaCW,QcCW))
-diag(Ga)
-diag(G)
 ```
+
+
 
 ### Correlated asymptotic genetic gain of a trait in the aggregate breeding value involving not all traits
 
@@ -387,6 +375,21 @@ $$Q_m^*= \frac {\sum_{y=1}^{2} i_yb^T(C_y^*)_m \sqrt{b^TC_y^*b}}{\sum_{y=1}^{2}L
 ```
 
 
+### Plots
 
+```{r}
+library(ggplot2)
+# Plot aggregate genotype
+AN_Qoverall_index <- Qoverall
+LM_Qoverall_index <- 2
+AN_Qoverall_CF <- 2
+LM_Qoverall_CF <- 4
+
+Aggregate_Genotype <- data.frame(Gain=c(AN_Qoverall_index,LM_Qoverall_index,AN_Qoverall_CF,LM_Qoverall_CF),Breed=rep(c("Angus","Limousin"),times=2), Strategy=rep(c("Index","CF"),each=2))
+
+Aggregate_Genotype <- ggplot(Aggregate_Genotype,aes(Breed,Gain,fill=Strategy))
+
+Aggregate_Genotype + geom_bar(stat="identity",position="dodge")
+```
 
 
