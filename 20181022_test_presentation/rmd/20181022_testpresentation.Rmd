@@ -3,6 +3,9 @@ title: "Testpresentation"
 author: "Peter von Rohr"
 date: "10/22/2018"
 output: beamer_presentation
+header-includes:
+  # - \setbeameroption{hide notes} # notes are not shown
+  - \setbeameroption{show notes}   # notes are shown after slide
 ---
 
 ```{r setup, include=FALSE}
@@ -14,11 +17,23 @@ knitr::knit_hooks$set(hook_convert_odg = rmddochelper::hook_convert_odg)
 ```
 
 
+## How to use notes
+
+This is some text on a R markdown slide. We want to show how notes can be added. The source for adding notes was taken from SO at https://stackoverflow.com/questions/44906264/add-speaker-notes-to-beamer-presentations-using-rmarkdown
+
+\note{
+On this slide I am adding a few notes that are relevant for the speaker.
+}
+
 ## R Markdown
 
 This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+\note{
+Basic facts about how to produce a presentation in R Markdown.
+}
 
 ## Slide with Bullets
 
@@ -26,17 +41,30 @@ When you click the **Knit** button a document will be generated that includes bo
 - Bullet 2
 - Bullet 3
 
+\note{
+Bullets can be useful for lists
+}
+
+
 ## Slide with R Output
 
 ```{r cars, echo = TRUE}
 summary(cars)
 ```
 
+\note{
+R output showing some summary statistics of the `cars` dataset
+}
+
 ## Slide with Plot
 
 ```{r pressure}
 plot(pressure)
 ```
+
+\note{
+Using base-R's plotting system
+}
 
 
 ## Own diagrams
@@ -46,3 +74,7 @@ plot(pressure)
 knitr::include_graphics(path = "odg/mydiagram.png")
 ```
  
+
+\note{
+I can also create my own diagram.
+}
