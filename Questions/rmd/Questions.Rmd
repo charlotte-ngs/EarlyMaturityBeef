@@ -492,6 +492,10 @@ if (is.null(tbl_result)){
 
 * How can I insert the labels of Qualitas and Mutterkuh Schweiz to the title slide?
 
+* May I use equations in the presentation?
+    * No, you would lose the people
+    
+* Should I explain terms like breeding value, generation intervall, selection intensity and accuracy?
 
     
 
