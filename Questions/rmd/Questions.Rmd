@@ -497,6 +497,8 @@ if (is.null(tbl_result)){
     
 * Should I explain terms like breeding value, generation intervall, selection intensity and accuracy?
 
+* May accuracy be higher than 1?
+
     
 
 
