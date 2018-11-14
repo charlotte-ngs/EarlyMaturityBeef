@@ -85,8 +85,8 @@ Of all of them there already exist two breeding values. One for carcasses which 
 
 * Corrected by age at slaughter -> *How early fatty*?
 
-```{r}
-setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
+```{r eval=FALSE}
+#setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
 library(knitr)
 include_graphics("GrowthComposition.png")
 ```
@@ -159,11 +159,11 @@ To conserve the shape of the distribution when increasing the population mean, I
 ## Carcass fat
 
 ```{r, eval=FALSE}
-setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
+#setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
 library(knitr)
 library(dplyr)
 LM <- "LM_economic_values"
-LM<- read.table(file = a, sep=";", header=TRUE)%>%
+LM <- read.table(file = a, sep=";", header=TRUE)%>%
   select(c("cCF","aCF"))
 LM <- as.vector(t(a))
 LM
