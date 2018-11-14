@@ -79,7 +79,7 @@ $T$ means, it is the transpose,
 
 $0$ indicates the initial population and
 
-$1$ indicates the population after the change in population mean by 0.1.
+$1$ indicates the population after the increase in population mean by 0.1.
 
 The price changes per unit of a carcass trait $p$ are based on CHTAX.
 There the price differences do not have the same value over the whole scale of the carcass traits.

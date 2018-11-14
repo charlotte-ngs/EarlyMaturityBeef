@@ -899,5 +899,117 @@ Q
 ```
 
 
+To evaluate this strategy, I have used a well-established tool: The genetic gain. 
+The genetic gain predicts the development of traits under a modelled selection scenarium. 
+Usually it is expressed in trait unit per year. 
+Here the scenarium is that beef cattle breeders will only select for increased carcass fat. 
+
+However the genetic gain of the trait carcass fat alone is not very meaningful if I like to find out if this strategy is effective in breeding for early maturity. 
+Therefore I computed the genetic gain not only of carcass fat, but also of the economic value of an animal in terms of carcass traits. 
+This economic value is called aggregate genotype. 
+I computed it by the weighed sum of the breeding values for six carcass traits carcass fat, carcass conformation and carcass weight for calves and adults respecteveley. 
+I have computed the weights using economic profit equations based on CHTAX, the payment system for beef carcasses in Switzerland.
+However I will not explain this here in detail because it is somehow a topic for itself and is not directly relevant for the understanding of my results. 
+Anyway, this aggregate genotype has the unit Swiss Francs which makes the unit of its genetic gain Swiss Francs per year. 
+The higher the aggregate genotype's genetic gain the more efficient may be this strategy in breeding for early maturity.
+I have got generation intervall and selection intensity from a population structure report about Swiss beef cattle breeds.
+For the value of accuracy and standard deviation I used known genetic variances and covariances between the carcass traits and assumed a certain number of offspring which give information to the estimated breeding values for the carcass traits.
+Then I got the genetic gains for the carcass traits by multiplying the genetic gain for the aggregate genotype with the right correlation coefficient. In this graphic you can see again, what a correlation coefficient is. Actually it is just the slope of a line through a lot of points.
+
+## Why
+
+Long-term assignment of Mutterkuh Schweiz for Qualitas AG:
+
+?? Labels of Mutterkuh Schweiz and Qualitas AG + Image of beef cattle.
+
+Developing breeding value estimation for beef cattle in Switzerland.
+Until 2018 breeding in Swiss beef cattle focused on daily gain and carcass conformation which means the faster they grow and the meatier they grow the better.
+
+## Why
+
+Until summer 2018 breeding focused on the traits daily gain and carcass conformation.
+
+During this time: 
+
+- Prooved: The trait carcass fat has decreased to significantly below class 3 in most beef cattle breeds.
+
+?? Graphic with mean performance carcass fat along range of breeds as barplot
+
+- Assumed: Performance in early maturity decreased as well.
+
+## Why
+
+Assumed negative effects for breeders and producers:
+
+- Higher carcass price reductions for poor carcass fat performances.
+
+- Combination of high costs and high price reductions.
+
+Mutterkuh Schweiz: "This trend must stop."
+
+## Why
+Issue with low carcass fat classes already solved:
+
+- Introduction of breeding value for carcass fat in summer 2018.
+
+However, breeding strategy for early maturity not clear yet.
+
+- Decision for a strategy is planned for 2019.
+
+## How
+
+Evaluation of 4 proposed approaches:
+
+**1. Derivation from carcass fat**
+
+**2. Index over carcass traits**
+
+3. Derivation in age at slaughter (Berry)
+
+4. Derivation over growth models
+
+## How
+
+Different results with 1. and 2.?
+
+Comparison of 
+
+- Animal ranks
+
+- Genetic gains per trait
+
+## How
+
+- Breeding value carcass fat available
+
+- Index computed using economic values from simple profit equations. (Show Equation with $H=a*w+a*w$)
+
+
+
+## 
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
 
 # References
