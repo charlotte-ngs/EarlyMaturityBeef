@@ -153,18 +153,32 @@ Therefore I had to compute the mean change in price if I increase the mean of th
 To do so I had to get the initial distribution of the population over the carcass trait.
 The initial distribution is different for each breed Angus and Limousin and for adults and calves.
 To conserve the shape of the distribution when increasing the population mean, I approximated a normal distribution to the discrete distribution 
-
 }
 
 
 ## Carcass fat
 
-x <-data.frame(Class=rep(c(1:5),times=2*2),Category=rep(c("Angus", "Limousin"),each=10), frequency=c(Ancfc,Ancfa,Lmcfc,Lmcfa))
-x$Group <- rep(rep(c("Calves","Adults"),each=5),times=2)
+```{r}
+setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
+library(knitr)
+library(dplyr)
+LM <- "LM_economic_values"
+LM<- read.table(file = a, sep=";", header=TRUE)%>%
+  select(c("cCF","aCF"))
+LM <- as.vector(t(a))
+LM
+LM <- "LM_economic_values"
+LM<- read.table(file = a, sep=";", header=TRUE)%>%
+  select(c("cCF","aCF"))
+LM <- as.vector(t(a))
+LM
+
 # Plot
-g <- ggplot(x,aes(Class,frequency))
+g <- ggplot(a,aes(Class,frequency))
 g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
   theme_classic()
+```
+
 
 ## Carcass Conformation
 
