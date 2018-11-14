@@ -158,7 +158,7 @@ To conserve the shape of the distribution when increasing the population mean, I
 
 ## Carcass fat
 
-```{r}
+```{r, eval=FALSE}
 setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
 library(knitr)
 library(dplyr)
@@ -170,11 +170,11 @@ LM
 LM <- "LM_economic_values"
 LM<- read.table(file = a, sep=";", header=TRUE)%>%
   select(c("cCF","aCF"))
-LM <- as.vector(t(a))
+LM <- as.vector(t(LM))
 LM
 
 # Plot
-g <- ggplot(a,aes(Class,frequency))
+g <- ggplot(LM,aes(Class,frequency))
 g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
   theme_classic()
 ```
