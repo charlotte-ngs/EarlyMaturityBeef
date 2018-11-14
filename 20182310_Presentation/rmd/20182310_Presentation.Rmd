@@ -49,80 +49,128 @@ Qualtitas tries to solve the problem by breeding for animals whith good performa
 However it is not an easily measurable trait, which makes breeding for it difficult.
 Probably due this reason breeding for early maturity is not established in any major breeding program.
 Even the word early maturity has not been present in any scientific paper I read about beef breeding.
-Therefore the question I want to answer in my master thesis is how Qualitas could breed for early maturity in beef cattle.
 Nevertheless my supervisors have found 4 possible strategies to breed for early maturity.
-I have evaluated the two most feasible and promising strategies. 
+I will evaluate the two most feasible and promising strategies in my master thesis.
 The first strategy is already implemented. 
 It uses the breeding value carcass fat which is corrected by age at slaughter to derive from it early maturity.
-The second strategy is new and tries to use an index over all breeding values for carcass traits to breed for early maturity.
+The second strategy is not implemented and tries to use an index over all breeding values for carcass traits to breed for early maturity.
 }
 
 ## Carcass traits
 
-* Carcass fat (CF)
+* Data from Proviande
 
-* Carcass conformation (CC)
+* Carcass fat (CF) -> How fatty?
 
-* Carcass weight (CW)
+* Carcass conformation (CC) -> How meaty?
+
+* Carcass weight (CW) -> How heavy?
+
+* Calves = < 180 d old
+
+* Adults = > 180 < ? d old
 
 \note{
 Both are very promising because the data which they use is already available. 
-Since 1992 Proviande routenely records data from beef carcass traits.
+Since 1992 Proviande routineley records data from beef carcass traits.
 These carcass traits are carcass fat, carcass conformation and carcass weight. 
-Carcass fat and carcass conformation are visually classified into 5 classes and carcass weight
-is the weight of the carcass in kg. 
 Of all of them there already exist two breeding values. One for carcasses which were calves and one for carcasses which were adults (cows not included)).
 }
 
 ## 1. Strategy (carcass fat)
 
-* Carcass fat probably correlated with early maturity 
+* Breeding values for carcass fat to derive early maturity
 
-* Tool for evaluation: Genetic gain.
+* Probably correlated with early maturity
 
-* Genetic gain predicts the progress of traits under a selection scenarium.
+* Corrected by age at slaughter -> *How early fatty*?
 
-* Selection for Carcass fat is called Scenarium 1.
+```{r}
+setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
+library(knitr)
+include_graphics("GrowthComposition.png")
+```
 
 \note{
-Carcass fat corrected by age at slaughter could be used to derive early maturity because these traits are assumed to be closely correlated. 
-*This assumption is based on practical experience from beef breeders and on the theoretical knowledge of beef cattle growth.* 
-The amount of fat tissue during growth is usually the limiting factor for carcass maturity (Image). To evaluate this strategy, I have used a well-established tool: The genetic gain. 
-The genetic gain predicts the development of traits under a modelled selection scenarium. 
-Usually it is expressed in trait unit per year. 
-Here the scenarium is that beef cattle breeders will only select for increased carcass fat. 
-Furthermore I assume that breeding occurs only within breeds. 
-To get the best overview on all beef breeds I chose to do the evaluations on Angus and Limousin. 
-Two important breeds which are very different in terms of early maturity. 
-While Angus is assumed to mature early, Limousin is known to mature late. 
-Therefore I have computed the genetic gain separateley for these breeds.
+The two breeding values for carcass fat corrected by age at slaughter could be used to derive early maturity, because these traits are assumed to be closely correlated. 
+This assumption is based on practical experience from beef breeders and on the theoretical knowledge of beef cattle growth. 
+The amount of fat tissue during growth is usually the limiting factor for carcass maturity.
 }
 
-## Aggregate genotype
+## 2. Strategy (index)
 
-* Genetic Gain for aggregate genotype $H$
+* Index as selection criterion
 
-$$H=\sum{a_mu_m}$$
+* Main result until this stage of master thesis
+
+$$I=\sum{a_mu_m}$$
 
 where 
 
-$a$ is an (economic) weighting factor,
+$a$ is an economic weight,
 
-$u$ is a true breeding value and
+$u$ is an estimated breeding value and
 
 $m$ indicates the breeding values CFa, CFc, CCa, CCc, CWa and CWc.
-CF = Carcass fat, CC = Carcass conformation, CW = Carcass weight, a = adults, c = calves.
+
+CF = Carcass fat 
+
+CC = Carcass conformation 
+
+CW = Carcass weight 
+
+a = adults 
+
+c = calves.
 
 \note{
-However the genetic gain of the trait carcass fat alone is not very meaningful if I like to find out if this strategy is effective in breeding for early maturity. 
-Therefore I computed the genetic gain not only of carcass fat, but also of the economic value of an animal in terms of carcass traits. 
-This economic value is called aggregate genotype. 
-I computed it by the weighed sum of the breeding values for six carcass traits carcass fat, carcass conformation and carcass weight for calves and adults respecteveley. 
-I have computed the weights using economic profit equations based on CHTAX, the payment system for beef carcasses in Switzerland.
-However I will not explain this here in detail because it is somehow a topic for itself and is not directly relevant for the understanding of my results. 
-Anyway, this aggregate genotype has the unit Swiss Francs which makes the unit of its genetic gain Swiss Francs per year. 
-The higher the aggregate genotype's genetic gain the more efficient may be this strategy in breeding for early maturity.
+In the second strategy the selection is based on an index, including all six estimated breeding values for carcass traits and six economic weighing factors.
+This index is the main result I have until this stage of the thesis.
+The estimated breeding values are available, but the economic weights not.
+My task was to compute the economic weights to produce an index.
+There I assume that breeding occurs within breeds which requires a separate index for each beef cattle breed.
+To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin. 
+These two breeds are very different in carcass traits. 
 }
+
+# Economic Weights
+
+* Unit Sfr. / breeding value unit (e.g. Sfr. / carcass fat class)
+
+* Scaling up from a small change in population mean
+
+\note{
+Economic weights must have the unit Swiss francs per breeding value unit.
+For example the economic weight for carcass fat has the unit Swiss francs per additional carcass fat class.
+However when breeding the chance to get an increase of a whole unit is not realistic, at least for carcass fat and carcass conformation.
+Therefore I computed it by taking the ratio of the change in profit, when the population mean is increased divided by a small increase in population mean.
+Then I scaled it up to a whole unit change in mean.
+However I did not have enough information to get the true change in profit for a change in population mean.
+Therefore I have approximated the change in profit by only using the difference in price per kg carcass weight.
+For example you get a certain amount of Swiss francs more for carcass fat class 3 than 4.
+Additionally the price changes are not the same over the whole scale.
+Therefore I had to compute the mean change in price if I increase the mean of the population.
+To do so I had to get the initial distribution of the population over the carcass trait.
+The initial distribution is different for each breed Angus and Limousin and for adults and calves.
+To conserve the shape of the distribution when increasing the population mean, I approximated a normal distribution to the discrete distribution 
+
+}
+
+
+## Carcass fat
+
+x <-data.frame(Class=rep(c(1:5),times=2*2),Category=rep(c("Angus", "Limousin"),each=10), frequency=c(Ancfc,Ancfa,Lmcfc,Lmcfa))
+x$Group <- rep(rep(c("Calves","Adults"),each=5),times=2)
+# Plot
+g <- ggplot(x,aes(Class,frequency))
+g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
+  theme_classic()
+
+## Carcass Conformation
+
+
+## Carcass Weight
+
 
 
 ## Genetic gain
@@ -142,43 +190,14 @@ Dependent on
 * Bulmer effect [Bulmer] taken into account
 
 \note{
-The genetic gain is dependent on the generation intervall which determines fast selection occurs, 
+To evaluate the two strategies, I will use a well-established tool: The genetic gain. 
+The genetic gain predicts the development of traits under a modelled selection scenarium. 
+Usually it is expressed in trait unit per year. 
+The genetic gain is dependent on the generation intervall which determines how fast selection occurs, 
 on the selection intensity, which determines how large the proportion of the selected population is which will produce the offspring for the next generation, 
 on the standard deviation of selected criterion in the population which is the potential for breeding 
 and on the accuracy of selection which is a measure of how similar the selected parents are to their progeny in the selection criterion.
-I have got generation intervall and selection intensity from a population structure report about Swiss beef cattle breeds.
-For the value of accuracy and standard deviation I used known genetic variances and covariances between the carcass traits and assumed a certain number of offspring which give information to the estimated breeding values for the carcass traits.
-Hier Zeichnungsbilder einfügen um die Begriffe zu klären?
 }
-
-## Correlated genetic gain
-
-* Carcass Fat ~ Aggregate genotype
-
-* Carcass Conformation ~ Aggregate genotype
-
-* Carcass Weight ~ Aggregate genotype
-
-\note{
-Then I got the genetic gains for the carcass traits by multiplying the genetic gain for the aggregate genotype with the right correlation coefficient. In this graphic you can see again, what a correlation coefficient is. Actually it is just the slope of a line through a lot of points.
-}
-
-## 2. Strategy (index)
-
-* Index as selection criterion
-
-* Different standard deviation and accuracy
-
-\note{
-In the second strategy the selection is based on an index which has the same shape as the aggregate genotype, including all 6 estimated breeding values for carcass traits and all 6 economic weighing factors.
-Again I computed the genetic gain for the aggregate genotype and for its correlated breeding values.
-But the values were not the same because the selection is now based on the index and not on the breeding value for carcass fat alone, which changed the standard deviation and the accuracy.
-}
-
-## Results
-
-(Here you can see the genetic gain per year for the aggregate genotype in the two scenarios.)
-
 
 
 
@@ -203,100 +222,5 @@ Whithin carcass categories price reductions if:
 
 ?? Graphics describing areas of price reduction along range of traits. Use Open Office.
 
-## Why
-
-Long-term assignment of Mutterkuh Schweiz for Qualitas AG:
-
-?? Labels of Mutterkuh Schweiz and Qualitas AG + Image of beef cattle.
-
-Developing breeding value estimation for beef cattle in Switzerland.
-Until 2018 breeding in Swiss beef cattle focused on daily gain and carcass conformation which means the faster they grow and the meatier they grow the better.
-
-## Why
-
-Until summer 2018 breeding focused on the traits daily gain and carcass conformation.
-
-During this time: 
-
-- Prooved: The trait carcass fat has decreased to significantly below class 3 in most beef cattle breeds.
-
-?? Graphic with mean performance carcass fat along range of breeds as barplot
-
-- Assumed: Performance in early maturity decreased as well.
-
-## Why
-
-Assumed negative effects for breeders and producers:
-
-- Higher carcass price reductions for poor carcass fat performances.
-
-- Combination of high costs and high price reductions.
-
-Mutterkuh Schweiz: "This trend must stop."
-
-## Why
-Issue with low carcass fat classes already solved:
-
-- Introduction of breeding value for carcass fat in summer 2018.
-
-However, breeding strategy for early maturity not clear yet.
-
-- Decision for a strategy is planned for 2019.
-
-## How
-
-Evaluation of 4 proposed approaches:
-
-**1. Derivation from carcass fat**
-
-**2. Index over carcass traits**
-
-3. Derivation in age at slaughter (Berry)
-
-4. Derivation over growth models
-
-## How
-
-Different results with 1. and 2.?
-
-Comparison of 
-
-- Animal ranks
-
-- Genetic gains per trait
-
-## How
-
-- Breeding value carcass fat available
-
-- Index computed using economic values from simple profit equations. (Show Equation with $H=a*w+a*w$)
-
-
-
-## 
-
-## R Markdown
-
-This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
-
-## Slide with Bullets
-
-- Bullet 1
-- Bullet 2
-- Bullet 3
-
-## Slide with R Output
-
-```{r cars, echo = TRUE}
-summary(cars)
-```
-
-## Slide with Plot
-
-```{r pressure}
-plot(pressure)
-```
-
+## References
 
