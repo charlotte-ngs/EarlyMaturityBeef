@@ -2,10 +2,10 @@
 title: "Testpresentation"
 author: "Peter von Rohr"
 date: "10/22/2018"
-output: beamer_presentation
-header-includes:
-  # - \setbeameroption{hide notes} # notes are not shown
-  - \setbeameroption{show notes}   # notes are shown after slide
+output:
+  beamer_presentation:
+    includes:
+      in_header: header_pagenrs.tex 
 ---
 
 ```{r setup, include=FALSE}
