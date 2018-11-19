@@ -6,8 +6,8 @@ output:
   beamer_presentation:
     slide_level: 2
 header-includes:
-   #- \setbeameroption{hide notes} # notes are not shown
-  - \setbeameroption{show notes}   # notes are shown after slide
+   - \setbeameroption{hide notes} # notes are not shown
+  #- \setbeameroption{show notes}   # notes are shown after slide
 ---
 
 ```{r setup, include=FALSE}
