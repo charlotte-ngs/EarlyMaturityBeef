@@ -4,56 +4,62 @@ author: "Silvan Wyss"
 date: "11/22/2018"
 output: beamer_presentation
 header-includes:
-  # - \setbeameroption{hide notes} # notes are not shown
-  - \setbeameroption{show notes}   # notes are shown after slide
+   #- \setbeameroption{hide notes} # notes are not shown
+  #- \setbeameroption{show notes}   # notes are shown after slide
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Content
 
-## Target
+* Topic and goal Master Thesis
 
-* Problem: Negative trend in early maturity.
+* Method and purpose of first Results
+
+* First Results
+
+* Outlook
+
+\note{
+Welcome to my presentation about my master thesis, my name is Silvan.
+I am here tell you what my master thesis is about, how I got my first results and what they are and what I want to do next.
+}
+
+## Goal
+
+* Predicting: Which strategy is suitable to breed for early maturity in beef cattle?
 
 * Here maturity is readiness for slaughter.
 
-* Bad performence in early maturity --> increased costs.
-
-* Qualitas commissioned by Mutterkuh Schweiz to solve this problem.
-
-* My part: Which proposed strategies are most suitable to breed for early maturity in beef cattle?
+* Increased performence in early maturity --> decreased costs.
 
 \note{
-Welcome to my presentation about strategies to breed for early maturity in beef cattle. My name is Silvan and I write my master thesis in association with Qualitas AG and Mutterkuh Schweiz. Mutterkuh Schweiz the Swiss beef breeders association is a customer of Qualitas AG and has a problem to be solved.
-The problem is, that Swiss beef cattle is getting worse in early maturity "Frühreife".
+The goal of my master thesis is to predict by using models, which breeding strategy will be most suitable to breed for early maturity in beef cattle.
+Here it is important that you remember: With early maturity I mean the early readiness for slaughter.
 This trait is an economically important trait for beef cattle breeders.
-With early maturity I mean the readiness for slaughter. 
 For example, imagine two beef carcasses which are exactly the same and get exatly the same price. 
-For one carcass an animal has lived 250 d and for the other 230 d. 
-Then the one that only lived for 230 d is the one which earlier mature than the other.
+For one carcass an animal has lived 250 d and for the other an animal has lived 230 d. 
 It is obvious that the one which only lived for 230 d led to much less costs for the breeder than the one which lived for 250 d.
-*Beef cattle as title image and labels Mutterkuh Schweiz and Qualitas.*
+This animal is the one which is earlier mature than the other and this is also the animal that you should select with the breeding strategy.
 }
 
 
 ## Strategies
 
-**1. Derivation of early maturity from carcass fat corrected by age at slaughter.**
+**1. Using carcass fat as auxilliary trait.**
 
-**2. Index over carcass traits corrected by age at slaughter to breed for early maturity.**
+**2. Using an index over carcass traits.**
 
 \note{
-Qualtitas tries to solve the problem by breeding for animals whith good performances in early maturity. 
-However it is not an easily measurable trait, which makes breeding for it difficult.
+However, as you can see it is not a trait which you can measure easily. This makes breeding for it difficult.
 Probably due this reason breeding for early maturity is not established in any major breeding program.
 Even the word early maturity has not been present in any scientific paper I read about beef breeding.
 Nevertheless my supervisors have found 4 possible strategies to breed for early maturity.
 I will evaluate the two most feasible and promising strategies in my master thesis.
-The first strategy is already implemented. 
-It uses the breeding value carcass fat which is corrected by age at slaughter to derive from it early maturity.
-The second strategy is not implemented and tries to use an index over all breeding values for carcass traits to breed for early maturity.
+In the first strategy you breed for early maturity in breeding for the carcass trait carcass fat.
+The second strategy is not implemented yet and tries to use an index over all breeding values for multiple carcass traits to breed for early maturity.
 }
 
 ## Carcass traits
@@ -66,9 +72,9 @@ The second strategy is not implemented and tries to use an index over all breedi
 
 * Carcass weight (CW) -> How heavy?
 
-* Calves = < 180 d old
+* Calves (c) = < 180 d old
 
-* Adults = > 180 < ? d old
+* Adults (a) = > 180 < 701 d old
 
 \note{
 Both are very promising because the data which they use is already available. 
@@ -77,115 +83,161 @@ These carcass traits are carcass fat, carcass conformation and carcass weight.
 Of all of them there already exist two breeding values. One for carcasses which were calves and one for carcasses which were adults (cows not included)).
 }
 
-## 1. Strategy (carcass fat)
-
-* Breeding values for carcass fat to derive early maturity
-
-* Probably correlated with early maturity
-
-* Corrected by age at slaughter -> *How early fatty*?
-
-```{r eval=FALSE}
-#setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
-library(knitr)
-include_graphics("GrowthComposition.png")
-```
-
-\note{
-The two breeding values for carcass fat corrected by age at slaughter could be used to derive early maturity, because these traits are assumed to be closely correlated. 
-This assumption is based on practical experience from beef breeders and on the theoretical knowledge of beef cattle growth. 
-The amount of fat tissue during growth is usually the limiting factor for carcass maturity.
-}
-
 ## 2. Strategy (index)
 
 * Index as selection criterion
 
 * Main result until this stage of master thesis
 
-$$I=\sum{a_mu_m}$$
+$$I=a^Tu$$
 
 where 
 
-$a$ is an economic weight,
+$a$ is the vector of economic values,
 
-$u$ is an estimated breeding value and
-
-$m$ indicates the breeding values CFa, CFc, CCa, CCc, CWa and CWc.
-
-CF = Carcass fat 
-
-CC = Carcass conformation 
-
-CW = Carcass weight 
-
-a = adults 
-
-c = calves.
+$u$ is the vector of estimated breeding values.
 
 \note{
+As the first strategy is already established I had first to create the basis for the second strategy to compare them.
 In the second strategy the selection is based on an index, including all six estimated breeding values for carcass traits and six economic weighing factors.
-This index is the main result I have until this stage of the thesis.
-The estimated breeding values are available, but the economic weights not.
-My task was to compute the economic weights to produce an index.
+It should allows to select the most profit yielding animal.
+The economic weights determine how important the trait is for the profit.
+The index is the main result I have until this stage of the thesis.
+The estimated breeding values are available, but the economic values not.
+My task was to compute the economic values to produce an index.
 There I assume that breeding occurs within breeds which requires a separate index for each beef cattle breed.
-To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin. 
-These two breeds are very different in carcass traits. 
+To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin, which are very different in carcass traits.
 }
 
-# Economic Weights
+# Economic values
 
 * Unit Sfr. / breeding value unit (e.g. Sfr. / carcass fat class)
 
-* Scaling up from a small change in population mean
+* Model potential increase in population mean -> scaling up to one unit
+
+* 
 
 \note{
-Economic weights must have the unit Swiss francs per breeding value unit.
-For example the economic weight for carcass fat has the unit Swiss francs per additional carcass fat class.
-However when breeding the chance to get an increase of a whole unit is not realistic, at least for carcass fat and carcass conformation.
-Therefore I computed it by taking the ratio of the change in profit, when the population mean is increased divided by a small increase in population mean.
-Then I scaled it up to a whole unit change in mean.
-However I did not have enough information to get the true change in profit for a change in population mean.
-Therefore I have approximated the change in profit by only using the difference in price per kg carcass weight.
-For example you get a certain amount of Swiss francs more for carcass fat class 3 than 4.
-Additionally the price changes are not the same over the whole scale.
-Therefore I had to compute the mean change in price if I increase the mean of the population.
-To do so I had to get the initial distribution of the population over the carcass trait.
-The initial distribution is different for each breed Angus and Limousin and for adults and calves.
-To conserve the shape of the distribution when increasing the population mean, I approximated a normal distribution to the discrete distribution 
+Economic values tell you how much more money you get if a trait increases by a unit.
+This money is determined by the payment system CHTAX.
+CHTAX gives me a price differences per kg for the ranges in the different carcass categories.
+For example the price per kilogramm is higher for the carcass class 3 than 2.
+Therefore I had to modell this increase in the whole population and look how the mean price changes in the population in comparison to the initial population.
+I will show you how at the example of the trait carcass fat in the breed Angus and for adults.
+There I knew the population mean and standard deviation which I used to construct a normal distribution for this population.
 }
 
+## Initial Population
 
-## Carcass fat
-
-```{r, eval=FALSE}
-#setwd("~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd")
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
 library(knitr)
-library(dplyr)
-LM <- "LM_economic_values"
-LM <- read.table(file = a, sep=";", header=TRUE)%>%
-  select(c("cCF","aCF"))
-LM <- as.vector(t(a))
-LM
-LM <- "LM_economic_values"
-LM<- read.table(file = a, sep=";", header=TRUE)%>%
-  select(c("cCF","aCF"))
-LM <- as.vector(t(LM))
-LM
+library(kableExtra)
+#Vectors of animal numbers Carcass fat 
+#Angus with a=adults and c=calves.
+Ancfc <- c(189,706,935,125,2)
+Ancfa <- c(802,3415,15673,6314,481)
+#Limousin with a=adults and c=calves.
+Lmcfc <- c(735,1504,1419,72,0)
+Lmcfa <- c(5102,21958,50705,7169,148)
+#frequencies Carcass fat
+#Angus with a=adults and c=calves.
+Ancfc <- Ancfc/sum(Ancfc)
+Ancfa <- Ancfa/sum(Ancfa)
+#Limousin with a=adults and c=calves.
+Lmcfc <- Lmcfc/sum(Lmcfc)
+Lmcfa <- Lmcfa/sum(Lmcfa)
 
-# Plot
-g <- ggplot(LM,aes(Class,frequency))
-g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
+#Values Carcass fat classes
+Vcf <- c(1:5)
+
+AncfaS <- 0.74
+AncfaM <- 3.1
+
+x <- data.frame(Class=Vcf,frequency=Ancfa)
+g <- ggplot(x,aes(Class,frequency,linetype="Mean"))
+g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
+  stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),aes(linetype="New distribution"))+
+    scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
   theme_classic()
 ```
 
+\note{
+Here you can see the initial distribution, the mean is at class 3.
+From the payment system I knew how the classes are priced.
+Then I installed thresholds in the distribution which mark where the price changes.
+Which was about here and there.
+Using the frequencies which is the area under the graphic and multiplying it with the price I could compute the mean price per kg carcass weight.
+Then I did the same for the new distribution with an increased population mean by 0.1 fat classes.
+The difference between the two prices gave me the economic weight.
+}
 
-## Carcass Conformation
+## Economic weights
+
+```{r economicweights}
+library(knitr)
+library(dplyr)
+library(tidyr)
+LM <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/LM_economic_values"
+LM <- read.table(file = LM, sep=";", header=TRUE)
+LM <- gather(LM,"Trait","Limousin")
+
+AN  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/AN_economic_values"
+AN  <- read.table(file = AN, sep=";", header=TRUE)
+AN <- gather(AN,"Trait","Angus")
+
+table <- inner_join(AN, LM, by="Trait")
+table$Trait <- c("Calves Conformation [Srf./Class]", "Adults Conformation [Srf./Class]", "Calves Fat [Srf./Class]", "Adults Fat [Srf./Class]", "Calves Weight [Srf./kg]", "Adults Weight [Srf./kg]")
+kable(table,booktabs=T, digits=2)
+table
+```
+
+\note{
+
+}
+
+## Corrected for trait unit
+
+```{r economicweights}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+SD  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/mean_sd.csv"
+SD  <- read_csv2(file = SD)
+SD
+SD$Sd
+SD_LM <- SD[1:6,"Sd"]
+SD_AN <- SD[7:12,"Sd"]
+
+is.numeric(c(SD_LM[4,],SD_LM[3,],SD_LM[2,],SD_LM[1,],SD_LM[6,],SD_LM[5,]))
+as.numeric(c(SD_LM[4,],SD_LM[3,],SD_LM[2,],SD_LM[1,],SD_LM[6,],SD_LM[5,]))
+
+LM <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/LM_economic_values"
+LM <- read.table(file = LM, sep=";", header=TRUE)
+LM <- gather(LM,"Trait","Limousin")
+LM
+LM$Limousin <- LM$Limousin*as.numeric(c(SD_LM[4,],SD_LM[3,],SD_LM[2,],SD_LM[1,],SD_LM[6,],SD_LM[5,]))
+
+AN  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/AN_economic_values"
+AN  <- read.table(file = AN, sep=";", header=TRUE)
+AN <- gather(AN,"Trait","Angus")
+AN
+as.numeric(c(SD_AN[4,],SD_AN[3,],SD_AN[2,],SD_AN[1,],SD_AN[6,],SD_AN[5,]))
+AN$Angus <- AN$Angus*as.numeric(c(SD_AN[4,],SD_AN[3,],SD_AN[2,],SD_AN[1,],SD_AN[6,],SD_AN[5,]))
+AN$Angus
 
 
-## Carcass Weight
 
+table <- inner_join(AN, LM, by="Trait")
+table$Trait <- c("Calves Conformation", "Adults Conformation", "Calves Fat", "Adults Fat", "Calves Weight", "Adults Weight")
+kable(table,booktabs=T, digits=2)
+table
+```
 
+\note{
+Here you can see that the economically most important trait in Angus is carcass fat in calves.
+}
 
 ## Genetic gain
 
@@ -199,42 +251,21 @@ Dependent on
 
 * Accuracy of the selection criterion
 
-* Selection criterion here = Estimated breeding value for carcass fat.
-
-* Bulmer effect [Bulmer] taken into account
+* Selection criterion here = Index or Estimated breeding value for carcass fat.
 
 \note{
-To evaluate the two strategies, I will use a well-established tool: The genetic gain. 
+Now I have got the two strategies which should help to breed for early maturity.
+The next and final step in my master thesis will be to evaluate the two strategies
+To do so, I will use a well-established tool: The genetic gain. 
 The genetic gain predicts the development of traits under a modelled selection scenarium. 
 Usually it is expressed in trait unit per year. 
 The genetic gain is dependent on the generation intervall which determines how fast selection occurs, 
 on the selection intensity, which determines how large the proportion of the selected population is which will produce the offspring for the next generation, 
 on the standard deviation of selected criterion in the population which is the potential for breeding 
 and on the accuracy of selection which is a measure of how similar the selected parents are to their progeny in the selection criterion.
+
+These results will help to predict how suitable the two strategies are to breed for early maturity.
+Thank you for your attention.
 }
 
-
-
-
-
-
-
-
-
-
-
-
-## CHTAX
-
-Whithin carcass categories price reductions if:
-
-- Carcass fat class $\neq$ 3 (optimum)
-
-- Carcass conformation $\neq$ C (maximum)
-
-- Carcass weight above certain limit (dependent on carcass category)
-
-?? Graphics describing areas of price reduction along range of traits. Use Open Office.
-
-## References
 
