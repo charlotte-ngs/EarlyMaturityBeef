@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
 
 * Topic and goal Master Thesis
 
-* Method and purpose of first Results
+* Method to get first Results
 
 * First Results
 
@@ -50,9 +50,9 @@ This animal is the one which is earlier mature than the other and this is also t
 
 ## Strategies
 
-**1. Using carcass fat as auxilliary trait.**
+1. Using carcass fat as auxilliary trait.
 
-**2. Using an index over carcass traits.**
+2. Using an index over carcass traits.
 
 \note{
 However, as you can see it is not a trait which you can measure easily. This makes breeding for it difficult.
@@ -62,32 +62,13 @@ Nevertheless my supervisors have found 4 possible strategies to breed for early 
 I will evaluate the two most feasible and promising strategies in my master thesis.
 In the first strategy you breed for early maturity in breeding for the carcass trait carcass fat.
 The second strategy is not implemented yet and tries to use an index over all breeding values for multiple carcass traits to breed for early maturity.
-}
-
-## Carcass traits
-
-* Data from Proviande
-
-* Carcass fat (CF) -> How fatty?
-
-* Carcass conformation (CC) -> How meaty?
-
-* Carcass weight (CW) -> How heavy?
-
-* Calves (c) = < 180 d old
-
-* Adults (a) = > 180 < 701 d old
-
-\note{
 Both are very promising because the data which they use is already available. 
 Since 1992 Proviande routineley records data from beef carcass traits.
-These carcass traits are carcass fat, carcass conformation and carcass weight. 
-Of all of them there already exist two breeding values. One for carcasses which were calves and one for carcasses which were adults (cows not included)).
 }
 
-## 2. Strategy (index)
+## Index
 
-* Index as selection criterion
+* Index as selection criterion --> weighted mean
 
 * Main result until this stage of master thesis
 
@@ -113,7 +94,9 @@ To get the best overview on all beef breeds I chose to compute the index for the
 
 ## Economic weights
 
-* Unit Sfr. / breeding value unit (e.g. Sfr. / carcass fat class)
+* Unit Sfr. / breeding value unit, e.g. Sfr. / carcass fat class
+
+* Simplification: (Sfr/kg carcass weight) / breeding value unit
 
 * Model potential increase in population mean -> scaling up to one unit
  
@@ -128,7 +111,7 @@ I will show you how at the example of the trait carcass fat in the breed Angus a
 There I knew the population mean and standard deviation which I used to construct a normal distribution for this population.
 }
 
-## Initial Population
+## Increase in Population mean
 
 ```{r, message=FALSE, warning=FALSE}
 library(ggplot2)
@@ -155,8 +138,8 @@ Vcf <- c(1:5)
 AncfaS <- 0.74
 AncfaM <- 3.1
 
-x <- data.frame(Class=Vcf,frequency=Ancfa)
-g <- ggplot(x,aes(Class,frequency,linetype="Mean"))
+x <- data.frame(Class=Vcf, Probability=Ancfa)
+g <- ggplot(x,aes(Class,Probability,linetype="Mean"))
 g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
@@ -174,7 +157,26 @@ Then I did the same for the new distribution with an increased population mean b
 The difference between the two prices gave me the economic weight.
 }
 
-## Economic weights
+## Carcass traits
+
+* Data from Proviande
+
+* Carcass fat -> How fatty?
+
+* Carcass conformation -> How meaty?
+
+* Carcass weight -> How heavy?
+
+* Calves are < 180 d old
+
+* Adults are > 180 < 701 d old
+
+\note{
+These carcass traits are carcass fat, carcass conformation and carcass weight. 
+Of all of them there already exist two breeding values. One for carcasses which were calves and one for carcasses which were adults (cows not included)).
+}
+
+## Results
 
 ```{r,echo=FALSE,results="asis"}
 library(knitr)
@@ -258,6 +260,6 @@ These results will help to predict how suitable the two strategies are to breed 
 Thank you for your attention.
 }
 
-## Thank you
+# Thank you
 
 
