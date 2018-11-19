@@ -7,11 +7,11 @@ output:
     slide_level: 2
 header-includes:
    #- \setbeameroption{hide notes} # notes are not shown
-  #- \setbeameroption{show notes}   # notes are shown after slide
+  - \setbeameroption{show notes}   # notes are shown after slide
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
 ```
 
 ## Content
@@ -95,7 +95,7 @@ $$I=a^Tu$$
 
 where 
 
-$a$ is the vector of economic values,
+$a$ is the vector of economic weights,
 
 $u$ is the vector of estimated breeding values.
 
@@ -105,22 +105,21 @@ In the second strategy the selection is based on an index, including all six est
 It should allows to select the most profit yielding animal.
 The economic weights determine how important the trait is for the profit.
 The index is the main result I have until this stage of the thesis.
-The estimated breeding values are available, but the economic values not.
-My task was to compute the economic values to produce an index.
+The estimated breeding values are available, but the economic weights not.
+My task was to compute the economic weights to produce an index.
 There I assume that breeding occurs within breeds which requires a separate index for each beef cattle breed.
 To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin, which are very different in carcass traits.
 }
 
-# Economic values
+## Economic weights
 
 * Unit Sfr. / breeding value unit (e.g. Sfr. / carcass fat class)
 
 * Model potential increase in population mean -> scaling up to one unit
-
-* 
+ 
 
 \note{
-Economic values tell you how much more money you get if a trait increases by a unit.
+Economic weights tell you how much more money you get if a trait increases by a unit.
 This money is determined by the payment system CHTAX.
 CHTAX gives me a price differences per kg for the ranges in the different carcass categories.
 For example the price per kilogramm is higher for the carcass class 3 than 2.
@@ -161,7 +160,8 @@ g <- ggplot(x,aes(Class,frequency,linetype="Mean"))
 g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
-  theme_classic()
+  theme_classic()+
+  theme(text = element_text(size = 30))
 ```
 
 \note{
@@ -176,7 +176,7 @@ The difference between the two prices gave me the economic weight.
 
 ## Economic weights
 
-```{r economicweights}
+```{r,echo=FALSE,results="asis"}
 library(knitr)
 library(dplyr)
 library(tidyr)
@@ -189,9 +189,8 @@ AN  <- read.table(file = AN, sep=";", header=TRUE)
 AN <- gather(AN,"Trait","Angus")
 
 table <- inner_join(AN, LM, by="Trait")
-table$Trait <- c("Calves Conformation [Srf./Class]", "Adults Conformation [Srf./Class]", "Calves Fat [Srf./Class]", "Adults Fat [Srf./Class]", "Calves Weight [Srf./kg]", "Adults Weight [Srf./kg]")
-kable(table,booktabs=T, digits=2)
-table
+table$Trait <- c("Calves Conformation [Sfr./Class]", "Adults Conformation [Sfr./Class]", "Calves Fat [Sfr./Class]", "Adults Fat [Sfr./Class]", "Calves Weight [Sfr./kg]", "Adults Weight [Sfr./kg]")
+kable(table,digits=2)
 ```
 
 \note{
@@ -200,41 +199,30 @@ table
 
 ## Corrected for trait unit
 
-```{r economicweights}
+```{r}
 library(knitr)
 library(dplyr)
 library(tidyr)
 library(readr)
 SD  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/mean_sd.csv"
 SD  <- read_csv2(file = SD)
-SD
-SD$Sd
+
 SD_LM <- SD[1:6,"Sd"]
 SD_AN <- SD[7:12,"Sd"]
-
-is.numeric(c(SD_LM[4,],SD_LM[3,],SD_LM[2,],SD_LM[1,],SD_LM[6,],SD_LM[5,]))
-as.numeric(c(SD_LM[4,],SD_LM[3,],SD_LM[2,],SD_LM[1,],SD_LM[6,],SD_LM[5,]))
 
 LM <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/LM_economic_values"
 LM <- read.table(file = LM, sep=";", header=TRUE)
 LM <- gather(LM,"Trait","Limousin")
-LM
 LM$Limousin <- LM$Limousin*as.numeric(c(SD_LM[4,],SD_LM[3,],SD_LM[2,],SD_LM[1,],SD_LM[6,],SD_LM[5,]))
 
 AN  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/AN_economic_values"
 AN  <- read.table(file = AN, sep=";", header=TRUE)
 AN <- gather(AN,"Trait","Angus")
-AN
-as.numeric(c(SD_AN[4,],SD_AN[3,],SD_AN[2,],SD_AN[1,],SD_AN[6,],SD_AN[5,]))
 AN$Angus <- AN$Angus*as.numeric(c(SD_AN[4,],SD_AN[3,],SD_AN[2,],SD_AN[1,],SD_AN[6,],SD_AN[5,]))
-AN$Angus
-
-
 
 table <- inner_join(AN, LM, by="Trait")
 table$Trait <- c("Calves Conformation", "Adults Conformation", "Calves Fat", "Adults Fat", "Calves Weight", "Adults Weight")
-kable(table,booktabs=T, digits=2)
-table
+kable(table, digits=2)
 ```
 
 \note{
@@ -269,5 +257,7 @@ and on the accuracy of selection which is a measure of how similar the selected 
 These results will help to predict how suitable the two strategies are to breed for early maturity.
 Thank you for your attention.
 }
+
+## Thank you
 
 
