@@ -359,9 +359,11 @@ table$Trait <- c("Calves Conformation", "Adults Conformation", "Calves Fat", "Ad
 kable(table, digits=2)
 ```
 
-* Negative economic weights for carcass weight
+* Negative and very low economic weights for carcass weight
 
-* 
+* Carcass conformation in relation to Carcass fat more important for Angus than Limousin, plus negative for adults
+
+* Calves more important than Adults
 
 \note{
 Here you can see that the economically most important trait in Angus is carcass fat in calves.
@@ -369,7 +371,14 @@ Here you can see that the economically most important trait in Angus is carcass 
 
 ## Discussion
 
-* 
+* Costs not considered
+
+* Explaines differences to @Aby2012, where carcass weight has highest positive economic value.
+
+* Breeding values corrected for age at slaughter
+    * Would need positive weight to breed for early maturity
+    
+* More information needed to compare the two strategies
 
 ## Outlook
 
