@@ -2,9 +2,12 @@
 title: "Breeding strategies for early maturity in beef cattle"
 author: "Silvan Wyss"
 date: "11/22/2018"
-fontsize: 20pt
+fontsize: 15pt
+bibliography: /Users/silvan/Documents/EarlyMaturityBeef/embc-thesis-bd/library.bib
 output: 
   beamer_presentation:
+    includes:
+      in_header: header_pagenrs.tex 
     slide_level: 2
 header-includes:
    - \setbeameroption{hide notes} # notes are not shown
@@ -34,9 +37,13 @@ I am here tell you what my master thesis is about, how I got my first results an
 
 * Predicting: Which strategy is suitable to breed for early maturity in beef cattle?
 
-* Here maturity is readiness for slaughter.
+Definition
 
-* Increased performence in early maturity --> decreased costs.
+* How early ready for slaughter.
+
+Relevance
+
+* Increased performance in early maturity --> decreased costs.
 
 \note{
 The goal of my master thesis is to predict by using models, which breeding strategy will be most suitable to breed for early maturity in beef cattle.
@@ -51,9 +58,17 @@ This animal is the one which is earlier mature than the other and this is also t
 
 ## Master Thesis
 
-1. Using carcass fat as auxilliary trait.
+Four Strategies with increasing complexity:
 
-2. Using an index over carcass traits.
+1. Carcass fat as auxilliary trait.
+
+2. Index over carcass traits.
+
+3. "Deviation in age at slaughter" from @Berry2017.
+
+4. Growth models.
+
+Starting with Strategies one and two.
 
 \note{
 However, as you can see it is not a trait which you can measure easily. This makes breeding for it difficult.
@@ -69,17 +84,24 @@ Since 1992 Proviande routineley records data from beef carcass traits.
 
 ## Master Thesis
 
-* Index as selection criterion --> weighted mean
+* Index as selection criterion 
+
+* Selecting for most economic animal
 
 * Main result until this stage of master thesis
+
+## Index
 
 $$I=a^Tu$$
 
 where 
 
-$a$ is the vector of economic weights,
+$a$ is the vector of economic weights --> not available,
 
-$u$ is the vector of estimated breeding values.
+$u$ is the vector of estimated breeding values --> available.
+
+* Carcass conformation, carcass weight and carcass fat for calves and adults
+    * Six economic weights
 
 \note{
 As the first strategy is already established I had first to create the basis for the second strategy to compare them.
@@ -93,20 +115,117 @@ There I assume that breeding occurs within breeds which requires a separate inde
 To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin, which are very different in carcass traits.
 }
 
-## Material Traits
+## Economic Weights
 
+* Definition: Change in profit per change in carcass trait.
+
+* Simplification: 
+    * Costs constant
+    * Price per kg carcass weight as Profit
+    
+* Prices from August 2018.
+
+## Traits
+
+* Carcass fat -> Visual fat coverage
+
+* Carcass conformation -> Visual meat
+
+* Carcass weight -> How heavy?
+
+## Carcass Fat
+
+![](~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/VK_Fett1_SK) ![](~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/VK_Fett4_SK)
+Carcass Fat Classes 1 and 4
+
+Image source: Proviande
+
+
+## Carcass Fat
 ```{r}
-LM <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/LM_economic_values"
-LM <- read.table(file = LM, sep=";", header=TRUE)
-LM <- gather(LM,"Trait","Limousin")
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+CF <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/CFa_price.csv"
+CF  <- read_csv2(file = CF)
+colnames(CF) <- "Price"
+Class <- c(1:5)
+x <- cbind(CF,Class)
+g <- ggplot(x,aes(Class,Price))
+g + geom_bar(stat="identity")+
+  theme_classic()+theme(text = element_text(size = 30))+
+  ylab("Relative price in Sfr. / kg")+
+  xlab("Carcass Fat Class")
 ```
 
+## Carcass conformation
 
+```{r}
+knitr::include_graphics(path="~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/VK-Gruppe_CHTAX_SK_seitlich")
+```
+From left to right decreasing carcass conformation.
 
+Image source: Proviande
+
+## Carcass conformation
+
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+CC <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/CCa_price.csv"
+CC  <- read_csv2(file = CC)
+colnames(CC) <- "Price"
+CC <- CC-as.numeric(CC[1,])
+Class <- c(1:7)
+x <- cbind(CC,Class)
+g <- ggplot(x,aes(Class,Price))
+g + geom_bar(stat="identity")+
+  theme_classic()+theme(text = element_text(size = 30))+
+  ylab("Relative price in Sfr. / kg")+
+  xlab("Carcass Conformation Class")
+```
+
+## Carcass weight
+
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+CW <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/CWa_price.csv"
+CW  <- read_csv2(file = CW)
+colnames(CW) <- "Price"
+Thresh <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/CWa_threshold.csv"
+Thresh  <- read_csv2(file = Thresh)
+x <- cbind(CW,Thresh)
+g <- ggplot(x,aes(threshold,Price))
+g + geom_bar(stat="identity")+
+  theme_classic()+theme(text = element_text(size = 30))+
+  ylab("Relative price in Sfr. / kg")+
+  xlab("kg Carcass Weight")
+```
+
+## Material Groups
+
+* Calves are less than 180 d old
+
+* Adults are between 180 and 701 d old
+
+* Different prices and distributions
 
 ## Material Breeds
 
-```{r BarplotInitialfrequenciesCF, echo=FALSE, fig.cap="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)"}
+* Same prices, different distributions
+
+* Base population from animals in 2010 - 2015
+
+```{r BarplotInitialfrequenciesCF, echo=FALSE}
 library(knitr)
 library(kableExtra)
 #Vectors of animal numbers Carcass fat 
@@ -140,18 +259,15 @@ x <-data.frame(Class=rep(c(1:5),times=2),Category=rep(c("Angus", "Limousin"),eac
 # Plot
 g <- ggplot(x,aes(Class,Frequency))
 g + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
-  theme_classic()+theme(text = element_text(size = 30))
+  theme_classic()+theme(text = element_text(size = 30))+
+  xlab("Carcass Fat Class")
 ```
 
 ## Method
 
-* Definition: Change in profit per change in carcass trait.
-
-* Simplification: 
-    * Costs constant
-    * Price per kg carcass weight as Profit
-
 * Model potential increase in population mean -> scaling up to one unit
+
+* Prices from August 2018.
  
 
 \note{
@@ -210,49 +326,7 @@ Then I did the same for the new distribution with an increased population mean b
 The difference between the two prices gave me the economic weight.
 }
 
-## Carcass traits
-
-* Data from Proviande
-
-* Carcass fat -> How fatty?
-
-* Carcass conformation -> How meaty?
-
-* Carcass weight -> How heavy?
-
-* Calves are < 180 d old
-
-* Adults are > 180 < 701 d old
-
-\note{
-These carcass traits are carcass fat, carcass conformation and carcass weight. 
-Of all of them there already exist two breeding values. One for carcasses which were calves and one for carcasses which were adults (cows not included)).
-}
-
 ## Results
-
-```{r,echo=FALSE,results="asis"}
-library(knitr)
-library(dplyr)
-library(tidyr)
-LM <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/LM_economic_values"
-LM <- read.table(file = LM, sep=";", header=TRUE)
-LM <- gather(LM,"Trait","Limousin")
-
-AN  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/AN_economic_values"
-AN  <- read.table(file = AN, sep=";", header=TRUE)
-AN <- gather(AN,"Trait","Angus")
-
-table <- inner_join(AN, LM, by="Trait")
-table$Trait <- c("Calves Conformation [Sfr./Class]", "Adults Conformation [Sfr./Class]", "Calves Fat [Sfr./Class]", "Adults Fat [Sfr./Class]", "Calves Weight [Sfr./kg]", "Adults Weight [Sfr./kg]")
-kable(table,digits=2)
-```
-
-\note{
-
-}
-
-## Corrected for trait unit
 
 ```{r}
 library(knitr)
@@ -280,9 +354,17 @@ table$Trait <- c("Calves Conformation", "Adults Conformation", "Calves Fat", "Ad
 kable(table, digits=2)
 ```
 
+* Negative economic weights for carcass weight
+
+* 
+
 \note{
 Here you can see that the economically most important trait in Angus is carcass fat in calves.
 }
+
+## Discussion
+
+* 
 
 ## Outlook
 
@@ -310,5 +392,7 @@ Thank you for your attention.
 }
 
 # Thank you
+
+## References
 
 
