@@ -2,6 +2,7 @@
 title: "Breeding strategies for early maturity in beef cattle"
 author: "Silvan Wyss"
 date: "11/22/2018"
+fontsize: 20pt
 output: 
   beamer_presentation:
     slide_level: 2
@@ -16,9 +17,9 @@ knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
 
 ## Content
 
-* Topic and goal Master Thesis
+* Present Master Thesis
 
-* Method to get first Results
+* Material and Method to get first Results
 
 * First Results
 
@@ -29,7 +30,7 @@ Welcome to my presentation about my master thesis, my name is Silvan.
 I am here tell you what my master thesis is about, how I got my first results and what they are and what I want to do next.
 }
 
-## Goal
+## Master Thesis
 
 * Predicting: Which strategy is suitable to breed for early maturity in beef cattle?
 
@@ -48,7 +49,7 @@ This animal is the one which is earlier mature than the other and this is also t
 }
 
 
-## Strategies
+## Master Thesis
 
 1. Using carcass fat as auxilliary trait.
 
@@ -66,7 +67,7 @@ Both are very promising because the data which they use is already available.
 Since 1992 Proviande routineley records data from beef carcass traits.
 }
 
-## Index
+## Master Thesis
 
 * Index as selection criterion --> weighted mean
 
@@ -92,11 +93,63 @@ There I assume that breeding occurs within breeds which requires a separate inde
 To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin, which are very different in carcass traits.
 }
 
-## Economic weights
+## Material Traits
 
-* Unit Sfr. / breeding value unit, e.g. Sfr. / carcass fat class
+```{r}
+LM <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/LM_economic_values"
+LM <- read.table(file = LM, sep=";", header=TRUE)
+LM <- gather(LM,"Trait","Limousin")
+```
 
-* Simplification: (Sfr/kg carcass weight) / breeding value unit
+
+
+
+## Material Breeds
+
+```{r BarplotInitialfrequenciesCF, echo=FALSE, fig.cap="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)"}
+library(knitr)
+library(kableExtra)
+#Vectors of animal numbers Carcass fat 
+#Angus with a=adults and c=calves.
+Ancfc <- c(189,706,935,125,2)
+Ancfa <- c(802,3415,15673,6314,481)
+#Limousin with a=adults and c=calves.
+Lmcfc <- c(735,1504,1419,72,0)
+Lmcfa <- c(5102,21958,50705,7169,148)
+#frequencies Carcass fat
+#Angus with a=adults and c=calves.
+Ancfc <- Ancfc/sum(Ancfc)
+Ancfa <- Ancfa/sum(Ancfa)
+#Limousin with a=adults and c=calves.
+Lmcfc <- Lmcfc/sum(Lmcfc)
+Lmcfa <- Lmcfa/sum(Lmcfa)
+
+#Values Carcass fat classes
+Vcf <- c(1:5)
+
+#define number of rows
+#x <- cbind(Vcf,Ancfc,Ancfa,Lmcfc,Lmcfa)
+#colnames(x) <- c("class", "ANcalves", "ANadults", "LMcalves", "LMadults")
+#kable(x, booktabs=T, caption="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)")
+#x <- as.data.frame(x)
+# settings barplot
+library(ggplot2)
+theme_set(theme_classic())
+#set dataframe
+x <-data.frame(Class=rep(c(1:5),times=2),Category=rep(c("Angus", "Limousin"),each=5), Frequency=c(Ancfa,Lmcfa))
+# Plot
+g <- ggplot(x,aes(Class,Frequency))
+g + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
+  theme_classic()+theme(text = element_text(size = 30))
+```
+
+## Method
+
+* Definition: Change in profit per change in carcass trait.
+
+* Simplification: 
+    * Costs constant
+    * Price per kg carcass weight as Profit
 
 * Model potential increase in population mean -> scaling up to one unit
  
@@ -111,9 +164,9 @@ I will show you how at the example of the trait carcass fat in the breed Angus a
 There I knew the population mean and standard deviation which I used to construct a normal distribution for this population.
 }
 
-## Increase in Population mean
+## Method
 
-```{r, message=FALSE, warning=FALSE}
+```{r increase, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(knitr)
 library(kableExtra)
@@ -231,19 +284,15 @@ kable(table, digits=2)
 Here you can see that the economically most important trait in Angus is carcass fat in calves.
 }
 
-## Genetic gain
+## Outlook
 
-Dependent on
+* Evaluation of Strategies
 
-* Generation intervall
+* Tool: Genetic Gain
 
-* Selection Intensity
+* Genetic Gain --> Improvement of carcass traits per year
 
-* Standard Deviation of the selection criterion
-
-* Accuracy of the selection criterion
-
-* Selection criterion here = Index or Estimated breeding value for carcass fat.
+* Characterization of 2 other Strategies
 
 \note{
 Now I have got the two strategies which should help to breed for early maturity.
