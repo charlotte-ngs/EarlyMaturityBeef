@@ -3,7 +3,7 @@ title: "Breeding strategies for early maturity in beef cattle"
 author: "Silvan Wyss"
 date: "11/22/2018"
 fontsize: 15pt
-bibliography: /Users/silvan/Documents/EarlyMaturityBeef/embc-thesis-bd/library.bib
+bibliography: ../../embc-thesis-bd/library.bib
 output: 
   beamer_presentation:
     includes:
