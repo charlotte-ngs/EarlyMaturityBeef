@@ -84,20 +84,15 @@ One of them is to derive the trait early maturity from the trait carcass fat.
 The derivation of one trait to another requires that the involved traits are closely correlated. 
 Therefore carcass fat should be highly correlated with early maturity.
 The assumed correlation is based on the theoretical knowledge about growth and body composition in beef cattle.
-Usually muscles grow in an earlier stadium of growth than fat tissue (Figure and reference Thonney?).
+Usually muscles grow in an earlier stadium of growth than fat tissue [@Thonney2015].
 This indicates that carcass fat is usually the limiting factor for early maturity in beef cattle.
 Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
 Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
 
-**Here the text interrupts its flow. I need to go on with, what this thesis has to do with the description of the breeding value estimation. Somehow like: My task is to find out how high the genetic gain in carcass fat can be over several years.**
-
-*The characteristics of the breeding value carcass fat were the material to asses the suitability of carcass fat for deriving early maturity. 
+The characteristics of the breeding value carcass fat were the material to asses the suitability of carcass fat for deriving early maturity. 
 To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
 I will use the results from the breeding value estimation as "material" to evaluate the efficiency of the breeding program.
-The explanations refering to the creation of the breeding value car are based on the documentation of @Kunz2018.*
-
-
-
+The explanations refering to the creation of the breeding value car are based on the documentation of @Kunz2018.
 
 A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
 The breeding value is a widespread tool to rank animals in a breeding program.
@@ -107,12 +102,12 @@ Multivariate means that BLUP accounts for the phenotypic, genetic and residual c
 A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
 Phenotypic records of three carcass traits are used to estimate a breeding value for carcass fat:
 
-* carcass fat [class] (table \@ref(tab:fatclass) 
+* carcass fat [class] (table \@ref(tab:fatclass)) 
 * carcass conformation [class] (table \@ref(tab:conformationclass))
 * carcass weight [dt] (section \@ref(CHTAX))
 
 Each beef carcass delivers one record per carcass trait.
-Proviande employees record the traits at slaughterhouses in Switzerland routeneley according to CHTAX (see section \ref(CHTAX)).
+Proviande employees record the traits at slaughterhouses in Switzerland routeneley according to CHTAX [@Proviande2015].
 
 An animals record is dependent on the environmental conditions the animal lives in beside the genetic effects.
 The environmental effects of the different conditions have been included in BLUP and used to separate additive genetic effects from environmental effects on the phenotypic observations.
