@@ -20,11 +20,11 @@ knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
 
 ## Content
 
-* Present Master Thesis
+* Present master thesis
 
-* Material and Method to get first Results
+* Material and method to get first results
 
-* First Results
+* First results
 
 * Outlook
 
@@ -33,19 +33,25 @@ Welcome to my presentation about my master thesis, my name is Silvan.
 I am here tell you what my master thesis is about, how I got my first results and what they are and what I want to do next.
 }
 
-## Master Thesis
+## Master thesis
+
 Goal
 
 * Predicting: Which strategy is suitable to breed for early maturity in beef cattle?
 
-Definition with example
+Definition of early maturity
 
-* 2 beef carcasses, same price at slaughterhouse, but different age at slaughter.
-The younger one was earlier mature than the older one.
+* Same price at the slaughterhouse but different age.
 
-Relevance
+## Master thesis
 
-* Younger -> decreased costs.
+![](MT_A_SK_seitlich) 
+![](MT_A_SK_seitlich)
+
+* left one: 300 d old    (Image source: Proviande)
+
+* right one: 250 d old -> earlier mature 
+
 
 \note{
 The goal of my master thesis is to predict by using models, which breeding strategy will be most suitable to breed for early maturity in beef cattle.
@@ -58,9 +64,9 @@ This animal is the one which is earlier mature than the other and this is also t
 }
 
 
-## Master Thesis
+## Master thesis
 
-Four Strategies sorted by increasing complexity:
+Four strategies sorted by increasing complexity:
 
 1. Carcass fat as auxilliary trait.
 
@@ -70,7 +76,7 @@ Four Strategies sorted by increasing complexity:
 
 4. Growth models.
 
-Starting with Strategies one and two.
+Starting with strategies one and two.
 
 \note{
 However, as you can see it is not a trait which you can measure easily. This makes breeding for it difficult.
@@ -84,7 +90,7 @@ Both are very promising because the data which they use is already available.
 Since 1992 Proviande routineley records data from beef carcass traits.
 }
 
-## Master Thesis
+## Master thesis
 
 * Index as selection criterion 
 
@@ -119,7 +125,7 @@ There I assume that breeding occurs within breeds which requires a separate inde
 To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin, which are very different in carcass traits.
 }
 
-## Economic Weights
+## Economic weights
 
 * Definition: Change in profit per change in carcass trait [@brascamp1985]
 
@@ -138,16 +144,16 @@ To get the best overview on all beef breeds I chose to compute the index for the
 
 * Carcass weight -> kg
 
-## Carcass Fat
+## Carcass fat
 
 ![](VK_Fett1_SK) 
 ![](VK_Fett4_SK)
-Carcass Fat Classes 1 and 4
+Carcass fat classes 1 and 4
 
 Image source: Proviande
 
 
-## Carcass Fat
+## Carcass fat
 ```{r}
 library(knitr)
 library(dplyr)
@@ -163,7 +169,7 @@ g <- ggplot(x,aes(Class,Price))
 g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 30))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass Fat Class")
+  xlab("Carcass fat class")
 ```
 
 ## Carcass conformation
@@ -193,7 +199,7 @@ g <- ggplot(x,aes(Class,Price))
 g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 30))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass Conformation Class")
+  xlab("Carcass conformation class")
 ```
 
 ## Carcass weight
@@ -215,7 +221,7 @@ g <- ggplot(x,aes(threshold,Price))
 g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 30))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("kg Carcass Weight")
+  xlab("kg carcass weight")
 ```
 
 ## Groups
@@ -265,7 +271,7 @@ x <-data.frame(Class=rep(c(1:5),times=2),Category=rep(c("Angus", "Limousin"),eac
 g <- ggplot(x,aes(Class,Frequency))
 g + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
   theme_classic()+theme(text = element_text(size = 30))+
-  xlab("Carcass Fat Class")
+  xlab("Carcass fat class")
 ```
 
 ## Method
@@ -318,7 +324,7 @@ g <- ggplot(x,aes(Class,Price,linetype=NULL))
 g+
   geom_bar(stat="identity",show_guide=FALSE,aes(linetype=NULL))+
  ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass Fat Class") + 
+  xlab("Carcass fat class") + 
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.3, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c(NULL=NULL,"Initial distribution"="solid","New distribution"="dashed"), guide = guide_legend(title=NULL))+
@@ -362,7 +368,7 @@ AN <- gather(AN,"Trait","Angus")
 AN$Angus <- AN$Angus*SD
 
 table <- inner_join(AN, LM, by="Trait")
-table$Trait <- c("Calves Conformation", "Adults Conformation", "Calves Fat", "Adults Fat", "Calves Weight", "Adults Weight")
+table$Trait <- c("Calves conformation", "Adults conformation", "Calves fat", "Adults fat", "Calves weight", "Adults weight")
 kable(table, digits=2)
 ```
 
@@ -390,13 +396,13 @@ Here you can see that the economically most important trait in Angus is carcass 
 
 ## Outlook
 
-* Evaluation of Strategies
+* Evaluation of strategies
 
 * Tool: Genetic Gain
 
 * Genetic Gain --> Improvement of carcass traits per year
 
-* Characterization of 2 other Strategies
+* Characterization of 2 other strategies
 
 \note{
 Now I have got the two strategies which should help to breed for early maturity.
