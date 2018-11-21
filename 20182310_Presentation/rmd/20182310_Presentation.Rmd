@@ -356,7 +356,7 @@ LM <- read.table(file = LM, sep=";", header=TRUE)
 LM <- gather(LM,"Trait","Limousin")
 LM$Limousin <- LM$Limousin*SD
 
-AN  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/AN_economic_values"
+AN  <- "AN_economic_values"
 AN  <- read.table(file = AN, sep=";", header=TRUE)
 AN <- gather(AN,"Trait","Angus")
 AN$Angus <- AN$Angus*SD
