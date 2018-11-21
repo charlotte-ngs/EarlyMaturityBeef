@@ -61,7 +61,7 @@ This animal is the one which is earlier mature than the other and this is also t
 
 ## Master Thesis
 
-Four Strategies with increasing complexity:
+Four Strategies sorted by increasing complexity:
 
 1. Carcass fat as auxilliary trait.
 
@@ -90,6 +90,8 @@ Since 1992 Proviande routineley records data from beef carcass traits.
 * Index as selection criterion 
 
 * Selecting for most economic animal
+
+* For each trait a breeding value
 
 * Main result until this stage of master thesis
 
@@ -208,6 +210,7 @@ colnames(CW) <- "Price"
 Thresh <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/CWa_threshold.csv"
 Thresh  <- read_csv2(file = Thresh)
 x <- cbind(CW,Thresh)
+x$threshold <- factor(x$threshold,levels=x$threshold)
 g <- ggplot(x,aes(threshold,Price))
 g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 30))+
@@ -267,7 +270,7 @@ g + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
 
 ## Method
 
-* Programm R using own functions
+* Programm R using own functions [@RCoreTeam2017]
 
 * Mean difference in price per difference in trait
 
@@ -413,7 +416,12 @@ These results will help to predict how suitable the two strategies are to breed 
 Thank you for your attention.
 }
 
-# Thank you
+## Thank you
+
+```{r}
+knitr::include_graphics(path="~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/Qualitas")
+```
+
 
 ## References
 
