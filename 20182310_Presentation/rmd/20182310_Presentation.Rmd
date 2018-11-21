@@ -33,17 +33,20 @@ Welcome to my presentation about my master thesis, my name is Silvan.
 I am here tell you what my master thesis is about, how I got my first results and what they are and what I want to do next.
 }
 
+## Early maturity
+
 ## Master Thesis
 
 * Predicting: Which strategy is suitable to breed for early maturity in beef cattle?
 
-Definition
+Definition with example
 
-* How early ready for slaughter.
+* 2 beef carcasses, same price at slaughterhouse, but different age at slaughter.
+The younger one was earlier mature than the older one.
 
 Relevance
 
-* Increased performance in early maturity --> decreased costs.
+* Younger --> Less  --> decreased costs.
 
 \note{
 The goal of my master thesis is to predict by using models, which breeding strategy will be most suitable to breed for early maturity in beef cattle.
@@ -121,7 +124,8 @@ To get the best overview on all beef breeds I chose to compute the index for the
 
 * Simplification: 
     * Costs constant
-    * Price per kg carcass weight as Profit
+    * Price per kg carcass weight as profit
+    
     
 * Prices from August 2018.
 
@@ -131,7 +135,7 @@ To get the best overview on all beef breeds I chose to compute the index for the
 
 * Carcass conformation -> Visual meat
 
-* Carcass weight -> How heavy?
+* Carcass weight -> kg
 
 ## Carcass Fat
 
@@ -211,7 +215,7 @@ g + geom_bar(stat="identity")+
   xlab("kg Carcass Weight")
 ```
 
-## Material Groups
+## Groups
 
 * Calves are less than 180 d old
 
@@ -219,7 +223,7 @@ g + geom_bar(stat="identity")+
 
 * Different prices and distributions
 
-## Material Breeds
+## Breeds
 
 * Same prices, different distributions --> animals from 2010 - 2015
 
@@ -331,37 +335,41 @@ Then I did the same for the new distribution with an increased population mean b
 The difference between the two prices gave me the economic weight.
 }
 
-## Results
+## Relative economic weights
 
 ```{r}
 library(knitr)
 library(dplyr)
 library(tidyr)
 library(readr)
-SD  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/mean_sd.csv"
-SD  <- read_csv2(file = SD)
+SD  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/adults_calves_genetic_variances_covariances"
+SD  <- read.table(file = SD, sep=";", header=TRUE)
+SD <- as.matrix(SD)
+SD <- diag(SD)
 
-SD_LM <- SD[1:6,"Sd"]
-SD_AN <- SD[7:12,"Sd"]
+SD[5:6] <- SD[5:6]*10^4
+SD[5:6] <- sqrt(SD[5:6])
 
 LM <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/LM_economic_values"
 LM <- read.table(file = LM, sep=";", header=TRUE)
 LM <- gather(LM,"Trait","Limousin")
-LM$Limousin <- LM$Limousin*as.numeric(c(SD_LM[4,],SD_LM[3,],SD_LM[2,],SD_LM[1,],SD_LM[6,],SD_LM[5,]))
+LM$Limousin <- LM$Limousin*SD
 
 AN  <- "~/Documents/EarlyMaturityBeef/20182310_Presentation/rmd/AN_economic_values"
 AN  <- read.table(file = AN, sep=";", header=TRUE)
 AN <- gather(AN,"Trait","Angus")
-AN$Angus <- AN$Angus*as.numeric(c(SD_AN[4,],SD_AN[3,],SD_AN[2,],SD_AN[1,],SD_AN[6,],SD_AN[5,]))
+AN$Angus <- AN$Angus*SD
 
 table <- inner_join(AN, LM, by="Trait")
 table$Trait <- c("Calves Conformation", "Adults Conformation", "Calves Fat", "Adults Fat", "Calves Weight", "Adults Weight")
 kable(table, digits=2)
 ```
 
-* Negative and very low economic weights for carcass weight
+* Per genetic standard deviation
 
 * Carcass conformation in relation to Carcass fat more important for Angus than Limousin, plus negative for adults
+
+* Negative economic weights for carcass weight
 
 * Calves more important than Adults
 
