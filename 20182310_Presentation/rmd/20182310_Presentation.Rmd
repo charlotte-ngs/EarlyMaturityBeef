@@ -121,7 +121,7 @@ To get the best overview on all beef breeds I chose to compute the index for the
 
 ## Economic Weights
 
-* Definition: Change in profit per change in carcass trait []
+* Definition: Change in profit per change in carcass trait [@brascamp1985]
 
 * Simplification: 
     * Costs constant
