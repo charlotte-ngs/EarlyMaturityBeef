@@ -62,15 +62,15 @@ This animal is the one which is earlier mature than the other and this is also t
 
 Four strategies sorted by increasing complexity:
 
-1. Carcass fat as auxilliary trait.
+1. Carcass fat as auxilliary trait
 
-2. Index over carcass traits.
+2. Index over carcass traits
 
-3. "Deviation in age at slaughter" from @Berry2017.
+3. "Deviation in age at slaughter" from @Berry2017
 
-4. Growth models.
+4. Growth models
 
--> Starting with strategies one and two.
+-> Starting with strategies one and two
 
 \note{
 However, as you can see it is not a trait which you can measure easily. This makes breeding for it difficult.
@@ -100,11 +100,11 @@ $$I=a^Tu$$
 
 where 
 
-$a$ is the vector of economic weights --> not available,
+$a$ is the vector of economic weights --> not available
 
-$u$ is the vector of estimated breeding values --> available.
+$u$ is the vector of estimated breeding values --> available
 
-* Carcass conformation, carcass weight and carcass fat for calves and adults each.
+* Carcass conformation, carcass weight and carcass fat for calves and adults each
     * Six breeding values -> six traits
     * Routeneley recorded by Proviande in slaughterhouses
 
@@ -133,7 +133,7 @@ Image source: Proviande
 ```{r}
 knitr::include_graphics(path="VK-Gruppe_CHTAX_SK_seitlich")
 ```
-Classified to decreasing conformation classes.
+Classified to decreasing conformation classes
 
 Image source: Proviande
 
@@ -153,7 +153,7 @@ Image source: Proviande
     * Price per kg carcass weight as profit
     
     
-* Prices from August 2018, based on payment system CHTAX.
+* Prices from August 2018, based on payment system CHTAX
     * For calves and adults on different levels but same pattern
     * Shown: prices for adults
 
