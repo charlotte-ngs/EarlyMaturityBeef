@@ -119,6 +119,12 @@ There I assume that breeding occurs within breeds which requires a separate inde
 To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin, which are very different in carcass traits.
 }
 
+## Groups
+
+* Calves are less than 180 d old
+
+* Adults are between 180 and 701 d old
+
 ## Carcass fat
 
 ![](VK_Fett1_SK) 
@@ -135,12 +141,6 @@ knitr::include_graphics(path="VK-Gruppe_CHTAX_SK_seitlich")
 Classified to decreasing conformation classes
 
 Image source: Proviande
-
-## Groups
-
-* Calves are less than 180 d old
-
-* Adults are between 180 and 701 d old
 
 
 ## Economic weights
@@ -219,14 +219,6 @@ g + geom_bar(stat="identity")+
   ylab("Relative price in Sfr. / kg")+
   xlab("kg carcass weight")
 ```
-
-## Groups
-
-* Calves are less than 180 d old
-
-* Adults are between 180 and 701 d old
-
-* Different prices and distributions
 
 ## Breeds
 
