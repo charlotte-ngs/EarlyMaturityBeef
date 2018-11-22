@@ -84,7 +84,7 @@ Both are very promising because the data which they use is already available.
 Since 1992 Proviande routineley records data from beef carcass traits.
 }
 
-## Master thesis
+## First result
 
 * Index as selection criterion 
 
