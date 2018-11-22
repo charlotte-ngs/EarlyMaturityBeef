@@ -86,13 +86,12 @@ Since 1992 Proviande routineley records data from beef carcass traits.
 
 ## First result
 
-* Index as selection criterion 
+* Index allows breeding for multiple traits simultanously 
 
-* Selecting for most economic animal [@Hazel1943]
+* Goal: Selecting most economic animals [@Hazel1943]
 
-* For each trait a breeding value
-
-* Main result until this stage of master thesis
+* For each trait a breeding value 
+    * weighed according to economic relevance
 
 ## Index
 
