@@ -92,6 +92,18 @@ female_generationintervall <- as.numeric(female_generationintervall)
 female_generationintervall
 ```
 
+## Proportion of calves and adults
+
+```{r CalvesAdultsNumber}
+number_calves_adults <- "LM_number_calves_adults"
+number_calves <- read.table(file = number_calves_adults, sep=";", header=TRUE) %>%
+  select(calves)
+number_adults <- read.table(file = number_calves_adults, sep=";", header=TRUE) %>%
+  select(adults)
+proportion_adults <- number_adults/(number_adults+number_calves)
+proportion_calves <- number_calves/(number_adults+number_calves)
+```
+
 
 
 ### Proportion selected
@@ -165,6 +177,12 @@ female_Ainv <- getAInv(female_A)
 ### Design matrix $Z_y$
 
 ```{r DesignMatrix}
+# number adults
+male_number_adults <- as.numeric(round(proportion_adults*male_offspring))
+male_number_calves <- as.numeric(round(proportion_calves*male_offspring))
+female_number_adults <- round(proportion_adults*female_offspring)
+female_number_calves <- round(proportion_adults*female_offspring)
+
 # male
 male_Z<-cbind(matrix(0, nrow=male_offspring*n,ncol=n),diag(male_offspring*n))
 dim(male_Z)
@@ -264,7 +282,7 @@ aMat
 $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 
 ```{r AsymptoticGeneticMatrix}
-Ga<-G-0.5*(as.numeric(solve(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca+as.numeric(solve(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca)
+Ga<-G-0.5*(as.numeric(1/(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca+as.numeric(1/(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca)
 ```
 
 ### Accuracy of the estimated overall breeding value $r_y^*$
