@@ -26,11 +26,11 @@ Scale on the whole unit of the trait, result is a value with unit **Sfr. / trait
 
 # Implementation
 
-Economic weights are weighing factors to produce an aggregate genotype $H$
+Economic weights are weighing factors to produce an index $I$
 
 \begin{equation}
 \label{AggregateGenotype}
-H=\sum{a_iu_i}
+I=a^Tu
 \end{equation}
 
 where
@@ -41,10 +41,15 @@ $u$ is a true breeding value and
 
 $i$ is a trait.
 
-In this thesis the aggregate genotype consists of the traits carcass fat, carcass conformation and carcass weight.
-Consequently the three traits needed an economical weight each.
-The economical weight for a trait is the change in profit in Swiss Francs (Sfr.) per additional unit of the trait.
-It is given by the equation
+In this thesis the index consists of the breeding values carcass fat, carcass conformation and carcass weight for adults and calves each.
+Consequently the six breeding values needed an economic weight each.
+All these breeding values are derived from a trait.
+The economic weight for a trait is the change in profit in Swiss Francs (Sfr.) per additional unit of the trait.
+However, there is no information available about the true change in profit per trait unit.
+The only information available is the payment system CHTAX which determines the price per kg carcass weight depending on the carcass traits.
+Therefore the change in profit is approximated by the difference in price per kg carcass weight determined by CHTAX.
+
+In this case an economic weight is given by the equation
 
 \begin{equation}
 \label{EconomicWeight}
@@ -55,14 +60,11 @@ where
 
 $a$ is the economic weight of a trait,
 
-$\Delta_p$ is the change in revenue in Sfr and
+$\Delta_p$ is the mean change in price per kg carcass weight in Sfr. and
 
 $\Delta_{\mu}$ is the increase in population mean by one unit of a trait.
 
-
-However, there is no information available about the true change in profit per unit carcass fat, carcass conformation and carcass weight.
-This change is therefore approximated by only using the difference in revenue which is caused by price differences per kg carcass weight in the slaughterhouse.
-The change in revenue $\Delta_p$ has been computed by the equation
+The change in price per kg carcass weight $\Delta_p$ has been computed by the equation
 
 \begin{equation}
 \label{DeltaP}
@@ -79,29 +81,29 @@ $T$ means, it is the transpose,
 
 $0$ indicates the initial population and
 
-$1$ indicates the population after the increase in population mean by 0.1.
+$1$ indicates the population after the increase in population mean.
 
-The price changes per unit of a carcass trait $p$ are based on CHTAX.
-There the price differences do not have the same value over the whole scale of the carcass traits.
+The price changes per unit of a carcass trait $p$ are based on CHTAX from August 2018 (Reference??).
+There the price differences do not have the same value over the whole scale of the carcass traits (see table where the prices are shown??).
 For example the change in revenue from carcass fat class 1 to 2 is not the same as from 2 to 3.
-The changes in revenue are different for "adults" and "calves".
-It is assumed that the group "calves" are all classified to the carcass category KV while the group "adults" are classified to MT, OB or RG.
-For the group "adults" the changes in revenue have been taken from a weighed mean of MT, OB and RG.
-Its weights have been chosen from the relative number of slaughtered carcasses classified to MT, OB and RG.
+The changes in revenue are different for adults and calves.
+It is assumed that the group "calves" are all classified to the carcass category KV while the group adults are classified to MT, OB or RG.
+For the group adults the changes in revenue have been taken from a weighed mean of MT, OB and RG.
+Its weights have been chosen from the relative number of slaughtered carcasses classified to MT, OB and RG (see table ???).
+
 Due to the non-linear changes in revenue for the carcass traits, the economic weight depends on the initial distribution of the population over the scale of a carcass trait.
 The initial distribution is different for each beef cattle breed, which also results in different economic weights for each breed.
 In this thesis the economic weights have been computed for the breeds Angus and Limousin.
-
+Here normal distributions are assumed for each carcass trait.
 While the revenue changes from class to class in carcass fat and carcass conformation, it changes at thresholds in carcass weight.
 In a continous normal distribution thresholds are needed to get the frequencies of population $r$ for each price class.
 The price class indicates a range of a carcass trait at which the price per kg carcass weight stays the same.
 For carcass fat and carcass conformation the thresholds have been difficult to set, because they are discreteley distributed (see Figure \@ref(fig:BarplotInitialfrequenciesCF)).
 There the thresholds have been set after the creation of the initial normal distribution approximated to the discrete distribution (see Figure \@ref(fig:NormDistApprox)).
-The tresholds have been set in a way that the population frequencies known by the discrete distribution have fitted to the frequencies in the normal distribution.
+The tresholds have been set in a way that the population frequencies known by the discrete distribution have fitted to the frequencies of the price classes in the normal distribution.
 After this step the procedure to compute the economic weight was again basically the same for all carcass traits:
-The initial normal distribution conserved its shape (standard deviation constant), but has been shifted by increasing the mean by 0.1 (see Figure \@ref(fig:ShiftMean)).
+The initial normal distribution conserved its shape (standard deviation constant), but has been shifted by increasing the mean (see Figure \@ref(fig:ShiftMean)).
 Then the population frequencies within each price class have been computed again using the characteristics of the normal distribution and using the computed thresholds.
-The population frequencies from the initial distribution $0$ and the changed distribution $1$ enabled the computation of the change in revenue for a change in population mean by $\Delta_{\mu}$.
 
 ```{r BarplotInitialfrequenciesCF, echo=FALSE, fig.cap="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)"}
 library(knitr)

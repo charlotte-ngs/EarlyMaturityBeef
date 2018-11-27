@@ -20,11 +20,11 @@ knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
 
 ## Content
 
-* Present Master Thesis
+* Present master thesis
 
-* Material and Method to get first Results
+* Material and method to get first results
 
-* First Results
+* First results
 
 * Outlook
 
@@ -33,19 +33,19 @@ Welcome to my presentation about my master thesis, my name is Silvan.
 I am here tell you what my master thesis is about, how I got my first results and what they are and what I want to do next.
 }
 
-## Master Thesis
+## Master thesis
+
 Goal
 
 * Predicting: Which strategy is suitable to breed for early maturity in beef cattle?
 
-Definition with example
+Definition of early maturity
 
-* 2 beef carcasses, same price at slaughterhouse, but different age at slaughter.
-The younger one was earlier mature than the older one.
+* Animal with same price at the slaughterhouse but younger
 
-Relevance
+Economic relevance
 
-* Younger -> decreased costs.
+* Younger -> less costs for the farmer
 
 \note{
 The goal of my master thesis is to predict by using models, which breeding strategy will be most suitable to breed for early maturity in beef cattle.
@@ -58,19 +58,19 @@ This animal is the one which is earlier mature than the other and this is also t
 }
 
 
-## Master Thesis
+## Master thesis
 
-Four Strategies sorted by increasing complexity:
+Four strategies sorted by increasing complexity:
 
-1. Carcass fat as auxilliary trait.
+1. Carcass fat as auxilliary trait
 
-2. Index over carcass traits.
+2. Index over carcass traits
 
-3. "Deviation in age at slaughter" from @Berry2017.
+3. "Deviation in age at slaughter" from @Berry2017
 
-4. Growth models.
+4. Growth models
 
-Starting with Strategies one and two.
+-> Starting with strategies one and two
 
 \note{
 However, as you can see it is not a trait which you can measure easily. This makes breeding for it difficult.
@@ -84,15 +84,14 @@ Both are very promising because the data which they use is already available.
 Since 1992 Proviande routineley records data from beef carcass traits.
 }
 
-## Master Thesis
+## First result
 
-* Index as selection criterion 
+* Index allows breeding for multiple traits simultanously 
 
-* Selecting for most economic animal [@Hazel1943]
+* Goal: Selecting most economic animals [@Hazel1943]
 
-* For each trait a breeding value
-
-* Main result until this stage of master thesis
+* For each trait a breeding value 
+    * weighed according to economic relevance
 
 ## Index
 
@@ -100,12 +99,13 @@ $$I=a^Tu$$
 
 where 
 
-$a$ is the vector of economic weights --> not available,
+$a$ is the vector of economic weights --> not available
 
-$u$ is the vector of estimated breeding values --> available.
+$u$ is the vector of estimated breeding values --> available
 
-* Carcass conformation, carcass weight and carcass fat for calves and adults
-    * Six economic weights
+* Carcass conformation, carcass weight and carcass fat for calves and adults each
+    * Six breeding values -> six traits
+    * Routeneley recorded by Proviande in slaughterhouses
 
 \note{
 As the first strategy is already established I had first to create the basis for the second strategy to compare them.
@@ -119,35 +119,44 @@ There I assume that breeding occurs within breeds which requires a separate inde
 To get the best overview on all beef breeds I chose to compute the index for the breeds Angus and Limousin, which are very different in carcass traits.
 }
 
-## Economic Weights
+## Groups
 
-* Definition: Change in profit per change in carcass trait []
+* Calves are less than 180 d old
+
+* Adults are between 180 and 701 d old
+
+## Carcass fat
+
+![](VK_Fett1_SK) 
+![](VK_Fett4_SK)
+Classified to fat class one and four
+
+Image source: Proviande
+
+## Carcass conformation
+
+```{r}
+knitr::include_graphics(path="VK-Gruppe_CHTAX_SK_seitlich")
+```
+Classified to decreasing conformation classes
+
+Image source: Proviande
+
+
+## Economic weights
+
+* Definition: Change in profit per change in carcass trait [@brascamp1985]
 
 * Simplification: 
     * Costs constant
     * Price per kg carcass weight as profit
     
     
-* Prices from August 2018.
+* Prices from August 2018, based on payment system CHTAX
+    * For calves and adults on different levels but same pattern
+    * Shown: prices for adults
 
-## Traits
-
-* Carcass fat -> Visual fat coverage
-
-* Carcass conformation -> Visual meat
-
-* Carcass weight -> kg
-
-## Carcass Fat
-
-![](VK_Fett1_SK) 
-![](VK_Fett4_SK)
-Carcass Fat Classes 1 and 4
-
-Image source: Proviande
-
-
-## Carcass Fat
+## Carcass fat
 ```{r}
 library(knitr)
 library(dplyr)
@@ -163,15 +172,8 @@ g <- ggplot(x,aes(Class,Price))
 g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 30))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass Fat Class")
+  xlab("Carcass fat class")
 ```
-
-## Carcass conformation
-
-```{r}
-knitr::include_graphics(path="VK-Gruppe_CHTAX_SK_seitlich")
-```
-From left to right decreasing carcass conformation class.
 
 Image source: Proviande
 
@@ -193,7 +195,7 @@ g <- ggplot(x,aes(Class,Price))
 g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 30))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass Conformation Class")
+  xlab("Carcass conformation class")
 ```
 
 ## Carcass weight
@@ -215,16 +217,8 @@ g <- ggplot(x,aes(threshold,Price))
 g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 30))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("kg Carcass Weight")
+  xlab("kg carcass weight")
 ```
-
-## Groups
-
-* Calves are less than 180 d old
-
-* Adults are between 180 and 701 d old
-
-* Different prices and distributions
 
 ## Breeds
 
@@ -265,7 +259,7 @@ x <-data.frame(Class=rep(c(1:5),times=2),Category=rep(c("Angus", "Limousin"),eac
 g <- ggplot(x,aes(Class,Frequency))
 g + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
   theme_classic()+theme(text = element_text(size = 30))+
-  xlab("Carcass Fat Class")
+  xlab("Carcass fat class")
 ```
 
 ## Method
@@ -318,7 +312,7 @@ g <- ggplot(x,aes(Class,Price,linetype=NULL))
 g+
   geom_bar(stat="identity",show_guide=FALSE,aes(linetype=NULL))+
  ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass Fat Class") + 
+  xlab("Carcass fat class") + 
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.3, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c(NULL=NULL,"Initial distribution"="solid","New distribution"="dashed"), guide = guide_legend(title=NULL))+
@@ -362,17 +356,17 @@ AN <- gather(AN,"Trait","Angus")
 AN$Angus <- AN$Angus*SD
 
 table <- inner_join(AN, LM, by="Trait")
-table$Trait <- c("Calves Conformation", "Adults Conformation", "Calves Fat", "Adults Fat", "Calves Weight", "Adults Weight")
+table$Trait <- c("Calves conformation", "Adults conformation", "Calves fat", "Adults fat", "Calves weight", "Adults weight")
 kable(table, digits=2)
 ```
 
-* Per genetic standard deviation
+* Per genetic standard deviation -> comparable
 
-* Carcass conformation in relation to Carcass fat more important for Angus than Limousin, plus negative for adults
+* Carcass conformation in relation to carcass fat more important for Angus than Limousin
 
 * Negative economic weights for carcass weight
 
-* Calves more important than Adults
+* Calves more important than adults
 
 \note{
 Here you can see that the economically most important trait in Angus is carcass fat in calves.
@@ -380,23 +374,25 @@ Here you can see that the economically most important trait in Angus is carcass 
 
 ## Discussion
 
+* Profit in price change per carcass weight -> Underestimation of carcass weight
+
 * Costs not considered
 
-* Explaines differences to @Aby2012, where carcass weight has highest positive economic value.
+* Explaines differences to @Aby2012, where carcass weight has highest positive economic weight.
 
 * Breeding values corrected for age at slaughter
-    * The lower the age the higher the value
-    * Would need positive weight to breed for early maturity
+    * The lower the age the higher the breeding values
+    * Negative weight for carcass weight -> Breeding for animals which grow slowly
 
 ## Outlook
 
-* Evaluation of Strategies
+* Evaluation of strategies: Carcass fat and index
 
 * Tool: Genetic Gain
 
 * Genetic Gain --> Improvement of carcass traits per year
 
-* Characterization of 2 other Strategies
+* Characterization of the two other strategies
 
 \note{
 Now I have got the two strategies which should help to breed for early maturity.
@@ -413,7 +409,7 @@ These results will help to predict how suitable the two strategies are to breed 
 Thank you for your attention.
 }
 
-## Thank you
+## In association with
 
 ```{r}
 knitr::include_graphics(path="Qualitas")
