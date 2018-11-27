@@ -185,12 +185,8 @@ female_number_calves <- round(proportion_adults*female_offspring)
 
 # male
 male_Z<-cbind(matrix(0, nrow=male_offspring*n,ncol=n),diag(male_offspring*n))
-dim(male_Z)
 # female
 female_Z<-cbind(matrix(0, nrow=female_offspring*n,ncol=n),diag(female_offspring*n))
-dim(female_Z)
-male_offspring*n
-male_offspring
 ```
 
 
@@ -273,8 +269,6 @@ male_Ca <- Ca[1:n,]
 # female
 female_Ca <- Ca[(1+n):(2*n),]
 
-male_Ca
-aMat
 ```
 
 ### Asymptotic genetic variance/covariance matrix $G^*$
