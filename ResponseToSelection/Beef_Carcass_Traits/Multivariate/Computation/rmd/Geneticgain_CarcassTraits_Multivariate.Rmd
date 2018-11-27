@@ -294,15 +294,15 @@ stdev_overall
 $$Q= \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}$$
 
 ```{r GeneticGainOverall}
-LM_Qoverall_index <- (male_i*male_ra*stdev_overall+female_i*female_ra*stdev_overall)/(male_generationintervall+female_generationintervall)
-LM_Qoverall_index
+Qoverall_index <- (male_i*male_ra*stdev_overall+female_i*female_ra*stdev_overall)/(male_generationintervall+female_generationintervall)
+Qoverall_index
 ```
 
 ### Correlated asymptotic genetic gain of traits when selecting for the aggregate genotype.
 
 $$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
 
-```{r GeneticGainTrait}
+```{r GenGain}
 QaCF<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
 
 jQcCF <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
@@ -380,16 +380,16 @@ $$Q_m^*= \frac {\sum_{y=1}^{2} i_yb^T(C_y^*)_m \sqrt{b^TC_y^*b}}{\sum_{y=1}^{2}L
 ```{r}
 library(ggplot2)
 # Plot aggregate genotype
-AN_Qoverall_index <- Qoverall
+#AN_Qoverall_index <- Qoverall_index
 LM_Qoverall_index <- 2
 AN_Qoverall_CF <- 2
 LM_Qoverall_CF <- 4
 
-Aggregate_Genotype <- data.frame(Gain=c(AN_Qoverall_index,LM_Qoverall_index,AN_Qoverall_CF,LM_Qoverall_CF),Breed=rep(c("Angus","Limousin"),times=2), Strategy=rep(c("Index","CF"),each=2))
+#Aggregate_Genotype <- data.frame(Gain=c(AN_Qoverall_index,LM_Qoverall_index,AN_Qoverall_CF,LM_Qoverall_CF),Breed=rep(c("Angus","Limousin"),times=2), Strategy=rep(c("Index","CF"),each=2))
 
-Aggregate_Genotype <- ggplot(Aggregate_Genotype,aes(Breed,Gain,fill=Strategy))
+#Aggregate_Genotype <- ggplot(Aggregate_Genotype,aes(Breed,Gain,fill=Strategy))
 
-Aggregate_Genotype + geom_bar(stat="identity",position="dodge")
+#Aggregate_Genotype + geom_bar(stat="identity",position="dodge")
 ```
 
 
