@@ -64,13 +64,13 @@ male_offspring <- "LM_number_of_offspring"
 male_offspring <- read.table(file = male_offspring, sep=";", header=TRUE) %>%
   select(male)
 male_offspring <- as.numeric(male_offspring)
-male_offspring
+male_offspring <- 20
 ## female
 female_offspring <- "LM_number_of_offspring"
 female_offspring <- read.table(file = female_offspring, sep=";", header=TRUE) %>%
   select(female)
 female_offspring <- as.numeric(female_offspring)
-female_offspring
+female_offspring <- 20
 ```
 
 
@@ -150,8 +150,8 @@ n <- as.numeric(nrow(phenotypic_var_cov))
 
 ```{r}
 G <- genetic_var_cov
-male_R <- residual_var_cov %x% diag(male_offspring)
-female_R <- residual_var_cov %x% diag(female_offspring)
+male_R <- residual_var_cov %x% diag(male_offspring/2)
+female_R <- residual_var_cov %x% diag(female_offspring/2)
 ```
 
 
@@ -177,16 +177,30 @@ female_Ainv <- getAInv(female_A)
 ### Design matrix $Z_y$
 
 ```{r DesignMatrix}
-# number adults
+# numbers of adults and calves in scenario
 male_number_adults <- as.numeric(round(proportion_adults*male_offspring))
 male_number_calves <- as.numeric(round(proportion_calves*male_offspring))
-female_number_adults <- round(proportion_adults*female_offspring)
-female_number_calves <- round(proportion_adults*female_offspring)
+female_number_adults <- as.numeric(round(proportion_adults*female_offspring))
+female_number_calves <- as.numeric(round(proportion_calves*female_offspring))
+# Kronecker
+kronecker_adults <- cbind(c(1,0,0),c(0,0,0),c(0,1,0),c(0,0,0),c(0,0,1),c(0,0,0))
+kronecker_calves <- cbind(c(0,0,0),c(1,0,0),c(0,0,0),c(0,1,0),c(0,0,0),c(0,0,1))
 
 # male
-male_Z<-cbind(matrix(0, nrow=male_offspring*n,ncol=n),diag(male_offspring*n))
+male_calves <- diag(male_number_calves)%x%kronecker_calves
+male_calves <- cbind(matrix(0, nrow=nrow(male_calves),ncol=male_number_adults*n),male_calves)
+male_adults <- diag(male_number_adults)%x%kronecker_adults
+male_adults <- cbind(male_adults,matrix(0, nrow=nrow(male_adults),ncol=male_number_calves*n))
+male_Z <- rbind(male_calves,male_adults)
+male_Z<-cbind(matrix(0, nrow=male_offspring*(n/2),ncol=n),male_Z)
+
 # female
-female_Z<-cbind(matrix(0, nrow=female_offspring*n,ncol=n),diag(female_offspring*n))
+female_calves <- diag(female_number_calves)%x%kronecker_calves
+female_calves <- cbind(matrix(0, nrow=nrow(female_calves),ncol=female_number_adults*n),female_calves)
+female_adults <- diag(female_number_adults)%x%kronecker_adults
+female_adults <- cbind(female_adults,matrix(0, nrow=nrow(female_adults),ncol=female_number_calves*n))
+female_Z <- rbind(female_calves,female_adults)
+female_Z<-cbind(matrix(0, nrow=female_offspring*(n/2),ncol=n),female_Z)
 ```
 
 
