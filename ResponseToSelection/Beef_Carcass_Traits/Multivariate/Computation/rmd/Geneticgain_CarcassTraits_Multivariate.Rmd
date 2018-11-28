@@ -7,7 +7,7 @@ output: pdf_document
 
 # Goal
 
-To compute genetic gains of the traits carcass fatt, carcass conformation and carcass weight. Each trait for adults and calves. (6 traits in total).
+To compute genetic gains of the traits carcass fat, carcass conformation and carcass weight. Each trait for adults and calves. (6 traits in total).
 
 # Plan
 
@@ -48,6 +48,10 @@ genetic_var_cov <- as.matrix(genetic_var_cov)
 residual_var_cov <- "adults_calves_residual_variances_covariances"
 residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
 residual_var_cov <- as.matrix(residual_var_cov)
+residual_var_cov_calves <- residual_var_cov[c(1,3,5),c(1,3,5)]
+residual_var_cov_calves
+residual_var_cov_adults <- residual_var_cov[c(2,4,6),c(2,4,6)]
+residual_var_cov_adults
 ## phenotypic
 phenotypic_var_cov <- "adults_calves_phenotypic_variances_covariances"
 phenotypic_var_cov <- read.table(file = phenotypic_var_cov, sep=";", header=TRUE)
@@ -64,13 +68,13 @@ male_offspring <- "LM_number_of_offspring"
 male_offspring <- read.table(file = male_offspring, sep=";", header=TRUE) %>%
   select(male)
 male_offspring <- as.numeric(male_offspring)
-male_offspring
+male_offspring <- 20
 ## female
 female_offspring <- "LM_number_of_offspring"
 female_offspring <- read.table(file = female_offspring, sep=";", header=TRUE) %>%
   select(female)
 female_offspring <- as.numeric(female_offspring)
-female_offspring
+female_offspring <- 5
 ```
 
 
@@ -101,7 +105,9 @@ number_calves <- read.table(file = number_calves_adults, sep=";", header=TRUE) %
 number_adults <- read.table(file = number_calves_adults, sep=";", header=TRUE) %>%
   select(adults)
 proportion_adults <- number_adults/(number_adults+number_calves)
+proportion_adults <- 0.5
 proportion_calves <- number_calves/(number_adults+number_calves)
+proportion_calves <- 0.5
 ```
 
 
@@ -115,13 +121,13 @@ male_proportionselected <- "LM_proportion_selected"
 male_proportionselected <- read.table(file = male_proportionselected, sep=";", header=TRUE) %>%
   select(male)
 male_proportionselected <- as.numeric(male_proportionselected)
-male_proportionselected
+male_proportionselected <- 0.1
 ## female
 female_proportionselected <- "LM_proportion_selected"
 female_proportionselected <- read.table(file = female_proportionselected, sep=";", header=TRUE) %>%
   select(female)
 female_proportionselected <- as.numeric(female_proportionselected)
-female_proportionselected
+female_proportionselected <- 0.5
 ```
 
 ### Economic values $a$
@@ -133,6 +139,7 @@ a <- "LM_economic_values"
 a <- read.table(file = a, sep=";", header=TRUE)
 aMat <- as.matrix(a)
 a <- as.vector(aMat)
+a
 dim(t(a))
 is.vector(a)
 dim(aMat)
@@ -146,14 +153,6 @@ dim(aMat)
 n <- as.numeric(nrow(phenotypic_var_cov))
 ```
 
-### Variance Covariance Matrices $G$ (genetic) and $R_y$ (residual)
-
-```{r}
-G <- genetic_var_cov
-male_R <- residual_var_cov %x% diag(male_offspring)
-female_R <- residual_var_cov %x% diag(female_offspring)
-```
-
 
 ### Relationship Matrix $A_y$ and Inverse $A_y^{-1}$
 
@@ -163,13 +162,15 @@ female_R <- residual_var_cov %x% diag(female_offspring)
 suppressPackageStartupMessages(library(pedigreemm))
 mnumb <- male_offspring+1
 male_A <- pedigree(sire = c(NA,rep(1,times = male_offspring)), dam =c(NA,rep(NA,times = male_offspring)), label = 1:mnumb)
+male_A
 # Compute inverse of relationsship matrix.
 male_Ainv <- getAInv(male_A)
 ##  female
 # Compute the relationsship matrix dependent on the number of offspring of the selection candidate. The selection candidate is the first animal.
 suppressPackageStartupMessages(library(pedigreemm))
 mnumb <- female_offspring+1
-female_A <- pedigree(sire = c(NA,rep(1,times = female_offspring)), dam =c(NA,rep(NA,times = female_offspring)), label = 1:mnumb)
+female_A <- pedigree(sire = c(NA,rep(NA,times = female_offspring)), dam =c(NA,rep(1,times = female_offspring)), label = 1:mnumb)
+female_A
 # Compute inverse of relationsship matrix.
 female_Ainv <- getAInv(female_A)
 ```
@@ -177,18 +178,82 @@ female_Ainv <- getAInv(female_A)
 ### Design matrix $Z_y$
 
 ```{r DesignMatrix}
-# number adults
-male_number_adults <- as.numeric(round(proportion_adults*male_offspring))
-male_number_calves <- as.numeric(round(proportion_calves*male_offspring))
-female_number_adults <- round(proportion_adults*female_offspring)
-female_number_calves <- round(proportion_adults*female_offspring)
+# numbers of adults and calves in scenario
+male_number_adults <- floor(proportion_adults*male_offspring)[[1]]
+male_number_calves <- male_offspring-male_number_adults
+proportion_adults
+male_number_calves
+female_number_adults <- floor(proportion_adults*female_offspring)[[1]]
+female_number_calves <- female_offspring-female_number_adults
+# Kronecker
+kronecker_calves <- cbind(c(1,0,0),c(0,0,0),c(0,1,0),c(0,0,0),c(0,0,1),c(0,0,0))
+kronecker_calves
+kronecker_adults <- cbind(c(0,0,0),c(1,0,0),c(0,0,0),c(0,1,0),c(0,0,0),c(0,0,1))
 
 # male
-male_Z<-cbind(matrix(0, nrow=male_offspring*n,ncol=n),diag(male_offspring*n))
+male_calves <- diag(1,male_number_calves)%x%kronecker_calves
+male_calves
+dim(male_calves)
+male_calves <- cbind(male_calves,matrix(0, nrow=nrow(male_calves),ncol=male_number_adults*n))
+male_adults <- diag(male_number_adults)%x%kronecker_adults
+male_adults <- cbind(matrix(0, nrow=nrow(male_adults),ncol=male_number_calves*n),male_adults)
+male_adults
+male_Z <- rbind(male_calves, male_adults)
+male_Z<-cbind(matrix(0, nrow=male_offspring*(n/2),ncol=n),male_Z)
+male_Z
+dim(male_Z)
+G
 # female
-female_Z<-cbind(matrix(0, nrow=female_offspring*n,ncol=n),diag(female_offspring*n))
+female_calves <- diag(1,female_number_calves)%x%kronecker_calves
+female_calves
+dim(female_calves)
+female_calves <- cbind(female_calves,matrix(0, nrow=nrow(female_calves),ncol=female_number_adults*n))
+female_adults <- diag(female_number_adults)%x%kronecker_adults
+female_adults <- cbind(matrix(0, nrow=nrow(female_adults),ncol=female_number_calves*n),female_adults)
+female_adults
+female_Z <- rbind(female_calves, female_adults)
+female_Z<-cbind(matrix(0, nrow=female_offspring*(n/2),ncol=n),female_Z)
+female_Z
+dim(female_Z)
 ```
 
+### Variance Covariance Matrices $G$ (genetic) and $R_y$ (residual)
+
+```{r}
+G <- genetic_var_cov
+
+# male
+
+male_calves_kronecker_residual <- diag(male_number_calves) %x% residual_var_cov_calves 
+male_adults_kronecker_residual <- diag(male_number_adults) %x% residual_var_cov_adults 
+
+male_calves_kronecker_residual_extended <- cbind(male_calves_kronecker_residual, matrix(0,nrow=nrow(male_calves_kronecker_residual),ncol=ncol(male_adults_kronecker_residual)))
+
+male_adults_kronecker_residual_extended <- cbind( matrix(0,nrow=nrow(male_adults_kronecker_residual),ncol=ncol(male_calves_kronecker_residual)), male_adults_kronecker_residual)
+
+dim(male_calves_kronecker_residual_extended)
+dim(male_adults_kronecker_residual_extended)
+
+male_R <- rbind(male_calves_kronecker_residual_extended,male_adults_kronecker_residual_extended)
+male_R
+
+# female
+
+female_calves_kronecker_residual <- diag(female_number_calves) %x% residual_var_cov_calves 
+female_adults_kronecker_residual <- diag(female_number_adults) %x% residual_var_cov_adults 
+
+female_calves_kronecker_residual_extended <- cbind(female_calves_kronecker_residual, matrix(0,nrow=nrow(female_calves_kronecker_residual),ncol=ncol(female_adults_kronecker_residual)))
+
+female_adults_kronecker_residual_extended <- cbind( matrix(0,nrow=nrow(female_adults_kronecker_residual),ncol=ncol(female_calves_kronecker_residual)), female_adults_kronecker_residual)
+
+dim(female_calves_kronecker_residual_extended)
+dim(female_adults_kronecker_residual_extended)
+
+female_R <- rbind(female_calves_kronecker_residual_extended,female_adults_kronecker_residual_extended)
+female_R
+dim(female_R)
+
+```
 
 ### Selection intensity $i_y$ and value of trunctation $x_y$
 
@@ -196,9 +261,13 @@ female_Z<-cbind(matrix(0, nrow=female_offspring*n,ncol=n),diag(female_offspring*
 # male
 male_i <- dnorm(qnorm(1-male_proportionselected))/male_proportionselected
 male_x <- qnorm(male_proportionselected, lower.tail = FALSE)
+male_i
+male_x
 # female
 female_i <- dnorm(qnorm(1-female_proportionselected))/female_proportionselected
 female_x <- qnorm(female_proportionselected, lower.tail = FALSE)
+female_i
+female_x
 ```
 
 ## Computations with Equations
@@ -210,8 +279,10 @@ $$k_y=i_y(i_y-x_y)$$
 ```{r}
 # male
 male_k <- male_i*(male_i-male_x)
+male_k
 # female
 female_k <- female_i*(female_i-female_x)
+female_k
 ```
 
 
@@ -223,8 +294,13 @@ $$PEV_y=(Z_y^TR_y^{-1}Z_y+A_y^{-1} \otimes G^{-1})^{-1}[1:n,1:n]$$
 dim(male_Z)
 dim(male_Ainv)
 dim(male_R)
+dim(female_Z)
+dim(female_Ainv)
+dim(female_R)
 # male
 male_PEV <- solve(t(male_Z)%*%solve(male_R)%*%male_Z+male_Ainv%x%solve(G))[1:n,1:n]
+n
+male_PEV
 # female
 female_PEV <- solve(t(female_Z)%*%solve(female_R)%*%female_Z+female_Ainv%x%solve(G))[1:n,1:n]
 ```
@@ -269,6 +345,11 @@ male_Ca <- Ca[1:n,]
 # female
 female_Ca <- Ca[(1+n):(2*n),]
 
+male_Ca
+female_Ca
+
+matrix(c(1+0.5*male_k, 0.5*female_k,0.5*male_k, 1+0.5*female_k),nrow = 2, ncol = 2, byrow=TRUE)
+
 ```
 
 ### Asymptotic genetic variance/covariance matrix $G^*$
@@ -276,7 +357,11 @@ female_Ca <- Ca[(1+n):(2*n),]
 $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 
 ```{r AsymptoticGeneticMatrix}
-Ga<-G-0.5*(as.numeric(1/(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca+as.numeric(1/(as.numeric(male_k*t(a)%*%male_Ca%*%a)))*male_Ca%*%a%*%t(a)%*%male_Ca)
+male_k
+Ga<-G-0.5*(as.numeric(male_k*1/as.numeric(t(a)%*%male_Ca%*%a))*male_Ca%*%a%*%t(a)%*%male_Ca+
+             as.numeric(female_k*1/as.numeric(t(a)%*%female_Ca%*%a))*female_Ca%*%a%*%t(a)%*%female_Ca)
+Ga
+eigen(Ga)
 ```
 
 ### Accuracy of the estimated overall breeding value $r_y^*$
