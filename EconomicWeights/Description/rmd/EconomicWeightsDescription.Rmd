@@ -26,20 +26,21 @@ Scale on the whole unit of the trait, result is a value with unit **Sfr. / trait
 
 # Implementation
 
-Economic weights are weighing factors to produce an index $I$ [@Hazel1943].
+An index is an instrument to breed for multiple traits simultanously.
+Its goal is to rank the animals according to their economic performance.
+The animals which give the highest profit should get the highest value from the index [@Hazel1943].
+In this thesis each trait was represented by its estimated breeding value.
+The weighed sum of these breeding values formed the value of the index $I$.
+It was calculated as
+
+$$I=a'u$$
 
 \begin{equation}
 \label{AggregateGenotype}
-I=a^Tu
+I=a'u
 \end{equation}
 
-where
-
-$a$ is an economic weight,
-
-$u$ is a true breeding value and
-
-$i$ is a trait.
+where $a$ is the vector of economic weights and $u$ is the vector of estimated breeding values.
 
 In this thesis the index consists of the breeding values carcass fat, carcass conformation and carcass weight for adults and calves each.
 Consequently the six breeding values needed an economic weight each.

@@ -340,14 +340,16 @@ library(readr)
 SD  <- "adults_calves_genetic_variances_covariances"
 SD  <- read.table(file = SD, sep=";", header=TRUE)
 SD <- as.matrix(SD)
+SD
 SD <- diag(SD)
 
 SD[5:6] <- SD[5:6]*10^4
-SD[5:6] <- sqrt(SD[5:6])
+SD <- sqrt(SD)
 
 LM <- "LM_economic_values"
 LM <- read.table(file = LM, sep=";", header=TRUE)
 LM <- gather(LM,"Trait","Limousin")
+LM
 LM$Limousin <- LM$Limousin*SD
 
 AN  <- "AN_economic_values"
@@ -358,6 +360,8 @@ AN$Angus <- AN$Angus*SD
 table <- inner_join(AN, LM, by="Trait")
 table$Trait <- c("Calves conformation", "Adults conformation", "Calves fat", "Adults fat", "Calves weight", "Adults weight")
 kable(table, digits=2)
+table
+SD
 ```
 
 * Per genetic standard deviation -> comparable
