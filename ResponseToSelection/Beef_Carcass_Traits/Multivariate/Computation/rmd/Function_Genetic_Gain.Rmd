@@ -1,0 +1,41 @@
+---
+title: "Function_GeneticGain"
+author: "Silvan"
+date: "30 11 2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Covariance matrix between true and estimated breeding values
+
+
+```{r intfunceconomicvalue}
+#' @title
+#' Covariance matrices between true and estimated breeding values.
+#' @description
+#' This function creates a covariance matrix between true and estimated breeding values of a selection candidate. This matrix is used to compute the genetic gain of an aggregate genotype when selection is based on multiple breeding values. The computation of the matrix is based on a possible scenario with known numbers of related animals, known genetic and residual variances and covariances. Here it is assumed, that there exist 6 breeding values which are present in the covariance matrix. This should result in a 6 x 6 matrix. Special is that it is also assumed, that the selection candidate has no records itself and that its relatives can have maximally have records of three of the six traits. This because they can not have a record as calf and as adult.
+#' @param genetic_var_cov   The genetic variance-covariance matrix between the involved traits in the aggregate genotype.
+#' @param residual_var_cov  The genetic variance-covariance matrix between the involved traits in the aggregate genotype.
+#' @param offspring         Number of the assumed offspring of the selection candidate when selection occurs.
+#' @param proportion_calves Proportion of calves in the offspring.
+#' @param proportion_adults Proportion of adults in the offspring.
+#' @return                 economic value
+compute_internal_economic_value <- function(pvec_threshold,
+                                            pvec_price,
+                                            pn_mean,
+                                            pn_sd,
+                                            pn_delta_mean){
+        # define new mean
+        pn_mean_new <- pn_mean+pn_delta_mean
+        # define frequencies for initial mean
+        freq_pn_mean <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean, lower.tail = T)))
+        # define frequencies for new mean
+        freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
+        # compute economic weight
+        ev_result <- (t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean)/pn_delta_mean
+        return(ev_result)
+      }
+```
