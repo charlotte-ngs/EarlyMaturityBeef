@@ -359,7 +359,6 @@ $$G^*=G-1/2{\sum_{y=1}^{2}(k_y(a^TC_y^*a)^{-1}C_y^*aa^TC_y^*)}$$
 male_k
 Ga<-G-0.5*(as.numeric(male_k*1/as.numeric(t(a)%*%male_Ca%*%a))*male_Ca%*%a%*%t(a)%*%male_Ca+
              as.numeric(female_k*1/as.numeric(t(a)%*%female_Ca%*%a))*female_Ca%*%a%*%t(a)%*%female_Ca)
-Ga
 eigen(Ga)
 ```
 
@@ -403,15 +402,25 @@ QaCF<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*1/(sqrt(as.numeric(t(a)%*%male
         female_i*as.numeric(t(a)%*%female_Ca[,"aCF"]) * 1/(sqrt(as.numeric(t(a)%*%female_Ca%*%a))))/(male_generationintervall+female_generationintervall)
 QaCF
 
-jQcCF <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+QcCF<- (male_i*as.numeric(t(a)%*%male_Ca[,"cCF"])*1/(sqrt(as.numeric(t(a)%*%male_Ca%*%a))) +  
+        female_i*as.numeric(t(a)%*%female_Ca[,"cCF"]) * 1/(sqrt(as.numeric(t(a)%*%female_Ca%*%a))))/(male_generationintervall+female_generationintervall)
+QcCF
 
-QaCC <- (male_i*as.numeric(t(a)%*%male_Ca[,"aCC"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCC"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+QaCC<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCC"])*1/(sqrt(as.numeric(t(a)%*%male_Ca%*%a))) +  
+        female_i*as.numeric(t(a)%*%female_Ca[,"aCC"]) * 1/(sqrt(as.numeric(t(a)%*%female_Ca%*%a))))/(male_generationintervall+female_generationintervall)
+QaCC
 
-QcCC <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCC"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCC"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+QcCC<- (male_i*as.numeric(t(a)%*%male_Ca[,"cCC"])*1/(sqrt(as.numeric(t(a)%*%male_Ca%*%a))) +  
+        female_i*as.numeric(t(a)%*%female_Ca[,"cCC"]) * 1/(sqrt(as.numeric(t(a)%*%female_Ca%*%a))))/(male_generationintervall+female_generationintervall)
+QcCC
 
-QaCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"aCW"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCW"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+QaCW<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCW"])*1/(sqrt(as.numeric(t(a)%*%male_Ca%*%a))) +  
+        female_i*as.numeric(t(a)%*%female_Ca[,"aCW"]) * 1/(sqrt(as.numeric(t(a)%*%female_Ca%*%a))))/(male_generationintervall+female_generationintervall)
+QaCW
 
-QcCW <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCW"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+QcCW<- (male_i*as.numeric(t(a)%*%male_Ca[,"cCW"])*1/(sqrt(as.numeric(t(a)%*%male_Ca%*%a))) +  
+        female_i*as.numeric(t(a)%*%female_Ca[,"cCW"]) * 1/(sqrt(as.numeric(t(a)%*%female_Ca%*%a))))/(male_generationintervall+female_generationintervall)
+QcCW
 
 ```
 
@@ -462,11 +471,11 @@ $$Q_m^*= \frac {\sum_{y=1}^{2} i_yb^T(C_y^*)_m \sqrt{b^TC_y^*b}}{\sum_{y=1}^{2}L
 ```
 
 ```{r}
-# library(ggplot2)
+library(ggplot2)
 #   
-dataframe <- data.frame(names = c("Overall",rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2)), Sfr = c(Qoverall_index,CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=c("index",rep(c("CFa","index"),each=6)))
+dataframe <- data.frame(names = c("Overall",rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2)), Unit = c(Qoverall_index,CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=c("index",rep(c("CFa","index"),each=6)))
 # 
-barplot <- ggplot(dataframe,aes(x=names,y=Sfr,fill=Strategy))
+barplot <- ggplot(dataframe,aes(x=names,y=Unit,fill=Strategy))
  barplot + geom_bar(stat="identity",position="dodge")
 
 ```
