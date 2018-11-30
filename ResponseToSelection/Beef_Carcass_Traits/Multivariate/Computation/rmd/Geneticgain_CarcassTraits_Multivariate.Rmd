@@ -462,13 +462,12 @@ $$Q_m^*= \frac {\sum_{y=1}^{2} i_yb^T(C_y^*)_m \sqrt{b^TC_y^*b}}{\sum_{y=1}^{2}L
 
 ```{r}
 # library(ggplot2)
-# x <- 
 #   
-# dataframe <- data.frame(names = c("Overall",rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2)), Sfr = c(Qoverall,CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=c("index",rep(c("CFa","index"),each=6)))
+dataframe <- data.frame(names = c("Overall",rep(c("CFa","CFc","CCa","CCc","CWa","CWc"),times=2)), Sfr = c(Qoverall_index,CFaQ,CFcQ,CCaQ,CCcQ,CWaQ,CWcQ,QaCF,QcCF,QaCC,QcCC,QaCW,QcCW), Strategy=c("index",rep(c("CFa","index"),each=6)))
 # 
-# barplot <- ggplot(dataframe,aes(x=names,y=Sfr,fill=Strategy))
-# barplot + geom_bar(stat="identity",position="dodge")
-# rep(rep(c("CFa","index"),each=6),times=2)
+barplot <- ggplot(dataframe,aes(x=names,y=Sfr,fill=Strategy))
+ barplot + geom_bar(stat="identity",position="dodge")
+
 ```
 
 
