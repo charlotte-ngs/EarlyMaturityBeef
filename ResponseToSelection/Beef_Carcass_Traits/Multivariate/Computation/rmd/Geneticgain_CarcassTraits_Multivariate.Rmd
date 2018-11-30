@@ -202,7 +202,6 @@ male_Z <- rbind(male_calves, male_adults)
 male_Z<-cbind(matrix(0, nrow=male_offspring*(n/2),ncol=n),male_Z)
 male_Z
 dim(male_Z)
-G
 # female
 female_calves <- diag(1,female_number_calves)%x%kronecker_calves
 female_calves
@@ -397,10 +396,12 @@ Qoverall_index
 
 ### Correlated asymptotic genetic gain of traits when selecting for the aggregate genotype.
 
-$$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}$$
+$$Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m * (\sqrt{a^TC_y^*a})^{-1}}{\sum_{y=1}^{2}L_y}$$
 
 ```{r GenGain}
-QaCF<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"aCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+QaCF<- (male_i*as.numeric(t(a)%*%male_Ca[,"aCF"])*1/(sqrt(as.numeric(t(a)%*%male_Ca%*%a))) +  
+        female_i*as.numeric(t(a)%*%female_Ca[,"aCF"]) * 1/(sqrt(as.numeric(t(a)%*%female_Ca%*%a))))/(male_generationintervall+female_generationintervall)
+QaCF
 
 jQcCF <- (male_i*as.numeric(t(a)%*%male_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*as.numeric(t(a)%*%female_Ca[,"cCF"])*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
 
