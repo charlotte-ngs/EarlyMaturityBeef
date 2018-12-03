@@ -162,7 +162,6 @@ n <- as.numeric(nrow(phenotypic_var_cov))
 suppressPackageStartupMessages(library(pedigreemm))
 mnumb <- male_offspring+1
 male_A <- pedigree(sire = c(NA,rep(1,times = male_offspring)), dam =c(NA,rep(NA,times = male_offspring)), label = 1:mnumb)
-male_A
 # Compute inverse of relationsship matrix.
 male_Ainv <- getAInv(male_A)
 ##  female
@@ -170,7 +169,6 @@ male_Ainv <- getAInv(male_A)
 suppressPackageStartupMessages(library(pedigreemm))
 mnumb <- female_offspring+1
 female_A <- pedigree(sire = c(NA,rep(NA,times = female_offspring)), dam =c(NA,rep(1,times = female_offspring)), label = 1:mnumb)
-female_A
 # Compute inverse of relationsship matrix.
 female_Ainv <- getAInv(female_A)
 ```
@@ -233,7 +231,7 @@ dim(male_calves_kronecker_residual_extended)
 dim(male_adults_kronecker_residual_extended)
 
 male_R <- rbind(male_calves_kronecker_residual_extended,male_adults_kronecker_residual_extended)
-male_R
+
 
 # female
 

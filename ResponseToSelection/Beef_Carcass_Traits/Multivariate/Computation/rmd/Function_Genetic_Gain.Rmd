@@ -14,28 +14,249 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r intfunceconomicvalue}
 #' @title
-#' Covariance matrices between true and estimated breeding values.
+#' Asymptotic covariance matrices between true and estimated breeding values.
 #' @description
-#' This function creates a covariance matrix between true and estimated breeding values of a selection candidate. This matrix is used to compute the genetic gain of an aggregate genotype when selection is based on multiple breeding values. The computation of the matrix is based on a possible scenario with known numbers of related animals, known genetic and residual variances and covariances. Here it is assumed, that there exist 6 breeding values which are present in the covariance matrix. This should result in a 6 x 6 matrix. Special is that it is also assumed, that the selection candidate has no records itself and that its relatives can have maximally have records of three of the six traits. This because they can not have a record as calf and as adult.
+#' This function creates two covariance matrices between true and estimated breeding values of a male and a female selection candidate. These matrices are used to compute the genetic gain of an aggregate genotype when selection is based on multiple breeding values. The computation of the matrix is based on a possible scenario with known numbers of related animals, known genetic and residual variances and covariances. Here it is assumed, that there exist 6 breeding values which are present in the covariance matrix. This should result in two 6 x 6 matrices. Special is that it is also assumed, that the selection candidate has no records itself and that its relatives can have maximally have records of three of the six traits. This because they can not have both a record as calf and as adult. The variance-covariance matrices need the order calf, adult, calf, adult, calf, adult. In the result the matrices are bond together to one matrix, where the male covariance matrix is the matrix from row 1 to 6 and the female matrix is the matrix from row 7 to 12.
 #' @param genetic_var_cov   The genetic variance-covariance matrix between the involved traits in the aggregate genotype.
 #' @param residual_var_cov  The genetic variance-covariance matrix between the involved traits in the aggregate genotype.
-#' @param offspring         Number of the assumed offspring of the selection candidate when selection occurs.
+#' @param male_offspring    Number of the assumed offspring of the male selection candidate when selection occurs.
+#' @param female_offspring    Number of the assumed offspring of the female selection candidate when selection occurs.
 #' @param proportion_calves Proportion of calves in the offspring.
 #' @param proportion_adults Proportion of adults in the offspring.
-#' @return                 economic value
-compute_internal_economic_value <- function(pvec_threshold,
-                                            pvec_price,
-                                            pn_mean,
-                                            pn_sd,
-                                            pn_delta_mean){
-        # define new mean
-        pn_mean_new <- pn_mean+pn_delta_mean
-        # define frequencies for initial mean
-        freq_pn_mean <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean, lower.tail = T)))
-        # define frequencies for new mean
-        freq_pn_mean_new <- diff(c(0,pnorm(pvec_threshold,sd=pn_sd,mean=pn_mean_new, lower.tail = T)))
-        # compute economic weight
-        ev_result <- (t(pvec_price)%*%freq_pn_mean_new-t(pvec_price)%*%freq_pn_mean)/pn_delta_mean
-        return(ev_result)
+#' @param male_proportionselected Proportion selected of the offspring of a male selection candidate
+#' @param female_proportionselected Proportion selected of the offspring of a female selection candidate
+#' @return                 Asymptotic Covariance Matrices between true and estimated breeding values
+compute_asymptotic_covariance_matrices <- function(genetic_var_cov,
+                                            residual_var_cov,
+                                            offspring,
+                                            proportion_calves,
+                                            proportion_adults,
+                                            male_proportionselected,
+                                            female_proportionselected){
+        # define number of traits
+        n <- as.numeric(nrow(genetic_var_cov))
+        
+        # Compute the relationsship matrix dependent on the number of offspring of the selection candidate. The selection candidate is the first animal. Male
+        suppressPackageStartupMessages(library(pedigreemm))
+        mnumb <- male_offspring+1
+        male_A <- pedigree(sire = c(NA,rep(1,times = male_offspring)), dam =c(NA,rep(NA,times = male_offspring)), label = 1:mnumb)
+        # Compute inverse of relationsship matrix.
+        male_Ainv <- getAInv(male_A)
+        
+        # Compute the relationsship matrix dependent on the number of offspring of the selection candidate. The selection candidate is the first animal. Female
+        suppressPackageStartupMessages(library(pedigreemm))
+        mnumb <- female_offspring+1
+        female_A <- pedigree(sire = c(NA,rep(NA,times = female_offspring)), dam =c(NA,rep(1,times = female_offspring)), label = 1:mnumb)
+        # Compute inverse of relationsship matrix.
+        female_Ainv <- getAInv(female_A)
+        
+        # Compute Relationship Matrix Z
+        # numbers of adults and calves in scenario
+        male_number_adults <- floor(proportion_adults*male_offspring)[[1]]
+        male_number_calves <- male_offspring-male_number_adults
+        female_number_adults <- floor(proportion_adults*female_offspring)[[1]]
+        female_number_calves <- female_offspring-female_number_adults
+        # Kronecker
+        kronecker_calves <- cbind(c(1,0,0),c(0,0,0),c(0,1,0),c(0,0,0),c(0,0,1),c(0,0,0))
+        kronecker_adults <- cbind(c(0,0,0),c(1,0,0),c(0,0,0),c(0,1,0),c(0,0,0),c(0,0,1))
+        # male Z
+        male_calves <- diag(1,male_number_calves)%x%kronecker_calves
+        male_calves <- cbind(male_calves,matrix(0, nrow=nrow(male_calves),ncol=male_number_adults*n))
+        male_adults <- diag(male_number_adults)%x%kronecker_adults
+        male_adults <- cbind(matrix(0, nrow=nrow(male_adults),ncol=male_number_calves*n),male_adults)
+        male_Z <- rbind(male_calves, male_adults)
+        male_Z<-cbind(matrix(0, nrow=male_offspring*(n/2),ncol=n),male_Z)
+        # female Z
+        female_calves <- diag(1,female_number_calves)%x%kronecker_calves
+        female_calves <- cbind(female_calves,matrix(0, nrow=nrow(female_calves),ncol=female_number_adults*n))
+        female_adults <- diag(female_number_adults)%x%kronecker_adults
+        female_adults <- cbind(matrix(0, nrow=nrow(female_adults),ncol=female_number_calves*n),female_adults)
+        female_Z <- rbind(female_calves, female_adults)
+        female_Z<-cbind(matrix(0, nrow=female_offspring*(n/2),ncol=n),female_Z)
+        
+        # Genetic Variance Covariance Matrix G
+        G <- genetic_var_cov
+        
+        # Residual Variance Covariance Matrix R
+        residual_var_cov_calves <- residual_var_cov[c(1,3,5),c(1,3,5)]
+        residual_var_cov_adults <- residual_var_cov[c(2,4,6),c(2,4,6)]
+        # male 
+        male_calves_kronecker_residual <- diag(male_number_calves) %x% residual_var_cov_calves 
+        male_adults_kronecker_residual <- diag(male_number_adults) %x% residual_var_cov_adults
+        male_calves_kronecker_residual_extended <- cbind(male_calves_kronecker_residual, matrix(0,nrow=nrow(male_calves_kronecker_residual),ncol=ncol(male_adults_kronecker_residual)))
+        male_adults_kronecker_residual_extended <- cbind( matrix(0,nrow=nrow(male_adults_kronecker_residual),ncol=ncol(male_calves_kronecker_residual)), male_adults_kronecker_residual)
+        male_R <- rbind(male_calves_kronecker_residual_extended,male_adults_kronecker_residual_extended)
+        # female 
+        female_calves_kronecker_residual <- diag(female_number_calves) %x% residual_var_cov_calves 
+        female_adults_kronecker_residual <- diag(female_number_adults) %x% residual_var_cov_adults
+        female_calves_kronecker_residual_extended <- cbind(female_calves_kronecker_residual, matrix(0,nrow=nrow(female_calves_kronecker_residual),ncol=ncol(female_adults_kronecker_residual)))
+        female_adults_kronecker_residual_extended <- cbind( matrix(0,nrow=nrow(female_adults_kronecker_residual),ncol=ncol(female_calves_kronecker_residual)), female_adults_kronecker_residual)
+        female_R <- rbind(female_calves_kronecker_residual_extended,female_adults_kronecker_residual_extended)
+       
+        # Selection intensity i and value of truncation x
+        # male
+        male_i <- dnorm(qnorm(1-male_proportionselected))/male_proportionselected
+        male_x <- qnorm(male_proportionselected, lower.tail = FALSE)
+        # female
+        female_i <- dnorm(qnorm(1-female_proportionselected))/female_proportionselected
+        female_x <- qnorm(female_proportionselected, lower.tail = FALSE)
+       
+        # Factor of variance reduction k
+        # male
+        male_k <- male_i*(male_i-male_x)
+        male_k
+        # female
+        female_k <- female_i*(female_i-female_x)
+        female_k
+        
+        # Prediction error variance matrix
+        # male
+        male_PEV <- solve(t(male_Z)%*%solve(male_R)%*%male_Z+male_Ainv%x%solve(G))[1:n,1:n]
+        # female
+        female_PEV <- solve(t(female_Z)%*%solve(female_R)%*%female_Z+female_Ainv%x%solve(G))[1:n,1:n]
+        
+        # Covariance Matrix 
+        # male
+        male_C <- G-male_PEV
+        # female
+        female_C <- G-female_PEV
+        
+        # Asymptotic Covariance Matrix
+        Ca <- (solve(matrix(c(1+0.5*male_k, 0.5*female_k,0.5*male_k, 1+0.5*female_k),nrow = 2, ncol = 2, byrow=TRUE))%x%diag(n))%*%rbind(male_C,female_C)
+        
+        # Return
+        return(Ca)
       }
 ```
+
+
+
+
+```{r}
+# import variance covariance dataframes and compute matrix
+## genetic
+genetic_var_cov <- "adults_calves_genetic_variances_covariances"
+genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
+genetic_var_cov <- as.matrix(genetic_var_cov)
+## residual
+residual_var_cov <- "adults_calves_residual_variances_covariances"
+residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
+residual_var_cov <- as.matrix(residual_var_cov)
+
+# input offspring
+male_offspring <- 20
+female_offspring <- 5
+proportion_adults <- 0.5
+proportion_calves <- 0.5
+
+# proportion selected
+male_proportionselected <- 0.1
+female_proportionselected <- 0.5
+
+compute_asymptotic_covariance_matrices(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected) 
+```
+
+
+```{r}
+#' @title
+#' Genetic Gain in Sfr. / year for index.
+#' @description
+#' This function computes the genetic gain in Sfr. / year of the selection on the index. In this index all traits are represented in the aggregate genotype.
+#' @param genetic_var_cov   The genetic variance-covariance matrix between the involved traits in the aggregate genotype.
+#' @param residual_var_cov  The genetic variance-covariance matrix between the involved traits in the aggregate genotype.
+#' @param male_offspring    Number of the assumed offspring of the male selection candidate when selection occurs.
+#' @param female_offspring    Number of the assumed offspring of the female selection candidate when selection occurs.
+#' @param proportion_calves Proportion of calves in the offspring.
+#' @param proportion_adults Proportion of adults in the offspring.
+#' @param male_proportionselected Proportion selected of the offspring of a male selection candidate
+#' @param female_proportionselected Proportion selected of the offspring of a female selection candidate
+#' @param male_generationintervall Generation intervall of the male selection path.
+#' @param female_generationintervall Generation intervall of the female selection path.
+#' @param economic_weights A vector of economic weights with lenght of number of traits.
+#' @return                 Genetic Gain in Sfr. per year
+compute_genetic_gain_overall_index <- function(genetic_var_cov,
+                                            residual_var_cov,
+                                            offspring,
+                                            proportion_calves,
+                                            proportion_adults,
+                                            male_proportionselected,
+                                            female_proportionselected,
+                                            male_generationintervall,
+                                            female_generationintervall,
+                                            economic_weights){
+        # define vector of economic weights
+        a <- economic_weights
+        
+        # Intesity of selection
+        male_i <- dnorm(qnorm(1-male_proportionselected))/male_proportionselected
+        female_i <- dnorm(qnorm(1-female_proportionselected))/female_proportionselected
+        
+        # Asymptotic covariance matrices
+        
+        Ca <- compute_asymptotic_covariance_matrices(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected) 
+        
+        # Number of traits
+        n <- as.numeric(ncol(Ca))
+        
+        # male
+        male_Ca <- Ca[1:n,]
+        # female
+        female_Ca <- Ca[(1+n):(2*n),]
+        
+        # Genetic Gain
+        Qoverall_index <- (male_i*sqrt(as.numeric(t(a)%*%male_Ca%*%a))+female_i*sqrt(as.numeric(t(a)%*%female_Ca%*%a)))/(male_generationintervall+female_generationintervall)
+        
+        return(Qoverall_index)
+      }
+```
+
+
+```{r}
+library(dplyr)
+# import variance covariance dataframes and compute matrix
+## genetic
+genetic_var_cov <- "adults_calves_genetic_variances_covariances"
+genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
+genetic_var_cov <- as.matrix(genetic_var_cov)
+## residual
+residual_var_cov <- "adults_calves_residual_variances_covariances"
+residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
+residual_var_cov <- as.matrix(residual_var_cov)
+
+# input offspring
+male_offspring <- 20
+female_offspring <- 5
+proportion_adults <- 0.5
+proportion_calves <- 0.5
+
+# proportion selected
+male_proportionselected <- 0.1
+female_proportionselected <- 0.5
+
+# economic weight
+economic_weights <- "LM_economic_values"
+economic_weights <- read.table(file = economic_weights, sep=";", header=TRUE)
+economic_weights <- as.matrix(economic_weights)
+economic_weights <- as.vector(economic_weights)
+
+# Generation Intervall
+male_generationintervall <- "LM_generation_intervall"
+male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
+  select(male)
+male_generationintervall <- as.numeric(male_generationintervall)
+female_generationintervall <- "LM_generation_intervall"
+female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
+  select(female)
+female_generationintervall <- as.numeric(female_generationintervall)
+
+compute_genetic_gain_overall_index(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights)
+
+
+```
+
+
+
+
+
+
+
