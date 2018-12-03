@@ -320,6 +320,7 @@ library(dplyr)
 ## genetic
 genetic_var_cov <- "adults_calves_genetic_variances_covariances"
 genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
+list_of_traits <- colnames(genetic_var_cov)
 genetic_var_cov <- as.matrix(genetic_var_cov)
 ## residual
 residual_var_cov <- "adults_calves_residual_variances_covariances"
@@ -353,9 +354,16 @@ female_generationintervall <- read.table(file = female_generationintervall, sep=
 female_generationintervall <- as.numeric(female_generationintervall)
 
 # Loop that produces a dataframe with all correlated genetic gains
+mat_correlated_gen_gain <- NULL
 
-
-compute_genetic_gain_trait(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights, trait=trait)
+for(trait in list_of_traits){
+  if (is.null(mat_correlated_gen_gain)){
+  mat_correlated_gen_gain <- cbind(trait,compute_genetic_gain_trait(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights, trait=trait))
+} else {
+  mat_correlated_gen_gain <- rbind(mat_correlated_gen_gain,cbind(trait,compute_genetic_gain_trait(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights, trait=trait)))
+}
+}
+mat_correlated_gen_gain
 
 
 ```
