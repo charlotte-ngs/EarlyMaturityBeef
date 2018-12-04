@@ -267,9 +267,9 @@ compute_asymptotic_covariance_matrices(genetic_var_cov = genetic_var_cov, residu
 ```
 
 
-# Produce result of function for genetic gain for index
+# Produce result of function for genetic gain for index Limousin
 
-```{r GenGainIndexSfr}
+```{r GenGainIndexSfrLM}
 library(dplyr)
 # import variance covariance dataframes and compute matrix
 ## genetic
@@ -307,14 +307,14 @@ female_generationintervall <- read.table(file = female_generationintervall, sep=
   select(female)
 female_generationintervall <- as.numeric(female_generationintervall)
 
-compute_genetic_gain_overall_index(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights)
+Sfr_LM <- compute_genetic_gain_overall_index(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights)
 
 
 ```
 
-# Produce results of function for correlated genetic gains for index
+# Produce results of function for correlated genetic gains for index Limousin
 
-```{r GenGainIndexTrait}
+```{r GenGainIndexTraitLM}
 library(dplyr)
 # import variance covariance dataframes and compute matrix
 ## genetic
@@ -353,7 +353,7 @@ female_generationintervall <- read.table(file = female_generationintervall, sep=
   select(female)
 female_generationintervall <- as.numeric(female_generationintervall)
 
-# Loop that produces a dataframe with all correlated genetic gains
+# Loop that produces a matrix with all correlated genetic gains
 mat_correlated_gen_gain <- NULL
 
 for(trait in list_of_traits){
@@ -363,10 +363,160 @@ for(trait in list_of_traits){
   mat_correlated_gen_gain <- rbind(mat_correlated_gen_gain,cbind(trait,compute_genetic_gain_trait(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights, trait=trait)))
 }
 }
-mat_correlated_gen_gain
+Trait_LM <- mat_correlated_gen_gain
 
 
 ```
+
+# Produce result of function for genetic gain for index Angus
+
+```{r GenGainIndexSfrAN}
+library(dplyr)
+# import variance covariance dataframes and compute matrix
+## genetic
+genetic_var_cov <- "adults_calves_genetic_variances_covariances"
+genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
+genetic_var_cov <- as.matrix(genetic_var_cov)
+## residual
+residual_var_cov <- "adults_calves_residual_variances_covariances"
+residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
+residual_var_cov <- as.matrix(residual_var_cov)
+
+# input offspring
+male_offspring <- 20
+female_offspring <- 5
+proportion_adults <- 0.5
+proportion_calves <- 0.5
+
+# proportion selected
+male_proportionselected <- 0.1
+female_proportionselected <- 0.5
+
+# economic weight
+economic_weights <- "AN_economic_values"
+economic_weights <- read.table(file = economic_weights, sep=";", header=TRUE)
+economic_weights <- as.matrix(economic_weights)
+economic_weights <- as.vector(economic_weights)
+
+# Generation Intervall
+male_generationintervall <- "AN_generation_intervall"
+male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
+  select(male)
+male_generationintervall <- as.numeric(male_generationintervall)
+female_generationintervall <- "AN_generation_intervall"
+female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
+  select(female)
+female_generationintervall <- as.numeric(female_generationintervall)
+
+Sfr_AN <- compute_genetic_gain_overall_index(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights)
+
+
+```
+
+# Produce results of function for correlated genetic gains for index Angus
+
+```{r GenGainIndexTraitAN}
+library(dplyr)
+# import variance covariance dataframes and compute matrix
+## genetic
+genetic_var_cov <- "adults_calves_genetic_variances_covariances"
+genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
+list_of_traits <- colnames(genetic_var_cov)
+genetic_var_cov <- as.matrix(genetic_var_cov)
+## residual
+residual_var_cov <- "adults_calves_residual_variances_covariances"
+residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
+residual_var_cov <- as.matrix(residual_var_cov)
+
+# input offspring
+male_offspring <- 20
+female_offspring <- 5
+proportion_adults <- 0.5
+proportion_calves <- 0.5
+
+# proportion selected
+male_proportionselected <- 0.1
+female_proportionselected <- 0.5
+
+# economic weight
+economic_weights <- "AN_economic_values"
+economic_weights <- read.table(file = economic_weights, sep=";", header=TRUE)
+economic_weights <- as.matrix(economic_weights)
+economic_weights <- as.vector(economic_weights)
+
+# Generation Intervall
+male_generationintervall <- "AN_generation_intervall"
+male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
+  select(male)
+male_generationintervall <- as.numeric(male_generationintervall)
+female_generationintervall <- "AN_generation_intervall"
+female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
+  select(female)
+female_generationintervall <- as.numeric(female_generationintervall)
+
+# Loop that produces a matrix with all correlated genetic gains
+mat_correlated_gen_gain <- NULL
+
+for(trait in list_of_traits){
+  if (is.null(mat_correlated_gen_gain)){
+  mat_correlated_gen_gain <- cbind(trait,compute_genetic_gain_trait(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights, trait=trait))
+} else {
+  mat_correlated_gen_gain <- rbind(mat_correlated_gen_gain,cbind(trait,compute_genetic_gain_trait(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected, male_generationintervall=male_generationintervall,female_generationintervall = female_generationintervall,economic_weights = economic_weights, trait=trait)))
+}
+}
+Trait_AN <- mat_correlated_gen_gain
+
+
+```
+
+## Produce barplot genetic gain Sfr.
+
+```{r BarplotSfr}
+library(ggplot2)
+x <-data.frame(Gain=c(Sfr_AN,Sfr_LM),Breed=c("Angus", "Limousin"))
+# Plot
+g <- ggplot(x,aes(Breed,Gain))
+g + geom_bar(stat="identity", width=0.5)+
+  theme_classic()+theme(text = element_text(size = 30))+
+  ylab("Genetic gain in Sfr./y")
+```
+
+## Produce barplot correlated genetic gains trait units.
+
+```{r}
+library(ggplot2)
+library(varhandle)
+x <- rbind(Trait_AN,Trait_LM)
+x <- as.data.frame(x)
+x$Breed <- rep(c("Angus", "Limousin"),each=6)
+colnames(x)[2] <- "Gain"
+x$Gain <- unfactor(x$Gain)
+x
+# Plot
+g <- ggplot(x,aes(trait,Gain))
+g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
+  theme_classic()+theme(text = element_text(size = 20))+
+  ylab("Genetic gain in trait unit/y")
+
+
+# Per genetic standard deviation
+
+SD  <- "adults_calves_genetic_variances_covariances"
+SD  <- read.table(file = SD, sep=";", header=TRUE)
+SD <- as.matrix(SD)
+SD
+SD <- diag(SD)
+SD <- sqrt(SD)
+x$SD <- c(SD,SD)
+x$GainSD <- x$Gain/x$SD
+x
+
+g <- ggplot(x,aes(trait,GainSD))
+g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
+  theme_classic()+theme(text = element_text(size = 20))+
+  ylab("Genetic gain in sd/y")
+```
+
 
 
 
