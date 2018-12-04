@@ -6,7 +6,7 @@ output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE,warning = FALSE,message = FALSE)
 ```
 
 ## Function for covariance matrix between true and estimated breeding values
@@ -263,7 +263,7 @@ proportion_calves <- 0.5
 male_proportionselected <- 0.1
 female_proportionselected <- 0.5
 
-compute_asymptotic_covariance_matrices(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected) 
+Ca <- compute_asymptotic_covariance_matrices(genetic_var_cov = genetic_var_cov, residual_var_cov = residual_var_cov, offspring = offspring, proportion_calves = proportion_calves, proportion_adults = proportion_adults,male_proportionselected = male_proportionselected,female_proportionselected = female_proportionselected) 
 ```
 
 
@@ -491,7 +491,6 @@ x <- as.data.frame(x)
 x$Breed <- rep(c("Angus", "Limousin"),each=6)
 colnames(x)[2] <- "Gain"
 x$Gain <- unfactor(x$Gain)
-x
 # Plot
 g <- ggplot(x,aes(trait,Gain))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
@@ -504,12 +503,10 @@ g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
 SD  <- "adults_calves_genetic_variances_covariances"
 SD  <- read.table(file = SD, sep=";", header=TRUE)
 SD <- as.matrix(SD)
-SD
 SD <- diag(SD)
 SD <- sqrt(SD)
 x$SD <- c(SD,SD)
 x$GainSD <- x$Gain/x$SD
-x
 
 g <- ggplot(x,aes(trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+

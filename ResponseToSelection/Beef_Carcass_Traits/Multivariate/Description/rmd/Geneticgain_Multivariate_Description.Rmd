@@ -33,31 +33,38 @@ This evaluation requires certain tools, which help to characterize the breeding 
 A particularly powerful tool is the value of genetic gain.
 This value provides information about a trait's or index's mean genetic improvement over a period of time in a population.
 
-## Two breeding strategies characterized by selection index theory
+
 
 The estimated variance components have been used to predict the genetic gain (Q).
 In this thesis the genetic gain has been used to compare two breeding strategies for early maturity.
 Subsequently the strategies will be called scenarios to show that they are based on predictions.
-In both scenarios the breeding values of "calves" and "stirks" have been included.
+
+
+
+## Two breeding strategies characterized by selection index theory
+
 The first scenarium assumes a selection for only carcass fat and the second scenarium assumes a selection for an economically weighed combination of carcass fat, carcass conformation and carcass weight.
-The value of genetic gain predicts a trait's or aggregate genotype's improvement in a population over a period of time.
+In both scenarios the breeding values of "calves" and "stirks" have been included.
+The value of genetic gain predicts an aggregate genotype's improvement in a population in Sfr. / year.
 For both scenarios this improvement is defined by an increase in the aggregate genotype $H$
 
-$$H=\sum{a_mu_m}$$
+$$H=\sum{a'_mu_m}$$
 
 where 
 
-$a$ is an economic weight,
+$a$ is a vector of economic weights,
 
-$u$ is a true breeding value and
+$u$ is a vector of true breeding value and
 
-$m$ indicates the breeding values CFa, CFc, CCa, CCc, CWa and CWc.
+$m$ indicates the breeding values of carcass fat, carcass conformation and carcass weight for adults and calves each.
 
-The aggregate genotype is designed to show the economic value of an animal when considering the carcass traits CFa, CFc, CCa, CCc, CWa and CWc.
+The aggregate genotype is designed to show the economic value of an animal when considering the carcass traits.
 Therefore it is a useful tool to evaluate the effectiveness of the two breeding strategies in improving the desired trait early maturity.
 However, the true breeding value is impossible to compute, which also makes it impossible to compute $H$ for an animal.
 Therefore $H$ must be approximated using multiple regression with information sources which estimate the true breeding values.
 Here, the information sources are estimated breeding values $û$ and do not have the same number for the two scenarios.
+
+### First Strategy
 
 In the first scenario it is assumed that selection will base only on the estimated breeding values for carcass fat $û_{aCF}$ and $û_{cCF}$.
 This results in the index $I_1$
