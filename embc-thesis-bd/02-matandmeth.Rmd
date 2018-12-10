@@ -547,12 +547,134 @@ g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(line
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
   theme_classic()
-  
 ```
 
 
+## Data Index
 
+Distributions carcass fat.
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+# Angus Adults
+AN_CFa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CFa_freq.csv"
+AN_CFa  <- read_csv2(file = AN_CFa)
+colnames(AN_CFa) <- "Frequency"
+AN_CFa$Breed <- c(rep("Angus",times=5))
+AN_CFa$Group <- c(rep("Adults",times=5))
+AN_CFa$Class <- c(1:5)
+AN_CFa
 
+# Angus Calves
+AN_CFc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CFc_freq.csv"
+AN_CFc  <- read_csv2(file = AN_CFc)
+colnames(AN_CFc) <- "Frequency"
+AN_CFc$Breed <- c(rep("Angus",times=5))
+AN_CFc$Group <- c(rep("Calves",times=5))
+AN_CFc$Class <- c(1:5)
+AN_CFc
+
+# Limousin Adults
+LM_CFa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CFa_freq.csv"
+LM_CFa  <- read_csv2(file = LM_CFa)
+colnames(LM_CFa) <- "Frequency"
+LM_CFa$Breed <- c(rep("Limousin",times=5))
+LM_CFa$Group <- c(rep("Adults",times=5))
+LM_CFa$Class <- c(1:5)
+LM_CFa
+
+# Limousin Calves
+LM_CFc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CFc_freq.csv"
+LM_CFc  <- read_csv2(file = LM_CFc)
+colnames(LM_CFc) <- "Frequency"
+LM_CFc$Breed <- c(rep("Limousin",times=5))
+LM_CFc$Group <- c(rep("Calves",times=5))
+LM_CFc$Class <- c(1:5)
+LM_CFc
+
+# Barplot
+x <- rbind(AN_CFa,AN_CFc,LM_CFa,LM_CFc)
+x
+g <- ggplot(x,aes(Class,Frequency))
+g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
+  facet_grid(.~Breed)+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Population frequency")+
+  xlab("Carcass fat class")
+```
+
+Distributions carcass conformation
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+# Angus Adults
+AN_CCa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CCa_freq.csv"
+AN_CCa  <- read_csv2(file = AN_CCa)
+colnames(AN_CCa) <- "Frequency"
+AN_CCa$Breed <- c(rep("Angus",times=7))
+AN_CCa$Group <- c(rep("Adults",times=7))
+AN_CCa$Class <- c("X","A","T-","T","T+","H","C")
+AN_CCa
+
+# Angus Calves
+AN_CCc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CCc_freq.csv"
+AN_CCc  <- read_csv2(file = AN_CCc)
+colnames(AN_CCc) <- "Frequency"
+AN_CCc$Breed <- c(rep("Angus",times=7))
+AN_CCc$Group <- c(rep("Calves",times=7))
+AN_CCc$Class <- c("X","A","T-","T","T+","H","C")
+AN_CCc
+
+# Limousin Adults
+LM_CCa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CCa_freq.csv"
+LM_CCa  <- read_csv2(file = LM_CCa)
+colnames(LM_CCa) <- "Frequency"
+LM_CCa$Breed <- c(rep("Limousin",times=7))
+LM_CCa$Group <- c(rep("Adults",times=7))
+LM_CCa$Class <- c("X","A","T-","T","T+","H","C")
+LM_CCa
+
+# Limousin Calves
+LM_CCc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CCc_freq.csv"
+LM_CCc  <- read_csv2(file = LM_CCc)
+colnames(LM_CCc) <- "Frequency"
+LM_CCc$Breed <- c(rep("Limousin",times=7))
+LM_CCc$Group <- c(rep("Calves",times=7))
+LM_CCc$Class <- c("X","A","T-","T","T+","H","C")
+LM_CCc
+
+# Barplot
+x <- rbind(AN_CCa,AN_CCc,LM_CCa,LM_CCc)
+x
+g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),Frequency))
+g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
+  facet_grid(.~Breed)+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Population frequency")+
+  xlab("Carcass conformation class")
+```
+
+Mean and standard deviation carcass traits
+```{r}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+# Angus Adults
+mean_sd <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/mean_sd.csv"
+mean_sd  <- read_csv2(file = mean_sd)
+mean_sd <- as.matrix(mean_sd)
+x <- data.frame(Breed=c("Angus","Angus","Limousin","Limousin"),Group=c("Adults","Calves","Adults","Calves"),Mean=as.numeric(c(mean_sd[11,3],mean_sd[12,3],mean_sd[5,3],mean_sd[6,3])),SD=as.numeric(c(mean_sd[11,4],mean_sd[12,4],mean_sd[5,4],mean_sd[6,4])))
+x
+kable(x,booktabs=T,caption="Mean and standard deviation in kg carcass weight")
+```
 
 
 

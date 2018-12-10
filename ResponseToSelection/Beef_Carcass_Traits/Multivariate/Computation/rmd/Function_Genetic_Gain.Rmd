@@ -103,10 +103,8 @@ compute_asymptotic_covariance_matrices <- function(genetic_var_cov,
         # Factor of variance reduction k
         # male
         male_k <- male_i*(male_i-male_x)
-        male_k
         # female
         female_k <- female_i*(female_i-female_x)
-        female_k
         
         # Prediction error variance matrix
         # male

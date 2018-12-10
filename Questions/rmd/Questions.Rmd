@@ -491,6 +491,7 @@ if (is.null(tbl_result)){
 * $W^*$ is different for scenarium 1 and 2? It is Var(H) and H is for both scenarios the same, why should Var(H) be different?
 
 * How can I insert the labels of Qualitas and Mutterkuh Schweiz to the title slide?
+    * I put it into the last slide.
 
 * May I use equations in the presentation?
     * No, you would lose the people
@@ -498,9 +499,24 @@ if (is.null(tbl_result)){
 * Should I explain terms like breeding value, generation intervall, selection intensity and accuracy?
 
 * May accuracy be higher than 1?
+    * No
+    
+* How can I produce a normal distribution plot?
+
+```{r}
+library(ggplot2)
+p1 <- ggplot(data = data.frame(x = c(50, 350)), aes(x)) +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 250, sd = 30),aes(linetype="Adults")) + ylab("") +
+  stat_function(fun = dnorm, n = 101, args = list(mean = 130, sd = 20),aes(linetype="Calves"))+
+  scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
+  scale_y_continuous(breaks = NULL)+
+  theme_classic()
+p1
+```
 
     
-
+* How do I produce "~"?
+    * With alt and n.
 
 
 
