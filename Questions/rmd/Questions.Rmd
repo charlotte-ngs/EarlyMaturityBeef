@@ -5,7 +5,7 @@ date: "9 8 2018"
 output: 
  pdf_document: 
   fig_caption: true
-bibliography: /Users/silvan/Documents/EarlyMaturityBeef/embc-thesis-bd/library.bib
+bibliography: "`r system.file('extdata','library.bib',package='Exemplary')`"
 
 ---
 
@@ -517,6 +517,14 @@ p1
     
 * How do I produce "~"?
     * With alt and n.
+    
+* How can I use a path to my files which always works in my thesis?
+    * I have to use the command system.file("extdata","library.bib",package="Exemplary") where library.bib is the file I need.
+    
+```{r}
+knitr::include_graphics("`r system.file('extdata','Qualitas',package='Exemplary')`")
+```
+
 
 
 
