@@ -727,10 +727,6 @@ Trait_LM_CF
 
 ```{r BarplotSfr}
 library(ggplot2)
-Sfr_AN
-Sfr_AN_index
-Sfr_AN_CF
-Sfr_LM_CF
 x <-data.frame(Gain=c(Sfr_AN_index,Sfr_LM_index,Sfr_AN_CF,Sfr_LM_CF),Breed=rep(c("Angus", "Limousin"),times=2),Strategy=rep(c("Index","Carcass fat"),each=2))
 x
 # Plot
@@ -755,25 +751,23 @@ x
 
 # Plot
 g <- ggplot(x,aes(trait,Gain))
-g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
-  theme_classic()+theme(text = element_text(size = 20))+
-  ylab("Genetic gain in trait unit/y")
+g + geom_bar(stat="identity", width=0.5,aes(fill=Strategy),position="dodge")+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Genetic gain in trait unit/y")+facet_grid(.~Breed)
 
 
 # Per genetic standard deviation
 
-SD  <- "adults_calves_genetic_variances_covariances"
-SD  <- read.table(file = SD, sep=";", header=TRUE)
-SD <- as.matrix(SD)
+SD <- as.matrix(genetic_var_cov)
 SD <- diag(SD)
 SD <- sqrt(SD)
 x$SD <- rep(SD,times=4)
 x$GainSD <- x$Gain/x$SD
 
 g <- ggplot(x,aes(trait,GainSD))
-g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
-  theme_classic()+theme(text = element_text(size = 20))+
-  ylab("Genetic gain in sd/y")
+g + geom_bar(stat="identity", width=0.5,aes(fill=Strategy),position="dodge")+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Genetic gain in trait unit/y")+facet_grid(.~Breed)
 ```
 
 
