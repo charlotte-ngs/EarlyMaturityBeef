@@ -8,19 +8,33 @@ library(kableExtra)
 ```
 
 # Material and Methods {#matandmeth}
-It is important to improve __early maturity__ in Swiss beef cattle as explained in section \@ref(intro). 
-One possibility to improve early maturity is to use early maturity in a breeding program. 
-Early maturity must be preciseley defined and efficiently measurable to include it in a breeding program.
 
-## Definition of Early Maturity {#defem}
-This thesis builds on the following definition: Animals mature early if they reach the state of carcass maturity faster than others. 
-Animals reach carcass maturity when their carcass does not get any price reductions per kg carcass weight when sold at the slaughterhouse. 
-Carcass price reductions are dependent on the payment system of the slaughterhouse.
-Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX [Kaufmann1995].
-Consequently, CHTAX mainly determines the definition of early maturity. 
+While the strategies *Deviation in age at slaughter* and *Growth models* were evaluated by literature review, the strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* were evaluated by predicting the effects of their implementation in Switzerland.
+The Swiss breeding value for carcass fat was introduced in summer 2018.
+Therefore all necessary data for the predictions was available to evaluate the strategy *Carcass fat as auxilliary trait*.
+However the index, which determines the strategy *Index over carcass traits* was missing.
+Its computation was necessary for the predictions and part of this Master Thesis (see ??).
+All predictions assumed within-breed breeding and were performed for the breeds Angus (Referenz für Bild Angus und Beschreibung: Angus is a extensive beef breed originating from the UK??) and Limousin (Referenz für Bild: Limousin is an intensive beef breed originating from France??).
+Additionally both beef breed populations were divided into the groups *calves* and *adults*.
+While the group *calves* included animals which were less or 180 d old at slaughter, the group *adults* included animals which were more than 180 but less than 700 d old at slaughter.
+Two tools were used to predict the effects of the two strategies: The genetic gain (see ??) and the rank correlation (see ??).
+The genetic gain was the mean change in price per kilogramm carcass weight per year in two Swiss beef breed populations.
+From its value correlated genetic gains were computed for all carcass traits individually.
+They express the mean change in trait unit or genetic standard deviation per year.
+Detailed information about the computation of the genetic gain is available in ???.
+
+
+
+
+
+
+
 
 ### Beef carcass classification system CHTAX {#CHTAX}
  
+Carcass price reductions are dependent on the payment system of the slaughterhouse.
+Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX [Kaufmann1995].
+Consequently, CHTAX mainly determines the definition of early maturity. 
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
 There, Proviande employees classify beef carcasses to determine their price.
 They carry out the same procedure for each beef carcass.

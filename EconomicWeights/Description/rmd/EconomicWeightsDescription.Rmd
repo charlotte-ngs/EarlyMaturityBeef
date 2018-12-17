@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Purpose
 
-To show how economic weights have been computed for carcass fat (CF), carcass conformation (CC) and carcass weight (CW).
+To write the Material and Methods section of my master thesis in which I describe how I computed the economic weights for the index.
 
 # Principle
 

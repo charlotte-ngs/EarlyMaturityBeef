@@ -10,3 +10,20 @@ knitr::include_graphics("figures/intro/genetictrend.pdf", auto_pdf = T)
 ```
 
 Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
+
+
+One possibility to improve early maturity is to use early maturity in a breeding program. 
+Early maturity must be preciseley defined and efficiently measurable to include it in a breeding program.
+
+## Definition of Early Maturity {#defem}
+This thesis builds on the following definition: Animals mature early if they reach the state of carcass maturity faster than others but get the same price at the slaughterhouse.
+
+Four strategies sorted by increasing complexity:
+
+1. Carcass fat as auxilliary trait
+
+2. Index over carcass traits
+
+3. "Deviation in age at slaughter" from @Berry2017
+
+4. Growth models
