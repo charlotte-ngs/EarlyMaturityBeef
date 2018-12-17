@@ -10,37 +10,40 @@ library(kableExtra)
 # Material and Methods {#matandmeth}
 
 While the strategies *Deviation in age at slaughter* and *Growth models* were evaluated by literature review, the strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* were evaluated by predicting the effects of their implementation in Switzerland.
-The Swiss breeding value for carcass fat was introduced in summer 2018.
-Therefore all necessary data for the predictions was available to evaluate the strategy *Carcass fat as auxilliary trait*.
+Two tools were used to predict the effects of the two strategies: The genetic gain (see ??) and the rank correlation (see ??).
+All necessary data was available to use these tools for the strategy *Carcass fat as auxilliary trait*.
 However the index, which determines the strategy *Index over carcass traits* was missing.
 Its computation was necessary for the predictions and part of this Master Thesis (see ??).
-All predictions assumed within-breed breeding and were performed for the breeds Angus (Referenz für Bild Angus und Beschreibung: Angus is a extensive beef breed originating from the UK??) and Limousin (Referenz für Bild: Limousin is an intensive beef breed originating from France??).
-Additionally both beef breed populations were divided into the groups *calves* and *adults*.
+Predictions assumed within-breed breeding and were performed for the breeds Angus (Referenz für Bild Angus und Beschreibung: Angus is a extensive beef breed originating from the UK??) and Limousin (Referenz für Bild: Limousin is an intensive beef breed originating from France??).
+Both beef breed populations were divided into groups of animals which were named *calves* and *adults*.
 While the group *calves* included animals which were less or 180 d old at slaughter, the group *adults* included animals which were more than 180 but less than 700 d old at slaughter.
-Two tools were used to predict the effects of the two strategies: The genetic gain (see ??) and the rank correlation (see ??).
-The genetic gain was the mean change in price per kilogramm carcass weight per year in two Swiss beef breed populations.
-From its value correlated genetic gains were computed for all carcass traits individually.
-They express the mean change in trait unit or genetic standard deviation per year.
-Detailed information about the computation of the genetic gain is available in ???.
+All computations were performed using the open source programm R [@RCoreTeam2017].
+The resulting codes are available in the annex (see ???)
 
 
+## Index
 
+The index consisted of 3 (carcass fat, carcass conformation and carcass weight) x 2 (adults and calves) traits for each breed.
+Their weighed sum formed the value of the index $I$.
+It was computed as
 
+\begin{equation}
+\label{Index}
+I=a'u
+\end{equation}
+$$I=a'u$$
+where $a$ is the vector of economic weights and $u$ is the vector of estimated breeding values.
+Both vectors had one entry for each trait which took the same places in the vectors.
+The economical weight for a trait is usually defined as the change in profit per additional unit of the trait.
+However, there was no information available about the true change in profit per trait unit.
+The only information available was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland.
+Therefore the change in profit was approximated by the difference in price per kg carcass weight determined by CHTAX.
 
-
-
-
-### Beef carcass classification system CHTAX {#CHTAX}
- 
-Carcass price reductions are dependent on the payment system of the slaughterhouse.
-Since 1994 the payment system of Swiss slaughterhouses is based on the carcass classification system CHTAX [Kaufmann1995].
-Consequently, CHTAX mainly determines the definition of early maturity. 
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
 There, Proviande employees classify beef carcasses to determine their price.
 They carry out the same procedure for each beef carcass.
 Firstly, Proviande employees assign the carcass to a carcass category. 
-Carcass categories differ in the animals age at slaughter, number of incissors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)).
-Carcass weight does not include the weight of the animals head, tail, guts and lower legs [@EDI2013].
+Carcass categories differ in the animals age at slaughter, number of incissors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)). 
 ```{r carcasscategory, echo=FALSE}
 x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
                                    category=c("calves", "young cattle", "young bulls", "bulls or steers", 
@@ -56,16 +59,12 @@ kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015
 column_spec(3, width="8cm")
 ```
 Secondly Proviande employees assign the carcass to a carcass conformation class.
-The assigned carcass conformation class depends on the accentuation of certain muscels (see table \@ref(tab:conformationclass)).
+The assigned carcass conformation class depends on the accentuation of certain muscels of the carcass (see table \@ref(tab:conformationclass)).
 The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
-Carcass conformation class C is the most favoured class and will result in the highest price of the carcass.
-In combination with the slaughter category the carcass conformation class determines the basis price per kilogram carcass weight.
 Thirdly Proviande employees assign the carcass to a carcass fat class.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see table \@ref(tab:fatclass)).
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
-The determination of carcass fat class can further decrease the base price per kilogramm carcass weight.
-When a carcass does not belong to class 3, the carcass gets a price reduction in Swiss Francs (Sfr.) per kilogramm carcass weight.
 ```{r fatclass, echo=FALSE}
 x<-data.frame(class = c("1", "2", "3", "4", "5"), description=c("no fat coverage","light fat coverage; muscels partially visible", "average even fat coverage; muscles generally covered", "strong fat coverage; excessive fat deposition", "fat coverage generally excessive; bulging fat formations"))
 kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015)") %>%
@@ -81,12 +80,21 @@ x<-data.frame(class = c("C", "H","T+","T","T-","A","X"), description=c("leg: acc
 kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)") %>%
 column_spec(1, width="0.5cm")
 ```
-In conclusion age, number of incissors, sex, carcass conformation, carcass weight and carcass fat all influence the price of a beef carcass in Switzerland.
-While age in days, number of incissors, carcass conformation and carcass weight are traits that should be maximal or minimal, sex and carcass fat should be optimal in the range.
 
-Early maturity is only dependent on age at slaughter and carcass fat though.
-There are two traits at once that influence early maturity, consequently early maturity is not directly measurable.
-There is no straightforward solution for breeding directed for a not directly measurable trait.
+
+In this Thesis it was assumed, that all animals which belong to the group *adults* were assigned to the carcass categories MT, OB and RG and all animals which belong to the group *calves* were assigned to the carcass category KV.
+
+
+
+
+## Genetic Gain
+The genetic gain was the mean change in price per kilogramm carcass weight per year in two Swiss beef breed populations.
+From its value correlated genetic gains were computed for all carcass traits individually.
+They express the mean change in trait unit or genetic standard deviation per year.
+Detailed information about the computation of the genetic gain is available in ???.
+
+## Rank Correlations
+
 
 
 ## Strategies to improve Early Maturity
