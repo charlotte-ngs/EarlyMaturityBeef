@@ -94,6 +94,25 @@ To form the relative price depending on carcass weight of calves it was assumed 
 The resulting relative price depending on the carcass trait are shown in Figures ???.
 They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3.
 
+```{r cfprice}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+file_name <- system.file("extdata","number_of_animals.csv", package="Exemplary")
+CF  <- read_csv2(file = file_name)
+colnames(CF) <- "Price"
+Class <- c(1:5)
+x <- cbind(CF,Class)
+g <- ggplot(x,aes(Class,Price))
+g + geom_bar(stat="identity")+
+  theme_classic()+theme(text = element_text(size = 30))+
+  ylab("Relative price in Sfr. / kg")+
+  xlab("Carcass fat class")
+```
+
+
 #### Population distributions
 
 The two breeds Angus and Limousin received the same prices, but their populations show different distributions in the carcass traits.
@@ -110,6 +129,13 @@ number_of_animals
 kable(number_of_animals, booktabs=T, caption="Number of animals per breed and animal group which records were used to determine their population distributions in carcass traits.")%>%
 kable_styling(latex_options=c("hold_position"))
 ```
+
+While the population distributions for carcass fat and carcass conformation were determined as discrete distributions with known frequencies for each class (see Figures ??), the population distributions for carcass weight were determined using means and standard deviations (see Tables ??).
+
+
+
+### Method
+
 
 
 
