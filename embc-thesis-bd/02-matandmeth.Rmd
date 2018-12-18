@@ -25,19 +25,23 @@ The resulting codes are available in the annex (see ???)
 
 The index consisted of 3 (carcass fat, carcass conformation and carcass weight) x 2 (adults and calves) traits for each breed.
 Their weighed sum formed the value of the index $I$.
-It was computed as
+The index's value was computed as
 
 \begin{equation}
 \label{Index}
 I=a'u
 \end{equation}
 $$I=a'u$$
-where $a$ is the vector of economic weights and $u$ is the vector of estimated breeding values.
+where $a$ was the vector of economic weights and $u$ was the vector of estimated breeding values.
 Both vectors had one entry for each trait which took the same places in the vectors.
-The economical weight for a trait is usually defined as the change in profit per additional unit of the trait.
+An economical weight for a trait is usually defined as the change in profit per additional unit of the trait [@brascamp1985].
 However, there was no information available about the true change in profit per trait unit.
 The only information available was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland.
 Therefore the change in profit was approximated by the difference in price per kg carcass weight determined by CHTAX.
+
+### Material
+
+#### Payment System CHTAX
 
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
 There, Proviande employees classify beef carcasses to determine their price.
@@ -81,8 +85,35 @@ kable(x, booktabs=T, caption="Description of carcass conformation classes (Provi
 column_spec(1, width="0.5cm")
 ```
 
+The values in carcass weight, carcass conformation and carcass fat all influence the price of a beef carcass in the slaughterhouses.
+While the price changes depending on carcass fat and carcass conformation change weekly and were taken from week 33 / 13. August in 2018 (Source???), the ones depending on carcass weight were taken from August 2016 [@Proviande2016].
+For each carcass category these relative price changes differ.
+In this Thesis it was assumed, that all animals which belonged to the group *adults* were assigned to the carcass categories MT, OB and RG and all animals which belonged to the group *calves* were assigned to the carcass category KV.
+The mean of OB,RG and MT was formed for the relative prices of the group *adults*.
+To form the relative price depending on carcass weight of calves it was assumed that their mean in carcass conformation is T+.
+The resulting relative price depending on the carcass trait are shown in Figures ???.
+They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3.
 
-In this Thesis it was assumed, that all animals which belong to the group *adults* were assigned to the carcass categories MT, OB and RG and all animals which belong to the group *calves* were assigned to the carcass category KV.
+#### Population distributions
+
+The two breeds Angus and Limousin received the same prices, but their populations show different distributions in the carcass traits.
+These distributions of the groups *calves* and *adults* were used to compute their economic weights respecteveley. 
+They were derived from the carcass trait records of animals which were slaughtered between 2010 and 2015 (number of animals shown in Table numberofanimals??).
+
+```{r numberofanimals}
+library(tidyr)
+library(knitr)
+library(kableExtra)
+file_name <- system.file("extdata","number_of_animals.csv", package="Exemplary")
+number_of_animals <- read.table(file = file_name, sep=";", header=TRUE)
+number_of_animals
+kable(number_of_animals, booktabs=T, caption="Number of animals per breed and animal group which records were used to determine their population distributions in carcass traits.")%>%
+kable_styling(latex_options=c("hold_position"))
+```
+
+
+
+
 
 
 

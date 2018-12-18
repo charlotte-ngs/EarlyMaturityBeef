@@ -572,13 +572,12 @@ proportion_calves <- as.numeric(proportion_calves)
 proportion_calves
 
 # Generation Intervall
-male_generationintervall <- system.file("extdata","generation_intervall", package="Exemplary")
-male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
+generation_intervall <- system.file("extdata","generation_intervall", package="Exemplary")
+male_generationintervall <- read.table(file = generation_intervall, sep=";", header=TRUE) %>%
   select(male)
 male_generationintervall <- as.numeric(male_generationintervall)
 male_generationintervall
-female_generationintervall <- system.file("extdata","generation_intervall", package="Exemplary")
-female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
+female_generationintervall <- read.table(file = generation_intervall, sep=";", header=TRUE) %>%
   select(female)
 female_generationintervall <- as.numeric(female_generationintervall)
 female_generationintervall

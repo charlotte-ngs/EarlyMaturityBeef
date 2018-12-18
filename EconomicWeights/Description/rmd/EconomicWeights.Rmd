@@ -130,9 +130,11 @@ z<-data.frame(class=c("1","2","3","4","5"))
 x<-data.frame(MT=c(-0.9,-0.3,0,-0.3,-0.7), 
               OB=c(-0.9, -0.3,0,-0.4,-0.9), RG=c(-0.9,-0.3,0,-0.5,-1))
 y<-as.matrix(x)
+y
 #compute mean over categories
 x$mean<-rowMeans(y)
 x<-cbind(z,x) 
+x
 #defintion of variable
 cfap <- c(-0.9000000, -0.3000000  ,0.0000000 ,-0.3926929 ,-0.8480817)
 cfap

@@ -41,21 +41,17 @@ With CC,CF,CW.
 ```{r VariancesCovariances}
 # import variance covariance dataframes and compute matrix
 ## genetic
-genetic_var_cov <- "adults_calves_genetic_variances_covariances"
+genetic_var_cov <- system.file("extdata","adults_calves_genetic_variances_covariances", package="Exemplary")
 genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
 genetic_var_cov <- as.matrix(genetic_var_cov)
 ## residual
-residual_var_cov <- "adults_calves_residual_variances_covariances"
+residual_var_cov <- system.file("extdata","adults_calves_residual_variances_covariances", package="Exemplary")
 residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
 residual_var_cov <- as.matrix(residual_var_cov)
 residual_var_cov_calves <- residual_var_cov[c(1,3,5),c(1,3,5)]
 residual_var_cov_calves
 residual_var_cov_adults <- residual_var_cov[c(2,4,6),c(2,4,6)]
 residual_var_cov_adults
-## phenotypic
-phenotypic_var_cov <- "adults_calves_phenotypic_variances_covariances"
-phenotypic_var_cov <- read.table(file = phenotypic_var_cov, sep=";", header=TRUE)
-phenotypic_var_cov <- as.matrix(phenotypic_var_cov)
 ```
 
 ### Number of Offspring
@@ -64,17 +60,15 @@ First the number of relatives is imported.
 ```{r NumberofRelatives}
 library(dplyr)
 ## male
-male_offspring <- "LM_number_of_offspring"
-male_offspring <- read.table(file = male_offspring, sep=";", header=TRUE) %>%
+offspring_file <- system.file("extdata","number_of_offspring", package="Exemplary")
+male_offspring <- read.table(file = offspring_file, sep=";", header=TRUE) %>%
   select(male)
 male_offspring <- as.numeric(male_offspring)
-male_offspring <- 20
 ## female
-female_offspring <- "LM_number_of_offspring"
-female_offspring <- read.table(file = female_offspring, sep=";", header=TRUE) %>%
+female_offspring <- read.table(file = offspring_file, sep=";", header=TRUE) %>%
   select(female)
 female_offspring <- as.numeric(female_offspring)
-female_offspring <- 5
+female_offspring
 ```
 
 
@@ -82,15 +76,12 @@ female_offspring <- 5
 
 ```{r GenerationIntervall}
 library(dplyr)
-## male
-male_generationintervall <- "LM_generation_intervall"
-male_generationintervall <- read.table(file = male_generationintervall, sep=";", header=TRUE) %>%
+generation_intervall <- system.file("extdata","generation_intervall", package="Exemplary")
+male_generationintervall <- read.table(file = generation_intervall, sep=";", header=TRUE) %>%
   select(male)
 male_generationintervall <- as.numeric(male_generationintervall)
 male_generationintervall
-## female
-female_generationintervall <- "LM_generation_intervall"
-female_generationintervall <- read.table(file = female_generationintervall, sep=";", header=TRUE) %>%
+female_generationintervall <- read.table(file = generation_intervall, sep=";", header=TRUE) %>%
   select(female)
 female_generationintervall <- as.numeric(female_generationintervall)
 female_generationintervall
@@ -99,15 +90,15 @@ female_generationintervall
 ## Proportion of calves and adults
 
 ```{r CalvesAdultsNumber}
-number_calves_adults <- "LM_number_calves_adults"
-number_calves <- read.table(file = number_calves_adults, sep=";", header=TRUE) %>%
-  select(calves)
-number_adults <- read.table(file = number_calves_adults, sep=";", header=TRUE) %>%
+proportion_file <- system.file("extdata","proportion_calves_adults", package="Exemplary")
+proportion_adults <- read.table(file = proportion_file, sep=";", header=TRUE) %>%
   select(adults)
-proportion_adults <- number_adults/(number_adults+number_calves)
-proportion_adults <- 0.5
-proportion_calves <- number_calves/(number_adults+number_calves)
-proportion_calves <- 0.5
+proportion_adults <- as.numeric(proportion_adults)
+proportion_adults
+proportion_calves <- read.table(file = proportion_file, sep=";", header=TRUE) %>%
+  select(calves)
+proportion_calves <- as.numeric(proportion_calves)
+proportion_calves
 ```
 
 
@@ -116,18 +107,15 @@ proportion_calves <- 0.5
 
 ```{r ProportionSelected}
 library(dplyr)
-## male
-male_proportionselected <- "LM_proportion_selected"
-male_proportionselected <- read.table(file = male_proportionselected, sep=";", header=TRUE) %>%
+proportionselected_file <- system.file("extdata","proportion_selected", package="Exemplary")
+male_proportionselected <- read.table(file = proportionselected_file, sep=";", header=TRUE) %>%
   select(male)
 male_proportionselected <- as.numeric(male_proportionselected)
-male_proportionselected <- 0.1
-## female
-female_proportionselected <- "LM_proportion_selected"
-female_proportionselected <- read.table(file = female_proportionselected, sep=";", header=TRUE) %>%
+male_proportionselected
+female_proportionselected <- read.table(file = proportionselected_file, sep=";", header=TRUE) %>%
   select(female)
 female_proportionselected <- as.numeric(female_proportionselected)
-female_proportionselected <- 0.5
+female_proportionselected
 ```
 
 ### Economic values $a$
@@ -135,11 +123,13 @@ female_proportionselected <- 0.5
 ```{r}
 library(dplyr)
 # always calves first and CC,CF,CW
-a <- "LM_economic_values"
-a <- read.table(file = a, sep=";", header=TRUE)
-aMat <- as.matrix(a)
-a <- as.vector(aMat)
+economic_weights <- system.file("extdata","AN_economic_values", package="Exemplary")
+economic_weights <- read.table(file = economic_weights, sep=";", header=TRUE)
+economic_weights <- as.matrix(economic_weights)
+economic_weights <- as.vector(economic_weights)
+a <- economic_weights
 a
+
 dim(t(a))
 is.vector(a)
 dim(aMat)

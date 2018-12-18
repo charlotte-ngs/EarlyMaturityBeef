@@ -60,6 +60,7 @@ In this case an economic weight is given by the equation
 \label{EconomicWeight}
 a=\frac{\Delta_p}{\Delta_{\mu}}
 \end{equation}
+$$a=\frac{\Delta_p}{\Delta_{\mu}}$$
 
 where
 
