@@ -261,15 +261,15 @@ CFc <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CWa") %>% filter(Breed == "AN") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CWa") %>% filter(Breed == "LM") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CWa") %>% filter(Breed == "AN") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CWa") %>% filter(Breed == "LM") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
-pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
+pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cw")%>%select(Delta)
 pn_delta_mean
 # Define price vector
 price_fname <- "CWa_price.csv"
@@ -294,15 +294,15 @@ CWa <- compute_economic_value(pvec_class_freq = pvec_class_freq$freq, pn_sd = pn
 library(dplyr)
 # Define mean
 s_mean_sd_fn <- "mean_sd.csv"
-pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CWc") %>% filter(Breed == "AN") %>% select(Mean)
+pn_mean <- readr::read_csv2(file = s_mean_sd_fn)%>% filter(Trait == "CWc") %>% filter(Breed == "LM") %>% select(Mean)
 pn_mean
 # Define standard deviation
 s_mean_sd_fn <- "mean_sd.csv"
-pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CWc") %>% filter(Breed == "AN") %>% select(Sd)
+pn_sd <- readr::read_csv2(file = s_mean_sd_fn) %>% filter(Trait == "CWc") %>% filter(Breed == "LM") %>% select(Sd)
 pn_sd
 # Define delta mean
 delta_mean_fn <- "delta_mean.csv"
-pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cf")%>%select(Delta)
+pn_delta_mean <- readr::read_csv2(file = delta_mean_fn)%>%filter(Trait == "cw")%>%select(Delta)
 pn_delta_mean
 # Define price vector
 price_fname <- "CWc_price.csv"

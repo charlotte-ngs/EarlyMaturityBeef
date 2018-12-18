@@ -97,9 +97,8 @@ Detailed information about the computation of the genetic gain is available in ?
 
 
 
-## Strategies to improve Early Maturity
-To breed for early maturity employees from Qualitas AG have proposed four strategies, which will be evaluated in this thesis.
-One of them is to derive the trait early maturity from the trait carcass fat.
+
+
 
 ### Deriving Early Maturity from Carcass Fat
 
