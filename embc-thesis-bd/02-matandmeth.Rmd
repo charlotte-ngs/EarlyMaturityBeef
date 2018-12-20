@@ -94,7 +94,7 @@ To form the relative price depending on carcass weight of calves it was assumed 
 The resulting relative price depending on the carcass trait are shown in Figures ???.
 They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3.
 
-```{r cfprice}
+```{r cfprice,fig.cap="Relative prices of each carcass fat class within the animal groups adults and calves."}
 library(knitr)
 library(dplyr)
 library(tidyr)
@@ -111,11 +111,86 @@ Class <- rep(c(1:5),times=2)
 x <- cbind(CF_price,Class)
 x
 g <- ggplot(x,aes(Class,price))
-g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
+g + geom_bar(stat="identity")+
+  theme_classic()+theme(text = element_text(size = 15))+
+   facet_grid(.~Group)+
+  ylab("Relative price in Sfr. / kg")+
+  xlab("Carcass fat class")
+```
+
+```{r ccprice,fig.cap="Relative prices of each carcass conformation class within the animal groups adults and calves."}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+CCc_price_file <- system.file("extdata","CCc_price.csv", package="Exemplary")
+CCc_price  <- read_csv2(file = CCc_price_file)
+CCc_price$price <- CCc_price$price-min(CCc_price$price)
+CCc_price$Group <- rep("Calves",times=7)
+CCa_price_file <- system.file("extdata","CCa_price.csv", package="Exemplary")
+CCa_price  <- read_csv2(file = CCa_price_file)
+CCa_price$price <- CCa_price$price-min(CCa_price$price)
+CCa_price$Group <- rep("Adults",times=7)
+CC_price <- rbind(CCc_price,CCa_price)
+Class <- rep(c("X","A","T-","T","T+","H","C"),times=2)
+x <- cbind(CC_price,Class)
+x
+g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),price))
+g + geom_bar(stat="identity")+
+  facet_grid(.~Group)+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass fat class")
 ```
+
+```{r cwaprice,fig.cap="Relative prices of different ranges in carcass weight for the animal group adults."}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+CWa_price_file <- system.file("extdata","CWa_price.csv", package="Exemplary")
+CWa_price  <- read_csv2(file = CWa_price_file)
+CWa_price$Group <- rep("Adults",times=11)
+CWa_threshold_file <- system.file("extdata","CWa_threshold.csv", package="Exemplary")
+CWa_threshold  <- read_csv2(file = CWa_threshold_file)
+CWa_threshold[10,] <- ">380"
+CWa_threshold <- rbind("<290",CWa_threshold)
+CWa_threshold$threshold <- factor(CWa_threshold$threshold,levels=CWa_threshold$threshold)
+CWa_threshold$threshold
+CWa <- cbind(CWa_price,CWa_threshold)
+
+CWa_plot <- ggplot(CWa,aes(threshold,price))
+CWa_plot + geom_bar(stat="identity")+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Relative price in Sfr. / kg")+
+  xlab("Carcass weight thresholds in kg")
+```
+
+```{r cwcprice,fig.cap="Relative prices of different ranges in carcass weight for the animal group calves."}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+CWc_price_file <- system.file("extdata","CWc_price.csv", package="Exemplary")
+CWc_price  <- read_csv2(file = CWc_price_file)
+CWc_price$Group <- rep("Calves",times=12)
+CWc_threshold_file <- system.file("extdata","CWc_threshold.csv", package="Exemplary")
+CWc_threshold  <- read_csv2(file = CWc_threshold_file)
+CWc_threshold[11,] <- ">150"
+CWc_threshold <- rbind("<140",CWc_threshold)
+CWc_threshold$threshold <- factor(CWc_threshold$threshold,levels=CWc_threshold$threshold)
+CWc_threshold$threshold
+CWc <- cbind(CWc_price,CWc_threshold)
+CWc_plot <- ggplot(CWc,aes(threshold,price))
+CWc_plot + geom_bar(stat="identity")+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Relative price in Sfr. / kg")+
+  xlab("Carcass weight thresholds in kg")
+```
+
 
 
 #### Population distributions
@@ -137,11 +212,105 @@ kable_styling(latex_options=c("hold_position"))
 
 While the population distributions for carcass fat and carcass conformation were determined as discrete distributions with known frequencies for each class (see Figures ??), the population distributions for carcass weight were determined using means and standard deviations (see Tables ??).
 
+```{r cffrequencies, fig.cap="Population frequencies of Angus and Limousin in carcass fat classes."}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+# Angus Adults
+AN_CFa <- system.file("extdata","AN_CFa_freq.csv", package="Exemplary")
+AN_CFa  <- read_csv2(file = AN_CFa)
+colnames(AN_CFa) <- "Frequency"
+AN_CFa$Breed <- c(rep("Angus",times=5))
+AN_CFa$Group <- c(rep("Adults",times=5))
+AN_CFa$Class <- c(1:5)
 
+# Angus Calves
+AN_CFc <- system.file("extdata","AN_CFc_freq.csv", package="Exemplary")
+AN_CFc  <- read_csv2(file = AN_CFc)
+colnames(AN_CFc) <- "Frequency"
+AN_CFc$Breed <- c(rep("Angus",times=5))
+AN_CFc$Group <- c(rep("Calves",times=5))
+AN_CFc$Class <- c(1:5)
+
+# Limousin Adults
+LM_CFa <- system.file("extdata","LM_CFa_freq.csv", package="Exemplary")
+LM_CFa  <- read_csv2(file = LM_CFa)
+colnames(LM_CFa) <- "Frequency"
+LM_CFa$Breed <- c(rep("Limousin",times=5))
+LM_CFa$Group <- c(rep("Adults",times=5))
+LM_CFa$Class <- c(1:5)
+
+# Limousin Calves
+LM_CFc <- system.file("extdata","LM_CFc_freq.csv", package="Exemplary")
+LM_CFc  <- read_csv2(file = LM_CFc)
+colnames(LM_CFc) <- "Frequency"
+LM_CFc$Breed <- c(rep("Limousin",times=5))
+LM_CFc$Group <- c(rep("Calves",times=5))
+LM_CFc$Class <- c(1:5)
+
+# Barplot
+x <- rbind(AN_CFa,AN_CFc,LM_CFa,LM_CFc)
+g <- ggplot(x,aes(Class,Frequency))
+g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
+  facet_grid(.~Breed)+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Population frequency")+
+  xlab("Carcass fat class")
+```
+
+```{r ccfrequencies, fig.cap="Population frequencies of Angus and Limousin in carcass conformation classes."}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+# Angus Adults
+AN_CCa <- system.file("extdata","AN_CCa_freq.csv", package="Exemplary")
+AN_CCa  <- read_csv2(file = AN_CCa)
+colnames(AN_CCa) <- "Frequency"
+AN_CCa$Breed <- c(rep("Angus",times=7))
+AN_CCa$Group <- c(rep("Adults",times=7))
+AN_CCa$Class <- c("X","A","T-","T","T+","H","C")
+
+# Angus Calves
+AN_CCc <- system.file("extdata","AN_CCc_freq.csv", package="Exemplary")
+AN_CCc  <- read_csv2(file = AN_CCc)
+colnames(AN_CCc) <- "Frequency"
+AN_CCc$Breed <- c(rep("Angus",times=7))
+AN_CCc$Group <- c(rep("Calves",times=7))
+AN_CCc$Class <- c("X","A","T-","T","T+","H","C")
+
+# Limousin Adults
+LM_CCa <- system.file("extdata","LM_CCa_freq.csv", package="Exemplary")
+LM_CCa  <- read_csv2(file = LM_CCa)
+colnames(LM_CCa) <- "Frequency"
+LM_CCa$Breed <- c(rep("Limousin",times=7))
+LM_CCa$Group <- c(rep("Adults",times=7))
+LM_CCa$Class <- c("X","A","T-","T","T+","H","C")
+
+# Limousin Calves
+LM_CCc <- system.file("extdata","LM_CCc_freq.csv", package="Exemplary")
+LM_CCc  <- read_csv2(file = LM_CCc)
+colnames(LM_CCc) <- "Frequency"
+LM_CCc$Breed <- c(rep("Limousin",times=7))
+LM_CCc$Group <- c(rep("Calves",times=7))
+LM_CCc$Class <- c("X","A","T-","T","T+","H","C")
+
+# Barplot
+x <- rbind(AN_CCa,AN_CCc,LM_CCa,LM_CCc)
+g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),Frequency))
+g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
+  facet_grid(.~Breed)+
+  theme_classic()+theme(text = element_text(size = 15))+
+  ylab("Population frequency")+
+  xlab("Carcass fat class")
+```
 
 ### Method
 
-
+Regarding the
 
 
 
