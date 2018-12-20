@@ -2,7 +2,8 @@
 output:
   pdf_document: default
 ---
-```{r, echo=FALSE}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
 library(knitr)
 library(kableExtra)
 ```
@@ -15,7 +16,7 @@ All necessary data was available to use these tools for the strategy *Carcass fa
 However the index, which determines the strategy *Index over carcass traits* was missing.
 Its computation was necessary for the predictions and part of this Master Thesis (see ??).
 Predictions assumed within-breed breeding and were performed for the breeds Angus (Referenz für Bild Angus und Beschreibung: Angus is a extensive beef breed originating from the UK??) and Limousin (Referenz für Bild: Limousin is an intensive beef breed originating from France??).
-Both beef breed populations were divided into groups of animals which were named *calves* and *adults*.
+Both beef breed populations were divided into two groups of animals which were named *calves* and *adults*.
 While the group *calves* included animals which were less or 180 d old at slaughter, the group *adults* included animals which were more than 180 but less than 700 d old at slaughter.
 All computations were performed using the open source programm R [@RCoreTeam2017].
 The resulting codes are available in the annex (see ???)
@@ -23,7 +24,7 @@ The resulting codes are available in the annex (see ???)
 
 ## Index
 
-The index consisted of 3 (carcass fat, carcass conformation and carcass weight) x 2 (adults and calves) traits for each breed.
+The index consisted of three (carcass fat, carcass conformation and carcass weight) times two (adults and calves) traits for each breed.
 Their weighed sum formed the value of the index $I$.
 The index's value was computed as
 
@@ -33,35 +34,21 @@ I=a'u
 \end{equation}
 $$I=a'u$$
 where $a$ was the vector of economic weights and $u$ was the vector of estimated breeding values.
-Both vectors had one entry for each trait which took the same places in the vectors.
-An economical weight for a trait is usually defined as the change in profit per additional unit of the trait [@brascamp1985].
-However, there was no information available about the true change in profit per trait unit.
-The only information available was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland.
-Therefore the change in profit was approximated by the difference in price per kg carcass weight determined by CHTAX.
+Both vectors had one entry for each trait which took the same places in $a$ and $u$.
 
 ### Material
 
 #### Payment System CHTAX
 
+An economical weight for a trait is usually defined as the change in profit per additional unit of the trait [@brascamp1985].
+However, in this project there was no information available about the true change in profit per trait unit.
+The only information available was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland.
+Therefore the change in profit was approximated by the difference in price per kg carcass weight determined by CHTAX.
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
 There, Proviande employees classify beef carcasses to determine their price.
 They carry out the same procedure for each beef carcass.
 Firstly, Proviande employees assign the carcass to a carcass category. 
 Carcass categories differ in the animals age at slaughter, number of incissors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)). 
-```{r carcasscategory, echo=FALSE}
-x <- data.frame(abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
-                                   category=c("calves", "young cattle", "young bulls", "bulls or steers", 
-                                              "young steers", "young heifers", "heifers or young cows", "cows"), 
-                                   description=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
-                                              ">161 days old, no incissors", 
-                                              ">161 days old, >0 incissors for bulls, >4 incissors for steers", 
-                                              ">161 days old, <5 incissors", ">161 days old, <5 incissors", 
-                                              ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
-                                              ">161 days old"))
-
-kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015)") %>%
-column_spec(3, width="8cm")
-```
 Secondly Proviande employees assign the carcass to a carcass conformation class.
 The assigned carcass conformation class depends on the accentuation of certain muscels of the carcass (see table \@ref(tab:conformationclass)).
 The meatier the carcass the higher the carcass conformation class.
@@ -69,22 +56,6 @@ The lowest carcass conformation class is called X and the highest class is calle
 Thirdly Proviande employees assign the carcass to a carcass fat class.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see table \@ref(tab:fatclass)).
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
-```{r fatclass, echo=FALSE}
-x<-data.frame(class = c("1", "2", "3", "4", "5"), description=c("no fat coverage","light fat coverage; muscels partially visible", "average even fat coverage; muscles generally covered", "strong fat coverage; excessive fat deposition", "fat coverage generally excessive; bulging fat formations"))
-kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015)") %>%
-column_spec(1, width="0.5cm")
-
-```
----
-nocite: | 
-  @Proviande2015
-...
-```{r conformationclass, echo=FALSE}
-x<-data.frame(class = c("C", "H","T+","T","T-","A","X"), description=c("leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","leg: wide; back: wide and full; shoulder: pronounced"," ", "leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced"," ", "leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
-kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)") %>%
-column_spec(1, width="0.5cm")
-```
-
 The values in carcass weight, carcass conformation and carcass fat all influence the price of a beef carcass in the slaughterhouses.
 While the price changes depending on carcass fat and carcass conformation change weekly and were taken from week 33 / 13. August in 2018 (Source???), the ones depending on carcass weight were taken from August 2016 [@Proviande2016].
 For each carcass category these relative price changes differ.
@@ -93,6 +64,35 @@ The mean of OB,RG and MT was formed for the relative prices of the group *adults
 To form the relative price depending on carcass weight of calves it was assumed that their mean in carcass conformation is T+.
 The resulting relative price depending on the carcass trait are shown in Figures ???.
 They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3.
+
+```{r carcasscategory}
+x <- data.frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
+                                   Category=c("Calves", "Young cattle", "Young bulls", "Bulls or steers", 
+                                              "Young steers", "Young heifers", "Heifers or young cows", "Cows"), 
+                                   Description=c("<161 days old", " >161 days <11 months old, <320 kg live weight", 
+                                              ">161 days old, no incissors", 
+                                              ">161 days old, >0 incissors for bulls, >4 incissors for steers", 
+                                              ">161 days old, <5 incissors", ">161 days old, <5 incissors", 
+                                              ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
+                                              ">161 days old"))
+
+kable(x, booktabs=F, caption="Description of carcass categories (Proviande, 2015)") %>%
+column_spec(3, width="8cm")
+```
+
+```{r fatclass}
+x<-data.frame(Class = c("1", "2", "3", "4", "5"), Description=c("No fat coverage","Light fat coverage; muscels partially visible", "Average even fat coverage; muscles generally covered", "Strong fat coverage; excessive fat deposition", "Fat coverage generally excessive; bulging fat formations"))
+kable(x, booktabs=F, caption="Description of carcass fat classes (Proviande, 2015)")
+```
+---
+nocite: | 
+  @Proviande2015
+...
+```{r conformationclass}
+x<-data.frame(Class = c("C", "H","T+","T","T-","A","X"), Description=c("Leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","Leg: wide; back: wide and full; shoulder: pronounced"," ", "Leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced"," ", "Leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "Leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
+kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)") %>%
+column_spec(1, width="0.5cm")
+```
 
 ```{r cfprice,fig.cap="Relative prices of each carcass fat class within the animal groups adults and calves."}
 library(knitr)
@@ -109,10 +109,9 @@ CFa_price$Group <- rep("Adults",times=5)
 CF_price <- rbind(CFc_price,CFa_price)
 Class <- rep(c(1:5),times=2)
 x <- cbind(CF_price,Class)
-x
 g <- ggplot(x,aes(Class,price))
 g + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 10))+
    facet_grid(.~Group)+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass fat class")
@@ -135,16 +134,15 @@ CCa_price$Group <- rep("Adults",times=7)
 CC_price <- rbind(CCc_price,CCa_price)
 Class <- rep(c("X","A","T-","T","T+","H","C"),times=2)
 x <- cbind(CC_price,Class)
-x
 g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),price))
 g + geom_bar(stat="identity")+
   facet_grid(.~Group)+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 10))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass fat class")
+  xlab("Carcass conformation class")
 ```
 
-```{r cwaprice,fig.cap="Relative prices of different ranges in carcass weight for the animal group adults."}
+```{r cwaprice,fig.cap="Relative prices at thresholds in carcass weight for the animal group adults."}
 library(knitr)
 library(dplyr)
 library(tidyr)
@@ -158,12 +156,11 @@ CWa_threshold  <- read_csv2(file = CWa_threshold_file)
 CWa_threshold[10,] <- ">380"
 CWa_threshold <- rbind("<290",CWa_threshold)
 CWa_threshold$threshold <- factor(CWa_threshold$threshold,levels=CWa_threshold$threshold)
-CWa_threshold$threshold
 CWa <- cbind(CWa_price,CWa_threshold)
 
 CWa_plot <- ggplot(CWa,aes(threshold,price))
 CWa_plot + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 10))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass weight thresholds in kg")
 ```
@@ -182,16 +179,13 @@ CWc_threshold  <- read_csv2(file = CWc_threshold_file)
 CWc_threshold[11,] <- ">150"
 CWc_threshold <- rbind("<140",CWc_threshold)
 CWc_threshold$threshold <- factor(CWc_threshold$threshold,levels=CWc_threshold$threshold)
-CWc_threshold$threshold
 CWc <- cbind(CWc_price,CWc_threshold)
 CWc_plot <- ggplot(CWc,aes(threshold,price))
 CWc_plot + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 10))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass weight thresholds in kg")
 ```
-
-
 
 #### Population distributions
 
@@ -205,7 +199,6 @@ library(knitr)
 library(kableExtra)
 file_name <- system.file("extdata","number_of_animals.csv", package="Exemplary")
 number_of_animals <- read.table(file = file_name, sep=";", header=TRUE)
-number_of_animals
 kable(number_of_animals, booktabs=T, caption="Number of animals per breed and animal group which records were used to determine their population distributions in carcass traits.")%>%
 kable_styling(latex_options=c("hold_position"))
 ```
@@ -255,7 +248,7 @@ x <- rbind(AN_CFa,AN_CFc,LM_CFa,LM_CFc)
 g <- ggplot(x,aes(Class,Frequency))
 g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 10))+
   ylab("Population frequency")+
   xlab("Carcass fat class")
 ```
@@ -303,18 +296,88 @@ x <- rbind(AN_CCa,AN_CCc,LM_CCa,LM_CCc)
 g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),Frequency))
 g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 10))+
   ylab("Population frequency")+
   xlab("Carcass fat class")
 ```
 
+```{r cwmeansd}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+mean_sd <- system.file("extdata","mean_sd.csv", package="Exemplary")
+mean_sd  <- read_csv2(file = mean_sd)
+mean_sd <- as.matrix(mean_sd)
+x <- data.frame(Breed=c("Angus","Angus","Limousin","Limousin"),Group=c("Adults","Calves","Adults","Calves"),Mean=as.numeric(c(mean_sd[11,3],mean_sd[12,3],mean_sd[5,3],mean_sd[6,3])),SD=as.numeric(c(mean_sd[11,4],mean_sd[12,4],mean_sd[5,4],mean_sd[6,4])))
+kable(x,booktabs=T,caption="Population mean and standard deviation in kg carcass weight of Angus and Limousin.")
+```
+
 ### Method
 
-Regarding the
+Regarding the mentioned simplifications for the determination of economic weight in Section ??, the economic weights $a$ in the *index over carcass traits* was computed as
+\begin{equation}
+\label{EconomicWeight}
+a=\frac{r_1'p-r_0^Tp}{\Delta_{\mu}}
+\end{equation}
+$$a=\frac{r_1'p-r_0'p}{\Delta_{\mu}}$$
+where $\Delta_{\mu}$ was a small increase in the present population mean of a trait (set to 0.1 class for carcass conformation and carcass fat and to 1 kg for carcass weight), $r_0$ was the vector of population frequencies belonging to each range in trait with the same price of the initial population distribution, $r_1$ was the vector of population frequencies belonging to each price range after the increase in population mean and $p$ was the vector of price changes within thresholds per kg carcass weight.
+Normal distributions were assumed for all carcass traits.
+They were determined by the population means and and standard deviations contained in Section popdist??.
+As an example this step is shown for the group *adults*, breed Angus and trait carcass fat in Figure normdistapprox??.
+To get the initial frequencies $r_0$ for each price class in these distributions, thresholds were needed.
+While the thresholds of carcass weight were available (shown in Figure ??), they were not available for carcass fat and carcass conformation.
+There the tresholds have been set in a way that the population frequencies known by the discrete distribution (shown in figures ??) had the same value as the population frequencies in the approximated normal distribution.
+After the shift of the normal distributions by $\Delta_{\mu}$ the thresholds were assumed to be constant, but the population frequencies within the thresholds changed (shown in Figure thresholdsconstant??). 
+The population frequencies within each price class have been computed again using the characteristics of the normal distribution and using the computed thresholds.
+The population frequencies from the initial distribution $r_0$ and the changed distribution $r_1$ enabled the computation of the change mean price per kg carcass weight for a change in the population mean by $\Delta_{\mu}$.
 
+```{r normdistapprox, fig.cap="Exemplary approximation of a normal distribution to a discrete distribution of the group adults, breed Angus and trait carcass fat.", echo=FALSE}
+library(ggplot2)
+mean_sd <- system.file("extdata","mean_sd.csv", package="Exemplary")
+mean_sd  <- read_csv2(file = mean_sd)
+mean_sd <- as.matrix(mean_sd)
+AncfaS <- as.numeric(mean_sd[7,4])
+AncfaM <- as.numeric(mean_sd[7,3])
+# Angus Adults
+AN_CFa <- system.file("extdata","AN_CFa_freq.csv", package="Exemplary")
+AN_CFa  <- read_csv2(file = AN_CFa)
+colnames(AN_CFa) <- "Frequency"
+AN_CFa$Breed <- c(rep("Angus",times=5))
+AN_CFa$Group <- c(rep("Adults",times=5))
+AN_CFa$Class <- c(1:5)
+x <- AN_CFa
+g <- ggplot(x,aes(Class,Frequency))
+g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
+  stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
+  theme_classic()+
+  ylab("Population frequency")+
+  xlab("Carcass fat class")+theme(text = element_text(size = 10))
+```
 
+```{r thresholdsconstant, fig.cap="Exemplary distribution shift whith constant thresholds of the group adults, breed Angus and trait carcass fat.", echo=FALSE}
+library(ggplot2)
+mean_sd <- system.file("extdata","mean_sd.csv", package="Exemplary")
+mean_sd  <- read_csv2(file = mean_sd)
+mean_sd <- as.matrix(mean_sd)
+AncfaS <- as.numeric(mean_sd[7,4])
+AncfaM <- as.numeric(mean_sd[7,3])
+CFa_price_file <- system.file("extdata","CFa_price.csv", package="Exemplary")
+CFa_price  <- read_csv2(file = CFa_price_file)
+CFa_price$Group <- rep("Adults",times=5)
+CFa_price$Class <- c(1:5)
 
-
+g <- ggplot(CFa_price,aes(Class,price,linetype=NULL))
+g+
+  geom_bar(stat="identity",show_guide=FALSE,aes(linetype=NULL))+
+ ylab("Relative price in Sfr. / kg")+
+  xlab("Carcass fat class") + 
+  stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
+  stat_function(fun = dnorm, args = list(mean = AncfaM+0.3, sd = AncfaS),aes(linetype="New distribution"))+
+    scale_linetype_manual(values=c(NULL=NULL,"Initial distribution"="solid","New distribution"="dashed"), guide = guide_legend(title=NULL))+
+  theme_classic()+theme(text = element_text(size = 10))
+```
 
 
 
@@ -661,272 +724,12 @@ see \autoref{Qm}
 @Phocas1996
 
 
-# Economic weights
-
-Economic weights are weighing factors to produce an aggregate genotype $H$
-
-\begin{equation}
-\label{AggregateGenotype}
-H=\sum{a_iu_i}
-\end{equation}
-
-where
-
-$a$ is an economic weight,
-
-$u$ is a true breeding value and
-
-$i$ is a trait.
-
-In this thesis the aggregate genotype consists of the traits carcass fat, carcass conformation and carcass weight.
-Consequently the three traits needed an economical weight each.
-The economical weight for a trait is the change in profit in Swiss Francs (Sfr.) per additional unit of the trait.
-It is given by the equation
-
-\begin{equation}
-\label{EconomicWeight}
-a=\frac{\Delta_p}{\Delta_{\mu}}
-\end{equation}
-
-where
-
-$a$ is the economic weight of a trait,
-
-$\Delta_p$ is the change in revenue in Sfr and
-
-$\Delta_{\mu}$ is the increase in population mean by one unit of a trait.
 
 
-However, there is no information available about the true change in profit per unit carcass fat, carcass conformation and carcass weight.
-This change is therefore approximated by only using the difference in revenue which is caused by price differences per kg carcass weight in the slaughterhouse.
-The change in revenue $\Delta_p$ has been computed by the equation
-
-\begin{equation}
-\label{DeltaP}
-\Delta_p=\frac{r_1^Tp-r_0^Tp}{0.1}
-\end{equation}
-
-where
-
-$r$ is the vector of population frequencies belonging to each price class,
-
-$p$ is the vector of price change per kg carcass weight,
-
-$T$ means, it is the transpose,
-
-$0$ indicates the initial population and
-
-$1$ indicates the population after the change in population mean by 0.1.
-
-The price changes per unit of a carcass trait $p$ are based on CHTAX.
-There the price differences do not have the same value over the whole scale of the carcass traits.
-For example the change in revenue from carcass fat class 1 to 2 is not the same as from 2 to 3.
-The changes in revenue are different for "adults" and "calves".
-It is assumed that the group "calves" are all classified to the carcass category KV while the group "adults" are classified to MT, OB or RG.
-For the group "adults" the changes in revenue have been taken from a weighed mean of MT, OB and RG.
-Its weights have been chosen from the relative number of slaughtered carcasses classified to MT, OB and RG.
-Due to the non-linear changes in revenue for the carcass traits, the economic weight depends on the initial distribution of the population over the scale of a carcass trait.
-The initial distribution is different for each beef cattle breed, which also results in different economic weights for each breed.
-In this thesis the economic weights have been computed for the breeds Angus and Limousin.
-
-While the revenue changes from class to class in carcass fat and carcass conformation, it changes at thresholds in carcass weight.
-In a continous normal distribution thresholds are needed to get the frequencies of population $r$ for each price class.
-The price class indicates a range of a carcass trait at which the price per kg carcass weight stays the same.
-For carcass fat and carcass conformation the thresholds have been difficult to set, because they are discreteley distributed (see Figure \@ref(fig:BarplotInitialfrequenciesCF)).
-There the thresholds have been set after the creation of the initial normal distribution approximated to the discrete distribution (see Figure \@ref(fig:NormDistApprox)).
-The tresholds have been set in a way that the population frequencies known by the discrete distribution have fitted to the frequencies in the normal distribution.
-After this step the procedure to compute the economic weight was again basically the same for all carcass traits:
-The initial normal distribution conserved its shape (standard deviation constant), but has been shifted by increasing the mean by 0.1 (see Figure \@ref(fig:ShiftMean)).
-Then the population frequencies within each price class have been computed again using the characteristics of the normal distribution and using the computed thresholds.
-The population frequencies from the initial distribution $0$ and the changed distribution $1$ enabled the computation of the change in revenue for a change in population mean by $\Delta_{\mu}$.
-
-```{r BarplotInitialfrequenciesCF, echo=FALSE, fig.cap="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)"}
-library(knitr)
-library(kableExtra)
-#Vectors of animal numbers Carcass fat 
-#Angus with a=adults and c=calves.
-Ancfc <- c(189,706,935,125,2)
-Ancfa <- c(802,3415,15673,6314,481)
-#Limousin with a=adults and c=calves.
-Lmcfc <- c(735,1504,1419,72,0)
-Lmcfa <- c(5102,21958,50705,7169,148)
-#frequencies Carcass fat
-#Angus with a=adults and c=calves.
-Ancfc <- Ancfc/sum(Ancfc)
-Ancfa <- Ancfa/sum(Ancfa)
-#Limousin with a=adults and c=calves.
-Lmcfc <- Lmcfc/sum(Lmcfc)
-Lmcfa <- Lmcfa/sum(Lmcfa)
-
-#Values Carcass fat classes
-Vcf <- c(1:5)
-
-#define number of rows
-#x <- cbind(Vcf,Ancfc,Ancfa,Lmcfc,Lmcfa)
-#colnames(x) <- c("class", "ANcalves", "ANadults", "LMcalves", "LMadults")
-#kable(x, booktabs=T, caption="Population frequencies for each carcass fat class in Angus and Limousin calves and adults (Kunz, 2018)")
-#x <- as.data.frame(x)
-# settings barplot
-library(ggplot2)
-theme_set(theme_classic())
-#set dataframe
-x <-data.frame(Class=rep(c(1:5),times=2*2),Category=rep(c("Angus", "Limousin"),each=10), frequency=c(Ancfc,Ancfa,Lmcfc,Lmcfa))
-x$Group <- rep(rep(c("Calves","Adults"),each=5),times=2)
-# Plot
-g <- ggplot(x,aes(Class,frequency))
-g +facet_grid(~Group) + geom_bar(stat="identity", width=0.5, aes(fill=Category), position="dodge")+
-  theme_classic()
-```
 
 
-```{r NormDistApprox, fig.cap="Exemplary approximation of a normal distribution to a discrete distribution.", echo=FALSE}
-library(ggplot2)
-AncfaS <- 0.74
-AncfaM <- 3.1
-x <- data.frame(Class=Vcf,frequency=Ancfa)
-g <- ggplot(x,aes(Class,frequency))
-g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
-  stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
-  theme_classic()
-```
 
 
-```{r ShiftMean, fig.cap="Exemplary shift from initial to new distribution by increasing the mean of the initial normal distribution by 0.1", echo=FALSE}
-library(ggplot2)
-x <- data.frame(Class=Vcf,frequency=Ancfa)
-g <- ggplot(x,aes(Class,frequency,linetype="Mean"))
-g + stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
-  stat_function(fun = dnorm, args = list(mean = AncfaM+0.1, sd = AncfaS),aes(linetype="New distribution"))+
-    scale_linetype_manual(values=c("solid","dashed"), guide = guide_legend(title=NULL))+
-  theme_classic()
-```
-
-
-## Data Index
-
-Distributions carcass fat.
-```{r}
-library(knitr)
-library(dplyr)
-library(tidyr)
-library(readr)
-library(ggplot2)
-# Angus Adults
-AN_CFa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CFa_freq.csv"
-AN_CFa  <- read_csv2(file = AN_CFa)
-colnames(AN_CFa) <- "Frequency"
-AN_CFa$Breed <- c(rep("Angus",times=5))
-AN_CFa$Group <- c(rep("Adults",times=5))
-AN_CFa$Class <- c(1:5)
-AN_CFa
-
-# Angus Calves
-AN_CFc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CFc_freq.csv"
-AN_CFc  <- read_csv2(file = AN_CFc)
-colnames(AN_CFc) <- "Frequency"
-AN_CFc$Breed <- c(rep("Angus",times=5))
-AN_CFc$Group <- c(rep("Calves",times=5))
-AN_CFc$Class <- c(1:5)
-AN_CFc
-
-# Limousin Adults
-LM_CFa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CFa_freq.csv"
-LM_CFa  <- read_csv2(file = LM_CFa)
-colnames(LM_CFa) <- "Frequency"
-LM_CFa$Breed <- c(rep("Limousin",times=5))
-LM_CFa$Group <- c(rep("Adults",times=5))
-LM_CFa$Class <- c(1:5)
-LM_CFa
-
-# Limousin Calves
-LM_CFc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CFc_freq.csv"
-LM_CFc  <- read_csv2(file = LM_CFc)
-colnames(LM_CFc) <- "Frequency"
-LM_CFc$Breed <- c(rep("Limousin",times=5))
-LM_CFc$Group <- c(rep("Calves",times=5))
-LM_CFc$Class <- c(1:5)
-LM_CFc
-
-# Barplot
-x <- rbind(AN_CFa,AN_CFc,LM_CFa,LM_CFc)
-x
-g <- ggplot(x,aes(Class,Frequency))
-g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
-  facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Population frequency")+
-  xlab("Carcass fat class")
-```
-
-Distributions carcass conformation
-```{r}
-library(knitr)
-library(dplyr)
-library(tidyr)
-library(readr)
-library(ggplot2)
-# Angus Adults
-AN_CCa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CCa_freq.csv"
-AN_CCa  <- read_csv2(file = AN_CCa)
-colnames(AN_CCa) <- "Frequency"
-AN_CCa$Breed <- c(rep("Angus",times=7))
-AN_CCa$Group <- c(rep("Adults",times=7))
-AN_CCa$Class <- c("X","A","T-","T","T+","H","C")
-AN_CCa
-
-# Angus Calves
-AN_CCc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/AN_CCc_freq.csv"
-AN_CCc  <- read_csv2(file = AN_CCc)
-colnames(AN_CCc) <- "Frequency"
-AN_CCc$Breed <- c(rep("Angus",times=7))
-AN_CCc$Group <- c(rep("Calves",times=7))
-AN_CCc$Class <- c("X","A","T-","T","T+","H","C")
-AN_CCc
-
-# Limousin Adults
-LM_CCa <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CCa_freq.csv"
-LM_CCa  <- read_csv2(file = LM_CCa)
-colnames(LM_CCa) <- "Frequency"
-LM_CCa$Breed <- c(rep("Limousin",times=7))
-LM_CCa$Group <- c(rep("Adults",times=7))
-LM_CCa$Class <- c("X","A","T-","T","T+","H","C")
-LM_CCa
-
-# Limousin Calves
-LM_CCc <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/LM_CCc_freq.csv"
-LM_CCc  <- read_csv2(file = LM_CCc)
-colnames(LM_CCc) <- "Frequency"
-LM_CCc$Breed <- c(rep("Limousin",times=7))
-LM_CCc$Group <- c(rep("Calves",times=7))
-LM_CCc$Class <- c("X","A","T-","T","T+","H","C")
-LM_CCc
-
-# Barplot
-x <- rbind(AN_CCa,AN_CCc,LM_CCa,LM_CCc)
-x
-g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),Frequency))
-g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
-  facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Population frequency")+
-  xlab("Carcass conformation class")
-```
-
-Mean and standard deviation carcass traits
-```{r}
-library(knitr)
-library(dplyr)
-library(tidyr)
-library(readr)
-library(ggplot2)
-# Angus Adults
-mean_sd <- "~/Documents/EarlyMaturityBeef/EconomicWeights/Computation/computeindex/20181010_compute_index/nb/mean_sd.csv"
-mean_sd  <- read_csv2(file = mean_sd)
-mean_sd <- as.matrix(mean_sd)
-x <- data.frame(Breed=c("Angus","Angus","Limousin","Limousin"),Group=c("Adults","Calves","Adults","Calves"),Mean=as.numeric(c(mean_sd[11,3],mean_sd[12,3],mean_sd[5,3],mean_sd[6,3])),SD=as.numeric(c(mean_sd[11,4],mean_sd[12,4],mean_sd[5,4],mean_sd[6,4])))
-x
-kable(x,booktabs=T,caption="Mean and standard deviation in kg carcass weight")
-```
 
 
 
