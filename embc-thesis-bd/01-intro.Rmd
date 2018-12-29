@@ -27,3 +27,12 @@ Four strategies sorted by increasing complexity:
 3. "Deviation in age at slaughter" from @Berry2017
 
 4. Growth models
+
+
+The derivation of one trait to another requires that the involved traits are closely correlated. 
+Therefore carcass fat should be highly correlated with early maturity.
+The assumed correlation is based on the theoretical knowledge about growth and body composition in beef cattle.
+Usually muscles grow in an earlier stadium of growth than fat tissue [@Thonney2015].
+This indicates that carcass fat is usually the limiting factor for early maturity in beef cattle.
+Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
+Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.

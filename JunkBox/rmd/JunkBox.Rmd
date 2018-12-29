@@ -1153,3 +1153,104 @@ The initial normal distribution conserved its shape (standard deviation constant
 The population frequencies within each price class have been computed again using the characteristics of the normal distribution and using the computed thresholds.
 The population frequencies from the initial distribution $0$ and the changed distribution $1$ enabled the computation of the change in revenue for a change in population mean by $\Delta_{\mu}$.
 
+The characteristics of the breeding value carcass fat were the material to asses the suitability of carcass fat for deriving early maturity. 
+To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
+I will use the results from the breeding value estimation as "material" to evaluate the efficiency of the breeding program.
+The explanations refering to the creation of the breeding value car are based on the documentation of @Kunz2018.
+
+A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
+The breeding value is a widespread tool to rank animals in a breeding program.
+
+```{r calvesvariancecomponents, echo=FALSE}
+library(knitr)
+library(kableExtra)
+g<-data.frame(c("cCC","cCF", "cCW"), c(0.4015, -0.00993, 0.01828), c( -0.00993, 0.12067,0.00050), c(0.01828,0.00050,0.00311))
+colnames(g) <- c(" ","cCC","cCF", "cCW")
+
+r<-data.frame(c(0.35845, 0.13154, 0.02907), c( 0.35845, 0.23651,0.02463), c(0.02907,0.23651,0.00904))
+colnames(r) <- c("cCC","cCF", "cCW")
+
+p<-data.frame(c(0.79947, 0.14951, 0.05394), c( 0.14951, 0.39365,0.02979), c(0.05394,0.02979,0.06395), c(0.50221, 0.30654, 0.22078))
+colnames(p) <- c("cCC","cCF", "cCW", "heritability")
+
+cvc<-cbind(g,r,p)
+kable(cvc, digits=3, booktabs=T, caption="Genetic and phenotypic variances-covariances for calves (c) derived from Kunz (2018)") %>%
+kable_styling(latex_options=c("hold_position")) %>%
+ add_header_above(c(" ","genetic"=3,"residual"=3, "phenotypic"=3," ")) %>%
+  column_spec(c(1,4,7,10), border_right = T)
+
+```
+---
+nocite: | 
+  @Kunz2018
+...
+
+```{r stirksvariancecomponents, echo=FALSE}
+library(knitr)
+library(kableExtra)
+sg<-data.frame(name=c("sCC","sCF", "sCW"),sCC= c(0.4013, -0.00655, 0.03387), sCF=c( -0.00655, 0.13028,0.01322), sCW=c(0.03387,0.01322,0.01947))
+colnames(sg) <- c(" ","sCC","sCF", "sCW")
+
+sr<-data.frame(sCC=c(0.26631, 0.00931, 0.04903),sCF= c( 0.00931, 0.19451,0.02162),sCW= c( 0.04903,0.02162,0.03466))
+colnames(sr) <- c("sCC","sCF", "sCW")
+
+sp<-data.frame(sCC=c(0.71754, 0.07159, 0.09911), sCF=c(0.07159, 0.36439,0.04989), sCW=c(0.09911,0.04989,0.06395), heritability=c(0.55928, 0.35752, 0.30447))
+colnames(sp) <- c("sCC","sCF", "sCW", "heritability")
+svc<-cbind(sg,sr,sp)
+kable(svc, digits=3, booktabs=T, caption="Genetic, phenotypic and residual variances-covariances for stirks (s) derived from Kunz (2018)") %>%
+ add_header_above(c("","genetic"=3,"residual"=3, "phenotypic"=3,""))
+
+```
+The response to selection is highly dependent on the breeding conditions in a population.
+The response to selection achieved in one generation is the product of the intensity of selection ($i$), the square root of the accuracy of the breeding value ($r$) and the genetic variance ($\sigma_{g}$).
+\begin{equation}
+\label{Qgeneration}
+Q = ir\sigma_{g}
+\end{equation}
+$$Q = ir\sigma_{g}$$
+The intensity of selection describes, how big the proportion of animals chosen to be parents compared to the whole population is.
+For example the intensity of selection is higher when you choose two of 10 animals to be parents than if you choose 5 animals to be parents.
+The accuracy of the breeding value tells, how big chances are that the best animals are chosen as parents. 
+For example if you have no means to distinguish between the best parents because you do not have any information about them (no records of them or relatives) or you know that the characteristics of the parents will not be inherited to their progeny (heritability=0) it would be completeley random if you choose the best parents.
+The additive genetic variance in the population limits the potential for improvement using selection.
+For example if you have cows that have the additive genetic potential of daily milk yields in kg of 1, 5, 7, 20 respecteveley you have the potential to get a mean additive genetic potential in milk yield of almost 20 kg by selecting the best animals for parents. 
+If you have cows with an additive genetic potential in daily milk yields of 2, 3, 5, 6 respectiveley you will reach not more than an additive genetic potential of 6 kg even if your intensity and accuracy of selection is very high.
+The intensity of selection is a value usually based on the usual percentage of animals chosen as parents. In this value the assumption of normal distribution for all traits is assumed (Here formula).
+
+In \autoref{Qgeneration} I computed the response to selection per generation.
+However sometimes it occurs that different generations overlap.
+Therefore it is usually more suitable to compute the response to selection per year.
+To do so \autoref{Qgeneration} extends with the term mean generation interval ($L$) in years.
+\begin{equation}
+\label{Qyear}
+Q = \frac {ir\sigma_{g}}{L}
+\end{equation}
+$$Q = \frac {ir\sigma_{g}}{L}$$
+
+For example usually selection on beef sires occurs when about 6 years old.
+$L$ Would then be 7 y in this case to get the response to selection per year.
+In \autoref{Qyear} we make the assumption that we know the mean generation intervall, the intensity of selection and the accuracy of the breeding value for all selection paths.
+Or we know that there is no difference in these parameter in different selection paths.
+A selection path is defined as a possibility to select on a population.
+Different selection paths differ in the type of population on which selection occurs and on the type of selected animals.
+Usually we organize selection paths in four categories: Dam - dam, dam - sire, sire - dam, sire - sire. 
+There the first term indicates the type of population on which selection occurs and the second term indicates the type of the selected animals.
+In case you know only the parameters of each selection path you can transform the formula
+ \autoref{Qyear} to
+\begin{equation}
+\label{Qselectionpath}
+Q = \frac {ir\sigma_{g}}{L}
+\end{equation}
+$$Q = \frac {\sum_{y=1}^{s} i_yr_y\sigma_g}{\sum_{y=1}^{s}L_y}$$
+where $y$ is a selection path and $s$ is the number of selection paths you choose to include in \autoref{Qselectionpath}.
+Some years ago @Bulmer1971 discovered that selection on a population reduces the genetic variance of the population over time to an asymptotic value.
+Considering the so called "Bulmer Effect" you should use the asymptotic genetic variance and the asymptotic accuracy of breeding values when computing the response to selection.
+\begin{equation}
+\label{Qasymptotic}
+Q^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
+\end{equation}
+$$Q^* = \frac {\sum_{y=1}^{s} i_yr_y^*\sigma_g^*}{\sum_{y=1}^{s}L_y}$$
+
+In a population already selected for a long time you may probably disregard the Bulmer effect.
+I would for sure facilitaty the computation of response to selection.
+For example, when you have the accuracy for a breeding value provided by the breeding value estimation, you can just insert its value in the \autoref{Qasymptotic}.

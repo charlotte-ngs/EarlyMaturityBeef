@@ -27,21 +27,20 @@ The resulting codes are available in the annex (see ???)
 The index consisted of three (carcass fat, carcass conformation and carcass weight) times two (adults and calves) traits for each breed.
 Their weighed sum formed the value of the index $I$.
 The index's value was computed as
-
 \begin{equation}
-\label{Index}
+\label{index}
 I=a'u
 \end{equation}
-$$I=a'u$$
-where $a$ was the vector of economic weights and $u$ was the vector of estimated breeding values.
-Both vectors had one entry for each trait which took the same places in $a$ and $u$.
+$$I=a'û$$
+where $a$ was the vector of economic weights and $û$ was the vector of estimated breeding values.
+Both vectors had one entry for each trait which took the same places in $a$ and $û$.
+The estimated breeding values $û$ were available for all carcass traits, but the economic weights not.
+An economical weight for a trait is usually defined as the change in profit per additional unit of the trait [@brascamp1985].
 
 ### Material
 
 #### Payment System CHTAX
 
-An economical weight for a trait is usually defined as the change in profit per additional unit of the trait [@brascamp1985].
-However, in this project there was no information available about the true change in profit per trait unit.
 The only information available was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland.
 Therefore the change in profit was approximated by the difference in price per kg carcass weight determined by CHTAX.
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
@@ -316,9 +315,9 @@ kable(x,booktabs=T,caption="Population mean and standard deviation in kg carcass
 
 ### Method
 
-Regarding the mentioned simplifications for the determination of economic weight in Section ??, the economic weights $a$ in the *index over carcass traits* was computed as
+Regarding the mentioned simplifications for the determination of economic weight in Section ??, the economic weights $a$ in the *Index over carcass traits* was computed as
 \begin{equation}
-\label{EconomicWeight}
+\label{economicweight}
 a=\frac{r_1'p-r_0^Tp}{\Delta_{\mu}}
 \end{equation}
 $$a=\frac{r_1'p-r_0'p}{\Delta_{\mu}}$$
@@ -380,12 +379,192 @@ g+
 ```
 
 
-
 ## Genetic Gain
-The genetic gain was the mean change in price per kilogramm carcass weight per year in two Swiss beef breed populations.
-From its value correlated genetic gains were computed for all carcass traits individually.
+
+The value of genetic gain $Q$ predicts an aggregate genotype's improvement in a population in Sfr. / year [@Hazel1943].
+For both strategies this improvement was defined as an increase in the aggregate genotype $H$
+
+$$H=a'u$$
+
+where $a$ was the vector of economic weights (see Section ??) and $u$ was the vector of true breeding values.
+Both vectors had one entry for each trait which took the same places in $a$ and $u$ (length of $a$ and $u$ = 6).
+
+
+### Material
+
+Beside the economic weights (see Table ??) residual and genetic variances / covariances of the six carcass traits were used to compute the genetic gain for Angus and Limousin for the two strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* (see table ??).
+
+```{r genvarcov}
+genetic_var_cov <- system.file("extdata","adults_calves_genetic_variances_covariances", package="Exemplary")
+genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
+# Add first column with names
+Trait <- c("cCC","aCC","cCF","aCF","cCW","aCW")
+genetic_var_cov <- cbind(Trait,genetic_var_cov)
+genetic_var_cov
+kable(genetic_var_cov, digits=3, booktabs=T, caption="Genetic variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults derived from Kunz (2018)")
+```
+
+```{r resvarcov}
+residual_var_cov <- system.file("extdata","adults_calves_genetic_variances_covariances", package="Exemplary")
+residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
+# Add first column with names
+Trait <- c("cCC","aCC","cCF","aCF","cCW","aCW")
+residual_var_cov <- cbind(Trait,residual_var_cov)
+residual_var_cov
+kable(residual_var_cov, digits=3, booktabs=T, caption="Residual variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults derived from Kunz (2018)")
+```
+
+
+They were computed by the method "estimation of variance components" using the software VCE created by Groeneveld and relied on data of estimated breeding values $û$ which were computed using a multivariate best linear unbiased prediction (BLUP) model [@Kunz2018].
+BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variances/covariances, environment factors and individual phenotypic records.
+Multivariate means that BLUP accounts for the phenotypic, genetic and residual covariances between the involved traits. 
+A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
+Phenotypic records of three carcass traits were used to estimate the breeding values:
+
+* carcass fat [class]  
+* carcass conformation [class] 
+* carcass weight [dt]
+
+Each beef carcass delivered one record per carcass trait either as *adult* or as *calf*.
+Animals 700 d or older at slaughter were not included in the model and do not get a breeding value.
+Proviande employees recorded the traits at slaughterhouses in Switzerland routeneley according to CHTAX [@Proviande2015].
+In the model an animals record was assumed to be dependent on the environmental conditions the animal lives in beside the genetic effects.
+The environmental effects of the different conditions were included in BLUP and used to separate additive genetic effects from environmental effects on the phenotypic observations.
+In BLUP the environmental effects on a phenotypic observation were either known fixed effects or unnkown random effects.
+The following parameters of the animals environment were used as fixed effects in BLUP:
+
+* Proviande carcass classifier for carcass fat and carcass conformation
+
+* Sex
+
+* Slaughterhouse
+
+
+Age and squared age at slaughter were used as covariables in the model.
+Beside the random animal effect which was the breeding value, there was only one random effect used in the model:
+
+* farm x year
+
+
+
+### Methods
+
+The genetic gain was computed considering the "Bulmer effect" [@Bulmer1971].
+The resulting asymptotic genetic gain $Q_H^*$ was computed using the equation for two selection paths [@VonRohr1998].
+It was expressed as
+\begin{equation}
+\label{geneticgain}
+Q_H^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
+\end{equation}
+$$Q_H^*= \frac {\sum_{y=1}^{2} i_yCov(I,H)^*_y}{\sum_{y=1}^{2}L_y}$$
+where $i$ was the selection intensity, $Cov(I,H)^*$ was the asymptotic covariance between the selection index $I$ and the aggregate genotype $H$, $L$ was the generation intervall, $y$ was the selection path with 1 = male and 2 = female and $*$ indicated, that the value was corrected for the "Bulmer effect".
+From its value correlated genetic gains $Q_m^*$ were computed for all carcass traits individually.
 They express the mean change in trait unit or genetic standard deviation per year.
-Detailed information about the computation of the genetic gain is available in ???.
+Equation correlated genetic gain???
+
+The genetic gain was based on assumptions of a probable future breeding scenario.
+It was the same for both strategy *Carcass fat as auxilliary trait* and *Index over carcass traits*.
+This breeding scenario was determined by generation intervall $L$, proportion selected, number of offspring and the proportion of calves and adults in the offspring separateley for a male and female selection candidate (see Table ??).
+```{r breedingscenario}
+library(dplyr)
+# number of offspring
+offspring_file <- system.file("extdata","number_of_offspring", package="Exemplary")
+male_offspring <- read.table(file = offspring_file, sep=";", header=TRUE) %>%
+  select(male)
+male_offspring <- as.numeric(male_offspring)
+female_offspring <- read.table(file = offspring_file, sep=";", header=TRUE) %>%
+  select(female)
+female_offspring <- as.numeric(female_offspring)
+# generation intervall
+generation_intervall <- system.file("extdata","generation_intervall", package="Exemplary")
+male_generationintervall <- read.table(file = generation_intervall, sep=";", header=TRUE) %>%
+  select(male)
+male_generationintervall <- as.numeric(male_generationintervall)
+female_generationintervall <- read.table(file = generation_intervall, sep=";", header=TRUE) %>%
+  select(female)
+female_generationintervall <- as.numeric(female_generationintervall)
+# proportion calves adults
+proportion_file <- system.file("extdata","proportion_calves_adults", package="Exemplary")
+proportion_adults <- read.table(file = proportion_file, sep=";", header=TRUE) %>%
+  select(adults)
+proportion_adults <- as.numeric(proportion_adults)
+proportion_calves <- read.table(file = proportion_file, sep=";", header=TRUE) %>%
+  select(calves)
+proportion_calves <- as.numeric(proportion_calves)
+# proportion selected
+proportionselected_file <- system.file("extdata","proportion_selected", package="Exemplary")
+male_proportionselected <- read.table(file = proportionselected_file, sep=";", header=TRUE) %>%
+  select(male)
+male_proportionselected <- as.numeric(male_proportionselected)
+female_proportionselected <- read.table(file = proportionselected_file, sep=";", header=TRUE) %>%
+  select(female)
+female_proportionselected <- as.numeric(female_proportionselected)
+
+breeding_scenario <- data.frame(Determinant=c("Generation intervall [y]","Proportion selected","Number of offsprin", "Proportion of adults","Proportion of calves"),Male=c(male_generationintervall,male_proportionselected,male_offspring,proportion_adults,proportion_calves),Female=c(female_generationintervall,female_proportionselected,female_offspring,proportion_adults,proportion_calves))
+kable(breeding_scenario, digits=3, booktabs=T, caption="Breeding scenario determinants for male and female selection candidates.")
+
+```
+
+There it was assumed that: 
+
+* population size was infiniteley large, 
+
+* selection candidates were randomly mated, 
+
+* generations in the population were discrete, 
+
+* all breeding values were computed using the same amount of information,
+
+* selection candidates had no record,
+
+* the traits are and stay normally distributed after selection,
+
+* an animal could not have a record as both *adult* and *calf*.
+
+While the generation intervall $L$ was therefore determined, the intensity of selection $i$ was computed using the R command `dnorm(qnorm(1-p))/p` where `p` was the proportion selected.
+The asymptotic covariance between selection index and aggregate genotype $Cov(I,H)^*$ was computed as 
+$$Cov(I,H)^*=\sqrt{b'P^*b}$$
+where $P^*$ was the asymptotic variance covariance matrix between the information sources of $I$ and $b$ was the vector of regression coefficients to maximize the correlation between $I$ and $H$.
+
+Both $P^*$ and $b$ differed between the stratgies *Carcass fat as auxilliary trait* and *Index over carcass traits*, because their selection index $I$ was differently defined.
+According to the selection index theory from @Hazel1943 the selection index is defined as linear regression from the information sources to the aggregate genotype $H$.
+
+#### Strategy Carcass fat as auxilliary trait
+
+For the strategy *Carcass fat as auxilliary trait* it was assumed that the information sources were the estimated breeding values of carcass fat for both *adults* and *calves*.
+This resulted in the selection index
+It was expressed as
+\begin{equation}
+\label{selindcf}
+I_{CF}= bû_{CF}
+\end{equation}
+$$I_{CF}= bû_{CF}$$
+where $b$ was the vector of regression coefficients and $û_{CF}$ was the vector of estimated breeding values of carcass fat for *adults* and *calves* (length of $b$ and $û_{CF}$ = 2).
+This resulted in the covariance between selection index and aggregate genotype
+
+$$Cov(I,H)^*_{CF}=\sqrt{b'P_{CF}^*b}$$
+where $b$ was  $P_{CF}$ was the variance covariance matrix $P$ between $û_{CF}$.
+
+
+For the strategy *Index over carcass traits* it was assumed that the information sources were the estimated breeding values of all carcass traits for both *adults* and *calves*.
+There $b$ could be replaced by the vector of economic weights $a$ because the variance covariance matrix $P$ between the information sources in $I$ was the same as the covariance matrix $G$ between $I$ and $H$ in the definition of $b$
+\begin{equation}
+\label{regrcoeff}
+b=P^{-1}Ga
+\end{equation}
+$$b=P^{-1}Ga$$
+This resulted in the selection index
+\begin{equation}
+\label{selindindex}
+I_{Index}= aû_{Index}
+\end{equation}
+$$I_{Index}= aû_{Index}$$
+where $a$ was the vector of economic weights and $û_{Index}$ was the vector of estimated breeding values of all carcass traits for *adults* and *calves* (length of $a$ and $û_{Index}$ = 6).
+This resulted in the two different equations
+The asymptotic accuracy of the index $r^*$ was defined as the covariance between $I$ and $H$
+
+$$r^*=$$
+
 
 ## Rank Correlations
 
@@ -394,156 +573,9 @@ Detailed information about the computation of the genetic gain is available in ?
 
 
 
-### Deriving Early Maturity from Carcass Fat
-
-The derivation of one trait to another requires that the involved traits are closely correlated. 
-Therefore carcass fat should be highly correlated with early maturity.
-The assumed correlation is based on the theoretical knowledge about growth and body composition in beef cattle.
-Usually muscles grow in an earlier stadium of growth than fat tissue [@Thonney2015].
-This indicates that carcass fat is usually the limiting factor for early maturity in beef cattle.
-Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
-Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
-
-The characteristics of the breeding value carcass fat were the material to asses the suitability of carcass fat for deriving early maturity. 
-To describe and discuss carcass fat as a trait to derive early maturity, the creation and evaluation procedure of the breeding value carcass fat will be explained here.
-I will use the results from the breeding value estimation as "material" to evaluate the efficiency of the breeding program.
-The explanations refering to the creation of the breeding value car are based on the documentation of @Kunz2018.
-
-A breeding value tells you about the additive genetic merit of an animal in comparison to the reference population in units of the measured trait.
-The breeding value is a widespread tool to rank animals in a breeding program.
-To compute the breeding values for carcass fat a multivariate best linear unbiased prediction (BLUP) model is used [@Kunz2018].
-BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variances/covariances, environment factors and individual phenotypic records.
-Multivariate means that BLUP accounts for the phenotypic, genetic and residual covariances between the involved traits. 
-A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
-Phenotypic records of three carcass traits are used to estimate a breeding value for carcass fat:
-
-* carcass fat [class] (table \@ref(tab:fatclass)) 
-* carcass conformation [class] (table \@ref(tab:conformationclass))
-* carcass weight [dt] (section \@ref(CHTAX))
-
-Each beef carcass delivers one record per carcass trait.
-Proviande employees record the traits at slaughterhouses in Switzerland routeneley according to CHTAX [@Proviande2015].
-
-An animals record is dependent on the environmental conditions the animal lives in beside the genetic effects.
-The environmental effects of the different conditions have been included in BLUP and used to separate additive genetic effects from environmental effects on the phenotypic observations.
-In BLUP the environmental effects on a phenotypic observation are either known fixed effects or unnkown random effects.
-To compute a breeding value for carcass fat, carcass conformation and carcass weight the following parameters of the animals environment have been used as fixed effects:
-
-* Proviande carcass classifier for carcass fat and carcass conformation
-* sex
-* age and squared age at slaughter (as covariable)
-* slaughterhouse
-
-Beside the random animal effect which is the breeding value, there is only one random effect used in the model:
-
-* farm x year
-
-Ultimateley the breeding values are divided into two groups based on age at slaughter of the animal which delivered the record.
-While the group "calves (c)" includes animals which are less or 180 d old at slaughter, the group "stirks (s)" includes animals which are more than 180 d but less than 700 d old at slaughter.
-Animals 700 d or older at slaughter are not included in the model and do not get a breeding value.
-
-The computation of multivariate BLUP breeding values enabled the estimation of variance components in the population.
-Variance components consist of phenotypical, genetic, fixed effects and residual variances/covariances.
-They have been computed by the method "estimation of variance components" using the Software VCE created by Groeneveld [@Kunz2018].
-The variance components distinguish as well between the two groups of breeding values "calves" (see table \@ref(tab:calvesvariancecomponents)) and "stirks" (see table \@ref(tab:stirksvariancecomponents)).
-
-```{r calvesvariancecomponents, echo=FALSE}
-library(knitr)
-library(kableExtra)
-g<-data.frame(c("cCC","cCF", "cCW"), c(0.4015, -0.00993, 0.01828), c( -0.00993, 0.12067,0.00050), c(0.01828,0.00050,0.00311))
-colnames(g) <- c(" ","cCC","cCF", "cCW")
-
-r<-data.frame(c(0.35845, 0.13154, 0.02907), c( 0.35845, 0.23651,0.02463), c(0.02907,0.23651,0.00904))
-colnames(r) <- c("cCC","cCF", "cCW")
-
-p<-data.frame(c(0.79947, 0.14951, 0.05394), c( 0.14951, 0.39365,0.02979), c(0.05394,0.02979,0.06395), c(0.50221, 0.30654, 0.22078))
-colnames(p) <- c("cCC","cCF", "cCW", "heritability")
-
-cvc<-cbind(g,r,p)
-kable(cvc, digits=3, booktabs=T, caption="Genetic and phenotypic variances-covariances for calves (c) derived from Kunz (2018)") %>%
-kable_styling(latex_options=c("hold_position")) %>%
- add_header_above(c(" ","genetic"=3,"residual"=3, "phenotypic"=3," ")) %>%
-  column_spec(c(1,4,7,10), border_right = T)
-
-```
----
-nocite: | 
-  @Kunz2018
-...
-
-```{r stirksvariancecomponents, echo=FALSE}
-library(knitr)
-library(kableExtra)
-sg<-data.frame(name=c("sCC","sCF", "sCW"),sCC= c(0.4013, -0.00655, 0.03387), sCF=c( -0.00655, 0.13028,0.01322), sCW=c(0.03387,0.01322,0.01947))
-colnames(sg) <- c(" ","sCC","sCF", "sCW")
-
-sr<-data.frame(sCC=c(0.26631, 0.00931, 0.04903),sCF= c( 0.00931, 0.19451,0.02162),sCW= c( 0.04903,0.02162,0.03466))
-colnames(sr) <- c("sCC","sCF", "sCW")
-
-sp<-data.frame(sCC=c(0.71754, 0.07159, 0.09911), sCF=c(0.07159, 0.36439,0.04989), sCW=c(0.09911,0.04989,0.06395), heritability=c(0.55928, 0.35752, 0.30447))
-colnames(sp) <- c("sCC","sCF", "sCW", "heritability")
-svc<-cbind(sg,sr,sp)
-kable(svc, digits=3, booktabs=T, caption="Genetic, phenotypic and residual variances-covariances for stirks (s) derived from Kunz (2018)") %>%
- add_header_above(c("","genetic"=3,"residual"=3, "phenotypic"=3,""))
-
-```
-
-
-
 #### Genetic gain equation derivation
 
-The response to selection is highly dependent on the breeding conditions in a population.
-The response to selection achieved in one generation is the product of the intensity of selection ($i$), the square root of the accuracy of the breeding value ($r$) and the genetic variance ($\sigma_{g}$).
-\begin{equation}
-\label{Qgeneration}
-Q = ir\sigma_{g}
-\end{equation}
-$$Q = ir\sigma_{g}$$
-The intensity of selection describes, how big the proportion of animals chosen to be parents compared to the whole population is.
-For example the intensity of selection is higher when you choose two of 10 animals to be parents than if you choose 5 animals to be parents.
-The accuracy of the breeding value tells, how big chances are that the best animals are chosen as parents. 
-For example if you have no means to distinguish between the best parents because you do not have any information about them (no records of them or relatives) or you know that the characteristics of the parents will not be inherited to their progeny (heritability=0) it would be completeley random if you choose the best parents.
-The additive genetic variance in the population limits the potential for improvement using selection.
-For example if you have cows that have the additive genetic potential of daily milk yields in kg of 1, 5, 7, 20 respecteveley you have the potential to get a mean additive genetic potential in milk yield of almost 20 kg by selecting the best animals for parents. 
-If you have cows with an additive genetic potential in daily milk yields of 2, 3, 5, 6 respectiveley you will reach not more than an additive genetic potential of 6 kg even if your intensity and accuracy of selection is very high.
-The intensity of selection is a value usually based on the usual percentage of animals chosen as parents. In this value the assumption of normal distribution for all traits is assumed (Here formula).
 
-In \autoref{Qgeneration} I computed the response to selection per generation.
-However sometimes it occurs that different generations overlap.
-Therefore it is usually more suitable to compute the response to selection per year.
-To do so \autoref{Qgeneration} extends with the term mean generation interval ($L$) in years.
-
-\begin{equation}
-\label{Qyear}
-Q = \frac {ir\sigma_{g}}{L}
-\end{equation}
-$$Q = \frac {ir\sigma_{g}}{L}$$
-
-For example usually selection on beef sires occurs when about 6 years old.
-$L$ Would then be 7 y in this case to get the response to selection per year.
-In \autoref{Qyear} we make the assumption that we know the mean generation intervall, the intensity of selection and the accuracy of the breeding value for all selection paths.
-Or we know that there is no difference in these parameter in different selection paths.
-A selection path is defined as a possibility to select on a population.
-Different selection paths differ in the type of population on which selection occurs and on the type of selected animals.
-Usually we organize selection paths in four categories: Dam - dam, dam - sire, sire - dam, sire - sire. 
-There the first term indicates the type of population on which selection occurs and the second term indicates the type of the selected animals.
-In case you know only the parameters of each selection path you can transform the formula \autoref{Qyear} to
-\begin{equation}
-\label{Qselectionpath}
-Q = \frac {ir\sigma_{g}}{L}
-\end{equation}
-$$Q = \frac {\sum_{y=1}^{s} i_yr_y\sigma_g}{\sum_{y=1}^{s}L_y}$$
-where $y$ is a selection path and $s$ is the number of selection paths you choose to include in \autoref{Qselectionpath}.
-Some years ago @Bulmer1971 discovered that selection on a population reduces the genetic variance of the population over time to an asymptotic value.
-Considering the so called "Bulmer Effect" you should use the asymptotic genetic variance and the asymptotic accuracy of breeding values when computing the response to selection.
-\begin{equation}
-\label{Qasymptotic}
-Q^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
-\end{equation}
-$$Q^* = \frac {\sum_{y=1}^{s} i_yr_y^*\sigma_g^*}{\sum_{y=1}^{s}L_y}$$
-In a population already selected for a long time you may probably disregard the Bulmer effect.
-I would for sure facilitaty the computation of response to selection.
-For example, when you have the accuracy for a breeding value provided by the breeding value estimation, you can just insert its value in the \autoref{Qasymptotic}.
 Another approach to compute the accuracies of breeding values is to use the selection index theory developed by @Hazel1943.
 There you have to mimic breeding value estimation using linear regression of breeding values on phenotypes.
 Then you need to find the regression coefficients and compute the accuracy of a breeding value.

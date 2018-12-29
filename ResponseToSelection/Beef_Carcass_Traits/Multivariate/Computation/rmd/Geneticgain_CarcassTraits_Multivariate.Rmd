@@ -458,7 +458,7 @@ male_Ma_cCF <- male_Ca[3:4,"cCF"]
 
 The correlated genetic gain is
 
-$$Q^*= \frac {\sum_{y=1}^{2} i_y(\sqrt{b'_yP_y^*b_y})^{-1}b'M^*_y}{\sum_{y=1}^{2}L_y}$$
+$$Q_m^*= \frac {\sum_{y=1}^{2} i_y(\sqrt{b'_yP_y^*b_y})^{-1}b'M^*_y}{\sum_{y=1}^{2}L_y}$$
 
 ```{r}
 QaCF_CF<- (male_i/sqrt(t(male_b)%*%male_Pa%*%male_b)*t(male_b)%*%male_Ca[3:4,"aCF"]+female_i/sqrt(t(female_b)%*%female_Pa%*%female_b)*t(female_b)%*%female_Ca[3:4,"aCF"])/(male_generationintervall+female_generationintervall)
