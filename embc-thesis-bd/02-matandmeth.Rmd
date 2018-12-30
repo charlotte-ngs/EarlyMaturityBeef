@@ -456,7 +456,7 @@ where $i$ was the selection intensity, $Cov(I,H)^*$ was the asymptotic covarianc
 From its value correlated genetic gains $Q_m^*$ were computed for all carcass traits $m$ individually using the equation
 
 $$Q^*_m=Q_H^*Cov(u_m,I)^*(Var(I)^*)^{-1}$$
-where $Cov(u_m,I)^*$ was the asymptotic covariance between a true breeding value of trait $m$ and the aggregate genotype $H$ and $Var(I)^*$ was
+where $Cov(u_m,I)^*$ was the asymptotic covariance between a true breeding value of trait $m$ and the aggregate genotype $H$ and $Var(I)^*$ was the asymptotic variance of the selection index $I$.
 
 The genetic gain was based on assumptions of a probable future breeding scenario.
 It was the same for both strategy *Carcass fat as auxilliary trait* and *Index over carcass traits*.
@@ -525,8 +525,15 @@ The asymptotic covariance between selection index and aggregate genotype $Cov(I,
 Cov(I,H)^*=\sqrt{b'P^*b}
 \end{equation}
 $$Cov(I,H)^*=\sqrt{b'P^*b}$$
-where $P^*$ was the asymptotic variance covariance matrix between the information sources of the selection index $I$ and $b$ was the vector of regression coefficients to maximize the correlation between $I$ and the aggregate genotype $H$.
-The vector of regression coefficients was computed as
+, the asymptotic covariance between a true breeding value of trait $m$ and the aggregate genotype $H$ was computed as
+
+$$Cov(u_m,I)^*=b'G^*_m$$
+and the asymptotic variance of the selection index $I$ was computed as
+
+$$Var(I)^*=b'P^*b$$
+
+where $P^*$ was the asymptotic variance covariance matrix between the information sources of the selection index $G^*_m$ was the asymptotic variance covariance matrix between a true breeding value and the selection index and $b$ was the vector of regression coefficients to maximize the correlation between $I$ and the aggregate genotype $H$.
+The vector of regression coefficients $b$ was computed as
 \begin{equation}
 \label{regrcoeff}
 b=P^{-1}Ga
@@ -555,6 +562,8 @@ $$P^*=C^*_{CF}$$
 where $C^*_{CF}$ was the asymptotic covariance matrix between true and estimated breeding values of the two estimated breeding values in $û_{CF}$ (resulted in a 2 x 2 matrix).
 Additionally the covariance matrix between selection index and aggregate genotype $G$ could be set to
 $$G=C_{CF,H}$$
+and asymptotic variance covariance matrix between a true breeding value and the selection index could be set to
+$$G^*_m=C^*$$
 where $C_{CF,H}$ was the covariance matrix of the two estimated breeding values $û_{CF}$ and the true breeding values in $H$ (resulted in a 2 x 6 matrix).
 
 #### Strategy Index over carcass traits
