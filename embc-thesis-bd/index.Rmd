@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
-bibliography: [library.bib]
+bibliography: "`r system.file('extdata','library.bib',package='Exemplary')`"
 biblio-style: apalike
 link-citations: yes
 github-repo: charlotte-ngs/EarlyMaturityBeef
@@ -56,9 +56,7 @@ options(knitr.graphics.auto_pdf = TRUE)
 # Preface {-}
 If you want to write a preface, please write it here.
 
-
 # Summary {-}
-
 
 # Task Description {-}
 Here comes the description of the MSc task.

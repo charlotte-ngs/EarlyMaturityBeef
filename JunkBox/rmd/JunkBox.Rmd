@@ -1254,3 +1254,96 @@ $$Q^* = \frac {\sum_{y=1}^{s} i_yr_y^*\sigma_g^*}{\sum_{y=1}^{s}L_y}$$
 In a population already selected for a long time you may probably disregard the Bulmer effect.
 I would for sure facilitaty the computation of response to selection.
 For example, when you have the accuracy for a breeding value provided by the breeding value estimation, you can just insert its value in the \autoref{Qasymptotic}.
+
+#### Genetic gain equation derivation
+
+
+Another approach to compute the accuracies of breeding values is to use the selection index theory developed by @Hazel1943.
+There you have to mimic breeding value estimation using linear regression of breeding values on phenotypes.
+Then you need to find the regression coefficients and compute the accuracy of a breeding value.
+An index in this context is a synonym for estimated breeding value.
+You can compute the index by summing phenotypic records $x$ on a selection candidate and weigh them with $b$ according to their significance for the breeding value.
+\begin{equation}
+\label{selectionindex}
+Â=\sum_{x=1}^{q}b_x*x_x
+\end{equation}
+$$Â=\sum_{z=1}^{q}b_zx_z$$
+For example you would like to compute the breeding value or index of cattle sire.
+You have available the phenotypic observation of a full sib and a half sib in which is known as difference to the population mean.
+You should now choose $b$ for the half sib to be equal or less than 0.25 and for the full sib equal or less than 0.5. 
+$b$ can further decrease when heratibility is low.
+The accuracy of selection $r$ is the correlation between the true breeding value and the estimated breeding value.
+For selection index theory it is 
+\begin{equation}
+\label{accuracyselectionindex}
+r= \frac { \sqrt{b'G}}{\sigma_g}
+\end{equation}
+$$r= \frac { \sqrt{b'G}}{\sigma_g} $$
+Using this approach including the "Bulmer effect" I was able to compute the genetic gains for the carcass traits dependent on their economical value.
+
+
+Therefore we created likely scenarios simulating breeding conditions for male and female selection candidates to assess the effect of breeding conditions on response to selection for this case.
+
+The chosen scenarios differ in the number and relationship of relatives the selection candidates have and the proportion of selected male/female animals that will be parents of the beef cattle population in a generation.
+From the proportion of selected animals we have computed intensities of selection applied on the population assuming that carcass fat, carcass conformation and carcass weight are normally distributed in the examined beef cattle population.
+We used the R command 
+Then we assigned economical weights as additional revenue in Sfr. / unit of trait gain for the involved traits carcass fat, carcass conformation and carcass weight.
+The values for the scenarios are available at ... Here I will create a table combining the assumed values for each scenarion (number of siblings, number of half siblings, proportion selected, intensity of selection, economical weights)
+
+For each scenario we have predicted the specific traits improvement $Q_m^*$ from the aggregate genotype asymptotic response to selection using linear regression as shown in \autoref{Qm} [@Andersen1994].
+All computations have been conducted using RStudio [@RStudio2016].
+
+\begin{equation}
+\label{Qm}
+Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
+\end{equation}
+
+Where:
+
+* $Q$ = response to selection [trait unit / years]
+
+* $_m$ = trait: carcass fat, carcass conformation or carcass weight. Here it means that we only take $m$ part of the matrix $C$ which makes it a $q x q$ dimensional matrix.
+
+* $^*$ = indicates that reduction of variance during selection has been taken into account known as "Bulmer effect", values turn to asymptotic values [@Bulmer1971].
+
+* $_y$ = sex of the predicted selection candidate (1 = male, 2 = female)
+
+* $i$ = intensity of selection
+
+* $C$ = covariance matrix between true and estimated breeding value before selection of dimesion $qn x qn$ ; $n$ = number of traits, $q$ = number of levels for random effects
+
+* $a$ = vector of economical weights [Sfr. / trait unit]
+
+* $L$ = generation intervall [years]
+
+
+We have computed the response to selection $Q^*$ of the aggregate genotype based on the following formula derived from [@Phocas1996]:
+
+\begin{equation}
+\label{Qagr}
+Q^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
+\end{equation}
+
+Where:
+
+* $r$ = accuracy of aggregate genotype
+
+* $\sigma$ = standard deviation of aggregate genotype
+
+We computed $r^*_y$ and $\sigma^*$ using the following formulas:
+
+\begin{equation}
+\label{rasympt}
+r^*=\sqrt{\frac {a^TC_y^*a}{a^TG^*a}}
+\end{equation}
+
+and
+
+\begin{equation}
+\label{sigasympt}
+\sigma^*=\sqrt{a^TG^*a}
+\end{equation}
+
+Where
+
+* $G$ = genetic variance-covariance matrix

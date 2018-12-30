@@ -3,7 +3,7 @@ output:
   pdf_document: default
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center")
 library(knitr)
 library(kableExtra)
 ```
@@ -110,7 +110,7 @@ Class <- rep(c(1:5),times=2)
 x <- cbind(CF_price,Class)
 g <- ggplot(x,aes(Class,price))
 g + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 10))+
+  theme_classic()+theme(text = element_text(size = 15))+
    facet_grid(.~Group)+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass fat class")
@@ -136,7 +136,7 @@ x <- cbind(CC_price,Class)
 g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),price))
 g + geom_bar(stat="identity")+
   facet_grid(.~Group)+
-  theme_classic()+theme(text = element_text(size = 10))+
+  theme_classic()+theme(text = element_text(size = 15))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass conformation class")
 ```
@@ -159,7 +159,7 @@ CWa <- cbind(CWa_price,CWa_threshold)
 
 CWa_plot <- ggplot(CWa,aes(threshold,price))
 CWa_plot + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 10))+
+  theme_classic()+theme(text = element_text(size = 15))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass weight thresholds in kg")
 ```
@@ -181,7 +181,7 @@ CWc_threshold$threshold <- factor(CWc_threshold$threshold,levels=CWc_threshold$t
 CWc <- cbind(CWc_price,CWc_threshold)
 CWc_plot <- ggplot(CWc,aes(threshold,price))
 CWc_plot + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 10))+
+  theme_classic()+theme(text = element_text(size = 15))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass weight thresholds in kg")
 ```
@@ -247,7 +247,7 @@ x <- rbind(AN_CFa,AN_CFc,LM_CFa,LM_CFc)
 g <- ggplot(x,aes(Class,Frequency))
 g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 10))+
+  theme_classic()+theme(text = element_text(size = 15))+
   ylab("Population frequency")+
   xlab("Carcass fat class")
 ```
@@ -295,7 +295,7 @@ x <- rbind(AN_CCa,AN_CCc,LM_CCa,LM_CCc)
 g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),Frequency))
 g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 10))+
+  theme_classic()+theme(text = element_text(size = 15))+
   ylab("Population frequency")+
   xlab("Carcass fat class")
 ```
@@ -352,7 +352,7 @@ g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
   theme_classic()+
   ylab("Population frequency")+
-  xlab("Carcass fat class")+theme(text = element_text(size = 10))
+  xlab("Carcass fat class")+theme(text = element_text(size = 15))
 ```
 
 ```{r thresholdsconstant, fig.cap="Exemplary distribution shift whith constant thresholds of the group adults, breed Angus and trait carcass fat.", echo=FALSE}
@@ -375,7 +375,7 @@ g+
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.3, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c(NULL=NULL,"Initial distribution"="solid","New distribution"="dashed"), guide = guide_legend(title=NULL))+
-  theme_classic()+theme(text = element_text(size = 10))
+  theme_classic()+theme(text = element_text(size = 15))
 ```
 
 
@@ -389,7 +389,6 @@ $$H=a'u$$
 where $a$ was the vector of economic weights (see Section ??) and $u$ was the vector of true breeding values.
 Both vectors had one entry for each trait which took the same places in $a$ and $u$ (length of $a$ and $u$ = 6).
 
-
 ### Material
 
 Beside the economic weights (see Table ??) residual and genetic variances / covariances of the six carcass traits were used to compute the genetic gain for Angus and Limousin for the two strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* (see table ??).
@@ -400,7 +399,6 @@ genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
 # Add first column with names
 Trait <- c("cCC","aCC","cCF","aCF","cCW","aCW")
 genetic_var_cov <- cbind(Trait,genetic_var_cov)
-genetic_var_cov
 kable(genetic_var_cov, digits=3, booktabs=T, caption="Genetic variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults derived from Kunz (2018)")
 ```
 
@@ -410,10 +408,8 @@ residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
 # Add first column with names
 Trait <- c("cCC","aCC","cCF","aCF","cCW","aCW")
 residual_var_cov <- cbind(Trait,residual_var_cov)
-residual_var_cov
 kable(residual_var_cov, digits=3, booktabs=T, caption="Residual variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults derived from Kunz (2018)")
 ```
-
 
 They were computed by the method "estimation of variance components" using the software VCE created by Groeneveld and relied on data of estimated breeding values $û$ which were computed using a multivariate best linear unbiased prediction (BLUP) model [@Kunz2018].
 BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variances/covariances, environment factors and individual phenotypic records.
@@ -421,9 +417,11 @@ Multivariate means that BLUP accounts for the phenotypic, genetic and residual c
 A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
 Phenotypic records of three carcass traits were used to estimate the breeding values:
 
-* carcass fat [class]  
-* carcass conformation [class] 
-* carcass weight [dt]
+* Carcass fat [class]  
+
+* Carcass conformation [class]
+
+* Carcass weight [dt]
 
 Each beef carcass delivered one record per carcass trait either as *adult* or as *calf*.
 Animals 700 d or older at slaughter were not included in the model and do not get a breeding value.
@@ -439,13 +437,10 @@ The following parameters of the animals environment were used as fixed effects i
 
 * Slaughterhouse
 
-
 Age and squared age at slaughter were used as covariables in the model.
 Beside the random animal effect which was the breeding value, there was only one random effect used in the model:
 
-* farm x year
-
-
+* Farm x year
 
 ### Methods
 
@@ -458,13 +453,15 @@ Q_H^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
 \end{equation}
 $$Q_H^*= \frac {\sum_{y=1}^{2} i_yCov(I,H)^*_y}{\sum_{y=1}^{2}L_y}$$
 where $i$ was the selection intensity, $Cov(I,H)^*$ was the asymptotic covariance between the selection index $I$ and the aggregate genotype $H$, $L$ was the generation intervall, $y$ was the selection path with 1 = male and 2 = female and $*$ indicated, that the value was corrected for the "Bulmer effect".
-From its value correlated genetic gains $Q_m^*$ were computed for all carcass traits individually.
-They express the mean change in trait unit or genetic standard deviation per year.
-Equation correlated genetic gain???
+From its value correlated genetic gains $Q_m^*$ were computed for all carcass traits $m$ individually using the equation
+
+$$Q^*_m=Q_H^*Cov(u_m,I)^*(Var(I)^*)^{-1}$$
+where $Cov(u_m,I)^*$ was the asymptotic covariance between a true breeding value of trait $m$ and the aggregate genotype $H$ and $Var(I)^*$ was
 
 The genetic gain was based on assumptions of a probable future breeding scenario.
 It was the same for both strategy *Carcass fat as auxilliary trait* and *Index over carcass traits*.
 This breeding scenario was determined by generation intervall $L$, proportion selected, number of offspring and the proportion of calves and adults in the offspring separateley for a male and female selection candidate (see Table ??).
+
 ```{r breedingscenario}
 library(dplyr)
 # number of offspring
@@ -523,9 +520,19 @@ There it was assumed that:
 
 While the generation intervall $L$ was therefore determined, the intensity of selection $i$ was computed using the R command `dnorm(qnorm(1-p))/p` where `p` was the proportion selected.
 The asymptotic covariance between selection index and aggregate genotype $Cov(I,H)^*$ was computed as 
+\begin{equation}
+\label{covindagg}
+Cov(I,H)^*=\sqrt{b'P^*b}
+\end{equation}
 $$Cov(I,H)^*=\sqrt{b'P^*b}$$
-where $P^*$ was the asymptotic variance covariance matrix between the information sources of $I$ and $b$ was the vector of regression coefficients to maximize the correlation between $I$ and $H$.
-
+where $P^*$ was the asymptotic variance covariance matrix between the information sources of the selection index $I$ and $b$ was the vector of regression coefficients to maximize the correlation between $I$ and the aggregate genotype $H$.
+The vector of regression coefficients was computed as
+\begin{equation}
+\label{regrcoeff}
+b=P^{-1}Ga
+\end{equation}
+$$b=P^{-1}Ga$$
+where $P$ was the variance covariance matrix between the information sources of $I$, $G$ was the covariance matrix between $I$ and $H$ and $a$ was the vector of economic weights.
 Both $P^*$ and $b$ differed between the stratgies *Carcass fat as auxilliary trait* and *Index over carcass traits*, because their selection index $I$ was differently defined.
 According to the selection index theory from @Hazel1943 the selection index is defined as linear regression from the information sources to the aggregate genotype $H$.
 
@@ -533,26 +540,27 @@ According to the selection index theory from @Hazel1943 the selection index is d
 
 For the strategy *Carcass fat as auxilliary trait* it was assumed that the information sources were the estimated breeding values of carcass fat for both *adults* and *calves*.
 This resulted in the selection index
-It was expressed as
 \begin{equation}
 \label{selindcf}
 I_{CF}= bû_{CF}
 \end{equation}
 $$I_{CF}= bû_{CF}$$
 where $b$ was the vector of regression coefficients and $û_{CF}$ was the vector of estimated breeding values of carcass fat for *adults* and *calves* (length of $b$ and $û_{CF}$ = 2).
-This resulted in the covariance between selection index and aggregate genotype
+Due to the assumption that the variance of BLUP computed estimated breeding values is the same as the variance of true breeding values, it was valid to set $P^*$ to
+\begin{equation}
+\label{covcf}
+P^*=C^*_{CF}
+\end{equation}
+$$P^*=C^*_{CF}$$
+where $C^*_{CF}$ was the asymptotic covariance matrix between true and estimated breeding values of the two estimated breeding values in $û_{CF}$ (resulted in a 2 x 2 matrix).
+Additionally the covariance matrix between selection index and aggregate genotype $G$ could be set to
+$$G=C_{CF,H}$$
+where $C_{CF,H}$ was the covariance matrix of the two estimated breeding values $û_{CF}$ and the true breeding values in $H$ (resulted in a 2 x 6 matrix).
 
-$$Cov(I,H)^*_{CF}=\sqrt{b'P_{CF}^*b}$$
-where $b$ was  $P_{CF}$ was the variance covariance matrix $P$ between $û_{CF}$.
-
+#### Strategy Index over carcass traits
 
 For the strategy *Index over carcass traits* it was assumed that the information sources were the estimated breeding values of all carcass traits for both *adults* and *calves*.
-There $b$ could be replaced by the vector of economic weights $a$ because the variance covariance matrix $P$ between the information sources in $I$ was the same as the covariance matrix $G$ between $I$ and $H$ in the definition of $b$
-\begin{equation}
-\label{regrcoeff}
-b=P^{-1}Ga
-\end{equation}
-$$b=P^{-1}Ga$$
+Therefore $b$ could be replaced in the selection index by the vector of economic weights $a$ because the variance covariance matrix $P$ between the information sources in $I$ was the same as the covariance matrix $G$ between $I$ and $H$ in the definition of $b$ (see Equation ??).
 This resulted in the selection index
 \begin{equation}
 \label{selindindex}
@@ -560,111 +568,19 @@ I_{Index}= aû_{Index}
 \end{equation}
 $$I_{Index}= aû_{Index}$$
 where $a$ was the vector of economic weights and $û_{Index}$ was the vector of estimated breeding values of all carcass traits for *adults* and *calves* (length of $a$ and $û_{Index}$ = 6).
-This resulted in the two different equations
-The asymptotic accuracy of the index $r^*$ was defined as the covariance between $I$ and $H$
+The asymptotic variance covariance matrix between the information sources of the selection index $I$ was set to
+\begin{equation}
+\label{covind}
+P^*=C^*_{Index}
+\end{equation}
+$$P^*=C^*_{Index}$$
+where $C^*_{Index}$ was the covariance matrix between the six estimated breeding values $û_{Index}$ and the true breeding values in $H$ (resulted in a 6 x 6 matrix).
 
-$$r^*=$$
+#### Asymptotic covariance matrix between true and estimated breeding values
 
+The asymptotic covariance matrix between true and estimated breeding values of all carcass traits was therefore necessary to compute $$, $$ and
 
 ## Rank Correlations
-
-
-
-
-
-
-#### Genetic gain equation derivation
-
-
-Another approach to compute the accuracies of breeding values is to use the selection index theory developed by @Hazel1943.
-There you have to mimic breeding value estimation using linear regression of breeding values on phenotypes.
-Then you need to find the regression coefficients and compute the accuracy of a breeding value.
-An index in this context is a synonym for estimated breeding value.
-You can compute the index by summing phenotypic records $x$ on a selection candidate and weigh them with $b$ according to their significance for the breeding value.
-\begin{equation}
-\label{selectionindex}
-Â=\sum_{x=1}^{q}b_x*x_x
-\end{equation}
-$$Â=\sum_{z=1}^{q}b_zx_z$$
-For example you would like to compute the breeding value or index of cattle sire.
-You have available the phenotypic observation of a full sib and a half sib in which is known as difference to the population mean.
-You should now choose $b$ for the half sib to be equal or less than 0.25 and for the full sib equal or less than 0.5. 
-$b$ can further decrease when heratibility is low.
-The accuracy of selection $r$ is the correlation between the true breeding value and the estimated breeding value.
-For selection index theory it is 
-\begin{equation}
-\label{accuracyselectionindex}
-r= \frac { \sqrt{b'G}}{\sigma_g}
-\end{equation}
-$$r= \frac { \sqrt{b'G}}{\sigma_g} $$
-Using this approach including the "Bulmer effect" I was able to compute the genetic gains for the carcass traits dependent on their economical value.
-
-
-Therefore we created likely scenarios simulating breeding conditions for male and female selection candidates to assess the effect of breeding conditions on response to selection for this case.
-
-The chosen scenarios differ in the number and relationship of relatives the selection candidates have and the proportion of selected male/female animals that will be parents of the beef cattle population in a generation.
-From the proportion of selected animals we have computed intensities of selection applied on the population assuming that carcass fat, carcass conformation and carcass weight are normally distributed in the examined beef cattle population.
-We used the R command 
-Then we assigned economical weights as additional revenue in Sfr. / unit of trait gain for the involved traits carcass fat, carcass conformation and carcass weight.
-The values for the scenarios are available at ... Here I will create a table combining the assumed values for each scenarion (number of siblings, number of half siblings, proportion selected, intensity of selection, economical weights)
-
-For each scenario we have predicted the specific traits improvement $Q_m^*$ from the aggregate genotype asymptotic response to selection using linear regression as shown in \autoref{Qm} [@Andersen1994].
-All computations have been conducted using RStudio [@RStudio2016].
-
-\begin{equation}
-\label{Qm}
-Q_m^*= \frac {\sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
-\end{equation}
-
-Where:
-
-* $Q$ = response to selection [trait unit / years]
-
-* $_m$ = trait: carcass fat, carcass conformation or carcass weight. Here it means that we only take $m$ part of the matrix $C$ which makes it a $q x q$ dimensional matrix.
-
-* $^*$ = indicates that reduction of variance during selection has been taken into account known as "Bulmer effect", values turn to asymptotic values [@Bulmer1971].
-
-* $_y$ = sex of the predicted selection candidate (1 = male, 2 = female)
-
-* $i$ = intensity of selection
-
-* $C$ = covariance matrix between true and estimated breeding value before selection of dimesion $qn x qn$ ; $n$ = number of traits, $q$ = number of levels for random effects
-
-* $a$ = vector of economical weights [Sfr. / trait unit]
-
-* $L$ = generation intervall [years]
-
-
-We have computed the response to selection $Q^*$ of the aggregate genotype based on the following formula derived from [@Phocas1996]:
-
-\begin{equation}
-\label{Qagr}
-Q^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
-\end{equation}
-
-Where:
-
-* $r$ = accuracy of aggregate genotype
-
-* $\sigma$ = standard deviation of aggregate genotype
-
-We computed $r^*_y$ and $\sigma^*$ using the following formulas:
-
-\begin{equation}
-\label{rasympt}
-r^*=\sqrt{\frac {a^TC_y^*a}{a^TG^*a}}
-\end{equation}
-
-and
-
-\begin{equation}
-\label{sigasympt}
-\sigma^*=\sqrt{a^TG^*a}
-\end{equation}
-
-Where
-
-* $G$ = genetic variance-covariance matrix
 
 To get $C_y^*$ we used the formula:
 
