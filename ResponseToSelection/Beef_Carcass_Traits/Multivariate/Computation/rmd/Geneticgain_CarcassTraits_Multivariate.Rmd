@@ -129,10 +129,6 @@ economic_weights <- as.matrix(economic_weights)
 economic_weights <- as.vector(economic_weights)
 a <- economic_weights
 a
-
-dim(t(a))
-is.vector(a)
-dim(aMat)
 ```
 
 ## Computations without equations
@@ -140,7 +136,7 @@ dim(aMat)
 ### Number of traits $n$
 
 ```{r}
-n <- as.numeric(nrow(phenotypic_var_cov))
+n <- as.numeric(nrow(genetic_var_cov))
 ```
 
 
@@ -225,6 +221,7 @@ dim(female_adults_kronecker_residual_extended)
 
 female_R <- rbind(female_calves_kronecker_residual_extended,female_adults_kronecker_residual_extended)
 dim(female_R)
+female_R
 
 ```
 

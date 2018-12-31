@@ -1,7 +1,27 @@
 # Results {#results}
 
+There are results for the computation of the index to determine the strategy *Index over carcass traits*, the genetic gains, the rank correlations and the literature reviews of the strategies *Deviation in age at slaughter* and *Growth models*.
+All of these results are presented for the breeds Angus and Limousin.
 
+## Index
 
+The index is determined by the economic weights for the carcass traits carcass fat, carcass conformation and carcass weight, each of the groups *adults* and *calves* (see Table ??).
+Additionally these weights are shown corrected for the trait's genetic standard deviation.
+This allows to compare the importance of the different traits in the index (see Figure ??).
+
+```{r ecweightstab}
+AN_economic_weights_file <- system.file("extdata","AN_economic_values", package="Exemplary")
+AN_economic_weights <- read.table(file = AN_economic_weights_file, sep=";", header=TRUE)
+AN_economic_weights <- as.matrix(AN_economic_weights)
+AN_economic_weights <- as.vector(AN_economic_weights)
+LM_economic_weights_file <- system.file("extdata","LM_economic_values", package="Exemplary")
+LM_economic_weights <- read.table(file = LM_economic_weights_file, sep=";", header=TRUE)
+LM_economic_weights <- as.matrix(LM_economic_weights)
+LM_economic_weights <- as.vector(LM_economic_weights)
+table <- data.frame(Trait= c("Calves conformation [Sfr. / conformation class]", "Adults conformation [Sfr. / conformation class]", "Calves fat [Sfr. / fat class]", "Adults fat [Sfr. / fat class]", "Calves weight [Sfr. / kg carcass weight]", "Adults weight [Sfr. / kg carcass weight]"),Angus=AN_economic_weights,Limousin=LM_economic_weights)
+kable(table, digits=2, booktabs=T,caption="Economic weights which determine the index for the strategy Index over carcass traits.")
+ 
+```
 
 
 

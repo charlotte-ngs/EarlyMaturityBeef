@@ -75,13 +75,12 @@ x <- data.frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"),
                                               ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
                                               ">161 days old"))
 
-kable(x, booktabs=F, caption="Description of carcass categories (Proviande, 2015)") %>%
-column_spec(3, width="8cm")
+kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015)")
 ```
 
 ```{r fatclass}
 x<-data.frame(Class = c("1", "2", "3", "4", "5"), Description=c("No fat coverage","Light fat coverage; muscels partially visible", "Average even fat coverage; muscles generally covered", "Strong fat coverage; excessive fat deposition", "Fat coverage generally excessive; bulging fat formations"))
-kable(x, booktabs=F, caption="Description of carcass fat classes (Proviande, 2015)")
+kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015)")
 ```
 ---
 nocite: | 
@@ -89,8 +88,7 @@ nocite: |
 ...
 ```{r conformationclass}
 x<-data.frame(Class = c("C", "H","T+","T","T-","A","X"), Description=c("Leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","Leg: wide; back: wide and full; shoulder: pronounced"," ", "Leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced"," ", "Leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "Leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
-kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)") %>%
-column_spec(1, width="0.5cm")
+kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)")
 ```
 
 ```{r cfprice,fig.cap="Relative prices of each carcass fat class within the animal groups adults and calves."}
@@ -543,7 +541,9 @@ where $P$ was the variance covariance matrix between the information sources of 
 Both $P^*$ and $b$ differed between the stratgies *Carcass fat as auxilliary trait* and *Index over carcass traits*, because their selection index $I$ was differently defined.
 According to the selection index theory from @Hazel1943 the selection index is defined as linear regression from the information sources to the aggregate genotype $H$.
 
-#### Strategy Carcass fat as auxilliary trait
+#### Characterization of the two strategies by selection indices
+
+##### Strategy Carcass fat as auxilliary trait
 
 For the strategy *Carcass fat as auxilliary trait* it was assumed that the information sources were the estimated breeding values of carcass fat for both *adults* and *calves*.
 This resulted in the selection index
@@ -561,12 +561,20 @@ P^*=C^*_{CF}
 $$P^*=C^*_{CF}$$
 where $C^*_{CF}$ was the asymptotic covariance matrix between true and estimated breeding values of the two estimated breeding values in $û_{CF}$ (resulted in a 2 x 2 matrix).
 Additionally the covariance matrix between selection index and aggregate genotype $G$ could be set to
+\begin{equation}
+\label{covindaggcf}
+G=C_{CF,H}
+\end{equation}
 $$G=C_{CF,H}$$
-and asymptotic variance covariance matrix between a true breeding value and the selection index could be set to
-$$G^*_m=C^*$$
-where $C_{CF,H}$ was the covariance matrix of the two estimated breeding values $û_{CF}$ and the true breeding values in $H$ (resulted in a 2 x 6 matrix).
+and the asymptotic variance covariance matrix between a true breeding value and the selection index could be set to
+\begin{equation}
+\label{covbvindcf}
+G^*_m=C^*_{m,CF}
+\end{equation}
+$$G^*_m=C^*_{m,CF}$$
+where $C_{CF,H}$ was the covariance matrix between the two estimated breeding values in $û_{CF}$ and the true breeding values in $H$ (resulted in a 2 x 6 matrix), and $C^*_{m,CF}$ was the covariance matrix between true and estimated breeding values of a trait $m$ and the two estimated breeding values in $û_{CF}$ (resulted in a vector of length 2).
 
-#### Strategy Index over carcass traits
+##### Strategy Index over carcass traits
 
 For the strategy *Index over carcass traits* it was assumed that the information sources were the estimated breeding values of all carcass traits for both *adults* and *calves*.
 Therefore $b$ could be replaced in the selection index by the vector of economic weights $a$ because the variance covariance matrix $P$ between the information sources in $I$ was the same as the covariance matrix $G$ between $I$ and $H$ in the definition of $b$ (see Equation ??).
@@ -585,13 +593,18 @@ P^*=C^*_{Index}
 $$P^*=C^*_{Index}$$
 where $C^*_{Index}$ was the covariance matrix between the six estimated breeding values $û_{Index}$ and the true breeding values in $H$ (resulted in a 6 x 6 matrix).
 
+Additionally the asymptotic variance covariance matrix between a true breeding value and the selection index could be set to
+\begin{equation}
+\label{covbvindind}
+G^*_m=C^*_{m,Index}
+\end{equation}
+$$G^*_m=C^*_{m,Index}$$
+where $C^*_{m,CF}$ was the covariance matrix between true and estimated breeding values of a trait $m$ and the two estimated breeding values in $û_{Index}$ (resulted in a vector of length 6).
+
 #### Asymptotic covariance matrix between true and estimated breeding values
 
-The asymptotic covariance matrix between true and estimated breeding values of all carcass traits was therefore necessary to compute $$, $$ and
-
-## Rank Correlations
-
-To get $C_y^*$ we used the formula:
+The asymptotic covariance matrix between true and estimated breeding values of all carcass traits was therefore necessary to compute the covariances in $C^*_{CF}$, $C_{CF,H}$, $C^*_{m,CF}$, $C^*_{Index}$ and $C^*_{m,Index}$.
+To get $C^*$ of the male $1$ and female $2$ the following equation was used
 
 \begin{equation}
 \label{Casympt}
@@ -613,72 +626,74 @@ C_2
 \end{bmatrix}
 \end{equation}
 
-Where
+$$
+\begin{bmatrix}
+C_1^* \\
+C_2^*
+\end{bmatrix}
+=
+\left( 
+\begin{bmatrix}
+1+1/2k_1  &  1/2k_2 \\
+1/2k_1    &  1+1/2k_2
+\end{bmatrix}^{-1}
+\otimes I_n
+\right)
+\begin{bmatrix}
+C_1 \\
+C_2
+\end{bmatrix}
+$$
 
-* $k$ = factor of variance reduction
-
-* $n$ = number of traits involved
-
-* $I$ = identity matrix of dimension n
-
-
-We computed $k$ using the formula:
+where $k$ was the factor of variance reduction, $n$ was the number of traits involved and $I$ was the identity matrix of dimension $n$, which is the number of all carcass traits.
+The factor of variance reduction $k$ was computed using the equation
 
 \begin{equation}
 \label{kvarred}
 k_y=i_y(i_y-x_y)
 \end{equation}
-
-
-Where 
-
-* $x$ = value of trunctation on the x-axis of the populations normal distribution [standard deviations]
-
-We computed $x_y$ from the proportion selected using the R-command `qnorm(proportion_selected, lower.tail = FALSE)`
-
-To get the covariance matrix between true and estimated breeding value before selection $C_y$ we used the following formula:
+$$k_y=i_y(i_y-x_y)$$
+where $x$ was the value of trunctation on the x-axis of the population's normal distribution in standard deviations.
+The value of trunctation $x_y$ was computed from the proportion selected using the R command `qnorm(p, lower.tail = FALSE)` where `p` was the proportion selected.
+To get the covariance matrix between true and estimated breeding value before selection $C_y$ the equation
 
 \begin{equation}
-\label{kvarred}
+\label{covmat}
 C_y=A_y \otimes G-PEV_y
 \end{equation}
+$$C_y=A_y \otimes V-PEV_y$$
+where $A$ was the numerator relationship matrix of dimension q x q (q = number of offspring), $\otimes$ symbolized the kronecker multiplication, $V$ was the genetic variance/covariance matrix (see Table ??) and $PEV$ was the prediction error variance matrix was used.
 
-Where
-
-* $A$ = numerator relationship matrix of dimension q x q; q = number of levels for random effects.
-
-* $\otimes$ = sign for kronecker product
-
-* $PEV$ = prediction error variance
-
-
-
-
-#### Response to selection based on Pimentel
-
-In contrast to the approach of Phocas and Vonrohr, Pimentel does not assume a probable breeding scenario using records from relatives.
-Pimentel's approach is based on the selection index theory developed by @Hazel1943.
-The selection index theory describes how an aggregate genotype can be computed.
-The term genotype is here used as synonym for breeding value.
-
-
-
-
+The prediction error variance matrix $PEV$ was computed using the equation
 \begin{equation}
-Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
-(\#eq:Qm)
+\label{kvarred}
+PEV_y=(Z_y'R_y^{-1}Z_y+A_y^{-1} \otimes G^{-1})^{-1}[1:n,1:n]
 \end{equation}
+$$PEV_y=(Z_y'R_y^{-1}Z_y+A_y^{-1} \otimes G^{-1})^{-1}[1:n,1:n]$$
+where $Z$ was the design matrix, $R$ was the residual variance/covariance matrix (see Table ???) and $[1:n,1:n]$ signaled that only the first $n$ rows and columns (belonged to the selection candidate) were used as $PEV$.
+The numerator relationship matrix $A$ was computed using the R package `pedigreem`.
 
-Watch \@ref(eq:Qm)
+## Rank correlations
 
-\begin{equation}
-\label{Qm}
-Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
-\end{equation}
+Rank correlations are used to determine how strongly different selection criteria influence the ranks of animals in a population.
 
-see \autoref{Qm}
+### Material
 
-@Phocas1996
+To compute the rank correlations, the breeding values of a set of each Angus and Limousin Swiss animals were used.
+The set of Angus consisted in 83 male animals and the set of Limousin consisted in 354 male animals.
+All these animals had at least 20 daughters and possessed breeding values for all six breeding values.
+
+### Methods
+
+The animals were assigned to a rank according to the values:
+
+* breeding value for carcass fat of *adults*,
+
+* breeding value for carcass fat of *calves* and
+
+* the weighed sum of all carcass traits the economic weights present in Table ??.
+
+
 
 
 

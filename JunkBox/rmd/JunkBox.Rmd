@@ -3,8 +3,6 @@ title: "Junk Box"
 author: "Silvan Wyss"
 date: "16.8.2018"
 output: html_document
-bibliography: 
-- /Users/silvan/Documents/EarlyMaturityBeef/References/library.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -1347,3 +1345,29 @@ and
 Where
 
 * $G$ = genetic variance-covariance matrix
+
+#### Response to selection based on Pimentel
+
+In contrast to the approach of Phocas and Vonrohr, Pimentel does not assume a probable breeding scenario using records from relatives.
+Pimentel's approach is based on the selection index theory developed by @Hazel1943.
+The selection index theory describes how an aggregate genotype can be computed.
+The term genotype is here used as synonym for breeding value.
+
+
+
+
+\begin{equation}
+Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
+(\#eq:Qm)
+\end{equation}
+
+Watch \@ref(eq:Qm)
+
+\begin{equation}
+\label{Qm}
+Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_y}
+\end{equation}
+
+see \autoref{Qm}
+
+@Phocas1996
