@@ -10,59 +10,74 @@ library(kableExtra)
 
 # Material and Methods {#matandmeth}
 
+This thesis builds on the following definition: Animals mature early if they reach the state of carcass maturity faster than others but get the same price at the slaughterhouse.
+
+The four proposed strategies to breed for early maturity are sorted by increasing complexity:
+
+1. Carcass fat as auxilliary trait (CFAT)
+
+2. Index over carcass traits (IOCT)
+
+3. Deviation in age at slaughter (DAGE) from @Berry2017
+
+4. Growth models (GM)
+
 While the strategies *Deviation in age at slaughter* and *Growth models* were evaluated by literature review, the strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* were evaluated by predicting the effects of their implementation in Switzerland.
 Two tools were used to predict the effects of the two strategies: The genetic gain (see ??) and the rank correlation (see ??).
 All necessary data was available to use these tools for the strategy *Carcass fat as auxilliary trait*.
 However the index, which determines the strategy *Index over carcass traits* was missing.
 Its computation was necessary for the predictions and part of this Master Thesis (see ??).
-Predictions assumed within-breed breeding and were performed for the breeds Angus (Referenz für Bild Angus und Beschreibung: Angus is a extensive beef breed originating from the UK??) and Limousin (Referenz für Bild: Limousin is an intensive beef breed originating from France??).
+Predictions assumed within-breed-breeding and were performed for the Swiss breed populations of Angus (Referenz für Bild Angus und Beschreibung: Angus is a extensive beef breed originating from the UK??) and Limousin (Referenz für Bild: Limousin is an intensive beef breed originating from France??).
 Both beef breed populations were divided into two groups of animals which were named *calves* and *adults*.
-While the group *calves* included animals which were less or 180 d old at slaughter, the group *adults* included animals which were more than 180 but less than 700 d old at slaughter.
+While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
 All computations were performed using the open source programm R [@RCoreTeam2017].
 The resulting codes are available in the annex (see ???)
 
 
 ## Index
 
-The index consisted of three (carcass fat, carcass conformation and carcass weight) times two (adults and calves) traits for each breed.
-Their weighed sum formed the value of the index $I$.
-The index's value was computed as
+The index consisted of the six traits carcass fat adults, carcass fat calves, carcass conformation adults, carcass conformation calves, carcass weight adults and carcass weight calves.
+Their weighted sum formed the value of the index $I$.
+It was computed separateley for each breed Angus and Limousin.
+For both breeds the index's value was computed as
 \begin{equation}
 \label{index}
 I=a'u
 \end{equation}
 $$I=a'û$$
 where $a$ was the vector of economic weights and $û$ was the vector of estimated breeding values.
-Both vectors had one entry for each trait which took the same places in $a$ and $û$.
+Both vectors had one entry for each trait which took the same place in $a$ and $û$.
 The estimated breeding values $û$ were available for all carcass traits, but the economic weights not.
-An economical weight for a trait is usually defined as the change in profit per additional unit of the trait [@brascamp1985].
+An economic weight for a trait is defined as the change in profit per additional unit of the trait [@brascamp1985].
 
 ### Material
 
-#### Payment System CHTAX
+#### Payment System CHTAX {#CHTAX}
 
-The only information available was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland.
+The only information available to compute the economic weights was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland.
 Therefore the change in profit was approximated by the difference in price per kg carcass weight determined by CHTAX.
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
-There, Proviande employees classify beef carcasses to determine their price.
+Proviande employees classify beef carcasses to determine their price.
 They carry out the same procedure for each beef carcass.
 Firstly, Proviande employees assign the carcass to a carcass category. 
 Carcass categories differ in the animals age at slaughter, number of incissors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)). 
-Secondly Proviande employees assign the carcass to a carcass conformation class.
-The assigned carcass conformation class depends on the accentuation of certain muscels of the carcass (see table \@ref(tab:conformationclass)).
+Secondly, Proviande employees assign the carcass to a carcass conformation class.
+The assigned carcass conformation class depends on the accentuation of certain muscels of the carcass (see Table \@ref(tab:conformationclass)).
 The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
-Thirdly Proviande employees assign the carcass to a carcass fat class.
-Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see table \@ref(tab:fatclass)).
+Thirdly, Proviande employees assign the carcass to a carcass fat class.
+Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see Table \@ref(tab:fatclass)).
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
 The values in carcass weight, carcass conformation and carcass fat all influence the price of a beef carcass in the slaughterhouses.
-While the price changes depending on carcass fat and carcass conformation change weekly and were taken from week 33 / 13. August in 2018 (Source???), the ones depending on carcass weight were taken from August 2016 [@Proviande2016].
-For each carcass category these relative price changes differ.
+The price changes weekly for the different carcass fat classes and carcass conformation classes. 
+The prices used in this Master Thesis were taken from 13 August in 2018 [@Proviande2018].
+The ones depending on carcass weight were taken from 1st of August 2016 [@Proviande2016].
+For each carcass category these relative prices differ.
 In this Thesis it was assumed, that all animals which belonged to the group *adults* were assigned to the carcass categories MT, OB and RG and all animals which belonged to the group *calves* were assigned to the carcass category KV.
-The mean of OB,RG and MT was formed for the relative prices of the group *adults*.
-To form the relative price depending on carcass weight of calves it was assumed that their mean in carcass conformation is T+.
-The resulting relative price depending on the carcass trait are shown in Figures ???.
-They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3.
+The mean of OB,RG and MT was formed to get the relative prices of the group *adults*.
+To form the relative price depending on carcass weight of *calves* it was assumed that their mean carcass conformation class is T+.
+The resulting relative price depending on the carcass trait are shown in Figures \@ref(fig:cfprice), \@ref(fig:ccprice), \@ref(fig:cwaprice) and \@ref(fig:cwcprice)
+They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3: 2 and 1.
 
 ```{r carcasscategory}
 x <- data.frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
@@ -75,12 +90,12 @@ x <- data.frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"),
                                               ">161 days old, >4 incissors for heifers, <5 incissors for young cows", 
                                               ">161 days old"))
 
-kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015)")
+kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015).")
 ```
 
 ```{r fatclass}
 x<-data.frame(Class = c("1", "2", "3", "4", "5"), Description=c("No fat coverage","Light fat coverage; muscels partially visible", "Average even fat coverage; muscles generally covered", "Strong fat coverage; excessive fat deposition", "Fat coverage generally excessive; bulging fat formations"))
-kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015)")
+kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015).")
 ```
 ---
 nocite: | 
@@ -184,11 +199,12 @@ CWc_plot + geom_bar(stat="identity")+
   xlab("Carcass weight thresholds in kg")
 ```
 
-#### Population distributions
+#### Population distributions {#popdist}
 
-The two breeds Angus and Limousin received the same prices, but their populations show different distributions in the carcass traits.
+The two breeds Angus and Limousin received the same prices, but their populations showed different distributions in the carcass traits.
 These distributions of the groups *calves* and *adults* were used to compute their economic weights respecteveley. 
-They were derived from the carcass trait records of animals which were slaughtered between 2010 and 2015 (number of animals shown in Table numberofanimals??).
+The economic weights were derived from the carcass trait records of animals which were slaughtered between 2010 and 2015.
+The number of animals are shown in Table \@ref(tab:numberofanimals).
 
 ```{r numberofanimals}
 library(tidyr)
@@ -200,7 +216,7 @@ kable(number_of_animals, booktabs=T, caption="Number of animals per breed and an
 kable_styling(latex_options=c("hold_position"))
 ```
 
-While the population distributions for carcass fat and carcass conformation were determined as discrete distributions with known frequencies for each class (see Figures ??), the population distributions for carcass weight were determined using means and standard deviations (see Tables ??).
+While the population distributions for carcass fat and carcass conformation were determined as discrete distributions with known frequencies for each class (see Figures \@ref(fig:cffrequencies) and \@ref(fig:ccfrequencies)), the population distributions for carcass weight were determined using means and standard deviations (see Table \@ref(tab:cwmeansd)).
 
 ```{r cffrequencies, fig.cap="Population frequencies of Angus and Limousin in carcass fat classes."}
 library(knitr)
@@ -313,22 +329,25 @@ kable(x,booktabs=T,caption="Population mean and standard deviation in kg carcass
 
 ### Method
 
-Regarding the mentioned simplifications for the determination of economic weight in Section ??, the economic weights $a$ in the *Index over carcass traits* was computed as
+Regarding the mentioned simplifications for the determination of economic weights in Section \@ref(CHTAX), the economic weights $a$ in the *Index over carcass traits* were computed as
 \begin{equation}
 \label{economicweight}
 a=\frac{r_1'p-r_0^Tp}{\Delta_{\mu}}
 \end{equation}
 $$a=\frac{r_1'p-r_0'p}{\Delta_{\mu}}$$
-where $\Delta_{\mu}$ was a small increase in the present population mean of a trait (set to 0.1 class for carcass conformation and carcass fat and to 1 kg for carcass weight), $r_0$ was the vector of population frequencies belonging to each range in trait with the same price of the initial population distribution, $r_1$ was the vector of population frequencies belonging to each price range after the increase in population mean and $p$ was the vector of price changes within thresholds per kg carcass weight.
+where $\Delta_{\mu}$ was a small increase in the present population mean of a trait (set to 0.1 [class] for carcass conformation and carcass fat and to 1 kg for carcass weight), $r_0$ was the vector of population frequencies belonging to each range in trait with the same price of the initial population distribution, $r_1$ was the vector of population frequencies belonging to each price range after the increase in population mean and $p$ was the vector of relative prices within thresholds per kg carcass weight.
 Normal distributions were assumed for all carcass traits.
-They were determined by the population means and and standard deviations contained in Section popdist??.
-As an example this step is shown for the group *adults*, breed Angus and trait carcass fat in Figure normdistapprox??.
-To get the initial frequencies $r_0$ for each price class in these distributions, thresholds were needed.
-While the thresholds of carcass weight were available (shown in Figure ??), they were not available for carcass fat and carcass conformation.
-There the tresholds have been set in a way that the population frequencies known by the discrete distribution (shown in figures ??) had the same value as the population frequencies in the approximated normal distribution.
-After the shift of the normal distributions by $\Delta_{\mu}$ the thresholds were assumed to be constant, but the population frequencies within the thresholds changed (shown in Figure thresholdsconstant??). 
+They were determined by the population means and standard deviations contained in Section \@ref(popdist).
+As an example this step is shown for the group *adults*, breed Angus and trait carcass fat in Figure \@ref(fig:normdistapprox).
+To get the initial frequencies of $r_0$ for each relative price in these distributions, thresholds were needed.
+These thresholds define at which point the relative prices change in the range of the normal distributions.
+While the thresholds of carcass weight were available (shown in Figure \@ref(fig:cwcprice)), they were not available for carcass fat and carcass conformation.
+There the tresholds have been set in a way, that the population frequencies known by the discrete distribution (shown in Figures \@ref(fig:cfprice) and \@ref(fig:ccprice)) had the same value as the population frequencies in the approximated normal distribution.
+The mean of the normal distributions was increased by $\Delta_{\mu}$ which resulted in the new distribution.
+Thresholds were assumed to be constant, but the population frequencies within the thresholds changed (shown in Figure \@ref(fig:thresholdsconstant)). 
 The population frequencies within each price class have been computed again using the characteristics of the normal distribution and using the computed thresholds.
-The population frequencies from the initial distribution $r_0$ and the changed distribution $r_1$ enabled the computation of the change mean price per kg carcass weight for a change in the population mean by $\Delta_{\mu}$.
+The population frequencies from the initial distribution $r_0$ and the changed distribution $r_1$ enabled the computation of the mean price per kg carcass weight for a change in the population mean by $\Delta_{\mu}$.
+Finally this price change was scaled up to whole entities ([class],[kg]).
 
 ```{r normdistapprox, fig.cap="Exemplary approximation of a normal distribution to a discrete distribution of the group adults, breed Angus and trait carcass fat.", echo=FALSE}
 library(ggplot2)
@@ -447,12 +466,15 @@ The resulting asymptotic genetic gain $Q_H^*$ was computed using the equation fo
 It was expressed as
 \begin{equation}
 \label{geneticgain}
-Q_H^* = \frac {\sum_{y=1}^{2} i_yr_y^*\sigma^*}{\sum_{y=1}^{2}L_y}
+Q_H^*= \frac {\sum_{y=1}^{2} i_yCov(I,H)^*_y}{\sum_{y=1}^{2}L_y}
 \end{equation}
 $$Q_H^*= \frac {\sum_{y=1}^{2} i_yCov(I,H)^*_y}{\sum_{y=1}^{2}L_y}$$
 where $i$ was the selection intensity, $Cov(I,H)^*$ was the asymptotic covariance between the selection index $I$ and the aggregate genotype $H$, $L$ was the generation intervall, $y$ was the selection path with 1 = male and 2 = female and $*$ indicated, that the value was corrected for the "Bulmer effect".
 From its value correlated genetic gains $Q_m^*$ were computed for all carcass traits $m$ individually using the equation
-
+\begin{equation}
+\label{corrgeneticgain}
+Q^*_m=Q_H^*Cov(u_m,I)^*(Var(I)^*)^{-1}
+\end{equation}
 $$Q^*_m=Q_H^*Cov(u_m,I)^*(Var(I)^*)^{-1}$$
 where $Cov(u_m,I)^*$ was the asymptotic covariance between a true breeding value of trait $m$ and the aggregate genotype $H$ and $Var(I)^*$ was the asymptotic variance of the selection index $I$.
 
@@ -495,7 +517,7 @@ female_proportionselected <- read.table(file = proportionselected_file, sep=";",
   select(female)
 female_proportionselected <- as.numeric(female_proportionselected)
 
-breeding_scenario <- data.frame(Determinant=c("Generation intervall [y]","Proportion selected","Number of offsprin", "Proportion of adults","Proportion of calves"),Male=c(male_generationintervall,male_proportionselected,male_offspring,proportion_adults,proportion_calves),Female=c(female_generationintervall,female_proportionselected,female_offspring,proportion_adults,proportion_calves))
+breeding_scenario <- data.frame(Determinant=c("Generation intervall [y]","Proportion selected","Number of offspring", "Proportion of adults","Proportion of calves"),Male=c(male_generationintervall,male_proportionselected,male_offspring,proportion_adults,proportion_calves),Female=c(female_generationintervall,female_proportionselected,female_offspring,proportion_adults,proportion_calves))
 kable(breeding_scenario, digits=3, booktabs=T, caption="Breeding scenario determinants for male and female selection candidates.")
 
 ```
@@ -517,7 +539,7 @@ There it was assumed that:
 * an animal could not have a record as both *adult* and *calf*.
 
 While the generation intervall $L$ was therefore determined, the intensity of selection $i$ was computed using the R command `dnorm(qnorm(1-p))/p` where `p` was the proportion selected.
-The asymptotic covariance between selection index and aggregate genotype $Cov(I,H)^*$ was computed as 
+The asymptotic covariance between selection index and aggregate genotype was computed as 
 \begin{equation}
 \label{covindagg}
 Cov(I,H)^*=\sqrt{b'P^*b}
@@ -685,7 +707,9 @@ All these animals had at least 20 daughters and possessed breeding values for al
 
 ### Methods
 
-The animals were assigned to a rank according to the values:
+Rank correlations were computed with the R command `cor(method ="spearman")`.
+
+To get the ranks, the animals were assigned to a rank according to the values:
 
 * breeding value for carcass fat of *adults*,
 
@@ -693,6 +717,7 @@ The animals were assigned to a rank according to the values:
 
 * the weighed sum of all carcass traits the economic weights present in Table ??.
 
+Ranking was performed using the R command `rank(ties.method = "max")`.
 
 
 

@@ -16,17 +16,7 @@ One possibility to improve early maturity is to use early maturity in a breeding
 Early maturity must be preciseley defined and efficiently measurable to include it in a breeding program.
 
 ## Definition of Early Maturity {#defem}
-This thesis builds on the following definition: Animals mature early if they reach the state of carcass maturity faster than others but get the same price at the slaughterhouse.
 
-Four strategies sorted by increasing complexity:
-
-1. Carcass fat as auxilliary trait
-
-2. Index over carcass traits
-
-3. "Deviation in age at slaughter" from @Berry2017
-
-4. Growth models
 
 
 The derivation of one trait to another requires that the involved traits are closely correlated. 

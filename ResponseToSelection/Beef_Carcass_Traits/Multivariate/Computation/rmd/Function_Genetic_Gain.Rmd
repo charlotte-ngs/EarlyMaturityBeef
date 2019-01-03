@@ -533,7 +533,8 @@ residual_var_cov <- as.matrix(residual_var_cov)
 residual_var_cov
 
 # herd x year
-herdyear_var_cov <- "adults_calves_herdyear_variances_covariances"
+herdyear_var_cov <- system.file("extdata","adults_calves_herdyear_variances_covariances", package="Exemplary")
+herdyear_var_cov
 herdyear_var_cov <- read.table(file = herdyear_var_cov, sep=";", header=TRUE)
 herdyear_var_cov <- as.matrix(herdyear_var_cov)
 #residual_var_cov <- residual_var_cov+herdyear_var_cov
