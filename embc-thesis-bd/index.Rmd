@@ -16,7 +16,7 @@ lot: TRUE
 
 ```{r setup-preq, echo=FALSE, results='hide'}
 ### # required packages from CRAN
-vec_reqpkgs_cran <- c("knitr", "rmarkdown", "roxygen2", "bookdown", "caTools", "citr", "devtools", "tidyverse", "huxtable")
+vec_reqpkgs_cran <- c("knitr", "rmarkdown", "roxygen2", "bookdown", "caTools", "citr", "devtools", "tidyverse", "huxtable","utf8 Latex")
 vec_instpkgs <- installed.packages()
 for (p in vec_reqpkgs_cran){
   if (!p %in% vec_instpkgs)
@@ -47,10 +47,14 @@ kable_styling(full_width = T) %>%
   column_spec(1, width="3cm")# booktab = T gives us a pretty APA-ish table
 ```
 
-```{r}
+```{r, echo=F}
 # R settings
 # set PDF as default for graphics
 options(knitr.graphics.auto_pdf = TRUE)
+```
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.pos = 'H')
 ```
 
 # Preface {-}

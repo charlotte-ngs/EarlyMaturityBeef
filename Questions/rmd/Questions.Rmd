@@ -417,10 +417,10 @@ data.frame(Kalb =c(1,2,3,5,3),
     *a <- c(a, 5) if a is a vector.
     
 * Should I avoid colors in the master thesis?
-    *
+    * no
     
 * Should I include mean and standard deviation in the legend, how?
-    *
+    * no
 
     
 
@@ -463,12 +463,13 @@ if (is.null(tbl_result)){
 * Should I use graphics to show the material? In other papers the author only use tables in the material and methods part.
 
 * Should I rename the carcass conformation class so that the classes are numbers?
-    *
+    * no
     
 * Should I cite R ore R Studio?
     * According to Peter I should cite R.
     
 * Should I use the term offspring or progeny?
+    * offspring
 
 * How can I put multiple hashtags at once to rows in R?
     * shift cmd c
@@ -477,6 +478,7 @@ if (is.null(tbl_result)){
     * cmd i
     
 * Should I say economic weight or economic value?
+    * economic weight
 
 * Why do we think that breeders have more than the breeding value of CF available to breed for early maturity? Here we assume that they can rank their animals using the correlations between the carcass traits and the accuracy of the breeding values.
 

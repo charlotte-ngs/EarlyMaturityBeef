@@ -5,9 +5,12 @@ All of these results are presented for the breeds Angus and Limousin.
 
 ## Index
 
-The index is determined by the economic weights for the carcass traits carcass fat, carcass conformation and carcass weight, each of *adults* and *calves* (see Table ??).
-Additionally these weights are shown corrected for the trait's genetic standard deviation.
-This allows to compare the importance of the different traits in the index (see Figure ??).
+The index is determined by the economic weights for the six carcass traits (see Section \@ref(index).
+The economic weights in Sfr. per trait unit are shown in Table \@ref(tab:ecweightstab)).
+Additionally these weights are shown corrected for the trait's genetic standard deviation in the Swiss beef population (see Figure \@ref(fig:ecweightsgensdfig)).
+The correction of the economic weights allows to compare their values not only between breeds but also between traits.
+
+
 
 ```{r ecweightstab}
 library(knitr)
@@ -49,12 +52,13 @@ table$Breed <- rep(c("Angus","Limousin"),each=6)
 g <- ggplot(table,aes(Trait,Weight))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Sfr. per genetic standard deviation.")+facet_grid(.~Group)
+  ylab("Sfr. per genetic standard deviation.")+facet_grid(.~Group)+
+  xlab("Carcass trait")
 ```
 
 ## Genetic Gain
 
-```{r geninputgengain}
+```{r inputgengain}
 library(dplyr)
 library(Exemplary)
 # import variance covariance dataframes and compute matrix
@@ -236,7 +240,8 @@ x$GainSD <- x$Gain/x$SD
 g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Group),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Genetic gain in trait unit/y")+facet_grid(.~Strategy)
+  ylab("Genetic gain in trait unit/y")+facet_grid(.~Strategy)+
+  xlab("Carcass trait")
 ```
 
 ```{r corrgengainpergensdlimousinfig, fig.cap="Correlated genetic gains per genetic standard deviation of Limousin when selecting for the strategies Index over carcass traits and Carcass fat as auxilliary trait."}
@@ -260,10 +265,13 @@ x$GainSD <- x$Gain/x$SD
 g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Group),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Genetic gain in trait unit/y")+facet_grid(.~Strategy)
+  ylab("Genetic gain in trait unit/y")+facet_grid(.~Strategy)+
+  xlab("Carcass trait")
 ```
 
 ## Rank Correlations
+
+## Literature Review
 
 
 

@@ -3,7 +3,7 @@ output:
   pdf_document: default
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center")
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center", fig.pos="H")
 library(knitr)
 library(kableExtra)
 ```
@@ -23,7 +23,7 @@ The four proposed strategies to breed for early maturity are sorted by increasin
 4. Growth models (GM)
 
 While the strategies *Deviation in age at slaughter* and *Growth models* were evaluated by literature review, the strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* were evaluated by predicting the effects of their implementation in Switzerland.
-Two tools were used to predict the effects of the two strategies: The genetic gain (see Section  \@ref(tab:carcasscategory)) and the rank correlations (see Section \@ref(tab:rankcorr)).
+Two tools were used to predict the effects of the two strategies: The genetic gain (see Section  \@ref(tab:carcasscategory)) and the rank correlations (see Section \@ref(rankcorr)).
 All necessary data was available to use these tools for the strategy *Carcass fat as auxilliary trait*.
 However the index, which determines the strategy *Index over carcass traits* was missing.
 Its computation was necessary for the predictions and part of this Master Thesis (see Section \@ref(index)).
@@ -31,13 +31,13 @@ Predictions assumed within-breed-breeding and were performed for the Swiss breed
 Both beef breed populations were divided into two groups of animals which were named *calves* and *adults*.
 While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
 All computations were performed using the open source programm R [@RCoreTeam2017].
-The resulting codes are available in the annex (see Section \@ref(annex))
+The resulting codes are available in the annex (see Section \@ref(annex)).
 
-```{r angusgraphic ,fig.cap = "Angus beef animal (Retrieved on 3.1.2019 from https://www.mutterkuh.ch/de/herdebuch/rasse/angus)."}
+```{r angusgraphic, fig.cap = "Angus beef animal."}
 knitr::include_graphics(system.file("extdata","Angus.jpg", package="Exemplary"))
 ```
 
-```{r limousingraphic ,fig.cap = "Limousin beef animal (Retrieved on 3.1.2019 from https://www.mutterkuh.ch/de/herdebuch/rasse/limousin)."}
+```{r limousingraphic, fig.cap = "Limousin beef animal (Retrieved on 3.1.2019 from https://www.mutterkuh.ch/de/herdebuch/rasse/limousin)."}
 knitr::include_graphics(system.file("extdata","Limousin.jpg", package="Exemplary"))
 ```
 
@@ -51,12 +51,12 @@ For both breeds the index's value was computed as
 
 \begin{equation}
 \label{index}
-I=a'û
+I=a'\hat{u}
 \end{equation}
 
-where $a$ was the vector of economic weights and $û$ was the vector of estimated breeding values.
-Both vectors had one entry for each trait which took the same place in $a$ and $û$ (length of $a$ and $û$ = 6).
-The estimated breeding values $û$ were available for all carcass traits, but the economic weights not.
+where $a$ was the vector of economic weights and $\hat{u}$ was the vector of estimated breeding values.
+Both vectors had one entry for each trait which took the same place in $a$ and $\hat{u}$ (length of $a$ and $\hat{u}$ = 6).
+The estimated breeding values $\hat{u}$ were available for all carcass traits, but the economic weights not.
 An economic weight for a trait is defined as the change in profit per additional unit of the trait [@brascamp1985].
 
 ### Material
@@ -76,17 +76,6 @@ The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
 Thirdly, Proviande employees assign the carcass to a carcass fat class.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see Table \@ref(tab:fatclass)).
-The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
-The values in carcass weight, carcass conformation and carcass fat all influence the price of a beef carcass in the slaughterhouses.
-The price changes weekly for the different carcass fat classes and carcass conformation classes. 
-The prices used in this Master Thesis were taken from 13 August in 2018 [@Proviande2018].
-The ones depending on carcass weight were taken from 1st of August 2016 [@Proviande2016].
-For each carcass category these relative prices differ.
-In this Thesis it was assumed, that all animals which belonged to the group *adults* were assigned to the carcass categories MT, OB and RG and all animals which belonged to the group *calves* were assigned to the carcass category KV.
-The mean of OB,RG and MT was formed to get the relative prices of the group *adults*.
-To form the relative price depending on carcass weight of *calves* it was assumed that their mean carcass conformation class is T+.
-The resulting relative price depending on the carcass trait are shown in Figures \@ref(fig:cfprice), \@ref(fig:ccprice), \@ref(fig:cwaprice) and \@ref(fig:cwcprice)
-They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3: 2 and 1.
 
 ```{r carcasscategory}
 x <- data.frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
@@ -106,14 +95,26 @@ kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015
 x<-data.frame(Class = c("1", "2", "3", "4", "5"), Description=c("No fat coverage","Light fat coverage; muscels partially visible", "Average even fat coverage; muscles generally covered", "Strong fat coverage; excessive fat deposition", "Fat coverage generally excessive; bulging fat formations"))
 kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015).")
 ```
----
-nocite: | 
-  @Proviande2015
-...
+
 ```{r conformationclass}
 x<-data.frame(Class = c("C", "H","T+","T","T-","A","X"), Description=c("Leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","Leg: wide; back: wide and full; shoulder: pronounced"," ", "Leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced"," ", "Leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "Leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
 kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015)")
 ```
+---
+nocite: | 
+  @Proviande2015
+...
+The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
+The values in carcass weight, carcass conformation and carcass fat all influence the price of a beef carcass in the slaughterhouses.
+The price changes weekly for the different carcass fat classes and carcass conformation classes. 
+The prices used in this Master Thesis were taken from 13 August in 2018 [@Proviande2018].
+The ones depending on carcass weight were taken from 1st of August 2016 [@Proviande2016].
+For each carcass category these relative prices differ.
+In this Thesis it was assumed, that all animals which belonged to the group *adults* were assigned to the carcass categories MT, OB and RG and all animals which belonged to the group *calves* were assigned to the carcass category KV.
+The mean of OB, RG and MT was formed to get the relative prices of the group *adults*.
+To form the relative price depending on carcass weight of *calves* it was assumed that their mean carcass conformation class is T+.
+The resulting relative price depending on the carcass trait are shown in Figures \@ref(fig:cfprice), \@ref(fig:ccprice), \@ref(fig:cwaprice) and \@ref(fig:cwcprice).
+They show that there are decreasing relative prices for too high carcass weights, increasing relative prices for increasing carcass conformation classes and high relative prices for carcass fat class 3 and the classes close to 3: 2 and 1.
 
 ```{r cfprice,fig.cap="Relative prices of each carcass fat class within the animal groups adults and calves."}
 library(knitr)
@@ -441,8 +442,8 @@ residual_var_cov <- cbind(Trait,residual_var_cov)
 kable(residual_var_cov, digits=3, booktabs=T, caption="Residual variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults derived from Kunz (2018).")
 ```
 
-The residual and genetic variances / covariances were computed by the method "estimation of variance components" using the software VCE created by Groeneveld.
-They relied on data of estimated breeding values $û$ which were computed using a multivariate best linear unbiased prediction (BLUP) model [@Kunz2018].
+The residual and genetic variances / covariances were computed by the method "estimation of variance components" using the software VCE created by Groeneveld [@Kunz2018].
+They relied on data of estimated breeding values $\hat{u}$ which were computed using a multivariate best linear unbiased prediction (BLUP) model [@Kunz2018].
 BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variances/covariances, environmental factors and individual phenotypic records.
 Multivariate means that BLUP accounts for the phenotypic, genetic and residual covariances between the involved traits. 
 A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
@@ -597,10 +598,10 @@ This resulted in the selection index
 
 \begin{equation}
 \label{selindcf}
-I_{CF}= bû_{CF}
+I_{CF}= b\hat{u}_{CF}
 \end{equation}
 
-where $b$ was the vector of regression coefficients and $û_{CF}$ was the vector of estimated breeding values of carcass fat for *adults* and *calves* (length of $b$ and $û_{CF}$ = 2).
+where $b$ was the vector of regression coefficients and $\hat{u}_{CF}$ was the vector of estimated breeding values of carcass fat for *adults* and *calves* (length of $b$ and $\hat{u}_{CF}$ = 2).
 The assumption "the variance of BLUP computed estimated breeding values is the same as the variance of true breeding values" allowed to set $P^*$ to
 
 \begin{equation}
@@ -608,7 +609,7 @@ The assumption "the variance of BLUP computed estimated breeding values is the s
 P^*=C^*_{CF}
 \end{equation}
 
-where $C^*_{CF}$ was the asymptotic covariance matrix between true and estimated breeding values of the two estimated breeding values in $û_{CF}$ (resulted in a 2 x 2 matrix).
+where $C^*_{CF}$ was the asymptotic covariance matrix between true and estimated breeding values of the two estimated breeding values in $\hat{u}_{CF}$ (resulted in a 2 x 2 matrix).
 Additionally the covariance matrix between selection index and aggregate genotype $G$ could be set to
 
 \begin{equation}
@@ -623,21 +624,21 @@ and the asymptotic variance covariance matrix between a true breeding value and 
 G^*_m=C^*_{m,CF}
 \end{equation}
 
-where $C_{CF,H}$ was the covariance matrix between the two estimated breeding values in $û_{CF}$ and the true breeding values in $H$ (resulted in a 2 x 6 matrix), and $C^*_{m,CF}$ was the covariance matrix between true and estimated breeding values of a trait $m$ and the two estimated breeding values in $û_{CF}$ (resulted in a vector of length 2).
+where $C_{CF,H}$ was the covariance matrix between the two estimated breeding values in $\hat{u}_{CF}$ and the true breeding values in $H$ (resulted in a 2 x 6 matrix), and $C^*_{m,CF}$ was the covariance matrix between true and estimated breeding values of a trait $m$ and the two estimated breeding values in $\hat{u}_{CF}$ (resulted in a vector of length 2).
 
 ##### Strategy Index over carcass traits
 
 For the strategy *Index over carcass traits* it was assumed that the information sources were the estimated breeding values of all six carcass traits.
-Therefore $b$ could be replaced in the selection index by the vector of economic weights $a$ 
+Therefore $b$ could be replaced in the selection index by the vector of economic weights $a$. 
 This was allowed considering that the variance covariance matrix $P$ between the information sources in $I$ was the same as the covariance matrix $G$ between $I$ and $H$ in the definition of $b$ (see Equation \@ref(regrcoeff)).
 This resulted in the selection index
 
 \begin{equation}
 \label{selindindex}
-I_{Index}= aû_{Index}
+I_{Index}= a\hat{u}_{Index}
 \end{equation}
 
-where $a$ was the vector of economic weights and $û_{Index}$ was the vector of estimated breeding values of all six carcass traits (length of $a$ and $û_{Index}$ = 6).
+where $a$ was the vector of economic weights and $\hat{u}_{Index}$ was the vector of estimated breeding values of all six carcass traits (length of $a$ and $\hat{u}_{Index}$ = 6).
 The asymptotic variance covariance matrix between the information sources of the selection index $I$ was set to
 
 \begin{equation}
@@ -645,7 +646,7 @@ The asymptotic variance covariance matrix between the information sources of the
 P^*=C^*_{Index}
 \end{equation}
 
-where $C^*_{Index}$ was the covariance matrix between the six estimated breeding values $û_{Index}$ and the true breeding values in $H$ (resulted in a 6 x 6 matrix).
+where $C^*_{Index}$ was the covariance matrix between the six estimated breeding values $\hat{u}_{Index}$ and the true breeding values in $H$ (resulted in a 6 x 6 matrix).
 
 Additionally the asymptotic variance covariance matrix between a true breeding value and the selection index could be set to
 
@@ -654,7 +655,7 @@ Additionally the asymptotic variance covariance matrix between a true breeding v
 G^*_m=C^*_{m,Index}
 \end{equation}
 
-where $C^*_{m,CF}$ was the covariance matrix between true and estimated breeding values of a trait $m$ and the two estimated breeding values in $û_{Index}$ (resulted in a vector of length 6).
+where $C^*_{m,CF}$ was the covariance matrix between true and estimated breeding values of a trait $m$ and the two estimated breeding values in $\hat{u}_{Index}$ (resulted in a vector of length 6).
 
 #### Asymptotic covariance matrix between true and estimated breeding values
 
@@ -707,7 +708,7 @@ The prediction error variance matrix $PEV$ was computed using the equation
 PEV_y=(Z_y'R_y^{-1}Z_y+A_y^{-1} \otimes G^{-1})^{-1}[1:n,1:n]
 \end{equation}
 
-where $Z$ was the design matrix, $R$ was the expanded residual variance / covariance matrix (see Table \@ref(tab:resvarcov)) and $[1:n,1:n]$ signaled that only the first $n$ rows and columns were used as $PEV$ (belonged to the selection candidate).
+where $Z$ was the design matrix, $R$ was the residual variance / covariance matrix expanded for all animals in the breeding scenario (see Table \@ref(tab:resvarcov)) and $[1:n,1:n]$ signaled that only the first $n$ rows and columns were used as $PEV$ (belonged to the selection candidate).
 The numerator relationship matrix $A$ was computed using the R package `pedigreem`.
 
 ## Rank correlations {#rankcorr}
@@ -726,7 +727,7 @@ All these animals had at least 20 daughters and possessed breeding values for al
 Rank correlations were computed using the R command `cor(method ="spearman")`.
 To get the different ranks, the animals were assigned to a rank according to the values
 
-* breeding value for carcass fat of *adults* or
+* breeding value for carcass fat of *adults*,
 
 * breeding value for carcass fat of *calves* or
 
