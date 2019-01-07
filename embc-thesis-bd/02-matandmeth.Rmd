@@ -33,7 +33,7 @@ While the group *calves* included animals which were less or 180 days old at sla
 All computations were performed using the open source programm R [@RCoreTeam2017].
 The resulting codes are available in the annex (see Section \@ref(annex)).
 
-```{r angusgraphic, fig.cap = "Angus beef animal."}
+```{r angusgraphic, fig.cap = "Angus beef animal (Retrieved on 3.1.2019 from https://www.mutterkuh.ch/de/herdebuch/rasse/angus)."}
 knitr::include_graphics(system.file("extdata","Angus.jpg", package="Exemplary"))
 ```
 

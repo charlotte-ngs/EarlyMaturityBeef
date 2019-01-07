@@ -5,12 +5,10 @@ All of these results are presented for the breeds Angus and Limousin.
 
 ## Index
 
-The index is determined by the economic weights for the six carcass traits (see Section \@ref(index).
+The index was determined by the economic weights for the six carcass traits (see Section \@ref(index).
 The economic weights in Sfr. per trait unit are shown in Table \@ref(tab:ecweightstab)).
 Additionally these weights are shown corrected for the trait's genetic standard deviation in the Swiss beef population (see Figure \@ref(fig:ecweightsgensdfig)).
 The correction of the economic weights allows to compare their values not only between breeds but also between traits.
-
-
 
 ```{r ecweightstab}
 library(knitr)
@@ -25,6 +23,23 @@ LM_economic_weights <- as.vector(LM_economic_weights)
 table <- data.frame(Trait= c("Calves conformation [Sfr. / conformation class]", "Adults conformation [Sfr. / conformation class]", "Calves fat [Sfr. / fat class]", "Adults fat [Sfr. / fat class]", "Calves weight [Sfr. / kg carcass weight]", "Adults weight [Sfr. / kg carcass weight]"),Angus=AN_economic_weights,Limousin=LM_economic_weights)
 kable(table, digits=2, booktabs=T,caption="Economic weights in Sfr. per trait unit which determine the index for the strategy Index over carcass traits.")
 ```
+
+There it can be seen that carcass conformation was the most important trait for both animal groups and both breeds, followed by carcass fat.
+The economic weights for carcass weight showed generally the lowest absolute values and were all negative.
+The negative values for carcass weight are due to the payment system.
+There, price reductions only occur when the carcass weight is too high, but never when carcass weight is too low (see Figures \@ref(fig:cwaprice) and \@ref(fig:cwcprice)).
+The economic weights for the traits of group *calves* were higher than for the group *adults*.
+Their higher importance were due to their higher relative price differences for the carcass traits. 
+Between the breeds Angus and Limousin there existed some general differences in their economic weights.
+They behaved the same for both animal groups *adults* and *calves*.
+Firstly, the economic weights for carcass weight were further in the negative for Limousin than for Angus.
+This was due to higher population means in carcass weight for Limousin than for Angus (see Table \@ref(tab:cwmeansd)).
+Secondly, the economic weights for carcass conformation were higher for Angus than for Limousin.
+This was due to higher population means in carcass conformation for Limousin than for Angus (see Figure \@ref(fig:ccfrequencies)).
+Thirdly, the economic weights for carcass fat were higher for Limousin than for Angus.
+This was due to population means closer to class 3 in carcass fat for Angus than for Limousin (see Figure \@ref(fig:cffrequencies)).
+Additionally economic weight was negative for carcass fat in the animal group adults and the breed Angus.
+This was due to the population mean of adults in carcass fat for Angus, which was slightly above the optimum carcass fat class 3.
 
 ```{r ecweightsgensdfig, fig.cap="Economic weights in Sfr. per genetic standard deviation for all carcass traits."}
 library(ggplot2)
@@ -57,6 +72,7 @@ g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
 ```
 
 ## Genetic Gain
+
 
 ```{r inputgengain}
 library(dplyr)
