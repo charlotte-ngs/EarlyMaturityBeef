@@ -1371,3 +1371,25 @@ Q_m^*= \frac { \sum_{y=1}^{2} i_ya^T(C_y^*)_m \sqrt{a^TC_y^*a}}{\sum_{y=1}^{2}L_
 see \autoref{Qm}
 
 @Phocas1996
+
+
+
+
+
+sd <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
+                 add = "reg.line",  # Add regressin line
+                 add.params = list(color = "blue", fill = "lightgray"),
+                 cor.coef=TRUE,
+                 cor.method="spearman",
+                 cor.coef.size=12
+ )
+ # Add correlation coefficient
+ sd + theme(text = element_text(size = 25))+
+   xlab("Carcass fat calves rank")+
+   ylab("Index rank")
+   
+   ggplot(data,aes(cfa_rank,ca_index_rank)) +
+   geom_jitter(se=FALSE)
+ 
+ ggplot(data,aes(cfc_rank,ca_index_rank)) +
+   geom_jitter(se=FALSE)

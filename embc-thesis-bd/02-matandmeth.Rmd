@@ -14,7 +14,7 @@ This thesis builds on the following definition: Animals mature early if they rea
 
 The four proposed strategies to breed for early maturity are sorted by increasing complexity:
 
-1. Carcass fat as auxilliary trait (CFAT)
+1. Carcass fat as auxiliary trait (CFAT)
 
 2. Index over carcass traits (IOCT)
 
@@ -30,7 +30,7 @@ Its computation was necessary for the predictions and part of this Master Thesis
 Predictions assumed within-breed-breeding and were performed for the Swiss breed populations of Angus (See Figure \@ref(fig:angusgraphic)) and Limousin (See Figure \@ref(fig:limousingraphic)).
 Both beef breed populations were divided into two groups of animals which were named *calves* and *adults*.
 While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
-All computations were performed using the open source programm R [@RCoreTeam2017].
+All computations were performed using the open source program R [@RCoreTeam2017].
 The resulting codes are available in the annex (see Section \@ref(annex)).
 
 ```{r angusgraphic, fig.cap = "Angus beef animal (Retrieved on 3.1.2019 from https://www.mutterkuh.ch/de/herdebuch/rasse/angus)."}
@@ -46,7 +46,7 @@ knitr::include_graphics(system.file("extdata","Limousin.jpg", package="Exemplary
 
 The index consisted of the six traits carcass fat adults, carcass fat calves, carcass conformation adults, carcass conformation calves, carcass weight adults and carcass weight calves.
 Their weighted sum formed the value of the index $I$.
-It was computed separateley for each breed Angus and Limousin.
+It was computed separately for each breed Angus and Limousin.
 For both breeds the index's value was computed as
 
 \begin{equation}
@@ -69,9 +69,9 @@ The Swiss meat industry association Proviande is responsible for the implementat
 Proviande employees classify beef carcasses to determine their price.
 They carry out the same procedure for each beef carcass.
 Firstly, Proviande employees assign the carcass to a carcass category. 
-Carcass categories differ in the animals age at slaughter, number of incissors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)). 
+Carcass categories differ in the animals age at slaughter, number of incisors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)). 
 Secondly, Proviande employees assign the carcass to a carcass conformation class.
-The assigned carcass conformation class depends on the accentuation of certain muscels of the carcass (see Table \@ref(tab:conformationclass)).
+The assigned carcass conformation class depends on the accentuation of certain muscles of the carcass (see Table \@ref(tab:conformationclass)).
 The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
 Thirdly, Proviande employees assign the carcass to a carcass fat class.
@@ -343,9 +343,8 @@ Regarding the mentioned simplifications for the determination of economic weight
 
 \begin{equation}
 \label{economicweight}
-a=\frac{r_1'p-r_0^Tp}{\Delta_{\mu}}
+a=\frac{r_1'p-r_0'p}{\Delta_{\mu}}
 \end{equation}
-
 where $\Delta_{\mu}$ was a small increase in the present population mean of a trait (set to 0.1 [class] for carcass conformation and carcass fat and to 1 kg for carcass weight), $r_0$ was the vector of population frequencies belonging to each range in trait with the same price of the initial population distribution, $r_1$ was the vector of population frequencies belonging to each price range after the increase in population mean and $p$ was the vector of relative prices within thresholds per kg carcass weight.
 Normal distributions were assumed for all carcass traits.
 They were determined by the population means and standard deviations contained in Section \@ref(popdist).
