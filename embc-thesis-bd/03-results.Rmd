@@ -313,6 +313,17 @@ This was due to positive correlations between carcass conformation and carcass w
 
 ## Rank Correlations
 
+The ranks of the 83 Angus animals and the 354 Limousin animals were computed using their breeding values of carcass fat adults, carcass fat calves and using their index of carcass traits value.
+These ranks were generally very different for the same animals, which is shown by the massive scattering in Figures \@ref(fig:rankcorcfaangus), \@ref(fig:rankcorcfcangus), \@ref(fig:rankcorcfalimousin) and \@ref(fig:rankcorcfclimousin).
+This massive scattering qualifies the values of the rank correlation coefficients and it reduces their validity.
+The correlation coefficients are higher between the ranks of carcass fat calves and the ranks of the index, than between carcass fat adults and the ranks of the index.
+This is due to the higher economic weights in the index of carcass fat calves than of carcass fat adults.
+Limousin shows higher rank correlations between both carcass fat traits and the index than Angus.
+The rank correlations between carcass fat and index of the Angus animals are close to 0.
+This is due to the higher economic weights in the index for carcass fat of Limousin than of Angus.
+
+
+
 ```{r rankcorcfaangus, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat adults and the index for Angus."}
 knitr::include_graphics(system.file("extdata","AN_rankcor_cfa.png", package="Exemplary"))
 ```
