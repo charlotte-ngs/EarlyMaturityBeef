@@ -3,7 +3,7 @@ output:
   pdf_document: default
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center", fig.pos="H")
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center", fig.pos="H", fig)
 library(knitr)
 library(kableExtra)
 ```
@@ -59,7 +59,7 @@ Both vectors had one entry for each trait which took the same place in $a$ and $
 The estimated breeding values $\hat{u}$ were available for all carcass traits, but the economic weights not.
 An economic weight for a trait is defined as the change in profit per additional unit of the trait [@brascamp1985].
 
-### Material
+### Material {#indexmat}
 
 #### Payment System CHTAX {#CHTAX}
 
@@ -337,7 +337,7 @@ x <- data.frame(Breed=c("Angus","Angus","Limousin","Limousin"),Group=c("Adults",
 kable(x,booktabs=T,caption="Population mean and standard deviation in kg carcass weight of Angus and Limousin.")
 ```
 
-### Method
+### Method {#indexmet}
 
 Regarding the mentioned simplifications for the determination of economic weights in Section \@ref(CHTAX), the economic weights $a$ in the *Index over carcass traits* were computed as
 
@@ -419,7 +419,7 @@ H=a'u
 where $a$ was the vector of economic weights and $u$ was the vector of true breeding values.
 Both vectors had one entry for each trait which took the same places in $a$ and $u$ (length of $a$ and $u$ = 6).
 
-### Material
+### Material {#matgengain}
 
 Beside the economic weights (see Table \@ref(tab:ecweightstab)) residual and genetic variances / covariances of the six carcass traits were used to compute the genetic gain for the two strategies (see Tables \@ref(tab:genvarcov) and \@ref(tab:resvarcov)).
 
@@ -473,7 +473,7 @@ Beside the random animal effect which was the breeding value, there was only one
 
 * Farm x year
 
-### Methods
+### Methods {#metgengain}
 
 The genetic gain was computed considering the "Bulmer effect" [@Bulmer1971].
 The resulting asymptotic genetic gain $Q_H^*$ was computed using the equation for two selection paths [@VonRohr1998].
@@ -710,18 +710,18 @@ PEV_y=(Z_y'R_y^{-1}Z_y+A_y^{-1} \otimes G^{-1})^{-1}[1:n,1:n]
 where $Z$ was the design matrix, $R$ was the residual variance / covariance matrix expanded for all animals in the breeding scenario (see Table \@ref(tab:resvarcov)) and $[1:n,1:n]$ signaled that only the first $n$ rows and columns were used as $PEV$ (belonged to the selection candidate).
 The numerator relationship matrix $A$ was computed using the R package `pedigreem`.
 
-## Rank correlations {#rankcorr}
+## Rank Correlations {#rankcorr}
 
 Rank correlations were used to determine how strongly different selection criteria influence the ranks of animals in a population.
 
-### Material
+### Material {#matrankcorr}
 
 To compute the rank correlations, breeding values of all six carcass traits were used. 
 The originated from a set of each Angus and Limousin Swiss animals.
 The set of Angus animals consisted in 83 males and the set of Limousin animals consisted in 354 males.
 All these animals had at least 20 daughters and possessed breeding values for all six breeding values.
 
-### Methods
+### Methods {#metrankcorr}
 
 Rank correlations were computed using the R command `cor(method ="spearman")`.
 To get the different ranks, the animals were assigned to a rank according to the values

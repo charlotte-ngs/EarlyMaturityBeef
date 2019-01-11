@@ -16,7 +16,7 @@ lot: TRUE
 
 ```{r setup-preq, echo=FALSE, results='hide'}
 ### # required packages from CRAN
-vec_reqpkgs_cran <- c("knitr", "rmarkdown", "roxygen2", "bookdown", "caTools", "citr", "devtools", "tidyverse", "huxtable","utf8 Latex")
+vec_reqpkgs_cran <- c("knitr", "rmarkdown", "roxygen2", "bookdown", "caTools", "citr", "devtools", "tidyverse", "huxtable")
 vec_instpkgs <- installed.packages()
 for (p in vec_reqpkgs_cran){
   if (!p %in% vec_instpkgs)

@@ -1,14 +1,14 @@
 # Results {#results}
 
-There are results for the computation of the index to determine the strategy *Index over carcass traits*, the genetic gains, the rank correlations and the literature reviews of the strategies *Deviation in age at slaughter* and *Growth models*.
+There are results of the index weights, the genetic gains and the rank correlations.
 All of these results are presented for the breeds Angus and Limousin.
 
-## Index
+## Index {#indexresults}
 
-The index was determined by the economic weights for the six carcass traits (see Section \@ref(index).
-The economic weights in Sfr. per trait unit are shown in Table \@ref(tab:ecweightstab).
-Additionally these weights are shown corrected for the trait's genetic standard deviation in the Swiss beef population (see Figure \@ref(fig:ecweightsgensdfig)).
-The correction of the economic weights allows to compare their values not only between breeds but also between traits.
+The index was determined by the economic weights for the six carcass traits (see Section \@ref(index)).
+These economic weights in Sfr. per trait unit are shown in Table \@ref(tab:ecweightstab).
+Additionally the economic weights are shown corrected for each trait's genetic standard deviation in the Swiss beef population (see Figure \@ref(fig:ecweightsgensdfig)).
+This correction allows to compare the economic weights not only between breeds but also between traits.
 ```{r ecweightstab}
 library(knitr)
 AN_economic_weights_file <- system.file("extdata","AN_economic_values", package="Exemplary")
@@ -19,8 +19,8 @@ LM_economic_weights_file <- system.file("extdata","LM_economic_values", package=
 LM_economic_weights <- read.table(file = LM_economic_weights_file, sep=";", header=TRUE)
 LM_economic_weights <- as.matrix(LM_economic_weights)
 LM_economic_weights <- as.vector(LM_economic_weights)
-table <- data.frame(Trait= c("Calves conformation [Sfr. / conformation class]", "Adults conformation [Sfr. / conformation class]", "Calves fat [Sfr. / fat class]", "Adults fat [Sfr. / fat class]", "Calves weight [Sfr. / kg carcass weight]", "Adults weight [Sfr. / kg carcass weight]"),Angus=AN_economic_weights,Limousin=LM_economic_weights)
-kable(table, digits=2, booktabs=T,caption="Economic weights in Sfr. per trait unit which determine the index for the strategy Index over carcass traits.")
+table <- data.frame(Trait= c("Calves conformation [Sfr. / conformation class]", "Adults conformation [Sfr. / conformation class]", "Calves fat [(Sfr. / kg carcass weight)?? / fat class]", "Adults fat [Sfr. / fat class]", "Calves weight [Sfr. / kg carcass weight]", "Adults weight [Sfr. / kg carcass weight]"),Angus=AN_economic_weights,Limousin=LM_economic_weights)
+kable(table, digits=2, booktabs=T,caption="Economic weights in Sfr. per trait unit determining the index for the strategy Index over carcass traits.")
 ```
 
 ```{r ecweightsgensdfig, fig.cap="Economic weights in Sfr. per genetic standard deviation for all carcass traits."}
@@ -49,35 +49,35 @@ table$Breed <- rep(c("Angus","Limousin"),each=6)
 g <- ggplot(table,aes(Trait,Weight))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Sfr. per genetic standard deviation.")+facet_grid(.~Group)+
+  ylab("Sfr. per genetic SD")+facet_grid(.~Group)+
   xlab("Carcass trait")
 ```
-There it can be seen that carcass conformation was the most important trait for both animal groups and both breeds, followed by carcass fat.
+Figure \@ref(fig:ecweightsgensdfig) shows that carcass conformation was the most important trait for both animal groups and both breeds, followed by carcass fat.
 The economic weights for carcass weight showed generally the lowest absolute values and were all negative.
-The negative values for carcass weight are due to the payment system.
+The negative values for carcass weight are due to the payment system CHTAX.
 There, price reductions only occur when the carcass weight is too high, but never when carcass weight is too low (see Figures \@ref(fig:cwaprice) and \@ref(fig:cwcprice)).
 The economic weights for the traits of group *calves* were higher than for the group *adults*.
-Their higher importance were due to their higher relative price differences for the carcass traits. 
-Between the breeds Angus and Limousin there existed some general differences in their economic weights.
-They behaved the same for both animal groups *adults* and *calves*.
-Firstly, the economic weights for carcass weight were further in the negative for Limousin than for Angus.
-This was due to higher population means in carcass weight for Limousin than for Angus (see Table \@ref(tab:cwmeansd)).
-Secondly, the economic weights for carcass conformation were higher for Angus than for Limousin.
-This was due to higher population means in carcass conformation for Limousin than for Angus (see Figure \@ref(fig:ccfrequencies)).
-Thirdly, the economic weights for carcass fat were higher for Limousin than for Angus.
-This was due to population means closer to class 3 in carcass fat for Angus than for Limousin (see Figure \@ref(fig:cffrequencies)).
-Additionally economic weight was negative for carcass fat in the animal group adults and the breed Angus.
-This was due to the population mean of adults in carcass fat for Angus, which was slightly above the optimum carcass fat class 3.
+Their higher importance were due to the higher relative price differences per kg carcass weight in CHTAX. 
+Between the breeds Angus and Limousin existed general differences in their economic weights.
+These differences behaved the same for both animal groups *adults* and *calves*.
+Firstly, the economic weights for carcass weight were more negative in Limousin than in Angus.
+This was due to higher population means in carcass weight in Limousin than in Angus (see Table \@ref(tab:cwmeansd)).
+Secondly, the economic weights for carcass conformation were higher in Angus than in Limousin.
+This was due to higher population means of carcass conformation in Limousin than in Angus (see Figure \@ref(fig:ccfrequencies)).
+Thirdly, the economic weights for carcass fat were higher in Limousin than in Angus.
+This was due to population means closer to class 3 of carcass fat in Angus than in Limousin (see Figure \@ref(fig:cffrequencies)).
+Additionally the economic weight for carcass fat in the animal group adults and in the breed Angus was negative.
+This was due to the population mean of adults carcass fat in Angus, which was slightly above the optimum carcass fat class 3.
 
-## Genetic Gain
+## Genetic Gain {#gengainresults}
 
 Both breeding strategies led to positive genetic gains (see Figure \@ref(fig:gengainagggenotypefig)).
-This shows that breeding for them would result in generally higher prices per kg carcass weight for beef carcasses of the breed populations Angus and Limousin in Switzerland.
+This shows that breeding for them would result in generally higher prices per kg carcass weight for beef carcasses in the Swiss breed populations Angus and Limousin.
 The genetic gain was higher for the strategy *Index over carcass traits* than for the strategy *Carcass fat as auxilliary trait*.
-This was due to more available information for the breeders to breed for the aggregate genotype when using the strategy *Index over carcass traits*.
-It can be seen in the two definitions of the selection indices which are shown as Equation \@ref(selindindex) and Equation \@ref(selindcf)).
-The difference between the two strategies in genetic gain was lower for Limousin than for Angus.
-This was due to a lower population mean in carcass fat for Limousin than for Angus (see Figure \@ref(fig:ccfrequencies)).
+This was due to more assumed available information for the breeders to breed for the aggregate genotype when using the strategy *Index over carcass traits*.
+The difference is shown in the two definitions of the selection indices which are shown as Equation \@ref(selindindex) and Equation \@ref(selindcf).
+The difference in genetic gain between the two strategies was lower in Limousin than in Angus.
+This was due to a lower population mean of carcass fat in Limousin than in Angus (see Figure \@ref(fig:ccfrequencies)).
 
 ```{r inputgengain}
 library(dplyr)
@@ -207,7 +207,7 @@ for(trait in list_of_traits){
 Trait_LM_CF <- mat_correlated_gen_gain
 ```
 
-```{r gengainagggenotypefig, fig.cap="Genetic gain of Angus and Limousin when selecting for the strategies Index over carcass traits and Carcass fat as auxilliary trait."}
+```{r gengainagggenotypefig, fig.cap="Genetic gain in Angus and Limousin when selecting for the strategies Index over carcass traits and Carcass fat as auxilliary trait."}
 library(ggplot2)
 x <-data.frame(Gain=c(Sfr_AN_index,Sfr_LM_index,Sfr_AN_CF,Sfr_LM_CF),Breed=rep(c("Angus", "Limousin"),times=2),Strategy=rep(c("Index over carcass traits","Carcass fat as auxilliary trait"),each=2))
 # Plot
@@ -218,12 +218,15 @@ g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
 
 ```
 
-Strategy *Carcass fat as auxilliary trait* considerably increased the population mean in this trait, which was more favorable for Limousin than for Angus (see Figure \@ref(fig:corrgengaincffig)).
+Strategy *Carcass fat as auxilliary trait* showed a relativeley high genetic gain in this trait, which was more favorable for the mean aggregate genotype of Limousin than of Angus (see Figure \@ref(fig:corrgengaincffig)).
 The correlated genetic gains of this strategy did only differ slightly between breeds.
-There the breed-specific economic weights apparently had little impact on the correlated genetic gains.
-The correlated genetic gains for carcass conformation and carcass weight were positive in the group *adults* but negative in the group *calves*.
+There the breed-specific economic weights (see Table \@ref(tab:ecweightstab)) apparently had little impact on the correlated genetic gains.
+The correlated genetic gains for carcass conformation were positive in the group *adults* but negative in the group *calves*.
 These gains were on low absolute levels in comparison to the gains in carcass fat.
-This was due to positive genetic correlations between carcass fat and the *adults* carcass conformation and carcass weight, and negative genetic correlations between carcass fat and the *calves* carcass conformation and carcass weight (see Table \@ref(tab:genvarcov)).
+This was due to positive genetic correlations between carcass fat and the *adults* carcass conformation.
+And it was due to negative genetic correlations between carcass fat and the *calves* carcass conformation (see Table \@ref(tab:genvarcov)).
+The correlated genetic gains of carcass weight behaved very similarly to the correlated genetic gains of carcass conformation.
+This shows that the genetic correlations of carcass conformation are close to the genetic correlations of carcass weight.
 
 ```{r corrgengaintab}
 library(ggplot2)
@@ -246,7 +249,7 @@ kable(table, digits=3, booktabs=T, caption="Correlated genetic gains of Angus an
 
 ```
 
-```{r corrgengaincffig, fig.cap="Correlated genetic gains per genetic standard deviation of Angus and Limousin when selecting for the strategy Carcass fat as auxilliary trait."}
+```{r corrgengaincffig, fig.cap="Correlated genetic gains in Angus and Limousin when selecting for the strategy Carcass fat as auxilliary trait in genetic standard deviation per year."}
 # Per genetic standard deviation
 library(ggplot2)
 library(varhandle)
@@ -268,11 +271,11 @@ x$GainSD <- x$Gain/x$SD
 g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Genetic gain in trait unit/y")+facet_grid(.~Group)+
+  ylab("Genetic gain in genetic SD / y")+facet_grid(.~Group)+
   xlab("Carcass trait")
 ```
 
-```{r corrgengainindexfig, fig.cap="Correlated genetic gains per genetic standard deviation of Angus and Limousin when selecting for the strategy Index over carcass traits."}
+```{r corrgengainindexfig, fig.cap="Correlated genetic gains in Angus and Limousin when selecting for the strategy Index over carcass traits in genetic standard deviation per year."}
 # Per genetic standard deviation
 library(ggplot2)
 library(varhandle)
@@ -294,33 +297,35 @@ x$GainSD <- x$Gain/x$SD
 g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Genetic gain in trait unit/y")+facet_grid(.~Group)+
+  ylab("Genetic gain in genetic SD / y")+facet_grid(.~Group)+
   xlab("Carcass trait")
 ```
 
-Strategy *Index over carcass traits* led to negative genetic gains in carcass weight (see Figure \@ref(fig:corrgengainindexfig)).
-This was due to generally low correlations between carcass weight and the other traits and represent the negative economic weights for these traits (see Table \@ref(tab:ecweightstab)).
-The correlated gains for this strategy differed substantially between Angus and Limousin.
-Firstly, the correlated genetic gain of carcass weight was further negative for Limousin than for Angus.
-This was due to the further negative economic weights of carcass weight for Limousin than for Angus and the positive genetic correlation between carcass weight *calves* and carcass weight *adults*.
-Secondly, the gain of carcass conformation was higher for Angus than for Limousin, the inverse applies to the gain of carcass fat.
+Strategy *Index over carcass traits* led to negative genetic gains of carcass weight (see Figure \@ref(fig:corrgengainindexfig)).
+This was due to generally low genetic correlations between carcass weight and the other traits.
+Additionally it represented the negative economic weights for carcass weight (see Table \@ref(tab:ecweightstab)).
+The correlated gains for the strategy *Index over carcass traits* differed substantially between Angus and Limousin.
+Firstly, the correlated genetic gains of carcass weight was more negative in Limousin than in Angus.
+This was due to the more negative economic weights of carcass weight in Limousin than in Angus and it was due to the positive genetic correlation between carcass weight *calves* and carcass weight *adults*.
+Secondly, the gain of carcass conformation was higher in Angus than in Limousin
+The inverse could be observed for the gain of carcass fat.
 These values followed the respective economic weights of these traits in the aggregate genotype.
-Additionally there were two observations which could not be explained by the economic weights.
+There were two observations which could not be explained by the economic weights.
 Firstly, the correlated genetic gain of carcass fat *adults* for Angus was positive.
 This was due to a high correlation between carcass fat *adults* and carcass fat *calves*.
 Secondly, the gain of carcass conformation was negative for Limousin.
 This was due to positive correlations between carcass conformation and carcass weight.
 
-## Rank Correlations
+## Rank Correlations {#rankcorresults}
 
-The ranks of the 83 Angus animals and the 354 Limousin animals were computed using their breeding values of carcass fat adults, carcass fat calves and using their index of carcass traits value.
+The ranks of the 83 Angus animals and the 354 Limousin animals were computed using their breeding values of carcass fat adults, carcass fat calves and using their index value.
 These ranks were generally very different for the same animals, which is shown by the massive scattering in Figures \@ref(fig:rankcorcfaangus), \@ref(fig:rankcorcfcangus), \@ref(fig:rankcorcfalimousin) and \@ref(fig:rankcorcfclimousin).
 This massive scattering qualifies the values of the rank correlation coefficients and it reduces their validity.
-The correlation coefficients are higher between the ranks of carcass fat calves and the ranks of the index, than between carcass fat adults and the ranks of the index.
-This is due to the higher economic weights in the index of carcass fat calves than of carcass fat adults.
-Limousin shows higher rank correlations between both carcass fat traits and the index than Angus.
-The rank correlations between carcass fat and index of the Angus animals are close to 0.
-This is due to the higher economic weights in the index for carcass fat of Limousin than of Angus.
+The correlation coefficients were higher between the ranks in carcass fat calves and the ranks in the index, than between carcass fat adults and the ranks of the index.
+This was due to the higher economic weights in the index for carcass fat calves than for carcass fat adults.
+Limousin showed higher rank correlations between both carcass fat traits and the index than Angus.
+The rank correlations between carcass fat and index of the Angus animals were not higher than 0.2.
+This was due to the higher economic weights for carcass fat in Limousin than in Angus.
 
 
 

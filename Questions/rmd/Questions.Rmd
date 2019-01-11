@@ -408,8 +408,6 @@ data.frame(Kalb =c(1,2,3,5,3),
 
 * Should I use a barplot to visualize the initial population shares in carcass fat classes, instead of a table?
 
-* Why do the references for table not work for R markdown?
-
 * How do I plot the normal distribution?
     *    # Plot a normal curve
     

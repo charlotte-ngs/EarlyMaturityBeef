@@ -1,1 +1,54 @@
 # Discussion {#discussion}
+
+Here the results shown in Section \@ref(results) are discussed using the same structure.
+
+
+## Index {#indexdiscussion}
+
+The resulting economic weights per genetic standard deviation indicate that the carcass traits of *calves* were economically more important than the carcass traits of *adults*.
+Separate breeding values for carcass traits in different animal groups are very unusual.
+They do not exist in related studies [@Aby2012; @Kause2014].
+Here, the stronger weighting of *calves* was a consequence of the payment system CHTAX.
+There relative prices per kg carcass weight were more sensitive to changes in carcass traits in *calves* than in *adults*.
+Unfortunateley the higher economic weights for *calves* than for *adults* did not represent the relative economic importance of these animal groups in Switzerland.
+Adult beef animals are slaughtered in considerably higher numbers than calves in Switzerland.
+For example in 2016 ???? [Agristat2018].
+Therefore, the used model to compute the economic weights could be improved by considering the frequencies of *calves* and *adults* slaughtered in Switzerland.
+
+For both *calves* and *adults* carcass conformation was the most important carcass trait in the index, followed by carcass fat and carcass weight.
+Again this followes from the payment system CHTAX, where carcass conformation was a maximum trait and carcass fat is an optimum trait.
+Carcass weight was a minimum trait with a large range missing any price differences (0 - 140 kg for calves and 0 - 290 kg for adults).
+This large range with missing price differences considerably reduced the importance of carcass weight in the index.
+In other studies carcass weight was usually the most important trait in the computed index [@Aby2012;?? ].
+The most important reason for this difference may be that in this Master thesis the unit [(Sfr. / kg carcass weight) / trait unit] was used for the economic weights.
+The other studies used the unit [Euro / (trait unit and animal)].
+Additionally production costs were not considered in this Master Thesis in contrast to @Aby2012.
+Carcass weight was not only the least important trait in the index, but also negativeley weighted.
+This is even more unusual and could not be observed in any other related study ??.
+Nevertheless negative weights for carcass weight may be favorable in Switzerland.
+In Switzerland beef animals are slaughter at much younger age than in other European countries, because Swiss consumers prefer small meat cuts [@Hospenthal??].
+However, negative weights for carcass weight may also hinder breeding for early maturity in Switzerland.
+The breeding values of carcass weight, like carcass conformation and carcass fat are corrected for age at slaughter in the multivariate BLUP model (see Section \@ref(matgengain)).
+This correction leads to increased carcass weights for animals with a low age at slaughter.
+Thus, these animals get reduced index values and will less often be used as parents for the next generation.
+Therefore negative economic weights for carcass fat apparently do not favor the wish to breed for early maturity in Switzerland.
+These weights could be adapted to the relative values of the literature, but then the index would loose one of its strengths.
+This strength is the transparence and comprehensibility of its creation.
+
+Another strength of the index is its ability to facilitate breeding adapted to the characteristics of different breeds.
+The index's economic weights computed in this Master thesis accounted for the specific potentials of the breed populations Angus and Limousin in Switzerland.
+While Angus has high potential to increase carcass conformation in its population, Limousin has high potential to increase carcass fat in its population.
+These different potentials led to different economic weights for these traits in Angus and Limousin.
+The economic weights for carcass conformation was higher for Angus compared to Limousin and the economic weights for carcass fat was higher for Limousin compared to Angus.
+This pattern was also observed by other studies [@Aby2012].
+@Aby2012 actually computed economic weights for the two groups *intensive breeds* (including Limousin) and *extensive breeds* (including Angus).
+For the comparison to the results of this Master thesis Angus was assumed to be exchangable with the group *extensive breeds* and Limousin was assumed to be exchangable with the group *intensive breeds*.
+
+## Genetic Gain {#gengaindiscussion}
+
+
+
+## Rank Correlations
+
+
+
