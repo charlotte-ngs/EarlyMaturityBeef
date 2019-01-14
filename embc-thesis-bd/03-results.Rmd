@@ -50,8 +50,10 @@ g <- ggplot(table,aes(Trait,Weight))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Sfr. per genetic SD")+facet_grid(.~Group)+
-  xlab("Carcass trait")
+  xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
 ```
+
+
 Figure \@ref(fig:ecweightsgensdfig) shows that carcass conformation was the most important trait for both animal groups and both breeds, followed by carcass fat.
 The economic weights for carcass weight showed generally the lowest absolute values and were all negative.
 The negative values for carcass weight are due to the payment system CHTAX.
@@ -214,7 +216,7 @@ x <-data.frame(Gain=c(Sfr_AN_index,Sfr_LM_index,Sfr_AN_CF,Sfr_LM_CF),Breed=rep(c
 g <- ggplot(x,aes(Strategy,Gain))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Genetic gain in Sfr. / y")
+  ylab("Genetic gain in Sfr. / y")+theme(text=element_text(family="CM Roman"))
 
 ```
 
@@ -272,7 +274,7 @@ g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Genetic gain in genetic SD / y")+facet_grid(.~Group)+
-  xlab("Carcass trait")
+  xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r corrgengainindexfig, fig.cap="Correlated genetic gains in Angus and Limousin when selecting for the strategy Index over carcass traits in genetic standard deviation per year."}
@@ -298,7 +300,7 @@ g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Genetic gain in genetic SD / y")+facet_grid(.~Group)+
-  xlab("Carcass trait")
+  xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
 ```
 
 Strategy *Index over carcass traits* led to negative genetic gains of carcass weight (see Figure \@ref(fig:corrgengainindexfig)).

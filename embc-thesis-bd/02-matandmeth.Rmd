@@ -3,9 +3,13 @@ output:
   pdf_document: default
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center", fig.pos="H", fig)
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center", fig.pos="H")
 library(knitr)
 library(kableExtra)
+library(ggplot2)
+library(extrafont)
+library(fontcm)
+library(dplyr)
 ```
 
 # Material and Methods {#matandmeth}
@@ -33,11 +37,11 @@ While the group *calves* included animals which were less or 180 days old at sla
 All computations were performed using the open source program R [@RCoreTeam2017].
 The resulting codes are available in the annex (see Section \@ref(annex)).
 
-```{r angusgraphic, fig.cap = "Angus beef animal (Retrieved on 3.1.2019 from https://www.mutterkuh.ch/de/herdebuch/rasse/angus)."}
+```{r angusgraphic, fig.cap = "Angus beef animal (Retrieved on 3.1.2019 from www.mutterkuh.ch)."}
 knitr::include_graphics(system.file("extdata","Angus.jpg", package="Exemplary"))
 ```
 
-```{r limousingraphic, fig.cap = "Limousin beef animal (Retrieved on 3.1.2019 from https://www.mutterkuh.ch/de/herdebuch/rasse/limousin)."}
+```{r limousingraphic, fig.cap = "Limousin beef animal (Retrieved on 3.1.2019 from www.mutterkuh.ch)."}
 knitr::include_graphics(system.file("extdata","Limousin.jpg", package="Exemplary"))
 ```
 
@@ -136,7 +140,7 @@ g + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 15))+
    facet_grid(.~Group)+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass fat class")
+  xlab("Carcass fat class")+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r ccprice,fig.cap="Relative prices of each carcass conformation class within the animal groups adults and calves."}
@@ -161,7 +165,7 @@ g + geom_bar(stat="identity")+
   facet_grid(.~Group)+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass conformation class")
+  xlab("Carcass conformation class")+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r cwaprice,fig.cap="Relative prices at thresholds in carcass weight for the animal group adults."}
@@ -184,7 +188,7 @@ CWa_plot <- ggplot(CWa,aes(threshold,price))
 CWa_plot + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass weight thresholds in kg")
+  xlab("Carcass weight thresholds in kg")+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r cwcprice,fig.cap="Relative prices at thresholds in carcass weight for the animal group calves."}
@@ -206,7 +210,7 @@ CWc_plot <- ggplot(CWc,aes(threshold,price))
 CWc_plot + geom_bar(stat="identity")+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Relative price in Sfr. / kg")+
-  xlab("Carcass weight thresholds in kg")
+  xlab("Carcass weight thresholds in kg")+theme(text=element_text(family="CM Roman"))
 ```
 
 #### Population distributions {#popdist}
@@ -273,7 +277,7 @@ g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Population frequency")+
-  xlab("Carcass fat class")
+  xlab("Carcass fat class")+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r ccfrequencies, fig.cap="Population frequencies of Angus and Limousin in carcass conformation classes."}
@@ -321,7 +325,7 @@ g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
   theme_classic()+theme(text = element_text(size = 15))+
   ylab("Population frequency")+
-  xlab("Carcass conformation class")
+  xlab("Carcass conformation class")+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r cwmeansd}
@@ -379,7 +383,7 @@ g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
   theme_classic()+
   ylab("Population frequency")+
-  xlab("Carcass fat class")+theme(text = element_text(size = 15))
+  xlab("Carcass fat class")+theme(text = element_text(size = 15))+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r thresholdsconstant, fig.cap="Exemplary distribution shift whith constant thresholds for the group adults, breed Angus and trait carcass fat.", echo=FALSE}
@@ -402,7 +406,7 @@ g+
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.3, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c(NULL=NULL,"Initial distribution"="solid","New distribution"="dashed"), guide = guide_legend(title=NULL))+
-  theme_classic()+theme(text = element_text(size = 15))
+  theme_classic()+theme(text = element_text(size = 15))+theme(text=element_text(family="CM Roman"))
 ```
 
 
