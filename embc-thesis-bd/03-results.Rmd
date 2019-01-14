@@ -19,7 +19,7 @@ LM_economic_weights_file <- system.file("extdata","LM_economic_values", package=
 LM_economic_weights <- read.table(file = LM_economic_weights_file, sep=";", header=TRUE)
 LM_economic_weights <- as.matrix(LM_economic_weights)
 LM_economic_weights <- as.vector(LM_economic_weights)
-table <- data.frame(Trait= c("Calves conformation [Sfr. / conformation class]", "Adults conformation [Sfr. / conformation class]", "Calves fat [(Sfr. / kg carcass weight)?? / fat class]", "Adults fat [Sfr. / fat class]", "Calves weight [Sfr. / kg carcass weight]", "Adults weight [Sfr. / kg carcass weight]"),Angus=AN_economic_weights,Limousin=LM_economic_weights)
+table <- data.frame(Trait= c("Calves conformation [(Sfr. / kg carcass weight) / conformation class]", "Adults conformation [(Sfr. / kg carcass weight) / conformation class]", "Calves fat [(Sfr. / kg carcass weight) / fat class]", "Adults fat [(Sfr. / kg carcass weight) / fat class]", "Calves weight [(Sfr. / kg carcass weight) / kg carcass weight]", "Adults weight [(Sfr. / kg carcass weight) / kg carcass weight]"),Angus=AN_economic_weights,Limousin=LM_economic_weights)
 kable(table, digits=2, booktabs=T,caption="Economic weights in Sfr. per trait unit determining the index for the strategy Index over carcass traits.")
 ```
 
@@ -48,7 +48,7 @@ table$Breed <- rep(c("Angus","Limousin"),each=6)
 
 g <- ggplot(table,aes(Trait,Weight))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Sfr. per genetic SD")+facet_grid(.~Group)+
   xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
 ```
@@ -215,7 +215,7 @@ x <-data.frame(Gain=c(Sfr_AN_index,Sfr_LM_index,Sfr_AN_CF,Sfr_LM_CF),Breed=rep(c
 # Plot
 g <- ggplot(x,aes(Strategy,Gain))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Genetic gain in Sfr. / y")+theme(text=element_text(family="CM Roman"))
 
 ```
@@ -272,7 +272,7 @@ x$GainSD <- x$Gain/x$SD
 
 g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Genetic gain in genetic SD / y")+facet_grid(.~Group)+
   xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
 ```
@@ -298,8 +298,8 @@ x$GainSD <- x$Gain/x$SD
 
 g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
-  theme_classic()+theme(text = element_text(size = 15))+
-  ylab("Genetic gain in genetic SD / y")+facet_grid(.~Group)+
+  theme_classic()+theme(text = element_text(size = 20))+
+  ylab("Genetic gain in gen. SD / y")+facet_grid(.~Group)+
   xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
 ```
 
@@ -331,22 +331,125 @@ This was due to the higher economic weights for carcass fat in Limousin than in 
 
 
 
-```{r rankcorcfaangus, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat adults and the index for Angus."}
-knitr::include_graphics(system.file("extdata","AN_rankcor_cfa.png", package="Exemplary"))
+```{r rankcorcfaangus, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat adults and the index for Angus.",out.width="60%",fig.width=7}
+library(dplyr)
+tbl_result <- read.table(
+  system.file("extdata","AN_tbl_result", package="Exemplary"),
+  sep="\t", header=TRUE)
+tbl_idx_comp <- read.table(
+  system.file("extdata","AN_tbl_idx_comp", package="Exemplary"),
+  sep="\t", header=TRUE)
+cfa_index_r<- cor(tbl_result$cfa_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+cfc_index_r <- cor(tbl_result$cfc_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+data <- inner_join(tbl_result,tbl_idx_comp,by="tvdnr")
+library(ggplot2)
+library(tidyr)
+library(ggpubr)
+library(extrafont)
+font_install("fontcm")
+# Rank correlation between CF adults and index
+cfa_index_plot <- ggscatter(data, x = "cfa_rank", y = "ca_index_rank",
+                 add = "reg.line",  # Add regressin line
+                 add.params = list(color = "blue", fill = "lightgray")
+ )
+ # Add correlation coefficient
+ cfa_index_plot + annotate(x=10, y=85, 
+               label=paste("R = ", round(cfa_index_r,2)), 
+               geom="text", size=10)+ 
+   theme(text = element_text(size = 20))+
+   xlab("Carcass fat adults rank")+
+   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
 ```
 
-```{r rankcorcfcangus, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat calves and the index for Angus."}
-knitr::include_graphics(system.file("extdata","AN_rankcor_cfc.png", package="Exemplary"))
+```{r rankcorcfcangus, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat calves and the index for Angus.",out.width="60%",fig.width=7}
+library(dplyr)
+tbl_result <- read.table(
+  system.file("extdata","AN_tbl_result", package="Exemplary"),
+  sep="\t", header=TRUE)
+tbl_idx_comp <- read.table(
+  system.file("extdata","AN_tbl_idx_comp", package="Exemplary"),
+  sep="\t", header=TRUE)
+cfa_index_r<- cor(tbl_result$cfa_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+cfc_index_r <- cor(tbl_result$cfc_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+data <- inner_join(tbl_result,tbl_idx_comp,by="tvdnr")
+library(ggplot2)
+library(tidyr)
+library(ggpubr)
+library(extrafont)
+font_install("fontcm")
+# Rank correlation between CF adults and index
+cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
+                 add = "reg.line",  # Add regressin line
+                 add.params = list(color = "blue", fill = "lightgray")
+ )
+ # Add correlation coefficient
+ cfa_index_plot + annotate(x=10, y=85, 
+               label=paste("R = ", round(cfc_index_r,2)), 
+               geom="text", size=10)+ 
+   theme(text = element_text(size = 20))+
+   xlab("Carcass fat adults rank")+
+   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
 ```
 
-```{r rankcorcfalimousin, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat adults and the index for Limousin."}
-knitr::include_graphics(system.file("extdata","LM_rankcor_cfa.png", package="Exemplary"))
+```{r rankcorcfalimousin, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat adults and the index for Limousin.",out.width="60%",fig.width=7}
+library(dplyr)
+tbl_result <- read.table(
+  system.file("extdata","LM_tbl_result", package="Exemplary"),
+  sep="\t", header=TRUE)
+tbl_idx_comp <- read.table(
+  system.file("extdata","LM_tbl_idx_comp", package="Exemplary"),
+  sep="\t", header=TRUE)
+cfa_index_r<- cor(tbl_result$cfa_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+cfc_index_r <- cor(tbl_result$cfc_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+data <- inner_join(tbl_result,tbl_idx_comp,by="tvdnr")
+library(ggplot2)
+library(tidyr)
+library(ggpubr)
+library(extrafont)
+font_install("fontcm")
+# Rank correlation between CF adults and index
+cfa_index_plot <- ggscatter(data, x = "cfa_rank", y = "ca_index_rank",
+                 add = "reg.line",  # Add regressin line
+                 add.params = list(color = "blue", fill = "lightgray")
+ )
+ # Add correlation coefficient
+ cfa_index_plot + annotate(x=40, y=350, 
+               label=paste("R = ", round(cfa_index_r,2)), 
+               geom="text", size=10)+ 
+   theme(text = element_text(size = 20))+
+   xlab("Carcass fat adults rank")+
+   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
 ```
 
-```{r rankcorcfclimousin, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat calves and the index for Limousin."}
-knitr::include_graphics(system.file("extdata","LM_rankcor_cfc.png", package="Exemplary"))
+```{r rankcorcfclimousin, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat calves and the index for Limousin.",out.width="60%",fig.width=7}
+library(dplyr)
+tbl_result <- read.table(
+  system.file("extdata","LM_tbl_result", package="Exemplary"),
+  sep="\t", header=TRUE)
+tbl_idx_comp <- read.table(
+  system.file("extdata","LM_tbl_idx_comp", package="Exemplary"),
+  sep="\t", header=TRUE)
+cfa_index_r<- cor(tbl_result$cfa_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+cfc_index_r <- cor(tbl_result$cfc_rank, tbl_idx_comp$ca_index_rank, method = c("spearman"))
+data <- inner_join(tbl_result,tbl_idx_comp,by="tvdnr")
+library(ggplot2)
+library(tidyr)
+library(ggpubr)
+library(extrafont)
+font_install("fontcm")
+# Rank correlation between CF adults and index
+cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
+                 add = "reg.line",  # Add regressin line
+                 add.params = list(color = "blue", fill = "lightgray")
+ )
+ # Add correlation coefficient
+ cfa_index_plot + annotate(x=40, y=350, 
+               label=paste("R = ", round(cfc_index_r,2)), 
+               geom="text", size=10)+ 
+   theme(text = element_text(size = 20))+
+   xlab("Carcass fat adults rank")+
+   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
 ```
-
 
 
 

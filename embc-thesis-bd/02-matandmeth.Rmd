@@ -3,7 +3,7 @@ output:
   pdf_document: default
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "70%",fig.align = "center", fig.pos="H")
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "90%",fig.align = "center", fig.pos="H", fig.width = 10)
 library(knitr)
 library(kableExtra)
 library(ggplot2)
@@ -137,7 +137,7 @@ Class <- rep(c(1:5),times=2)
 x <- cbind(CF_price,Class)
 g <- ggplot(x,aes(Class,price))
 g + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
    facet_grid(.~Group)+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass fat class")+theme(text=element_text(family="CM Roman"))
@@ -163,7 +163,7 @@ x <- cbind(CC_price,Class)
 g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),price))
 g + geom_bar(stat="identity")+
   facet_grid(.~Group)+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass conformation class")+theme(text=element_text(family="CM Roman"))
 ```
@@ -186,7 +186,7 @@ CWa <- cbind(CWa_price,CWa_threshold)
 
 CWa_plot <- ggplot(CWa,aes(threshold,price))
 CWa_plot + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass weight thresholds in kg")+theme(text=element_text(family="CM Roman"))
 ```
@@ -208,7 +208,7 @@ CWc_threshold$threshold <- factor(CWc_threshold$threshold,levels=CWc_threshold$t
 CWc <- cbind(CWc_price,CWc_threshold)
 CWc_plot <- ggplot(CWc,aes(threshold,price))
 CWc_plot + geom_bar(stat="identity")+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Relative price in Sfr. / kg")+
   xlab("Carcass weight thresholds in kg")+theme(text=element_text(family="CM Roman"))
 ```
@@ -275,7 +275,7 @@ x <- rbind(AN_CFa,AN_CFc,LM_CFa,LM_CFc)
 g <- ggplot(x,aes(Class,Frequency))
 g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Population frequency")+
   xlab("Carcass fat class")+theme(text=element_text(family="CM Roman"))
 ```
@@ -323,7 +323,7 @@ x <- rbind(AN_CCa,AN_CCc,LM_CCa,LM_CCc)
 g <- ggplot(x,aes(x=factor(Class,levels=c("X","A","T-","T","T+","H","C")),Frequency))
 g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   facet_grid(.~Breed)+
-  theme_classic()+theme(text = element_text(size = 15))+
+  theme_classic()+theme(text = element_text(size = 20))+
   ylab("Population frequency")+
   xlab("Carcass conformation class")+theme(text=element_text(family="CM Roman"))
 ```
@@ -383,7 +383,7 @@ g + geom_bar(stat="identity", width=0.5, fill="tomato2") +
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS))+
   theme_classic()+
   ylab("Population frequency")+
-  xlab("Carcass fat class")+theme(text = element_text(size = 15))+theme(text=element_text(family="CM Roman"))
+  xlab("Carcass fat class")+theme(text = element_text(size = 20))+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r thresholdsconstant, fig.cap="Exemplary distribution shift whith constant thresholds for the group adults, breed Angus and trait carcass fat.", echo=FALSE}
@@ -406,7 +406,7 @@ g+
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.3, sd = AncfaS),aes(linetype="New distribution"))+
     scale_linetype_manual(values=c(NULL=NULL,"Initial distribution"="solid","New distribution"="dashed"), guide = guide_legend(title=NULL))+
-  theme_classic()+theme(text = element_text(size = 15))+theme(text=element_text(family="CM Roman"))
+  theme_classic()+theme(text = element_text(size = 20))+theme(text=element_text(family="CM Roman"))
 ```
 
 
@@ -437,7 +437,7 @@ kable(genetic_var_cov, digits=3, booktabs=T, caption="Genetic variance / covaria
 ```
 
 ```{r resvarcov}
-residual_var_cov <- system.file("extdata","adults_calves_genetic_variances_covariances", package="Exemplary")
+residual_var_cov <- system.file("extdata","adults_calves_residual_variances_covariances", package="Exemplary")
 residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
 # Add first column with names
 Trait <- c("cCC","aCC","cCF","aCF","cCW","aCW")

@@ -11,16 +11,24 @@ They do not exist in related studies [@Aby2012; @Kause2014].
 Here, the stronger weighting of *calves* was a consequence of the payment system CHTAX.
 There relative prices per kg carcass weight were more sensitive to changes in carcass traits in *calves* than in *adults*.
 Unfortunateley the higher economic weights for *calves* than for *adults* did not represent the relative economic importance of these animal groups in Switzerland.
-Adult beef animals are slaughtered in considerably higher numbers than calves in Switzerland.
-For example in 2016 ???? [Agristat2018].
-Therefore, the used model to compute the economic weights could be improved by considering the frequencies of *calves* and *adults* slaughtered in Switzerland.
-
+Adult beef animals are slaughtered in higher numbers than calves in Switzerland.
+For example 233'245 adult animals (cows excluded) and 215'187 calves have been slaughtered 2017 in Switzerland [Agristat2018].
+Measured in carcass weight this difference is more distinct with 65'154 t for *adults* versus 27'050 t for *calves* [Agristat2018].
+Therefore, the used model to compute the economic weights could be improved by correcting them for the relative economic importance of *calves* and *adults* in Switzerland.
 For both *calves* and *adults* carcass conformation was the most important carcass trait in the index, followed by carcass fat and carcass weight.
-Again this followes from the payment system CHTAX, where carcass conformation was a maximum trait and carcass fat is an optimum trait.
+That carcass conformation was more important than carcass fat followes from the payment system CHTAX, where carcass conformation is a maximum trait and carcass fat is an optimum trait [@Proviande2015].
+In the computation of economic weights, trait improvements are defined as an increase in population mean [@brascamp1985].
+An increase in population mean may more easily improve a maximum trait than an optimum trait, which could be better improved by a reduction in the population distribution's standard deviation.
+The ranking of these carcass trait was also observed in the indices computed by @Amer2001 and @Aby2014.
+In these studies not CHTAX was used as material but the EUROP payment system.
+Like in CHTAX, carcass fat is an optimum and carcass conformation is a maximum trait in EUROP.
+However high levels in carcass fat are far more punished in EUROP than in CHTAX.
+This explains the negative weights of carcass fat observed by @Amer2001 and @Aby2014 in contrast to the generally positive values in this Master thesis.
+
 Carcass weight was a minimum trait with a large range missing any price differences (0 - 140 kg for calves and 0 - 290 kg for adults).
 This large range with missing price differences considerably reduced the importance of carcass weight in the index.
-In other studies carcass weight was usually the most important trait in the computed index [@Aby2012;?? ].
-The most important reason for this difference may be that in this Master thesis the unit [(Sfr. / kg carcass weight) / trait unit] was used for the economic weights.
+In the study of @Aby2012 carcass weight was the most important trait in the computed index.
+The most important reason for this different result may be that in this Master thesis the unit [(Sfr. / kg carcass weight) / trait unit] was used for the economic weights.
 The other studies used the unit [Euro / (trait unit and animal)].
 Additionally production costs were not considered in this Master Thesis in contrast to @Aby2012.
 Carcass weight was not only the least important trait in the index, but also negativeley weighted.
@@ -34,7 +42,6 @@ Thus, these animals get reduced index values and will less often be used as pare
 Therefore negative economic weights for carcass fat apparently do not favor the wish to breed for early maturity in Switzerland.
 These weights could be adapted to the relative values of the literature, but then the index would loose one of its strengths.
 This strength is the transparence and comprehensibility of its creation.
-
 Another strength of the index is its ability to facilitate breeding adapted to the characteristics of different breeds.
 The index's economic weights computed in this Master thesis accounted for the specific potentials of the breed populations Angus and Limousin in Switzerland.
 While Angus has high potential to increase carcass conformation in its population, Limousin has high potential to increase carcass fat in its population.
