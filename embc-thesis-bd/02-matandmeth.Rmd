@@ -31,20 +31,15 @@ Two tools were used to predict the effects of the two strategies: The genetic ga
 All necessary data was available to use these tools for the strategy *Carcass fat as auxilliary trait*.
 However the index, which determines the strategy *Index over carcass traits* was missing.
 Its computation was necessary for the predictions and part of this Master Thesis (see Section \@ref(index)).
-Predictions assumed within-breed-breeding and were performed for the Swiss breed populations of Angus (See Figure \@ref(fig:angusgraphic)) and Limousin (See Figure \@ref(fig:limousingraphic)).
+Predictions assumed within-breed-breeding and were performed for the Swiss breed populations of Angus and Limousin (See Figure \@ref(fig:breedgraphic)).
 Both beef breed populations were divided into two groups of animals which were named *calves* and *adults*.
 While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
 All computations were performed using the open source program R [@RCoreTeam2017].
 The resulting codes are available in the annex (see Section \@ref(annex)).
 
-```{r angusgraphic, fig.cap = "Angus beef animal (Retrieved on 3.1.2019 from www.mutterkuh.ch)."}
-knitr::include_graphics(system.file("extdata","Angus.jpg", package="Exemplary"))
+```{r breedgraphic, fig.cap = "Angus (l) and Limousin (r) beef animal (Retrieved from www.mutterkuh.ch, 3.1.2019).", out.width = "40%", fig.show='hold'}
+knitr::include_graphics(c(system.file("extdata","Angus.jpg", package="Exemplary"),system.file("extdata","Limousin.jpg", package="Exemplary")))
 ```
-
-```{r limousingraphic, fig.cap = "Limousin beef animal (Retrieved on 3.1.2019 from www.mutterkuh.ch)."}
-knitr::include_graphics(system.file("extdata","Limousin.jpg", package="Exemplary"))
-```
-
 
 ## Index {#index}
 

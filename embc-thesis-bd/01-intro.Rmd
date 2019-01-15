@@ -1,28 +1,35 @@
+```{r setupintro, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,fig.align = "center", fig.pos="H")
+```
 # Introduction {#intro}
 
 ## Background
 
 Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations mainly on growth rate and carcass conformation. 
-Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds, see \@ref(fig:genetictrendCF). The decrease of carcass fat leads to a price reduction of the carcass [@Hospenthal2016].
-
-```{r genetictrendCF, echo=FALSE, fig.cap = "Genetic trend of carcass fat 1995-2015", out.width="100%", out.height="50%",fig.align='center', fig.pos='H'}
-knitr::include_graphics(system.file("extdata","genetictrend.pdf", package="Exemplary"), auto_pdf = T)
-```
-
+Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds. The decrease of carcass fat leads to a price reduction of the carcass [@Hospenthal2016].
 Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
+This thesis builds on the following definition of early maturity: Animals mature early if they reach the state of carcass maturity faster than others but get the same price at the slaughterhouse.
+One possibility to improve early maturity is to breed for it in a breeding program by using an appropriate strategy.
+Two strategies were proposed which had the goal to breed for early maturity in Switzerland:
 
+1. Carcass fat as auxiliary trait (CFAT)
 
-One possibility to improve early maturity is to use early maturity in a breeding program. 
-Early maturity must be preciseley defined and efficiently measurable to include it in a breeding program.
+2. Index over carcass traits (IOCT)
 
-## Definition of Early Maturity {#defem}
-
-
-
-The derivation of one trait to another requires that the involved traits are closely correlated. 
-Therefore carcass fat should be highly correlated with early maturity.
-The assumed correlation is based on the theoretical knowledge about growth and body composition in beef cattle.
-Usually muscles grow in an earlier stadium of growth than fat tissue [@Thonney2015].
+In strategy Carcass fat as auxiliary trait, early maturity is inteded to be derived from the breeding value carcass fat. 
+The breeding value carcass fat is based on the trait carcass fat, which classifies different levels of fat coverage on beef carcasses (see Figure \@ref(fig:cfgraphic)).
+The derivation of one trait to another requires that the involved traits are closely correlated [@Falconer1996].
+Therefore carcass fat should be highly correlated with early maturity in order to be an effective auxiliary trait.
+The assumed correlation is based on the theoretical knowledge about growth and body composition in beef cattle [@Thonney2015].
+Usually muscles grow in an earlier stadium of growth than fat tissue (see Figure \@ref(fig:growthcompgraphic)).
 This indicates that carcass fat is usually the limiting factor for early maturity in beef cattle.
 Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
 Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
+```{r cfgraphic, fig.cap = "High (l) and low (r) carcass fat levels (Retrieved on 3.1.2019 from www.proviande.ch).", out.width = "40%", fig.show='hold'}
+knitr::include_graphics(c(system.file("extdata","VK_Fett4_SK.pdf", package="Exemplary"),system.file("extdata","VK_Fett1_SK.pdf", package="Exemplary")))
+```
+
+```{r growthcompgraphic, fig.cap = "Chemical components in the empty body (gut contents removed) of 49 beef steers (Thonney,2015)",out.width = "80%"}
+knitr::include_graphics(system.file("extdata","GrowthComposition.png", package="Exemplary"))
+```
+

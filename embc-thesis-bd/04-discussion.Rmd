@@ -45,17 +45,43 @@ This strength is the transparence and comprehensibility of its creation.
 Another strength of the index is its ability to facilitate breeding adapted to the characteristics of different breeds.
 The index's economic weights computed in this Master thesis accounted for the specific potentials of the breed populations Angus and Limousin in Switzerland.
 While Angus has high potential to increase carcass conformation in its population, Limousin has high potential to increase carcass fat in its population.
-These different potentials led to different economic weights for these traits in Angus and Limousin.
+The different potentials led to different economic weights for these traits in Angus and Limousin.
 The economic weights for carcass conformation was higher for Angus compared to Limousin and the economic weights for carcass fat was higher for Limousin compared to Angus.
-This pattern was also observed by @Aby2012.
+This pattern was also observed by @Aby2012 and @Kause2014.
 @Aby2012 actually computed economic weights for the two groups *intensive breeds* (including Limousin) and *extensive breeds* (including Angus).
 For the comparison to the results of this Master thesis Angus was assumed to be exchangable with the group *extensive breeds* and Limousin was assumed to be exchangable with the group *intensive breeds* in @Aby2012.
 
 ## Genetic Gain {#gengaindiscussion}
 
+The genetic gain for strategy *Index over carcass traits* is higher than for strategy *Carcass fat as auxiliary trait*.
+It is the expected result, because an index is known to be the most suitable strategy to breed for multiple traits simoultanously [@Hazel1943].
+The result indicates that the strategy *Index over carcass traits* is more suitable to breed for early maturity than the strategy *Carcass fat as auxiliary trait*.
+Early maturity is an economic trait maximizing the price of a carcass at the slaughterhouse and minimizing the age at slaughter of the carcass as defined in Section \@ref(intro).
+The price at slaughter of a beef carcass is determined by all carcass traits present in the aggregate genotype.
+Even though the dimension time is not regarded in the economic weights of the aggregate genotype, the aggregate genotype may still be closely linked to the trait early maturity.
+The dimension time is included in the aggregate genotype by the estimated breeding values of the carcass traits.
+All of these traits are corrected by the covariable age at slaughter.
+To the author's best knowledge there is no other attempt reported which aims breeding for early maturity in beef cattle using an index.
+Most selection in beef cattle did not change the growth curve and its relationship with body composition [@Thonney2015].
+Exactly this change would be necessary to improve early maturity in beef cattle.
+There has been proposed an attempt to perform this change based on a model combining age at slaughter and carcass traits.
+This attempt is called deviation in age at slaughter (DAGE), was proposed from @Berry2017 and is not implemented in any European breeding program yet.
+The DAGE is a far more complex way to deal with early maturity than a selection index, but the material for its implementation would be present in Switzerland.
+However the complexity of DAGE could complicate the computation of its genetic gain which is used to compare the DAGE to other breeding strategies.
+The strategy *Carcass fat as auxiliary trait* is more useful for breeds similar to Limousin than breeds similar to Angus in breeding for early maturity.
+In this strategy the genetic gain of the trait carcass fat is maximized.
+This is obviously not favourable for breeds like Angus which are at the optimum point of carcass fat.
 
 
-## Rank Correlations
+
+
+
+
+
+
+
+
+## Rank Correlations {#rankcordiscussion}
 
 
 

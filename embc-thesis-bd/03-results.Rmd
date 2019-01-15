@@ -303,11 +303,11 @@ g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
 ```
 
-Strategy *Index over carcass traits* led to negative genetic gains of carcass weight (see Figure \@ref(fig:corrgengainindexfig)).
-This was due to generally low genetic correlations between carcass weight and the other traits.
-Additionally it represented the negative economic weights for carcass weight (see Table \@ref(tab:ecweightstab)).
+Strategy *Index over carcass traits* led to positive genetic gains of carcass weight (see Figure \@ref(fig:corrgengainindexfig)).
+This was due to generally high genetic correlations between carcass weight and the other traits.
+Therefor it did not represented the negative economic weights for carcass weight (see Table \@ref(tab:ecweightstab)).
 The correlated gains for the strategy *Index over carcass traits* differed substantially between Angus and Limousin.
-Firstly, the correlated genetic gains of carcass weight was more negative in Limousin than in Angus.
+Firstly, the correlated genetic gains of carcass weight was lower in Limousin than in Angus.
 This was due to the more negative economic weights of carcass weight in Limousin than in Angus and it was due to the positive genetic correlation between carcass weight *calves* and carcass weight *adults*.
 Secondly, the gain of carcass conformation was higher in Angus than in Limousin
 The inverse could be observed for the gain of carcass fat.
