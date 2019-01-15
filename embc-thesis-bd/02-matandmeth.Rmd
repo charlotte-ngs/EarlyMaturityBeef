@@ -14,39 +14,10 @@ library(dplyr)
 
 # Material and Methods {#matandmeth}
 
-This thesis builds on the following definition: Animals mature early if they reach the state of carcass maturity faster than others but get the same price at the slaughterhouse.
-
-The four proposed strategies to breed for early maturity are sorted by increasing complexity:
-
-1. Carcass fat as auxiliary trait (CFAT)
-
-2. Index over carcass traits (IOCT)
-
-3. Deviation in age at slaughter (DAGE) from @Berry2017
-
-4. Growth models (GM)
-
-While the strategies *Deviation in age at slaughter* and *Growth models* were evaluated by literature review, the strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* were evaluated by predicting the effects of their implementation in Switzerland.
-Two tools were used to predict the effects of the two strategies: The genetic gain (see Section  \@ref(tab:carcasscategory)) and the rank correlations (see Section \@ref(rankcorr)).
-All necessary data was available to use these tools for the strategy *Carcass fat as auxilliary trait*.
-However the index, which determines the strategy *Index over carcass traits* was missing.
-Its computation was necessary for the predictions and part of this Master Thesis (see Section \@ref(index)).
-Predictions assumed within-breed-breeding and were performed for the Swiss breed populations of Angus and Limousin (See Figure \@ref(fig:breedgraphic)).
-Both beef breed populations were divided into two groups of animals which were named *calves* and *adults*.
-While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
-All computations were performed using the open source program R [@RCoreTeam2017].
-The resulting codes are available in the annex (see Section \@ref(annex)).
-
-```{r breedgraphic, fig.cap = "Angus (l) and Limousin (r) beef animal (Retrieved from www.mutterkuh.ch, 3.1.2019).", out.width = "40%", fig.show='hold'}
-knitr::include_graphics(c(system.file("extdata","Angus.jpg", package="Exemplary"),system.file("extdata","Limousin.jpg", package="Exemplary")))
-```
-
 ## Index {#index}
 
 The index consisted of the six traits carcass fat adults, carcass fat calves, carcass conformation adults, carcass conformation calves, carcass weight adults and carcass weight calves.
-Their weighted sum formed the value of the index $I$.
-It was computed separately for each breed Angus and Limousin.
-For both breeds the index's value was computed as
+The index $I$ was computed for both breeds Angus and Limousin as shown in
 
 \begin{equation}
 \label{index}

@@ -8,13 +8,25 @@ knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,fig.align = "cent
 Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations mainly on growth rate and carcass conformation. 
 Lately it has been observed that carcass fat is decreasing at least for some beef cattle breeds. The decrease of carcass fat leads to a price reduction of the carcass [@Hospenthal2016].
 Several stakeholders derive from the decreasing levels of carcass fat that Swiss beef cattle does not show any improvements in the trait early maturity. 
-This thesis builds on the following definition of early maturity: Animals mature early if they reach the state of carcass maturity faster than others but get the same price at the slaughterhouse.
+In the context of the present project, the term "Early maturity" means early maturity of carcasses at slaughter and is related to a carcass classification system.
+It is important to distinguish between early maturity of carcassses and early maturity in reproduction and fertility.
+From now on the term early maturity refers to early maturity of carcasses.
+Early maturity could be defined as follows:
+Let us imagine two animals with identical carcass characteristics defined by a certain carcass classification system.
+The animal that is younger will then be earlier mature than the other one.
+Early maturity is important for Swiss beef breeders, because it affects their profit.
+An animal which is early mature creates less costs but the same revenue for the beef breeder than animals which are less early mature [@Berry2017].
+
 One possibility to improve early maturity is to breed for it in a breeding program by using an appropriate strategy.
 Two strategies were proposed which had the goal to breed for early maturity in Switzerland:
 
 1. Carcass fat as auxiliary trait (CFAT)
 
 2. Index over carcass traits (IOCT)
+
+3. Deviation in age at slaughter (DAGE) from @Berry2017
+
+4. Growth models (GM)
 
 In strategy Carcass fat as auxiliary trait, early maturity is inteded to be derived from the breeding value carcass fat. 
 The breeding value carcass fat is based on the trait carcass fat, which classifies different levels of fat coverage on beef carcasses (see Figure \@ref(fig:cfgraphic)).
@@ -33,3 +45,17 @@ knitr::include_graphics(c(system.file("extdata","VK_Fett4_SK.pdf", package="Exem
 knitr::include_graphics(system.file("extdata","GrowthComposition.png", package="Exemplary"))
 ```
 
+While the strategies *Deviation in age at slaughter* and *Growth models* were evaluated by literature review, the strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* were evaluated by predicting the effects of their implementation in Switzerland.
+Two tools were used to predict the effects of the two strategies: The genetic gain (see Section  \@ref(tab:gengain)) and the rank correlations (see Section \@ref(rankcorr)).
+All necessary data was available to use these tools for the strategy *Carcass fat as auxilliary trait*.
+However the index, which determines the strategy *Index over carcass traits* was missing.
+Its computation was necessary for the predictions and part of this Master Thesis (see Section \@ref(index)).
+Predictions assumed pure-bred selection and were performed for the Swiss breeding populations Angus and Limousin (See Figure \@ref(fig:breedgraphic)).
+In both breeds, the slaughtered animals were divided into the two groups *calves* and *adults*.
+While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
+All computations were performed using the open source program R [@RCoreTeam2017].
+The resulting codes are available in the annex (see Section \@ref(annex)).
+
+```{r breedgraphic, fig.cap = "Angus (l) and Limousin (r) beef animal (Retrieved from www.mutterkuh.ch, 3.1.2019).", out.width = "40%", fig.show='hold'}
+knitr::include_graphics(c(system.file("extdata","Angus.jpg", package="Exemplary"),system.file("extdata","Limousin.jpg", package="Exemplary")))
+```
