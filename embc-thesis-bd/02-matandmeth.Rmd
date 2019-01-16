@@ -66,8 +66,8 @@ kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 201
 ```
 
 ```{r conformationclass}
-x<-data.frame(Class = c("C", "H","T","A","X"), Description=c("Leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","Leg: wide; back: wide and full; shoulder: pronounced"," ", "Leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced"," ", "Leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "Leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
-kable(x, booktabs=T, caption="Description of carcass conformation classes, class T divided into T-, T and T+ (Proviande, 2015)")
+x<-data.frame(Class = c("C", "H","T","A","X"), Description=c("Leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","Leg: wide; back: wide and full; shoulder: pronounced", "Leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "Leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "Leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
+kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015). Class T is divided into T+, T and T-.")
 ```
 The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
 The values in carcass weight, carcass conformation and carcass fat all influence the price of a beef carcass in the slaughterhouses.
@@ -196,6 +196,22 @@ kable_styling(latex_options=c("hold_position"))
 
 While the population distributions for carcass fat and carcass conformation were determined as discrete distributions with known frequencies for each class (see Figures \@ref(fig:cffrequencies) and \@ref(fig:ccfrequencies)), the population distributions for carcass weight were assumed to be a normal distribution with a given mean and a given standard deviation (see Table \@ref(tab:cwmeansd)).
 
+```{r cwmeansd}
+library(knitr)
+library(dplyr)
+library(tidyr)
+library(readr)
+library(ggplot2)
+mean_sd <- system.file("extdata","mean_sd.csv", package="Exemplary")
+mean_sd  <- read_csv2(file = mean_sd)
+mean_sd$Mean[7:12]
+mean_sd <- data.frame(Trait=c("aCF","cCF","aCC","cCC","aCW","cCW"),Unit=c("Class","Class","Class","Class","kg","kg") ,Mean=mean_sd$Mean[7:12], SD=mean_sd$Sd[7:12],Mean=mean_sd$Mean[1:6],SD=mean_sd$Sd[1:6])
+colnames(mean_sd) <- c("Trait","Unit","Mean","SD","Mean","SD")
+kable(mean_sd,booktabs=T,caption="Population mean and standard deviation for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults in Angus and Limousin.")%>%
+kable_styling(latex_options=c("hold_position"))%>%
+ add_header_above(c("","","Angus"=2,"Limousin"=2))
+```
+
 ```{r cffrequencies, fig.cap="Population frequencies of Angus and Limousin in carcass fat classes."}
 library(knitr)
 library(dplyr)
@@ -290,21 +306,6 @@ g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
   theme_classic()+theme(text = element_text(size = 20))+
   ylab("Population frequency")+
   xlab("Carcass conformation class")+theme(text=element_text(family="CM Roman"))
-```
-
-```{r cwmeansd}
-library(knitr)
-library(dplyr)
-library(tidyr)
-library(readr)
-library(ggplot2)
-mean_sd <- system.file("extdata","mean_sd.csv", package="Exemplary")
-mean_sd  <- read_csv2(file = mean_sd)
-mean_sd$Trait <- rep(c("aCF","cCF","aCC","cCC","aCW","cCW"),times=2)
-colnames(mean_sd)[4] <- "SD"
-mean_sd$Unit <- rep(c("Class","Class","Class","Class","kg","kg"),times=2)
-kable(mean_sd,booktabs=T,caption="Population mean and standard deviation for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults in AN = Angus and LM = Limousin.")%>%
-kable_styling(latex_options=c("hold_position"))
 ```
 
 ### Method {#indexmet}
