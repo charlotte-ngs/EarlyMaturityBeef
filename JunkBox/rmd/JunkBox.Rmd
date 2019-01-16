@@ -1393,3 +1393,50 @@ sd <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
  
  ggplot(data,aes(cfc_rank,ca_index_rank)) +
    geom_jitter(se=FALSE)
+   
+   
+   
+   
+   
+   
+The residual and genetic variances / covariances were computed by the method "estimation of variance components" using the software VCE created by Groeneveld [@Kunz2018].
+They relied on data of estimated breeding values $\hat{u}$ which were computed using a multivariate best linear unbiased prediction (BLUP) model [@Kunz2018].
+BLUP is a statistical model combining the given knowledge about animal pedigrees, trait heritabilities, trait variances/covariances, environmental factors and individual phenotypic records.
+Multivariate means that BLUP accounts for the phenotypic, genetic and residual covariances between the involved traits. 
+A Multivariariate BLUP computes breeding values synchronically for all involved traits [@Mrode2003].
+Phenotypic records of three carcass traits were used to estimate the breeding values:
+
+* Carcass fat [class]  
+
+* Carcass conformation [class]
+
+* Carcass weight [kg]
+
+Each beef carcass delivered one record per carcass trait either as *adult* or as *calf*.
+Animals 700 d or older at slaughter were not included in the model and did not get a breeding value.
+Proviande employees recorded the traits at slaughterhouses in Switzerland routeneley according to CHTAX [@Proviande2015].
+In the model an animals record was assumed to be dependent on the environmental conditions the animal lived in beside the genetic effects.
+The environmental effects of the different conditions were included in BLUP and used to separate additive genetic effects from environmental effects on the phenotypic observations.
+In BLUP the environmental effects on a phenotypic observation were either known fixed effects or unnkown random effects.
+The following parameters of the animal's environment were used as fixed effects in BLUP:
+
+* Proviande carcass classifier for carcass fat and carcass conformation
+
+* Sex
+
+* Slaughterhouse
+
+Age and squared age at slaughter were used as covariables for all traits in the model.
+Beside the random animal effect which was the breeding value, there was only one random effect used in the model:
+
+* Farm x year  
+
+
+The asymptotic covariance between selection index and aggregate genotype was computed as 
+
+\begin{equation}
+\label{covindagg}
+Cov(I,H)^*=\sqrt{b'P^*b}
+\end{equation}
+
+, t

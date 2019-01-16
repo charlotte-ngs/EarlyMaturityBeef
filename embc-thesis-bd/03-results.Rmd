@@ -6,22 +6,8 @@ All of these results are presented for the breeds Angus and Limousin.
 ## Index {#indexresults}
 
 The index was determined by the economic weights for the six carcass traits (see Section \@ref(index)).
-These economic weights in Sfr. per trait unit are shown in Table \@ref(tab:ecweightstab).
-Additionally the economic weights are shown corrected for each trait's genetic standard deviation in the Swiss beef population (see Figure \@ref(fig:ecweightsgensdfig)).
+The economic weights are shown corrected for each trait's genetic standard deviation in the Swiss beef population (see Figure \@ref(fig:ecweightsgensdfig)).
 This correction allows to compare the economic weights not only between breeds but also between traits.
-```{r ecweightstab}
-library(knitr)
-AN_economic_weights_file <- system.file("extdata","AN_economic_values", package="Exemplary")
-AN_economic_weights <- read.table(file = AN_economic_weights_file, sep=";", header=TRUE)
-AN_economic_weights <- as.matrix(AN_economic_weights)
-AN_economic_weights <- as.vector(AN_economic_weights)
-LM_economic_weights_file <- system.file("extdata","LM_economic_values", package="Exemplary")
-LM_economic_weights <- read.table(file = LM_economic_weights_file, sep=";", header=TRUE)
-LM_economic_weights <- as.matrix(LM_economic_weights)
-LM_economic_weights <- as.vector(LM_economic_weights)
-table <- data.frame(Trait= c("Calves conformation [(Sfr. / kg carcass weight) / conformation class]", "Adults conformation [(Sfr. / kg carcass weight) / conformation class]", "Calves fat [(Sfr. / kg carcass weight) / fat class]", "Adults fat [(Sfr. / kg carcass weight) / fat class]", "Calves weight [(Sfr. / kg carcass weight) / kg carcass weight]", "Adults weight [(Sfr. / kg carcass weight) / kg carcass weight]"),Angus=AN_economic_weights,Limousin=LM_economic_weights)
-kable(table, digits=2, booktabs=T,caption="Economic weights in Sfr. per trait unit determining the index for the strategy Index over carcass traits.")
-```
 
 ```{r ecweightsgensdfig, fig.cap="Economic weights in Sfr. per genetic standard deviation for all carcass traits."}
 library(ggplot2)
