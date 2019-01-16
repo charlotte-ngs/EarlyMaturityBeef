@@ -36,7 +36,7 @@ According to @brascamp1985, the economic weight of a given trait is defined as t
 The only information available to compute the economic weights was the payment system CHTAX which determines the price per kg carcass weight for a beef carcass at large-scale slaughterhouses in Switzerland [@Proviande2015].
 Therefore the change in profit was approximated by the difference in price per kg carcass weight determined by CHTAX.
 The Swiss meat industry association Proviande is responsible for the implementation of CHTAX in Swiss slaughterhouses. 
-Proviande employees classify beef carcasses to determine their price.
+Proviande employees subjectiveley classify beef carcasses to determine their price.
 They carry out the same procedure for each beef carcass.
 Firstly, Proviande employees assign the carcass to a carcass category. 
 Carcass categories differ in the animals age at slaughter, number of incisors (front teeth), sex and carcass weight (see table  \@ref(tab:carcasscategory)). 
@@ -46,6 +46,7 @@ The meatier the carcass the higher the carcass conformation class.
 The lowest carcass conformation class is called X and the highest class is called C.
 Thirdly, Proviande employees assign the carcass to a carcass fat class.
 Proviande employees determine the class of carcass fat by the area and the accentuation of fat that covers the carcass (see Table \@ref(tab:fatclass)).
+The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
 ```{r carcasscategory}
 x <- data.frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"), 
                                    Category=c("Calves", "Young cattle", "Young bulls", "Bulls or steers", 
@@ -59,24 +60,20 @@ x <- data.frame(Abbreviation=c("KV", "JB", "MT", "MA", "OB", "RG", "RV", "VK"),
 
 kable(x, booktabs=T, caption="Description of carcass categories (Proviande, 2015).")
 ```
-
 ```{r fatclass}
 x<-data.frame(Class = c("1", "2", "3", "4", "5"), Description=c("No fat coverage","Light fat coverage; muscels partially visible", "Average even fat coverage; muscles generally covered", "Strong fat coverage; excessive fat deposition", "Fat coverage generally excessive; bulging fat formations"))
 kable(x, booktabs=T, caption="Description of carcass fat classes (Proviande, 2015).")
 ```
-
 ```{r conformationclass}
 x<-data.frame(Class = c("C", "H","T","A","X"), Description=c("Leg: accentedly wide; back: accentedly wide and full; shoulder: accentedly pronounced","Leg: wide; back: wide and full; shoulder: pronounced", "Leg: well developed, quite wide; back: average large; shoulder: accentedly pronounced", "Leg: moderateley developed, slim, hollow; back: moderateley developed til slim ; shoulder: flat", "Leg: poorly developed, very slim, very hollow; back: slim, thin, pointy wither; shoulder: flat, hollow"))
 kable(x, booktabs=T, caption="Description of carcass conformation classes (Proviande, 2015). Class T is divided into T+, T and T-.")
 ```
-The least fatty carcasses belong to carcass fat class 1 and the fattiest carcasses belong to carcass fat class 5.
 The values in carcass weight, carcass conformation and carcass fat all influence the price of a beef carcass in the slaughterhouses.
 The price changes weekly for the different carcass fat classes and carcass conformation classes. 
 The prices used in this Master Thesis were taken from August 2018 [@Proviande2018].
 The ones depending on carcass weight were taken from August 2016 [@Proviande2016].
 For each carcass category these prices differed.
-In this Thesis and in the Swiss breeding value estimation it was assumed, that all animals which belonged to the group *adults* were assigned to the carcass categories MT, OB and RG.
-All animals which belonged to the group *calves* were assigned to the carcass category KV.
+MT, OB and RG formed the group *adults* and KV formed the group *calves*.
 The mean of OB, RG and MT was formed to get the prices of the group *adults*.
 To form the prices depending on carcass weight of *calves* it was assumed that their mean carcass conformation class was T+.
 Not the absolute prices are shown, but the price reductions or increases depending on a reference price of a class or range of kg carcass weight.
@@ -178,8 +175,8 @@ CWc_plot + geom_bar(stat="identity")+
 
 #### Population Distributions {#popdist}
 
-The two breeds Angus and Limousin received the same prices, but their populations showed different distributions in the carcass traits.
-These distributions of the groups *calves* and *adults* were used to compute their economic weights respectiveley. 
+The two breeds Angus and Limousin received the same prices, but their populations showed different distributions of the groups *calves* and *adults*.
+These distributions were used to compute their economic weights respectiveley. 
 The economic weights were derived from the carcass trait records of animals which were slaughtered between 2010 and 2015.
 The number of animals are shown in Table \@ref(tab:numberofanimals).
 
@@ -310,7 +307,7 @@ g + geom_bar(stat="identity",aes(fill=Group),position="dodge")+
 
 ### Method {#indexmet}
 
-Regarding the mentioned simplifications for the determination of economic weights in Section \@ref(CHTAX), the economic weights $a$ in the *Index over carcass traits* were computed as
+Regarding the mentioned material for the determination of economic weights in Section \@ref(CHTAX), the economic weights $a$ in the *Index over carcass traits* were computed as
 \begin{equation}
 \label{economicweight}
 a=\frac{r_1'p-r_0'p}{\Delta_{\mu}}
@@ -321,8 +318,8 @@ They were determined by the population means and standard deviations contained i
 As an example this step is shown for the group *adults*, breed Angus and trait carcass fat in Figure \@ref(fig:normdistapprox).
 To get the frequencies of $r_1$ for each price range in these distributions, thresholds defining the price ranges were needed.
 These thresholds define at which point the price changes in the range of the normal distributions.
-While the thresholds of carcass weight were available (shown in Figure \@ref(fig:cwcprice)), they were not available for carcass fat and carcass conformation.
-There the tresholds have been set in a way, that the population frequencies known by the discrete distribution (shown in Figures \@ref(fig:cfprice) and \@ref(fig:ccprice)) had the same value as the population frequencies in the approximated normal distribution.
+While the thresholds of carcass weight were available, they were not available for carcass fat and carcass conformation.
+There the tresholds have been set in a way, that the population frequencies known by the discrete distribution (shown in Figures \@ref(fig:cfprice) and \@ref(fig:ccprice)) had the same value as the population frequencies in the approximated normal distribution (see Figure \@ref(fig:normdistapprox)).
 The mean of the normal distributions was increased by $\Delta_{\mu}$ which resulted in the new distribution.
 Thresholds were assumed to be constant, but the population frequencies within the thresholds changed (shown in Figure \@ref(fig:thresholdsconstant)). 
 The population frequencies within each price class have been computed again using the characteristics of the normal distribution and using the computed thresholds.
@@ -414,7 +411,7 @@ genetic_var_cov <- read.table(file = genetic_var_cov, sep=";", header=TRUE)
 # Add first column with names
 Trait <- c("cCC","aCC","cCF","aCF","cCW","aCW")
 genetic_var_cov <- cbind(Trait,genetic_var_cov)
-kable(genetic_var_cov, digits=3, booktabs=T, caption="Genetic variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults derived from Kunz (2018).")
+kable(genetic_var_cov, digits=3, booktabs=T, caption="Genetic variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults, variance component estimation done by Kunz (2018).")
 ```
 
 ```{r resvarcov}
@@ -423,7 +420,7 @@ residual_var_cov <- read.table(file = residual_var_cov, sep=";", header=TRUE)
 # Add first column with names
 Trait <- c("cCC","aCC","cCF","aCF","cCW","aCW")
 residual_var_cov <- cbind(Trait,residual_var_cov)
-kable(residual_var_cov, digits=3, booktabs=T, caption="Residual variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults derived from Kunz (2018).")
+kable(residual_var_cov, digits=3, booktabs=T, caption="Residual variance / covariance matrix for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults, variance component estimation done by Kunz (2018).")
 ```
 
 
@@ -667,7 +664,7 @@ Rank correlations were used to compare the different rankings of animals using t
 To compute the rank correlations, breeding values of all six carcass traits were used. 
 The originated from a set of each Angus and Limousin Swiss animals.
 The set of Angus animals consisted in 83 males and the set of Limousin animals consisted in 354 males.
-All these animals had at least 20 daughters and possessed breeding values for all six traits.
+All these animals had at least 20 descendants and possessed breeding values for all six traits.
 
 ### Methods {#metrankcorr}
 

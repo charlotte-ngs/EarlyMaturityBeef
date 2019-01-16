@@ -51,6 +51,8 @@ All necessary data was available to use these tools for the strategy *Carcass fa
 However the index, which determines the strategy *Index over carcass traits* was missing.
 Its computation was necessary for the predictions and part of this Master Thesis (see Section \@ref(index)).
 Predictions assumed pure-bred selection and were performed for the Swiss breeding populations Angus and Limousin (See Figure \@ref(fig:breedgraphic)).
+These breeds were chosen because they are relevant beef breeds in Switzerland and because they are known to be very different in the trait early maturity. 
+While Angus is known to be early maturing, Limousin is known to be late maturing [@Thonney2015].
 In both breeds, the slaughtered animals were divided into the two groups *calves* and *adults*.
 While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
 All computations were performed using the open source program R [@RCoreTeam2017].
