@@ -3,7 +3,7 @@ output:
   pdf_document: default
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "90%",fig.align = "center", fig.pos="H", fig.width = 10)
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,out.width = "90%",fig.align = "center", fig.pos="H",fig.width = 10)
 library(knitr)
 library(kableExtra)
 library(ggplot2)
@@ -364,7 +364,7 @@ CFa_price$Class <- c(1:5)
 g <- ggplot(CFa_price,aes(Class,price,linetype=NULL))
 g+
   geom_bar(stat="identity",show_guide=FALSE,aes(linetype=NULL))+
- ylab("Relative price in Sfr. / kg")+
+ ylab("Price reduction in Sfr. / kg")+
   xlab("Carcass fat class") + 
   stat_function(fun = dnorm, args = list(mean = AncfaM, sd = AncfaS), aes(linetype="Initial distribution"))+
   stat_function(fun = dnorm, args = list(mean = AncfaM+0.3, sd = AncfaS),aes(linetype="New distribution"))+

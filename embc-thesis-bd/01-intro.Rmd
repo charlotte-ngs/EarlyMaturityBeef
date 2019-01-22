@@ -16,8 +16,9 @@ Let us imagine two animals with identical carcass characteristics defined by a c
 The animal that is younger will then be earlier mature than the other one.
 Early maturity is important for Swiss beef breeders, because it affects their profit.
 An animal which is early mature creates less costs but the same revenue for the beef breeder than animals which are less early mature [@Berry2017].
-
 One possibility to improve early maturity is to breed for it in a breeding program by using an appropriate strategy.
+Until now most selection in beef cattle did not change the growth curve and its relationship with body composition [@Thonney2015].
+Exactly this change would be necessary to improve early maturity in beef cattle.
 Two strategies were proposed which had the goal to breed for early maturity in Switzerland:
 
 1. Carcass fat as auxiliary trait (CFAT)
@@ -37,6 +38,10 @@ Usually muscles grow in an earlier stadium of growth than fat tissue (see Figure
 This indicates that carcass fat is usually the limiting factor for early maturity in beef cattle.
 Based on this knowledge of beef growth, carcass fat could be a usefull trait to derive early maturity.
 Therefore "Mutterkuh Schweiz", the Swiss beef breeders association, has introduced a breeding value for carcass fat in Summer 2018.
+There has been proposed an attempt to perform this change based on a model combining age at slaughter and carcass traits.
+This attempt is called deviation in age at slaughter (DAGE), was proposed from @Berry2017 and is not implemented in any European breeding program yet.
+The DAGE is a far more complex way to deal with early maturity than a selection index, but the material for its implementation would be present in Switzerland.
+However the complexity of DAGE could complicate the computation of its genetic gain which would be used to compare the DAGE with other breeding strategies.
 ```{r cfgraphic, fig.cap = "High (l) and low (r) carcass fat levels (Retrieved on 3.1.2019 from www.proviande.ch).", out.width = "40%", fig.show='hold'}
 knitr::include_graphics(c(system.file("extdata","VK_Fett4_SK.pdf", package="Exemplary"),system.file("extdata","VK_Fett1_SK.pdf", package="Exemplary")))
 ```

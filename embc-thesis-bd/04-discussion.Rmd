@@ -7,7 +7,7 @@ Here the results shown in Section \@ref(results) are discussed using the same st
 
 The resulting economic weights per genetic standard deviation indicate that the carcass traits of *calves* were economically more important than the carcass traits of *adults*.
 Separate breeding values for carcass traits in different animal groups are very unusual.
-They do not exist in related studies [@Aby2012; @Kause2014].
+They were only observed in @Phocas1998, where calves had lower economic weights for carcass traits than adults.
 Here, the stronger weighting of *calves* was a consequence of the payment system CHTAX.
 There relative prices per kg carcass weight were more sensitive to changes in carcass traits in *calves* than in *adults*.
 Unfortunateley the higher economic weights for *calves* than for *adults* did not represent the relative economic importance of these animal groups in Switzerland.
@@ -16,16 +16,17 @@ For example 233'245 adult animals (cows excluded) and 215'187 calves have been s
 Measured in carcass weight this difference is more distinct with 65'154 t for *adults* versus 27'050 t for *calves* [Agristat2018].
 Therefore, the used model to compute the economic weights could be improved by correcting them for the relative economic importance of *calves* and *adults* in Switzerland.
 For both *calves* and *adults* carcass conformation was the most important carcass trait in the index, followed by carcass fat and carcass weight.
-That carcass conformation was more important than carcass fat followes from the payment system CHTAX, where carcass conformation is a maximum trait and carcass fat is an optimum trait [@Proviande2015].
+That carcass conformation was more important than carcass fat follows from the payment system CHTAX, where carcass conformation is a maximum trait and carcass fat is an optimum trait [@Proviande2015].
 In the computation of economic weights, trait improvements are defined as an increase in population mean [@brascamp1985].
-An increase in population mean may more easily improve a maximum trait than an optimum trait, which could be better improved by a reduction in the population distribution's standard deviation.
-The ranking of these carcass trait was also observed in the indices computed by @Amer2001 and @Aby2014.
+An increase in population mean may more easily improve a maximum trait than an optimum trait.
+An optimum trait in turn could be better improved by a reduction in the population distribution's standard deviation.
+That carcass conformation was more important than carcass fat was also observed in the indices computed by @Phocas1998, @Amer2001 and @Aby2014.
 In these studies not CHTAX was used as material but the EUROP payment system.
-Like in CHTAX, carcass fat is an optimum and carcass conformation is a maximum trait in EUROP.
+In CHTAX and in EUROP, carcass fat is an optimum and carcass conformation is a maximum trait.
 However high levels in carcass fat are far more punished in EUROP than in CHTAX.
-This explains the negative weights of carcass fat observed by @Amer2001 and @Aby2014 in contrast to the generally positive values in this Master thesis.
+This explains the negative weights of carcass fat observed by @Phocas1998, @Amer2001 and @Aby2014 in contrast to the mostly positive values for carcass fat in this Master thesis.
 
-Carcass weight was a minimum trait with a large range where price differences were missing (0 - 140 kg for calves and 0 - 290 kg for adults).
+Carcass weight was a minimum trait and on a large range of carcass weight price differences were missing (0 - 140 kg for calves and 0 - 290 kg for adults).
 This large range with missing price differences considerably reduced the importance of carcass weight in the index.
 In the study of @Aby2012 carcass weight was the most important trait in the computed index.
 The most important reason for this different result may be that in this Master thesis the unit [(Sfr. / kg carcass weight) / trait unit] was used for the economic weights, which reduces the importance of carcass weight.
@@ -54,23 +55,37 @@ For the comparison to the results of this Master thesis Angus was assumed to be 
 ## Genetic Gain {#gengaindiscussion}
 
 The genetic gain for strategy *Index over carcass traits* is higher than for strategy *Carcass fat as auxiliary trait*.
-It is the expected result, because an index is known to be the most suitable strategy to breed for multiple traits simoultanously [@Hazel1943].
 The result indicates that the strategy *Index over carcass traits* is more suitable to breed for early maturity than the strategy *Carcass fat as auxiliary trait*.
+It is the expected result, because an index is known to be the most suitable strategy to breed for multiple traits simoultanously [@Hazel1943].
+The increase in the aggregate genotype is likely to be measure the suitability in breeding for early maturity due to the following relationship.
 Early maturity is an economic trait maximizing the price of a carcass at the slaughterhouse and minimizing the age at slaughter of the carcass as defined in Section \@ref(intro).
-The price at slaughter of a beef carcass is determined by all carcass traits present in the aggregate genotype.
-Even though the dimension time is not regarded in the economic weights of the aggregate genotype, the aggregate genotype may still be closely linked to the trait early maturity.
+The price at slaughter of a beef carcass is determined by all carcass traits present in the aggregate genotype and is included by the economic weights.
 The dimension time is included in the aggregate genotype by the estimated breeding values of the carcass traits.
-All of these traits are corrected by the covariable age at slaughter.
-To the author's best knowledge there is no other attempt reported which aims breeding for early maturity in beef cattle using an index.
-Most selection in beef cattle did not change the growth curve and its relationship with body composition [@Thonney2015].
-Exactly this change would be necessary to improve early maturity in beef cattle.
-There has been proposed an attempt to perform this change based on a model combining age at slaughter and carcass traits.
-This attempt is called deviation in age at slaughter (DAGE), was proposed from @Berry2017 and is not implemented in any European breeding program yet.
-The DAGE is a far more complex way to deal with early maturity than a selection index, but the material for its implementation would be present in Switzerland.
-However the complexity of DAGE could complicate the computation of its genetic gain which is used to compare the DAGE to other breeding strategies.
-The strategy *Carcass fat as auxiliary trait* is more useful for breeds similar to Limousin than breeds similar to Angus in breeding for early maturity.
-In this strategy the genetic gain of the trait carcass fat is maximized.
-This is obviously not favourable for breeds like Angus which are at the optimum point of carcass fat.
+All of these traits are corrected by the covariable age at slaughter leading to the effect: The lower the age at slaughter the higher the records for the carcass traits.
+Additionally strategy *Index over carcass traits* leads to higher correlated genetic gains than *Carcass fat as auxiliary trait*.
+This gives even more evidence that it is the strategy which is more suitable to breed for early maturity.
+Even the higher gains in carcass weight may lead to a better performance in early maturity considering the correction with age at slaughter (as explained in Section \@ref(indexdiscussion)).
+The correlated genetic gains increasingly favorable if carcass weight had more neutral economic weights in the index and in the aggregate genotype.
+This could be achieved through the introduction of price reductions for too low carcass weights in CHTAX by Proviande.
+The correlated genetic gains show another important advantage from strategy *Index over carcass traits* to *Carcass fat as auxiliary trait*.
+They are adapted to the breed-specific potentials to improve early maturity, as already indicated by the economic weights.
+For example in Angus the highest potential to improve early maturity is by increasing carcass conformation.
+Exactly this trait showed the highest genetic gains in Angus.
+A similar pattern could be observed for the genetic gains of carcass fat in Limousin.
+In @Aby2014 this was not observed.
+The correlated genetic gains were lower in Angus than in Limousin for both carcass conformation and carcass fat.
+This was due to the lower economic weights in Angus than in Limousin for both traits.
+Additionally in @Aby2014 the aggregate genotype consisted of a higher number of traits including functional traits.
+This impairs a clear comparation of the genetic gains to the results of the present study.
+
+
+
+
+
+
+
+
+
 
 
 
