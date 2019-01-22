@@ -1,49 +1,48 @@
 # Discussion {#discussion}
 
-Here the results shown in Section \@ref(results) are discussed using the same structure.
+Here the results are discussed using the same structure as in Section \@ref(results).
 
 
 ## Index {#indexdiscussion}
 
 The resulting economic weights per genetic standard deviation indicate that the carcass traits of *calves* were economically more important than the carcass traits of *adults*.
 Separate breeding values for carcass traits in different animal groups are very unusual.
-They were only observed in @Phocas1998, where calves had lower economic weights for carcass traits than adults.
+This separation was only observed in @Phocas1998, where calves had lower economic weights for carcass traits than adults.
 Here, the stronger weighting of *calves* was a consequence of the payment system CHTAX.
-There relative prices per kg carcass weight were more sensitive to changes in carcass traits in *calves* than in *adults*.
-Unfortunateley the higher economic weights for *calves* than for *adults* did not represent the relative economic importance of these animal groups in Switzerland.
+There price discounts or increases per kg carcass weight were more sensitive to changes in carcass traits in *calves* than in *adults*.
+Unfortunateley the higher economic weights for *calves* than for *adults* did not represent the economic importance of these animal groups in Switzerland.
 Adult beef animals are slaughtered in higher numbers than calves in Switzerland.
-For example 233'245 adult animals (cows excluded) and 215'187 calves have been slaughtered 2017 in Switzerland [Agristat2018].
-Measured in carcass weight this difference is more distinct with 65'154 t for *adults* versus 27'050 t for *calves* [Agristat2018].
-Therefore, the used model to compute the economic weights could be improved by correcting them for the relative economic importance of *calves* and *adults* in Switzerland.
+For example 233'245 adult animals (cows excluded) and 215'187 calves were slaughtered during 2017 in Switzerland [@Agristat2018].
+Measured in carcass weight this difference is more distinct resulting in 65'154 t carcass weight for *adults* versus 27'050 t carcass weight for *calves* slaughtered during 2017 in Switzerland [@Agristat2018].
+Therefore, the used model to compute the economic weights could be improved by correcting the economic weights according to the economic importance of *calves* and *adults* in Switzerland.
 For both *calves* and *adults* carcass conformation was the most important carcass trait in the index, followed by carcass fat and carcass weight.
-That carcass conformation was more important than carcass fat follows from the payment system CHTAX, where carcass conformation is a maximum trait and carcass fat is an optimum trait [@Proviande2015].
+This was due to the payment system CHTAX, where carcass conformation is a maximum trait and carcass fat is an optimum trait [@Proviande2015].
 In the computation of economic weights, trait improvements are defined as an increase in population mean [@brascamp1985].
 An increase in population mean may more easily improve a maximum trait than an optimum trait.
 An optimum trait in turn could be better improved by a reduction in the population distribution's standard deviation.
 That carcass conformation was more important than carcass fat was also observed in the indices computed by @Phocas1998, @Amer2001 and @Aby2014.
-In these studies not CHTAX was used as material but the EUROP payment system.
-In CHTAX and in EUROP, carcass fat is an optimum and carcass conformation is a maximum trait.
+In these studies not CHTAX was used as material to compute the economic weights for carcass traits but the EUROP payment system.
+In EUROP, carcass fat is an optimum and carcass conformation is a maximum trait as in CHTAX.
 However high levels in carcass fat are far more punished in EUROP than in CHTAX.
 This explains the negative weights of carcass fat observed by @Phocas1998, @Amer2001 and @Aby2014 in contrast to the mostly positive values for carcass fat in this Master thesis.
-
-Carcass weight was a minimum trait and on a large range of carcass weight price differences were missing (0 - 140 kg for calves and 0 - 290 kg for adults).
-This large range with missing price differences considerably reduced the importance of carcass weight in the index.
+Carcass weight was a minimum trait and on a large range of carcass weight price reductions were missing (0 - 140 kg for calves and 0 - 290 kg for adults).
+This large range with missing price differences considerably reduced the importance of carcass weight in the index of the present study.
 In the study of @Aby2012 carcass weight was the most important trait in the computed index.
 The most important reason for this different result may be that in this Master thesis the unit [(Sfr. / kg carcass weight) / trait unit] was used for the economic weights, which reduces the importance of carcass weight.
 The study of @Aby2012 used the unit [Euro / (trait unit and animal)] for its economic weights.
-Additionally production costs were not considered in this Master Thesis in contrast to @Aby2012.
-Carcass weight was not only the least important trait in the index, but also negativeley weighted.
+Carcass weight was not only the least important trait in the index of the present study, but also negativeley weighted.
 This is even more unusual and could not be observed in any other related study.
 Nevertheless negative weights for carcass weight may be favorable in Switzerland.
-In Switzerland beef animals are slaughter at much younger age than in other European countries, because Swiss consumers prefer small meat cuts [@Hospenthal2016].
+In Switzerland beef animals are slaughtered at much younger age than in other European countries, because Swiss consumers prefer small meat cuts [@Hospenthal2016].
+Reduced genetic predisposition for high carcass weights could therefore fit to the market situation in Switzerland.
 However, negative weights for carcass weight may also hinder breeding for early maturity in Switzerland.
 The breeding values of carcass weight, like carcass conformation and carcass fat are corrected for age at slaughter in the multivariate BLUP model (see Section \@ref(matgengain)).
-This correction leads to increased carcass weights for animals with a low age at slaughter.
+This correction leads to increased carcass weights of animals with low age at slaughter.
 Thus, these animals get reduced index values and will less often be used as parents for the next generation.
-Negative economic weights for carcass fat apparently do not favor the wish to breed for early maturity in Switzerland.
-These weights could be adapted to the relative values of the literature, but then the index would loose one of its strengths.
-This strength is the transparence and comprehensibility of its creation.
-Another strength of the index is its ability to facilitate breeding adapted to the characteristics of different breeds.
+Considering this prediction, negative economic weights for carcass fat apparently do not favor the wish to breed for early maturity in Switzerland.
+The economic weights of carcass weight could be adapted to the values of the literature, but then the index would loose one of its central strengths.
+This strength is the transparence and comprehensibility of its creation and its adaption to the payment system CHTAX.
+Another strength of the index is that it enables breeding adapted to the characteristics of different breeds.
 The index's economic weights computed in this Master thesis accounted for the specific potentials of the breed populations Angus and Limousin in Switzerland.
 While Angus has high potential to increase carcass conformation in its population, Limousin has high potential to increase carcass fat in its population.
 The different potentials led to different economic weights for these traits in Angus and Limousin.
@@ -51,10 +50,12 @@ The economic weights for carcass conformation was higher for Angus compared to L
 This pattern was also observed by @Aby2012 and @Kause2014.
 @Aby2012 actually computed economic weights for the two groups *intensive breeds* (including Limousin) and *extensive breeds* (including Angus).
 For the comparison to the results of this Master thesis Angus was assumed to be exchangable with the group *extensive breeds* and Limousin was assumed to be exchangable with the group *intensive breeds* in @Aby2012.
+This breed specificity of the index in the present study in contrast to the strategy *Carcass fat as auxiliary trait* could be even better observed in the correlated genetic gains.
+These are discussed in the next section.
 
 ## Genetic Gain {#gengaindiscussion}
 
-The genetic gain for strategy *Index over carcass traits* is higher than for strategy *Carcass fat as auxiliary trait*.
+The genetic gain for strategy *Index over carcass traits* was higher than for strategy *Carcass fat as auxiliary trait*.
 The result indicates that the strategy *Index over carcass traits* is more suitable to breed for early maturity than the strategy *Carcass fat as auxiliary trait*.
 It is the expected result, because an index is known to be the most suitable strategy to breed for multiple traits simoultanously [@Hazel1943].
 The increase in the aggregate genotype is likely to be measure the suitability in breeding for early maturity due to the following relationship.
@@ -77,26 +78,19 @@ The correlated genetic gains were lower in Angus than in Limousin for both carca
 This was due to the lower economic weights in Angus than in Limousin for both traits.
 Additionally in @Aby2014 the aggregate genotype consisted of a higher number of traits including functional traits.
 This impairs a clear comparation of the genetic gains to the results of the present study.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+In contrast to the correlated genetic gains in strategy *Index over carcass traits*, the gains in *Carcass fat as auxiliary trait* did only marginally differ between Angus and Limousin.
+*Carcass fat as auxiliary trait* is therefore a much weaker strategy in adapting to breed-specific potentials than *Index over carcass traits*.
+Using it would mainly increase the trait carcass fat for both Angus and Limousin, but would result in very low increases in carcass conformation and carcass weight.
+Especially in Angus this would not be favorable, because carcass fat is already high enough in this population.
 
 
 ## Rank Correlations {#rankcordiscussion}
+
+The rank correlations between the strategies *Index over carcass traits* and *Carcass fat as auxiliary trait* indicate that these strategies would lead to considerably distinct selection decisions in both Angus and Limousin.
+Especially in Angus the rank correlations were very low.
+Very different selection candidates would be selected for both strategies in Angus.
+In Limousin the correlations were higher and therefore also the congruency was higher between the two strategies.
+
 
 
 
