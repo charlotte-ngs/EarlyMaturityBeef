@@ -123,7 +123,7 @@ female_proportionselected
 ```{r}
 library(dplyr)
 # always calves first and CC,CF,CW
-economic_weights <- system.file("extdata","AN_economic_values", package="Exemplary")
+economic_weights <- system.file("extdata","LM_economic_values", package="Exemplary")
 economic_weights <- read.table(file = economic_weights, sep=";", header=TRUE)
 economic_weights <- as.matrix(economic_weights)
 economic_weights <- as.vector(economic_weights)

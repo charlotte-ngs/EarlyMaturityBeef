@@ -32,21 +32,6 @@ for (idx in seq_along(1:length(list_reqpkgs_github$package))){
 }
 ```
 
-# Abbreviations {-}
-```{r, echo=FALSE, warning=FALSE, cache=FALSE, message=FALSE}
-library(tidyverse)
-library(knitr)
-library(kableExtra)
-
-data_frame(
-Abbreviation = c("c", "s", "CW") , Term = c("calves: less or 180 d old animals", "stirks: more than 180 d but less than 700 d old animals", "carcass weight")
-  ) %>%
-  arrange(Abbreviation) %>% # i.e. alphabetical order by Term
-  kable(booktab = T) %>%
-kable_styling(full_width = T) %>%
-  column_spec(1, width="3cm")# booktab = T gives us a pretty APA-ish table
-```
-
 ```{r, echo=F}
 # R settings
 # set PDF as default for graphics
@@ -56,9 +41,6 @@ options(knitr.graphics.auto_pdf = TRUE)
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(fig.pos = 'H')
 ```
-
-# Preface {-}
-If you want to write a preface, please write it here.
 
 # Summary {-}
 

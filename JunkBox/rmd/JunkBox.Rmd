@@ -1444,3 +1444,22 @@ Cov(I,H)^*=\sqrt{b'P^*b}
 The strategy *Carcass fat as auxiliary trait* is more useful for breeds similar to Limousin than breeds similar to Angus in breeding for early maturity.
 In this strategy the genetic gain of the trait carcass fat is maximized.
 This is obviously not favourable for breeds like Angus which are at the optimum point of carcass fat.
+
+
+# Glossary {-}
+```{r, echo=FALSE, warning=FALSE, cache=FALSE, message=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+data_frame(
+Abbreviation = c("Calves", "s", "CW") , Term = c("calves: less or 180 d old animals", "stirks: more than 180 d but less than 700 d old animals", "carcass weight")
+  ) %>%
+  arrange(Abbreviation) %>% # i.e. alphabetical order by Term
+  kable(booktab = T) %>%
+kable_styling(full_width = T) %>%
+  column_spec(1, width="3cm")# booktab = T gives us a pretty APA-ish table
+```
+
+# Preface {-}
+If you want to write a preface, please write it here.
