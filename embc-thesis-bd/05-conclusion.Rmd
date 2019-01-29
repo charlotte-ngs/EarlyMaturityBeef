@@ -1,1 +1,13 @@
 # Conclusion {#conc}
+Strategies *Index over carcass traits* and *Carcass fat as auxiliary trait* are both suitable to improve early maturity in Swiss beef cattle.
+Strategy *Index over carcass traits* is more effective in breeding for early maturity than strategy *Carcass fat as auxiliary trait*.
+Both strategies show considerable differences in the predicted improvement of different carcass traits.
+Using strategy *Index over carcass traits* would improve early maturity by increasing carcass traits according to the breed-specific potentials.
+For example, Angus would mainly be increased in carcass conformation and carcass weight ,and Limousin would mainly be increased in carcass fat.
+Strategy *Carcass fat as auxiliary trait* would mainly increase carcass fat independently on the breed.
+This would be 
+Strategy *Index over carcass traits* could be improved by considering the economic importance of *adults* and *calves* in its economic weights.
+Additionally, it may be further improved, if Proviande introduced price reductions for too low carcass weights within a carcass category in the payment system CHTAX.
+The deviation in age at slaughter (DAGE) from @Berry2017 should be kept in mind as an alternative way to improve early maturity.
+Experiences from other European countries with the DAGE may facilitate its introduction in Switzerland.
+Its introduction would be necessary, if the available strategies against all expectations should not be successful in improving early maturity during the next decades. 

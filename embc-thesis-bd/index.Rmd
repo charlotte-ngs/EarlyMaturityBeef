@@ -44,6 +44,20 @@ knitr::opts_chunk$set(fig.pos = 'H')
 
 # Summary {-}
 
+Up until summer 2018, the Swiss beef cattle breeders association "Mutterkuh Schweiz" focused their genetic evaluations mainly on growth rate and carcass conformation.  
+Lately, it has been observed that carcass fat is decreasing at least for some beef cattle breeds. 
+Several stakeholders derive from the decreasing levels of carcass fat, that Swiss beef cattle does not show any improvements in the trait early maturity. 
+In the context of the present study, the term "Early maturity" means early maturity of carcasses at slaughter and is related to a carcass classification system.
+Two strategies were proposed to breed for early maturity in Switzerland and are evaluated in this Master thesis: *Carcass fat as auxiliary trait* and *Index over carcass traits*.
+Economic weights for all carcass traits were computed using the payment system CHTAX in the beef breeds Angus and Limousin.
+Two tools were used to predict the effects of the two strategies: The genetic gain and the rank correlations.
+The genetic gain of strategy *Index over carcass traits* was higher than of strategy *Carcass fat as auxiliary trait* in both breeds.
+The result indicates that the strategy *Index over carcass traits* is more suitable to breed for early maturity than the strategy *Carcass fat as auxiliary trait*.
+The most important advantage of strategy *Index over carcass traits* is, that it improves early maturity by increasing carcass traits according to the breed-specific potentials.
+Strategy *Carcass fat as auxiliary trait* would mainly increase the trait carcass fat in Swiss beef populations.
+In Angus this would not be favorable, because this beef breed population is already sufficiently high in carcass fat.
+
+
 # Task Description {-}
 
 __Background__
