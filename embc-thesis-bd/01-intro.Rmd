@@ -3,7 +3,7 @@ knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,fig.align = "cent
 ```
 # Introduction {#intro}
 
-Up until summer 2018, the Swiss beef cattle breeders association "Mutterkuh Schweiz" focused their genetic evaluations mainly on growth rate and carcass conformation. 
+Until summer 2018, the Swiss beef cattle breeders association "Mutterkuh Schweiz" focused their genetic evaluations mainly on growth rate and carcass conformation. 
 Lately, it has been observed that carcass fat is decreasing at least for some beef cattle breeds. 
 The decrease of carcass fat may have led to a price reduction of the carcass [@Hospenthal2016].
 Therefore, carcass fat was added as a new trait to the existing multi-trait breeding evaluation model in summer 2018 [@Kunz2018].
@@ -36,7 +36,7 @@ Therefore carcass fat must be highly correlated with early maturity in order to 
 The assumed correlation is based on the theoretical knowledge about growth and body composition in beef cattle which is described in @Thonney2015.
 Typically in beef cattle bodies, the chemical components water,protein and ash show an increase of mass in an earlier stadium of growth than the component lipid in beef (see Figure \@ref(fig:growthcompgraphic)).
 This indicates that carcass fat is strongly related to early maturity in beef cattle, which may make it a usefull auxiliary trait for early maturity.
-```{r cfgraphic, fig.cap = "High (l) and low (r) carcass fat levels (Retrieved on 3.1.2019 from www.proviande.ch).", out.width = "40%", fig.show='hold'}
+```{r cfgraphic, fig.cap = "High (left) and low (right) carcass fat levels (Retrieved on 3.1.2019 from www.proviande.ch).", out.width = "40%", fig.show='hold'}
 knitr::include_graphics(c(system.file("extdata","VK_Fett4_SK.pdf", package="Exemplary"),system.file("extdata","VK_Fett1_SK.pdf", package="Exemplary")))
 ```
 
@@ -60,7 +60,7 @@ Its computation was necessary for the predictions and part of this Master Thesis
 Predictions assumed pure-bred selection and were performed for the Swiss breeding populations Angus and Limousin (See Figure \@ref(fig:breedgraphic)).
 These breeds were chosen because they are relevant beef breeds in Switzerland and because they are known to be very different in the trait early maturity. 
 While Angus is known to be early maturing, Limousin is known to be late maturing [@Thonney2015].
-```{r breedgraphic, fig.cap = "Angus (l) and Limousin (r) beef animal (Retrieved from www.mutterkuh.ch, 3.1.2019).", out.width = "40%", fig.show='hold'}
+```{r breedgraphic, fig.cap = "Angus (left) and Limousin (right) beef animal (Retrieved from www.mutterkuh.ch, 3.1.2019).", out.width = "40%", fig.show='hold'}
 knitr::include_graphics(c(system.file("extdata","Angus.jpg", package="Exemplary"),system.file("extdata","Limousin.jpg", package="Exemplary")))
 ```
 In both breeds, the slaughtered animals were divided into the two groups *calves* and *adults*.

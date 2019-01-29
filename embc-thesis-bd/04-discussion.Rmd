@@ -9,6 +9,7 @@ There, price discounts or increases per kg carcass weight were more sensitive to
 Unfortunateley the higher economic weights for *calves* than for *adults* did not represent the economic importance of these animal groups in Switzerland.
 This difference is obvious if considering the annual carcass weight in Switzerland, which was 65'154 t carcass weight for *adults* and 27'050 t carcass weight for *calves* [@Agristat2018].
 Therefore, the used model to compute the economic weights could be improved by correcting the economic weights according to the annual carcass weight of *calves* and *adults* in Switzerland.
+
 For both *calves* and *adults*, carcass conformation was the most important carcass trait in the index, followed by carcass fat and carcass weight.
 This was due to the payment system CHTAX, where carcass conformation is a maximum trait and carcass fat is an optimum trait [@Proviande2015].
 That carcass conformation was more important than carcass fat was also observed in the indices computed by @Phocas1998, @Amer2001 and @Aby2014.
@@ -22,7 +23,7 @@ This large range with missing price differences considerably reduced the importa
 In the study of @Aby2012 carcass weight was the most important trait in the computed index.
 Carcass weight was not only the least important trait in the index of the present study, but also negativeley weighted.
 This was even more unusual and could not be observed in any other related study.
-The negative values for carcass weight are due to the payment system CHTAX.
+The negative values for carcass weight are due to the payment system CHTAX, which aims to limit the carcass sizes in Switzerland.
 There, price reductions within carcass categories occur when the carcass weight is too high, but not when carcass weight is too low (see Figures \@ref(fig:cwaprice) and \@ref(fig:cwcprice)).
 Nevertheless, negative weights for carcass weight may be favorable in Switzerland.
 In Switzerland beef animals are slaughtered at much younger age than in other European countries, because Swiss consumers prefer small meat cuts [@Hospenthal2016].
@@ -36,17 +37,18 @@ To solve this issue, a production model as in @Phocas1998, @Amer2001 and @Aby201
 This measure would conserve the major strenght of the computed index in the present study.
 This strength is the transparence and comprehensibility of its creation, and it is its consequent adaption to the payment system CHTAX.
 Another strength of the index is, that it enables breeding which is adapted to the characteristics of the different beef breeds in Switzerland.
+
 The index's economic weights computed in this Master thesis accounted for the specific potentials of the breed populations Angus and Limousin in increasing their average price per kg carcass weight.
 For example, while Angus has high potential to increase the average price depending on carcass conformation in its population, Limousin has high potential to increase the average price depending on carcass fat in its population.
 The different potentials led to different economic weights for these traits in Angus and Limousin.
-The economic weights for carcass conformation were higher for Angus compared to Limousin and the economic weights for carcass fat were higher for Limousin compared to Angus.
+The economic weights for carcass conformation were higher for Angus compared to Limousin.
 This was due to higher population means of carcass conformation in Limousin than in Angus (see Figure \@ref(fig:ccfrequencies)).
-And it was due to population means closer to class 3 of carcass fat in Angus than in Limousin (see Figure \@ref(fig:cffrequencies)).
-@Aby2012 and @Kause2014 also observed ,that the economic weight for carcass conformation was higher for Angus than for Limousin ,and that the economic weight for carcass fat was higher for Angus than for Limousin.
+The economic weights for carcass fat were higher for Limousin compared to Angus.
+This was due to population means closer to class 3 of carcass fat in Angus than in Limousin (see Figure \@ref(fig:cffrequencies)).
+@Aby2012 and @Kause2014 also observed ,that the economic weight for carcass conformation was higher for Angus than for Limousin ,and that the economic weight for carcass fat was higher for Limousin than for Angus.
 @Aby2012 actually computed economic weights for the two groups *intensive breeds* (including Limousin) and *extensive breeds* (including Angus).
 For the comparison to the results of this Master thesis Angus was assumed to be exchangable with the group *extensive breeds* and Limousin was assumed to be exchangable with the group *intensive breeds* in @Aby2012.
 The higher breed specificity of the index in contrast to the strategy *Carcass fat as auxiliary trait* was even more significant when observing the correlated genetic gains.
-These results are discussed in the next section.
 
 ## Genetic Gain {#gengaindiscussion}
 
