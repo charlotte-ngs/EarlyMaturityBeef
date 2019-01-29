@@ -1463,3 +1463,85 @@ kable_styling(full_width = T) %>%
 
 # Preface {-}
 If you want to write a preface, please write it here.
+
+# Task Description {-}
+
+__Background__
+
+Up until summer 2018, the Swiss beef cattle breeders association has been focusing their genetic evaluations
+mainly on traits such as growth rate and proportion of carcass lean meat. There might be evidence that
+the level of carcass fatness is decreasing at least for some beef cattle breeds (see @Hospenthal2016 for a
+possible source). Decreasing levels of carcass fatness has a negative effect on time of carcass maturity and an
+important economic impact for beef cattle producers, because slaughterhouses reduce the price for carcasses
+with an insufficient fatness level. To address this problem, beef cattle breeders in Switzerland have decided
+to estimate breeding values for carcass fatness. These breeding value estimates represent a first tool for
+improving early maturity in beef cattle. The first results of the routine breeding value estimation for carcass
+fatness will be published in summer 2018.
+
+__Aim__
+
+This project aims at comparing different breeding strategies for improving early maturity in beef cattle. The
+different strategies that are proposed are described in the following section.
+
+__Strategies__
+
+Breeding value estimation for carcass fatness: Starting in summer 2018 breeding values for
+carcass fatness are estimated for beef cattle. The estimated breeding values for carcass fatness are a first
+tool to improve early maturity. At this stage it is important to describe how the estimated breeding
+values of carcass fatness as a single trait can be used to improve early maturity in beef cattle.
+
+• Carcass trait index: In most cases, animal breeders are interested to consider more than one trait
+simultaneously for their selection decisions. Selection index theory provides an approach to optimally
+combine a set of traits when selecting animals as potential parents.
+
+• Approach by @Berry2017 defined a new trait called “deviation in age
+at slaughter” (DAGE). They used this trait to access the genetic potential of selection candidates for
+early maturity.
+
+• Growth models: In pigs, @Greef1992 used specialized growth models to quantify the transformation
+of nutrients into the deposition of protein and fat in a carcass. The same type of models can also be
+applied to beef cattle. Based on the results of these growth models, the property of early maturity can
+be derived.
+
+__Requirements__
+
+The following points are required for a successful result of this Masters Thesis
+1. The literature in the area of early maturity in meat production in general and specifically for beef cattle
+is to be thoroughly reviewed.
+
+2. The relevance of early maturity in beef cattle has to be described in a convincing manner.
+
+3. The proposed strategies for improving early maturity in beef cattle must be described.
+
+4. A Proposal of an implementation of the improvement of early maturity via traits that are easily and
+effectively measurable in a sufficiently large population of animals must be given.
+
+5. An Implementation of a carcass trait index consisting of the most characteristic traits for which
+observations are currently available must be described.
+
+6. First Addition: Setting up the statistical analysis for the carcass index trait with real data from the
+field.
+
+7. Second Addition: Implementation of the approach by @Berry2017 and or
+starting to develop the analysis by growth curve models.
+
+__Assessment__
+
+For a successful completion of this Masters Thesis, requirements 1-3 are absolutely required. If requirements
+1-5 are fulfilled, the Thesis will be graded as very good. Results from requirements 6 and 7 can be used to
+improve the overall grade of the thesis.
+
+
+There has been proposed an attempt to perform this change based on a model combining the records of age at slaughter and other carcass traits.
+This attempt is called deviation in age at slaughter (DAGE), was proposed from @Berry2017 and is not implemented in any European breeding program yet.
+The DAGE is able to select for beef animals which are earlier mature than expected.
+The expections may be based on environmental factors and the sex of the beef animal.
+The DAGE is a complex way to deal with early maturity, but the material for its implementation would be present in Switzerland.
+However the complexity of the DAGE could complicate the computation of its genetic gain which would be used to compare the DAGE with other breeding strategies.
+
+In the computation of economic weights, trait improvements are defined as an increase in population mean [@brascamp1985].
+An increase in population mean may more easily improve a maximum trait than an optimum trait.
+An optimum trait in turn could be better improved by a reduction in the population distribution's standard deviation.
+
+The most important reason for this different result may be, that in this Master thesis the unit [(Sfr. / kg carcass weight) / trait unit] was used for the economic weights, which reduced the importance of carcass weight.
+The study of @Aby2012 used the unit [Euro / (trait unit and animal)] for its economic weights, which increased the importance of the trait carcass weight.

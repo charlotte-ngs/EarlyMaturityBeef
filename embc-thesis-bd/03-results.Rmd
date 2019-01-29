@@ -321,7 +321,7 @@ The correlated genetic gain of carcass fat *adults* for Angus was positive.
 
 Rank correlations between predicted breeding values for carcass fat and the index values over all six carcass traits were computed for Angus and Limousin.
 The ranks of the 83 Angus animals and the 354 Limousin animals were computed using their predicted breeding values of carcass fat adults, carcass fat calves and using their index value.
-The ranks used to compute the rank correlations are shown in  Figures \@ref(fig:rankcorcfaangus), \@ref(fig:rankcorcfcangus), \@ref(fig:rankcorcfalimousin) and \@ref(fig:rankcorcfclimousin)
+The ranks used to compute the rank correlations are shown in  Figures \@ref(fig:rankcorcfaangus), \@ref(fig:rankcorcfcangus), \@ref(fig:rankcorcfalimousin) and \@ref(fig:rankcorcfclimousin).
 The ranks were generally very different for the same animals, which is shown by the massive scattering these figures.
 The correlation coefficients, also shown in these figures, were higher between the ranks in carcass fat calves and the ranks in the index, than between carcass fat adults and the ranks of the index.
 Limousin showed higher rank correlations between both carcass fat traits and the index than Angus.

@@ -6,26 +6,24 @@ knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE,fig.align = "cent
 Up until summer 2018, the Swiss beef cattle breeders association "Mutterkuh Schweiz" focused their genetic evaluations mainly on growth rate and carcass conformation. 
 Lately, it has been observed that carcass fat is decreasing at least for some beef cattle breeds. 
 The decrease of carcass fat may have led to a price reduction of the carcass [@Hospenthal2016].
-Therefore, carcass fat has joined carcass conformation and carcass weight to the existing multi-trait breeding valuation model of carcass traits in summer 2018 [@Kunz2018].
-Furthermore, several stakeholders derive from the decreasing levels of carcass fat, that Swiss beef cattle does not show any improvements in the trait early maturity. 
+Therefore, carcass fat was added as a new trait to the existing multi-trait breeding evaluation model in summer 2018 [@Kunz2018].
+Furthermore, several stakeholders derive from the decreasing levels of carcass fat, that Swiss beef cattle does not show any improvements in early maturity of carcasses. 
+
 In the context of the present study, the term "Early maturity" means early maturity of carcasses at slaughter and is related to a carcass classification system.
 It is important to distinguish between early maturity of carcasses and early maturity in reproduction and fertility.
 From now on, the term early maturity refers to early maturity of carcasses.
 Early maturity could be defined as follows:
 Let us imagine two animals with identical carcass characteristics defined by a certain carcass classification system.
 The animal, that is younger, will then be earlier mature than the other one.
-Early maturity in this context is important for beef keeping farmers, because it reduces their fattening costs [@Berry2017].
+Early maturity in this context is important for beef cattle farmers, because it reduces their fattening costs [@Berry2017].
 One possibility to improve early maturity is to breed for it in a breeding program by using an appropriate breeding strategy.
-Until now, most selection in beef cattle could not change the growth curve and its relationship with the body composition [@Thonney2015].
-Exactly this change would be necessary to improve early maturity in beef cattle.
-There has been proposed an attempt to perform this change based on a model combining the records of age at slaughter and other carcass traits.
-This attempt is called deviation in age at slaughter (DAGE), was proposed from @Berry2017 and is not implemented in any European breeding program yet.
-The DAGE is able to select for beef animals which are earlier mature than expected.
-The expections may be based on environmental factors and the sex of the beef animal.
-The DAGE is a complex way to deal with early maturity, but the material for its implementation would be present in Switzerland.
-However the complexity of the DAGE could complicate the computation of its genetic gain which would be used to compare the DAGE with other breeding strategies.
-
-Therefore two less complex strategies were proposed to breed for early maturity in Switzerland and are evaluated in this Master thesis:
+Until now, most selection in beef cattle could not change the shape of the growth curve and its relationship with the body composition [@Thonney2015].
+To improve early maturity the rate of fat and protein deposition in the carcass would have to be changed.
+@Berry2017 proposed the use of an auxiliary trait called deviation in age at slaughter (DAGE) as a selection criterion for early maturity of carcasses.
+Animals with a favorable value of DAGE tend to have a good carcass conformation and a good fat coverage at lower age at slaughter.
+Hence, their carcasses would be classified as earlier mature.
+In Swiss beef cattle breeding all required information is already available to consider DAGE as additional trait of selection.
+However, in the context of this thesis two other strategies were proposed to breed for early maturity:
 
 1. *Carcass fat as auxiliary trait* (CFAT)
 
@@ -47,14 +45,15 @@ knitr::include_graphics(system.file("extdata","GrowthComposition.png", package="
 ```
 
 In strategy *Index over carcass traits* an index over the breeding values of carcass fat, carcass conformation and carcass weight is used to breed for early maturity.
-There, carcass conformation is based on subjectiveley created records, which assign beef carcasses to different levels of fat coverage (see Figure \@ref(fig:ccgraphic)) and carcass weight is based on weight measurements of the carcass.
+There, carcass conformation is based on subjectiveley created records, which assign beef carcasses to different levels of conformation (see Figure \@ref(fig:ccgraphic)) and carcass weight is based on weight measurements of the carcass.
 The breeding values are then weighted according to their economic significance using economic weights.
 This allows to compute the value of the index for each beef animal.
 ```{r ccgraphic, fig.cap = "From left to right decreasing carcass conformation classes with names C, H, T, A and X (Retrieved on 3.1.2019 from www.proviande.ch).", out.width = "80%"}
 knitr::include_graphics(system.file("extdata","VK-Gruppe_CHTAX_SK_seitlich.pdf", package="Exemplary"))
 ```
 The strategies *Carcass fat as auxilliary trait* and *Index over carcass traits* were evaluated by predicting the effects of their implementation in Switzerland.
-Two tools were used to predict the effects of the two strategies: The genetic gain (see Section  \@ref(gengain)) and the rank correlations (see Section \@ref(rankcorr)).
+Genetic gain was estimated to evaluate both strategies (see Section \@ref(gengain)).
+Rank correlations were used to assess the differences between the two strategies (see Section \@ref(rankcorr)). 
 All necessary data was available to use these tools for the strategy *Carcass fat as auxilliary trait*.
 However the index, which determines the strategy *Index over carcass traits* was missing.
 Its computation was necessary for the predictions and part of this Master Thesis (see Section \@ref(index)).
@@ -67,4 +66,8 @@ knitr::include_graphics(c(system.file("extdata","Angus.jpg", package="Exemplary"
 In both breeds, the slaughtered animals were divided into the two groups *calves* and *adults*.
 While the group *calves* included animals which were less or 180 days old at slaughter, the group *adults* included animals which were more than 180 but less than 700 days old at slaughter.
 All computations were performed using the open source program R [@RCoreTeam2017].
-The resulting codes are available in the annex (see Section \@ref(annex)).
+The resulting codes can be obtained from the author upon request.
+
+The characterization and comparation of suitable breeding strategies for early maturity were demanded in the task description.
+In this master thesis they were conducted for strategies *Carcass fat as auxilliary trait* and *Index over carcass traits*.
+Therefore, the following chapters are divided into the characterization of the strategies (Index) and the comparation of the strategies (Genetic Gain, Rank Correlations).
