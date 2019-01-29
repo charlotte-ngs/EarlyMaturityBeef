@@ -42,7 +42,7 @@ options(knitr.graphics.auto_pdf = TRUE)
 knitr::opts_chunk$set(fig.pos = 'H')
 ```
 
-# Summary {-}
+# Abstract {-}
 
 Up until summer 2018, the Swiss beef cattle breeders association "Mutterkuh Schweiz" focused their genetic evaluations mainly on growth rate and carcass conformation.  
 Lately, it has been observed that carcass fat is decreasing at least for some beef cattle breeds. 
