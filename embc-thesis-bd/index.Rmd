@@ -1,12 +1,16 @@
 --- 
 title: "Early Maturity in Swiss Beef Cattle"
-author: "Silvan Wyss"
+subtitle: 
+- "Master Thesis ETH Zurich"
+author: 
+- "Author: Silvan Wyss"
+- "Supervisor: Prof. Dr. Hubert Pausch"
+- "Co-Supervisor: Dr. Peter von Rohr"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
 bibliography: "`r system.file('extdata','library.bib',package='Exemplary')`"
-biblio-style: apalike
 link-citations: yes
 github-repo: charlotte-ngs/EarlyMaturityBeef
 description: "Master thesis on early maturity in Swiss Beef Cattle."

@@ -13,6 +13,11 @@ bibliography: "`r system.file('extdata','library.bib',package='Exemplary')`"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+@Proviande2016
+@Proviande2015
+@Proviande2018
+biblio-style: apalike
+
 # Formating rules
 
 * Questions That is how you format questions.

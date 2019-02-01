@@ -201,7 +201,6 @@ library(readr)
 library(ggplot2)
 mean_sd <- system.file("extdata","mean_sd.csv", package="Exemplary")
 mean_sd  <- read_csv2(file = mean_sd)
-mean_sd$Mean[7:12]
 mean_sd <- data.frame(Trait=c("aCF","cCF","aCC","cCC","aCW","cCW"),Unit=c("Class","Class","Class","Class","kg","kg") ,Mean=mean_sd$Mean[7:12], SD=mean_sd$Sd[7:12],Mean=mean_sd$Mean[1:6],SD=mean_sd$Sd[1:6])
 colnames(mean_sd) <- c("Trait","Unit","Mean","SD","Mean","SD")
 kable(mean_sd,booktabs=T,caption="Population mean and standard deviation for the traits cCC = Carcass conformation calves, aCC = Carcass conformation adults, cCF = Carcasss fat calves, aCF = Carcass fat adults, cCW = Carcass weight calves, aCW = Carcass weight adults in Angus and Limousin.")%>%
