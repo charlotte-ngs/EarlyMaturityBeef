@@ -36,7 +36,7 @@ g <- ggplot(table,aes(Trait,Weight))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 20))+
   ylab("Sfr. per genetic SD")+facet_grid(.~Group)+
-  xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
+  xlab("Carcass trait") #+theme(text=element_text(family="CM Roman"))
 ```
 
 
@@ -69,7 +69,7 @@ g <- ggplot(AN_LM_index_values,aes(Path,Weight))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 20))+
   ylab("Sfr. per genetic SD")+facet_grid(.~Group)+
-  xlab("Selection path")+theme(text=element_text(family="CM Roman"))
+  xlab("Selection path") #+theme(text=element_text(family="CM Roman"))
 ```
 
 When using an index over the traits carcass fat *calves* and carcass fat *adults*, the index weights maximize the correlation between the index $I$ and the aggregate genotype $H$.
@@ -226,7 +226,7 @@ x <-data.frame(Gain=c(Sfr_AN_index,Sfr_LM_index,Sfr_AN_CF,Sfr_LM_CF),Breed=rep(c
 g <- ggplot(x,aes(Strategy,Gain))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 20))+
-  ylab("Genetic gain in Sfr. / y")+theme(text=element_text(family="CM Roman"))
+  ylab("Genetic gain in Sfr. / y") #+theme(text=element_text(family="CM Roman"))
 
 ```
 
@@ -281,7 +281,7 @@ g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 20))+
   ylab("Genetic gain in genetic SD / y")+facet_grid(.~Group)+
-  xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
+  xlab("Carcass trait") #+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r corrgengainindexfig, fig.cap="Correlated genetic gains in Angus and Limousin when selecting for the strategy Index over carcass traits in genetic standard deviation per year."}
@@ -307,7 +307,7 @@ g <- ggplot(x,aes(Trait,GainSD))
 g + geom_bar(stat="identity", width=0.5,aes(fill=Breed),position="dodge")+
   theme_classic()+theme(text = element_text(size = 20))+
   ylab("Genetic gain in gen. SD / y")+facet_grid(.~Group)+
-  xlab("Carcass trait")+theme(text=element_text(family="CM Roman"))
+  xlab("Carcass trait") #+theme(text=element_text(family="CM Roman"))
 ```
 
 Strategy *Index over carcass traits* led to positive genetic gains of carcass weight (see Figure \@ref(fig:corrgengainindexfig)).
@@ -355,7 +355,7 @@ cfa_index_plot <- ggscatter(data, x = "cfa_rank", y = "ca_index_rank",
                geom="text", size=10)+ 
    theme(text = element_text(size = 20))+
    xlab("Carcass fat adults rank")+
-   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
+   ylab("Index rank") #+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r rankcorcfcangus, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat calves and the index for Angus.",out.width="60%",fig.width=7}
@@ -385,7 +385,7 @@ cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
                geom="text", size=10)+ 
    theme(text = element_text(size = 20))+
    xlab("Carcass fat adults rank")+
-   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
+   ylab("Index rank") #+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r rankcorcfalimousin, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat adults and the index for Limousin.",out.width="60%",fig.width=7}
@@ -415,7 +415,7 @@ cfa_index_plot <- ggscatter(data, x = "cfa_rank", y = "ca_index_rank",
                geom="text", size=10)+ 
    theme(text = element_text(size = 20))+
    xlab("Carcass fat adults rank")+
-   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
+   ylab("Index rank") #+theme(text=element_text(family="CM Roman"))
 ```
 
 ```{r rankcorcfclimousin, fig.cap = "Rank correlation (R) and regression (blue line) between the ranks of breeding value carcass fat calves and the index for Limousin.",out.width="60%",fig.width=7}
@@ -445,7 +445,7 @@ cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
                geom="text", size=10)+ 
    theme(text = element_text(size = 20))+
    xlab("Carcass fat adults rank")+
-   ylab("Index rank")+theme(text=element_text(family="CM Roman"))
+   ylab("Index rank") #+theme(text=element_text(family="CM Roman"))
 ```
 
 
