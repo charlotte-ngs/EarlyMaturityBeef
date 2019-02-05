@@ -374,7 +374,7 @@ library(tidyr)
 library(ggpubr)
 library(extrafont)
 font_install("fontcm")
-# Rank correlation between CF adults and index
+# Rank correlation between CF calves and index
 cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
                  add = "reg.line",  # Add regressin line
                  add.params = list(color = "blue", fill = "lightgray")
@@ -384,7 +384,7 @@ cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
                label=paste("R = ", round(cfc_index_r,2)), 
                geom="text", size=10)+ 
    theme(text = element_text(size = 20))+
-   xlab("Carcass fat adults rank")+
+   xlab("Carcass fat calves rank")+
    ylab("Index rank")+theme(text=element_text(family="CM Roman"))
 ```
 
@@ -434,7 +434,7 @@ library(tidyr)
 library(ggpubr)
 library(extrafont)
 font_install("fontcm")
-# Rank correlation between CF adults and index
+# Rank correlation between CF calves and index
 cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
                  add = "reg.line",  # Add regressin line
                  add.params = list(color = "blue", fill = "lightgray")
@@ -444,7 +444,7 @@ cfa_index_plot <- ggscatter(data, x = "cfc_rank", y = "ca_index_rank",
                label=paste("R = ", round(cfc_index_r,2)), 
                geom="text", size=10)+ 
    theme(text = element_text(size = 20))+
-   xlab("Carcass fat adults rank")+
+   xlab("Carcass fat calves rank")+
    ylab("Index rank")+theme(text=element_text(family="CM Roman"))
 ```
 

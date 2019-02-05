@@ -40,7 +40,7 @@ This indicates that carcass fat is strongly related to early maturity in beef ca
 knitr::include_graphics(c(system.file("extdata","VK_Fett4_SK.pdf", package="Exemplary"),system.file("extdata","VK_Fett1_SK.pdf", package="Exemplary")))
 ```
 
-```{r growthcompgraphic, fig.cap = "Chemical components in the empty body (gut contents removed) of 49 beef steers (Thonney,2015).",out.width = "80%"}
+```{r growthcompgraphic, fig.cap = "Chemical components in the empty body (gut contents removed) of 49 beef steers (Thonney,2015).",out.width = "70%"}
 knitr::include_graphics(system.file("extdata","GrowthComposition.png", package="Exemplary"))
 ```
 
@@ -60,7 +60,7 @@ Its computation was necessary for the predictions and part of this Master Thesis
 Predictions assumed pure-bred selection and were performed for the Swiss breeding populations Angus and Limousin (See Figure \@ref(fig:breedgraphic)).
 These breeds were chosen because they are relevant beef breeds in Switzerland and because they are known to be very different in the trait early maturity. 
 While Angus is known to be early maturing, Limousin is known to be late maturing [@Thonney2015].
-```{r breedgraphic, fig.cap = "Angus (left) and Limousin (right) beef animal (Retrieved from www.mutterkuh.ch, 3.1.2019).", out.width = "40%", fig.show='hold'}
+```{r breedgraphic, fig.cap = "Angus (left) and Limousin (right) beef animal (Retrieved from www.mutterkuh.ch, 3.1.2019).", out.width = "49%", fig.show='hold'}
 knitr::include_graphics(c(system.file("extdata","Angus.jpg", package="Exemplary"),system.file("extdata","Limousin.jpg", package="Exemplary")))
 ```
 In both breeds, the slaughtered animals were divided into the two groups *calves* and *adults*.
