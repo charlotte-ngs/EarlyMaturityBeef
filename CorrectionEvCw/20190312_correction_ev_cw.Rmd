@@ -1,0 +1,30 @@
+---
+title: "Economic Values for Carcass Weight"
+output: 
+  bookdown::pdf_document2:
+    toc: false
+    number_section: false
+bibliography: [bibliography.bib]    
+---
+
+```{r, include=FALSE}
+mrmt <- rmddochelper::MendeleyExportToolR6$new()
+mrmt$set_this_rmd_file(ps_this_rmd_file = ifelse(rstudioapi::isAvailable(),
+                                                 rstudioapi::getSourceEditorContext(),
+                                                 rprojroot::thisfile()))
+```
+
+
+## Disclaimer
+There is a conceptual error in the computation of economic values for carcass weight in `r mrmt$add("Wyss2019")`. This error is analysed and some correction measures are proposed.
+
+
+## Economic Values
+Economic values are defined as change in profit ($\Delta T$) caused by a small change in the mean level of a trait in a given population. In [@Wyss2019] econcomic values are computed with a simplified version of a profit function. Profit ($T$) is computed as gross revenue ($R$) minus costs ($C$)
+
+$$T = R - C$$
+
+Due to above mentioned simplification, the costs $C$ were assumed to be constant. Hence any change in $T$ was assumed to be caused completely by changes in $R$. 
+
+
+## References
