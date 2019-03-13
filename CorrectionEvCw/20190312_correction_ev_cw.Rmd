@@ -16,15 +16,81 @@ mrmt$set_this_rmd_file(ps_this_rmd_file = ifelse(rstudioapi::isAvailable(),
 
 
 ## Disclaimer
-There is a conceptual error in the computation of economic values for carcass weight in `r mrmt$add("Wyss2019")`. This error is analysed and some correction measures are proposed.
+This is a first draft of the clarification document. This should help to understand some more details about the results as they are presented in [@Wyss2019]. 
+
+There is a conceptual error in the computation of economic values for carcass weight in `r mrmt$add("Wyss2019")`. Furthermore the resulting economic values in [@Wyss2019] are on the basis of $1 kg$ carcass weight. This is not the usual basis where profit per animal is used as the foundamental building block to compute economic values.
+
+In what follows, we want to produce a detailed analysis of the work presented in [@Wyss2019].
 
 
-## Economic Values
-Economic values are defined as change in profit ($\Delta T$) caused by a small change in the mean level of a trait in a given population. In [@Wyss2019] econcomic values are computed with a simplified version of a profit function. Profit ($T$) is computed as gross revenue ($R$) minus costs ($C$)
+## Background On Computation Of Economic Values
+According to `r mrmt$add("Miesenberger1997")` the lowest level on which economic values can be expressed is on the basis of one animal. In contrast to that, [@Wyss2019] expressed the economic values on the basis of one kilogram of carcass weight. 
 
-$$T = R - C$$
+In principle economic values are defined as change in profit ($\Delta T$) caused by a small change in the mean level ($\Delta \mu$) of a trait in a given population. 
 
-Due to above mentioned simplification, the costs $C$ were assumed to be constant. Hence any change in $T$ was assumed to be caused completely by changes in $R$. 
+
+## Economic and Population Parameters
+The following parameters are required for the computation of economic values. 
+
+* __Revenue__ ($R$): amount of money the farmer gets per animal at the slaughterhouse
+* __Carcass Weight__ ($CW$): weight of the carcass when it is sold at the slaughterhouse
+* __Price__ ($P$): price per kilogram carcass weight paid at the slaughterhouse
+* __Cost__ ($C$): total costs per slaughter animal between time of birth and time of slaughter. We are not separating fixed from variable costs.
+* __Profit__ ($T$): profit per slaughter animal
+* __Population mean__: ($\mu$) mean of all phenotypic values of a given trait where traits can be ($CC$, $CF$ or $CW$)
+* __Population standard deviation__: ($\sigma$) standard deviation of the given trait. This can either be at the phenotypic ($\sigma_p$) or at the genetic level ($\sigma_g$).
+
+
+## Relationships Between Parameters
+The revenue $R$ corresponds to the product of price times carcass weight. 
+
+$$R = P * CW$$
+
+The profit is the difference between revenue and costs
+
+$$T = R - C = P * CW - C$$
+
+The above shown formula is what is called a general form of a __profit function__.
+
+
+## Definition Of Economic Value
+An economic value $EV$ for a given trait is defined as the change in profit for a small change in the population mean of the respective trait. That small change is assumed to be caused by a certain response to selection of the population under study. The above listed economic parameters are compared between the situation before and after the change due to selection. Subscripts $0$ are used for the situation before the change and subscripts $1$ are used for the situation after the change. The profit ($T_0$) per slaughter animal before the change can be written as 
+
+$$T_0 = P_0 * CW_0 - C_0$$
+
+The profit $T_0$ is realized when the population mean is at its initial value $\mu_0$. After a certain period of time the population mean changes to a value of $\mu_1$ and the profit ($T_1$) at that point in time is 
+
+$$T_1 = P_1 * CW_1 - C_1$$
+
+The economic value $EV_{unit}$ for a given change measured in units of that trait is defined as 
+
+$$EV_{unit} = \frac{\Delta T}{\Delta \mu}$$
+where $\Delta T = T_1 - T_0$ and $\Delta \mu = \mu_1 - \mu_0$. 
+
+Economic values are made comparable between different traits by expressing them in terms of a change of one genetic standard deviation. This leads to 
+
+$$EV_{sd} = EV_{u} * \sigma_g$$
+where $\sigma_g$ stands for the genetic standard deviation of a given trait.
+
+
+## Simplified Profit Function
+In [@Wyss2019] econcomic values are computed with a simplified version of a profit function. In a simplified profit function, the costs $C$ are assumed to be constant (i.e. $\Delta C = 0$). Hence any change in $T$ was assumed to be caused completely by changes in $R$. From this it follows
+
+$$EV_{u} = \frac{\Delta T}{\Delta \mu} = \frac{\Delta R - \Delta C}{\Delta \mu} = \frac{\Delta R}{\Delta \mu} = \frac{R_1 - R_0}{\Delta \mu} = \frac{P_1 * CW_1 - P_0 * CW_0}{\Delta \mu}$$
+
+where $R_0$ and $\mu_0$ are revenu and population mean before the change and $R_1$ and $\mu_1$ are the same quantities after the change.
+
+
+## Traits Other Than Carcass Weight
+For all traits other than carcass weight, we assume that any change in the population mean of that trait does not affect carcass weight and hence $CW_1 = CW_0 = CW$. Therefore, 
+
+$$EV_{u} = \frac{P_1 * CW - P_0 * CW}{\Delta \mu} = \frac{(P_1 - P_0)}{\Delta \mu} * CW = \frac{\Delta P}{\Delta \mu}* CW $$
+
+
+## Average Over Distribution Of Population
+For breeding purposes the computation of a single animal is not so relevant. We have to extend these computations to the whole population. Hence the economic and the population parameters have to be aggregated over the whole population. This means that the prices $P_1$ and $P_0$ must be averaged over the whole population. The same is then done for the carcass weight.
+
+
 
 
 ## References
